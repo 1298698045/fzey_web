@@ -1,110 +1,73 @@
-<div class="contSix">
-    <div class="footerBar">
-        <div class="box-wrap">
-            <div class="lBox">
-                <div class="column">
-                    <p class="title">
-                        快速入口
-                    </p>
-                    <p class="text" @click="gotoHref('{ms:global.url/}/index.html')">
-                        首页
-                    </p>
-                    <p class="text" @click="handleOpen">
-                        申请试用
-                    </p>
-                    {ms:channel type='self' typeid='1400716168132456449'}
-                    <p class="text" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
-                        新闻中心
-                    </p>
-                    {/ms:channel}
-                    {ms:channel type='self' typeid='1438711778957242369'}
-                    <p class="text" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
-                        客户案例
-                    </p>
-                    {/ms:channel}
+<div class="footer">
+    <div class="footer_top fixedWidth clearfix">
+        <div class="top_l fl">
+            <ul class="info">
+               <li class="dz">通讯地址：福建省福州市仓山区上藤路47号</li>
+               <li class="yb">   邮编：350007</li>
+               <li class="dh">
+                   <a href="#">来院导航</a>
+               </li>
+            </ul>
+            <p class="phone">
+               电话总机：0591-22169222
+            </p>
+        </div>
+        <div class="top_r fr">
+           邮箱：<a href="#">fzshier@126.com</a>
+        </div>
+    </div>
+    <div class="footer_center">
+        <div class="cen_view fixedWidth clearfix">
+            <div class="cen_l fl clearfix">
+                <div class="logo_img fl">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/logo_2.png" alt="">
                 </div>
-                <div class="column">
-                    <p class="title">
-                        产品中心
-                    </p>
-                    {ms:channel type='son' typeid='1438711587575345153'}
-                    <p class="text" @click="goto('{ms:global.url/}${field.typelink}')">
-                        ${field.typetitle}
-                    </p>
-                    {/ms:channel}
-                </div>
-                <div class="column">
-                    <p class="title">
-                        关于我们
-                    </p>
-                    {ms:channel type='son' typeid='1438712142158802946'}
-                    <p class="text" @click="goto('{ms:global.url/}${field.typelink}')">
-                        ${field.typetitle}
-                    </p>
-                    {/ms:channel}
+                <div class="hz_img fl">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/qualification.png" alt="">
                 </div>
             </div>
-            <div class="rBox">
-                <div class="column">
-                    <p class="title">
-                        售前咨询
-                    </p>
-                    <p class="text">
-                        <i class="iconfont" style="margin-right: 10px;">
-                            
-                        </i>
-                        010-87897479
-                    </p>
-                    <p class="text">
-                        <i class="iconfont" style="margin-right: 10px;">
-                            
-                        </i>
-                        lzy@phxinfo.com.cn
-                    </p>
-                    <p class="text">
-                        <i class="iconfont" style="margin-right: 10px;">
-                            
-                        </i>
-                        北京市海淀区花园路5号5幢(天博中润）2层221室
-                    </p>
-                </div>
-                <div class="qrCode_wrap">
-                    <div class="row">
-                        <p class="imgs" @click="handleTabQrCode(0)">
-                            <img src="data:image/png;base64,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"
-                            alt="">
-                        </p>
-                        <p class="imgs" @click="handleTabQrCode(1)">
-                            <img src="data:image/png;base64,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"
-                            alt="">
-                        </p>
-                        <p class="imgs" @click="handleTabQrCode(2)">
-                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTQ1IDc5LjE2MzQ5OSwgMjAxOC8wOC8xMy0xNjo0MDoyMiAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTkgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MDkyNDgyRjMyRDMwMTFFQjk5QjBBQTAxOTgxNjJERkQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MDkyNDgyRjQyRDMwMTFFQjk5QjBBQTAxOTgxNjJERkQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDowOTI0ODJGMTJEMzAxMUVCOTlCMEFBMDE5ODE2MkRGRCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDowOTI0ODJGMjJEMzAxMUVCOTlCMEFBMDE5ODE2MkRGRCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PuGj/WAAAAiwSURBVHja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"
-                            alt="">
-                        </p>
-                    </div>
-                    <div class="qrCode">
-                        <div :class="qrCodeIdx==1?'qr-img-one':qrCodeIdx==2?'qr-img-two':'qr-img'">
-                        </div>
-                        <div class="imgs">
-                            <img v-if="qrCodeIdx==0" src="{ms:global.host/}/{ms:global.style/}/images/apple_link.png" alt="">
-                            <img v-if="qrCodeIdx==1" src="{ms:global.host/}/{ms:global.style/}/images/android.png" alt="">
-                            <img v-if="qrCodeIdx==2" src="{ms:global.host/}/{ms:global.style/}/images/wechat.jpg" alt="">
-                        </div>
-                    </div>
-                </div>
+            <div class="cen_r fr">
+                <ul class="box_wrap">
+                   <li class="box">
+                       <div class="code_img"></div>
+                       <p class="name">官方微博</p>
+                   </li>
+                   <li class="box">
+                       <div class="code_img"></div>
+                       <p class="name">官方微信订阅号</p>
+                   </li>
+                   <li class="box">
+                       <div class="code_img"></div>
+                       <p class="name">官方微信服务号</p>
+                   </li>
+                   <li class="box">
+                       <div class="code_img"></div>
+                       <p class="name">官方抖音</p>
+                   </li>
+                </ul>
             </div>
         </div>
     </div>
-    <div class="textUrl">
-        <a href="https://beian.miit.gov.cn">
-            <img src="{ms:global.host/}/{ms:global.style/}/images/country.jpg" alt="">
-            <span style="margin-left: 10px;">
-                Copyright © 2021 北京凤凰世纪科技有限公司版权所有 | 京ICP备16024828号-1
-            </span>
-        </a>
-        <p>
-            京公网安备11030102010604
-        </p>
+    <div class="footer_foot fixedWidth clearfix">
+        <div class="foot_l fl">
+            <ul class="route">
+               <li class="badge">
+                   <img src="{ms:global.host/}/{ms:global.style/}/images/badge.png" alt="">
+                  <a href="#">闽公网安备 35010402350152号</a>
+              </li>
+              <li class="beia">
+                   <a href="#">闽ICP备13015393号</a>
+               </li>
+            </ul>
+        </div>
+        <div class="foot_r fr">
+            <ul>
+                <li class="text">
+                   版权所有：2021 福建省福州市第二医院 All right reserved
+                </li>
+                
+               <li>网站建设：<a href="#">北京凤凰世纪科技有限公司</a></li>
+            </ul>
+        </div>
     </div>
 </div>

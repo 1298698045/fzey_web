@@ -1,93 +1,123 @@
-/* 把我们所有标签的内外边距清零 */
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/*css 初始化 begin */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img {
+	margin: 0;
+	padding: 0;
 }
-
-/* em 和 i 斜体的文字不倾斜 */
-
-em, i {
-    font-style: normal
+fieldset, img, input, button {
+	border: none;
+	padding: 0;
+	margin: 0;
+	outline-style: none; /*去掉input 获取焦点后的外框环绕*/
 }
-
-/* 去掉li 的小圆点 */
-
-li {
-    list-style: none
+ul, ol {
+	list-style: none;
 }
-
+/*去掉原样式中的小黑点*/
+input {
+	padding-top: 0;
+	padding-bottom: 0;
+	font-family: "SimSun", "宋体";
+}
+select, input {
+	vertical-align: middle;
+}
+/*输入字居中显示*/
+select, input, textarea {
+	font-size: 12px;
+	margin: 0;
+}
+/*不允许用户缩放*/
+textarea {
+	resize: none; /*去掉右下角*/
+}
+/*防止拖动*/
 img {
-    /* border 0 照顾低版本浏览器 如果 图片外面包含了链接会有边框的问题 */
-    border: 0;
-    /* 取消图片底侧有空白缝隙的问题 */
-    vertical-align: middle
+	border: 0;
+	vertical-align: middle; /*  去掉图片底部默认的3像素空白缝隙*/
 }
-
-button {
-    /* 当我们鼠标经过button 按钮的时候，鼠标变成小手 */
-    cursor: pointer
+table {
+	border-collapse: collapse; /*合并外连线*/
 }
-
-a {
-    color: #666;
-    text-decoration: none
-}
-
-a:hover {
-    color: #c81623
-}
-
-button, input {
-    /* "\5B8B\4F53" 就是宋体的意思 这样浏览器兼容性比较好 */
-    font-family: Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif;
-    border: 0;
-    outline: 0;
-}
-
 body {
-    /* CSS3 抗锯齿形 让文字显示的更加清晰 */
-    /* -webkit-font-smoothing: antialiased; */
-    /* background-color: #fff; */
-    /* font: 12px/1.5 Microsoft YaHei, Heiti SC, tahoma, arial, Hiragino Sans GB, "\5B8B\4F53", sans-serif; */
-    /* color: #666 */
+	/* font: 12px/150% Arial, Verdana, "\5b8b\4f53"; unicode（统一码）的写法，宋体的写法 */
+	/* color: #666; 150%基于当前字体尺寸的百分比行间距 */
+	color: #333333;
+	background: #fff;
+	font-family: 微软雅黑;
 }
-
-/* 隐藏 */
-
-.hide, .none {
-    display: none
+.clearfix:before, .clearfix:after {
+	/*清除浮动，最好最标准的写法*/
+	content: "";
+	display: table;
 }
-
-/* 浮动公共类 */
-
-.fl {
-    float: left;
-}
-
-.fr {
-    float: right;
-}
-
-/* 清除浮动 */
-
 .clearfix:after {
-    visibility: hidden;
-    clear: both;
-    display: block;
-    content: "";
-    height: 0
+	clear: both;
+	visibility: hidden;/*保留位置*/
 }
-
 .clearfix {
-    *zoom: 1
+ *zoom: 1; /*IE/7/6*/  /*兼容IE6下的写法*/
 }
-
-
-
-
-
-
-
-
+a {
+	color: #333333;
+	text-decoration: none;
+}
+a:hover {
+	cursor: pointer;
+	color: #c0a868;
+}
+.a_disable_hover:hover{
+	color: #333333;
+	cursor: not-allowed;
+}
+h1, h2, h3, h4, h5, h6 {
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 100%;
+}
+s, i, em {
+	font-style: normal;/*将原有的样式去掉*/
+	text-decoration: none;/*去掉下划线，但也可以去掉中划线(贯穿线)*/
+}
+.col-red {
+	color: #C81623 !important;/*京东主色调*/
+}
+/*公共类*/
+.w {
+	/*版心 提取 */
+	width: 1210px;
+	margin: 0 auto;
+}
+.fl {
+	float: left;
+}
+.fr {
+	float: right;
+}
+.al {
+	text-align: left;
+}
+.ac {
+	text-align: center;
+}
+.ar {
+	text-align: right;
+}
+.hide {
+	display: none;
+}
+.fz12{
+	font-size: 12px;
+}
+.fz16{
+	font-size: 16px;
+}
+.fz18{
+	font-size: 18px;
+}
+.fz24{
+	font-size: 24px;
+}
+/*css 初始化 end*/
+.cloak{
+    display: none;
+}

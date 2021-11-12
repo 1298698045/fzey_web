@@ -1,51 +1,52 @@
 <div class="header">
-    <div class="nav">
-        <div class="left">
-            <div class="logo">
+    <div class="header_top">
+        <div class="header_bd fixedWidth clearfix">
+            <div class="logo fl" @click="gotoHref('{ms:global.url/}/index.html')">
                 <img src="{ms:global.host/}/{ms:global.style/}/images/logo.png" alt="">
             </div>
-        </div>
-        <div class="cen">
-            <ul class="menu">
-                <li class="lis">
-                    <span :class="{active: activeMenu=='0'}" @click="gotoHref('{ms:global.url/}/index.html')">首页</span>
-                </li>
-                {ms:channel type='top' flag='nav' orderby='sort'}
-                <#assign parentlink=field.typelink>
-                <#assign parentchannel=field>
-                <li class="lis">
-                    <span
-                    :class="{active: activeMenu.includes('${field.typeid}')}"
-                    @mouseover="onMenuMouseOver('${field.typeid}')"
-                    @mouseleave="onMenuMouseLeave"
-                    @click="gotoHref('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">${field.typetitle}</span>
-                    <#if (field.childsize>0&&field.typeid!='1400716168132456449')>
-                        <div class="twoNav">
-                            <i class="arrow"></i>
-                            {ms:channel type='son' flag='nav2' orderby='sort'}
-                            <p class="navText">
-                                <a href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">
-                                    ${field.typetitle}</p>
-                                </a>
-                            {/ms:channel}
-                            <!-- <p class="navText">人力资源管理系统</p>
-                            <p class="navText">电子票据管理平台</p>
-                            <p class="navText">智能报销管理系统</p>
-                            <p class="navText">合同管理系统</p> -->
-                        </div>
-                    </#if>
-                </li>
-                {/ms:channel}
-            </ul>
-        </div>
-        <div class="right">
-            <div class="icon">
-                <img src="{ms:global.host/}/{ms:global.style/}/images/Hotline.png" alt="">
+            <div class="search fl">
+               <div class="search_box clearfix">
+                   <div class="l_inp fl">
+                       <input type="text" placeholder="请您输入关键词">
+                   </div>
+                   <div class="r_btn fr">
+                       查询
+                   </div>
+               </div>
             </div>
-            <div class="textBox">
-                <p class="phone">010-87897479</p>
+            <div class="optionsBtn fr">
+                <p class="btn">
+                    <a class="" href="#">在线院刊</a>
+                </p>
+                <p class="btn">
+                    <a class="" href="#">医保政策</a>
+                </p>
+                <p class="btn">
+                    <a class="" href="#">客户服务</a>
+                </p>
             </div>
-            <div class="btn" @click="handleOpen">申请试用</div>
         </div>
     </div>
+   <div class="header_nav" :class="{'active':isFixed}" ref="headerNav">
+       <ul class="nav fixedWidth clearfix">
+            {ms:channel type='top' flag='nav' orderby='sort'}
+            <#assign parentlink=field.typelink>
+            <#assign parentchannel=field>
+           <li class="column fl" :class="{active: activeMenu.indexOf('${field.typeid}')!=-1}" @mouseover="onMenuMouseOver('${field.typeid}')" @mouseleave="onMenuMouseLeave">
+               <a href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">${field.typetitle}</a>
+               <#if (field.childsize>0)>
+                    <div class="content">
+                        <div class="menu_wrap">
+                            {ms:channel type='son' flag='nav2' orderby='sort'}
+                            <div class="menu">
+                                <a href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">${field.typetitle}</a>
+                            </div>
+                            {/ms:channel}
+                        </div>
+                    </div>
+               </#if>
+           </li>
+           {/ms:channel}
+       </ul>
+   </div>
 </div>
