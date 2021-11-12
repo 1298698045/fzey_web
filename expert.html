@@ -1,0 +1,103 @@
+<script type="text/x-template" id="expert">
+    <div class="swiper-container1">
+        <div class="swiper-wrapper headPhoto">
+            <div class="swiper-slide" v-for="line in lines">
+                <div class="box">
+                    <div class="block">
+                        <div class="hover" @click="handleRouter(line)">
+                            <div class="box_child">
+                                <div class="pad">
+                                    <div class="img">
+                                        <img :src="line.portraitUrl" alt="" />
+                                    </div>
+                                    <p class="name">{{line.name}}</p>
+                                    <p class="position">{{line.technicalTitle}}</p>
+                                </div>
+                            </div>
+                            <div class="box_active_wrap">
+                                <div class="box_active">
+                                    <div class="descWrap">
+                                        <p class="text">
+                                            {{line.briefIntro || ''}}
+                                        </p>
+                                        <p class="title" v-show="line.briefIntro&&line.briefIntro.length<109">擅长：</p>
+                                        <p class="text" v-show="line.briefIntro&&line.briefIntro.length<109">
+                                            {{line.goodAt}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="back_bord">
+                            {ms:channel type='self' typeid='1401911628809506818'}
+                            <div class="back" @click="handleDept(line)">
+                                {{line.departmentName}}
+                            </div>
+                            {/ms:channel}
+                        </div>
+                        <div class="back_row">
+                            <a class="cel_o" href="#">挂号</a>
+                            <a class="cel_t"  target="_blank" href="https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ9">问诊</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="swiper-pagination1"></div>
+    </div>
+</script>
+<script>
+Vue.component('Expert', {
+    template: '#expert',
+    data: function() {
+        return {
+            lines: []
+        }
+    },
+    methods: {
+        list: function() {
+            var that = this
+                var page = {pageNo: 1,pageSize:100}
+                ms.http.post("/cms/expert/list.do", Object.assign({}, {
+                    contentType: 'c'
+                }, page)).then(function(res) {
+                    //that.page.contentCount = res.data.total
+                    var list = res.data.rows.map(function(row) {
+                        let name = row.name.split('_');
+                        if(name.length>1){
+                            row.name = name[0];
+                            row.sortIdx = name[1];
+                        }
+                        if (row.portrait) {
+                            var img = JSON.parse(row.portrait)
+                            if (img.length > 0) {
+                                row.portraitUrl = '{ms:global.host/}' + img[0].url
+                            }
+                        }
+                        return row
+                    })
+                    that.lines = list.sort(that.compare('sortIdx'))
+                    console.log('lines:', that.lines)
+                }).catch(function(err) {
+                    console.error('error:', err)
+                })
+        },
+        compare:function(property){
+            return function(a,b){
+                var val1 = a[property];
+                var val2 = b[property];
+                return val1 - val2;
+            }
+        },
+        handleRouter(item){
+            window.open("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+        },
+        handleDept(item){
+            window.open("{ms:global.url/}"+ item.departmentPath+'/index.html');
+        }
+    },
+    created: function() {
+    this.list()
+    }
+})
+</script>

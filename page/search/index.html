@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/search.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <#include "location.html" />
+            <div class="container">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">搜索结果</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="searchPanel">
+                    <p class="l_text">
+                        关键词“<span class="resultRed keyword">肿瘤</span>”搜索结果如下
+                    </p>
+                    <p class="r_text">
+                        共 <sapn class="totalNum resultRed">710</sapn> 篇
+                    </p>
+                </div>
+                <div class="swiper-container">
+                    <div class="swiper-wrapper headPhoto">
+                        
+                    </div>
+                </div>
+                <div class="content_wrap">
+                    <div class="content">
+                        {ms:channel type='son'}
+                        <div class="lCont" id="news">
+                            {ms:arclist size=5}
+                            <div class="box">
+                                <p class="leftIcon"></p>
+                                <div class="desc_wrap">
+                                    <p class="title">
+                                        中医住院（全科）医师规范化培训 结业肿瘤临床实践能力考核顺利完成
+                                    </p>
+                                    <p class="desc">
+                                        2020年8月18日-20日，受山西省中医药管理局委托，由山西省住培管理中心组织实施，我院承接的中医住院（全科）医师规范化培训结业临床实践能力考核顺利完成，本考点共有1952020年8月18日-20日，受山西省中医药管理局委托，由山西省住培管理中心组织实施，我院承接的中医住院（全科）医师规范化培训结业临床实践能力考核顺利完成，本考点共有195...
+                                    </p>
+                                    <p class="time">
+                                        2020.11.15
+                                    </p>
+                                </div>
+                                <p class="rightIcon"></p>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                        {/ms:channel}
+                    </div>
+                    <div id="pages">
+                
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/pagination.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/searchQuery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+</script>
+</html>

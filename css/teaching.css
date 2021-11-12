@@ -1,0 +1,160 @@
+.wrap{
+  width: 100%;
+  background: url('../images/bg.jpg') no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+.d_multiline{
+  width: 247px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+  .wrap .center {
+    width: 1230px;
+    margin: 30px auto;
+    padding-bottom: 50px;
+  }
+  .wrap .center .Breadcrumb span {
+    font-size: 14px;
+    color: #333333;
+  }
+  .wrap .center .Breadcrumb .black:hover{
+    cursor: pointer;
+    color: #704c2f;
+  }
+  .wrap .center .container .row_title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px 0;
+  }
+  .wrap .center .container .row_title .imgs {
+    width: 24px;
+    height: 40px;
+  }
+  .wrap .center .container .row_title .imgs img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .wrap .center .container .row_title .name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #575757;
+    padding: 0 40px;
+    cursor: pointer;
+    font-family: 'St';
+  }
+  .wrap .center .container .tabs {
+    display: flex;
+  }
+  .wrap .center .container .tabs .tab {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+  }
+  .wrap .center .container .tabs .tab .imgs {
+    width: 10px;
+    height: 46px;
+  }
+  .wrap .center .container .tabs .tab .imgs img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .wrap .center .container .tabs .tab .l {
+    background: url('../images/l-1.png') no-repeat;
+  }
+  .wrap .center .container .tabs .tab .r {
+    background: url('../images/r-1.png') no-repeat;
+  }
+  .wrap .center .container .tabs .tab .l.active {
+    background: url('../images/backl.png') no-repeat;
+  }
+  .wrap .center .container .tabs .tab .r.active {
+    background: url('../images/backr.png') no-repeat;
+  }
+  .wrap .center .container .tabs .tab .text {
+    width: 285px;
+    height: 47px;
+    line-height: 47px;
+    background: url('../images/tab_child.png') no-repeat;
+    text-align: center;
+    color: #086252;
+    cursor: pointer;
+    background-size: 100% 100%;
+  }
+  .wrap .center .container .tabs .tab .text.active {
+    color: #fff;
+    background: url('../images/tab_child_active.png') no-repeat;
+    background-size: 100% 100%;
+  }
+  .wrap .center .container .content.active{
+    display: block;
+    cursor: pointer;
+  }
+  .wrap .center .container .content{
+    display: none;
+  }
+  .wrap .center .container .content .dynamic{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 40px 0;
+  }
+  .wrap .center .container .content .dynamic .block{
+      width: 610px;
+      height: 185px;
+      background: url('../images/teaching_box.png') no-repeat;
+      margin-top: 10px;
+      padding: 5px;
+      box-sizing: border-box;
+  }
+  .wrap .center .container .content .dynamic .block .box{
+      width: 100%;
+      height: 100%;
+      background: rgba(255,255,255,.8);
+      display: flex;
+  }
+  .wrap .center .container .content .dynamic .block .box .img{
+      width: 305px;
+      height: 175px;
+  }
+  .wrap .center .container .content .dynamic .block .box .img img{
+      width: 100%;
+      height: 100%;
+      vertical-align: middle;
+      object-fit: cover;
+  }
+  .wrap .center .container .content .dynamic .block .box .rightCont{
+      flex: 1;
+  }
+  .wrap .center .container .content .dynamic .block .box .rightCont .title{
+      font-size: 18px;
+      color: #333333;
+      font-weight: bold;
+      margin: 24px 24px;
+  }
+  .wrap .center .container .content .dynamic .block .box .rightCont .boxTime{
+      width: 54px;
+      height: 54px;
+      background: url('../images/g_box.png') no-repeat;
+      margin-left: 24px;
+      color: #fff;
+      text-align: center;
+  }
+  .wrap .center .container .content .dynamic .block .box:hover .rightCont .title{
+    color: #815b3f;
+  }
+  .wrap .center .container .content .dynamic .block .box:hover .rightCont .boxTime{
+    background: url('../images/g_box_active.png') no-repeat;
+  }
+  .wrap .center .container .content .dynamic .block .box .rightCont .boxTime .maxText{
+      font-size: 24px;
+      margin-top: 8px;
+  }
+  .wrap .center .container .content .dynamic .block .box .rightCont .boxTime .time{
+      font-size: 12px;
+  }

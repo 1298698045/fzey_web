@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/dynamic.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/departmentDetail.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+
+        <div class="maxImage" id="maxImage">
+            <div class="dm-second-mask">
+                <div class="max_img_content">
+                    <#include "location.html" />
+                    <div class="layOut_panel">
+                        <div class="l_img">
+                            {ms:arclist size=1 flag='c'}
+                            <p id="backPhoto" virtualPath='{ms:global.host/}{@ms:file field.litpic/}'></p>
+                            {/ms:arclist}
+                        </div>
+                        <div class="r_cont_wrap">
+                            <div class="flex">
+                                {ms:channel type='self' size=1}
+                                {ms:arclist size=1 flag='c'}
+                                <div class="preview">
+                                    <i class="icon top_icon"></i>
+                                    <p class="text" @click="goto('{ms:global.url/}${field.link}')">查看详细</p>
+                                    <i class="icon bottom_icon"></i>
+                                </div>
+                                {/ms:arclist}
+                                {/ms:channel}
+				{ms:channel type='parent'}
+				<#assign parenttitle=field.typetitle>
+				{/ms:channel}
+                                {ms:arclist size=1 flag='c'}
+                                <div class="article">
+                                    <p class="column">${field.descrip}</p>
+                                </div>
+                                <div class="tag">
+                                    <div class="text">
+                                        <div class="topBack"></div>
+                                        <span class="fieldTitle">${field.title}</span>
+                                        <div class="bottomBack">
+                                            <span class="dept">${parenttitle}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/ms:arclist}
+                            </div>
+                            <div class="rowColumn">
+                                <div class="box">
+                                    <p>预约挂号</p>
+                                </div>
+                                {ms:channel type='self'  typeid='1403306687218151426'}
+                                <div class="box" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                                    <p>出诊信息</p>
+                                </div>
+                                {/ms:channel}
+                                {ms:channel type='self'  typeid='1402954155253919745'}
+                                <div class="box" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                                    <p>医院位置</p>
+                                </div>
+                                {/ms:channel}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {ms:channel type='son' size=1}
+        <div class="ysImageWrap">
+            <div class="ys_container">
+                <div class="tag">
+                    <div class="text">
+                        <div class="topBack"></div>
+                        ${field.typetitle}
+                        <div class="bottomBack">
+                        </div>
+                    </div>
+                </div>
+                <div class="rightBox">
+                    <div class="boxWrap">
+                        <div class="scrollbox">
+                            {ms:arclist type='son'}
+                            <div class="box">
+                                <div class="boxBlock">
+                                    <p class="text">
+                                        ${field.descrip}
+                                    </p>
+                                    <div class="subject">
+                                        ${field.title}
+                                    </div>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                    </div>
+                    <!-- <div class="sliderWrap" id="rowSliderWrap">
+                        <div class="slider">
+
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        {/ms:channel}
+        <div class="center">
+            <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">医生团队</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+                <!-- {ms:channel type='self'}
+                <p class="more" id="departs" @click="goto('{ms:global.url/}${'/page/department/team.html'}')">
+                    更多查看
+                </p>
+                {/ms:channel} -->
+            </div>
+            <div class="headPhoto">
+                <div class="box" v-for="line in lines">
+                    <div class="block">
+                        <div class="hover" @click="handleRoute(line)">
+                            <div class="box_child">
+                                <div class="pad">
+                                    <div class="img">
+                                        <img :src="line.portraitUrl" alt="">
+                                    </div>
+                                    <p class="name">{{line.name}}</p>
+                                    <p class="position">{{line.technicalTitle}}</p>
+                                </div>
+                            </div>
+                            <div class="box_active_wrap">
+                                <div class="box_active">
+                                    <div class="descWrap">
+                                        <p class="text">
+                                            {{line.briefIntro}}
+                                        </p>
+                                        <p class="title" v-if="line.show">擅长：</p>
+                                        <p class="text" v-if="line.show">
+                                            {{line.goodAt}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="back_row">
+                            <div class="cel_o">挂号</div>
+                            <div class="cel_t" @click="goto('https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ9')">问诊</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+            </div>
+            <!-- <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">医院新闻</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+                {ms:channel type='self' typeid='1400716168132456449'}
+                <p class="more" id="departDynamic" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                    更多查看
+                </p>
+                {/ms:channel}
+            </div> -->
+            <!-- {ms:channel type='self' typeid='1400716168132456449'}
+            <div class="memorabilia marginAuto">
+                <div class="dynamic" id="memorabiliaId">
+                    {ms:arclist size=4}
+                    <div class="box" @click="goto('{ms:global.url/}${field.link}')">
+                        <div class="box_child">
+                            <div class="img">
+                                <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                                <div class="timeBox">
+                                    <p class="time">${field.date?string("dd")}</p>
+                                    <p class="year">${field.date?string("yyyy-MM")}</p>
+                                </div>
+                            </div>
+                            <div class="textWrap">
+                                <p class="text">
+                                    ${field.title}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {/ms:arclist}
+                    <div class="box">
+                        <div class="boxSolid">
+                            <div class="textCont">
+                                <p class="color">大腿根部突现“肿块”，几个月疯长成足球般大小</p>
+                                <p class="desc">
+                                    案例回放大腿根部突现“肿块”今年63岁的薛阿姨家住新会，平时健康的薛阿姨突然发现自己的右大腿根部长了东西
+                                </p>
+                            </div>
+                            <div class="bottom">
+                                <div class="l_time_box">
+                                    <p class="time">04</p>
+                                    <p class="year">2020-12</p>
+                                </div>
+                                <div class="youjiantou"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            {/ms:channel} -->
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            lines:[]
+        },
+        mixins: [mixin],
+        methods: {
+            list: function() {
+                var that = this
+                    var page = {pageNo: 1,pageSize: 100}
+                    ms.http.post("/cms/expert/list.do", Object.assign({}, {
+                        {ms:channel type='self'}
+                        departmentId:`${field.typeid}`
+                        {/ms:channel}
+                    }, page)).then(function(res) {
+                        //that.page.contentCount = res.data.total
+                        that.lines = res.data.rows.map(function(row) {
+                            let name = row.name.split('_');
+                            if(name.length>1){
+                                row.name = name[0];
+                                row.sortIdx = name[1];
+                            }
+                            if (row.portrait) {
+                                var img = JSON.parse(row.portrait)
+                                if (img.length > 0) {
+                                    row.portraitUrl = '{ms:global.host/}' + img[0].url
+                                }
+                            }
+                            if(row.briefIntro&&row.briefIntro.length>=109){
+                                row.show = false;
+                            }else {
+                                row.show = true;
+                            }
+                            return row
+                        })
+                        let temp = that.lines.filter(item=>{
+                            return item.jobNumber.indexOf('-') == -1
+                        })
+                        that.lines = temp;
+                        console.log('temp:', temp)
+                        console.log('lines:', that.lines)
+                    }).catch(function(err) {
+                        console.error('error:', err)
+                    })
+            },
+            handleRoute(item){
+                {ms:channel type='self'}
+                this.goto("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                {/ms:channel}
+            }
+        },
+        created: function() {
+            this.list()
+        }
+    })
+    window.onload = function(){
+        let title = $('.fieldTitle').html();
+        if(title.length>7){
+            title = title.slice(0,7);
+            $('.fieldTitle').html(title);
+        }
+        let photoUrl = $('#backPhoto').attr('virtualPath');
+        photoUrl = photoUrl.trim();
+        console.log(photoUrl,'photoUrl');
+        $("#maxImage").css({"background":'url("'+photoUrl+'") no-repeat ',"background-position":"27% 60px"});
+    }
+    $(function(){
+    })
+</script>
+</html>

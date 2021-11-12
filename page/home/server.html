@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/huli.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/dynamic.css">
+    <style>
+        .guide{
+            width: 100%;
+            height: 486px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/yc_banner2.jpg') no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .guide .guide_wrap{
+            width: 1230px;
+            margin: 0 auto;
+        }
+        .guide .guide_content{
+            display: flex;
+            justify-content: space-between;
+        }
+        .guide .guide_content .tag{
+            width: 77px;
+            margin-left: 400px;
+        }
+        .guide .guide_content .tag .text{
+            font-size: 42px;
+            color: #6a3f24;
+            text-align: center;
+            position: relative;
+            top: 138px;
+            font-family: 'St';
+            line-height: 1.05;
+            padding: 20px 0;
+        }
+        .guide .guide_content .tag .text .topBack{
+            width: 77px;
+            height: 76px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/new_top_icon.png') no-repeat;
+            position: absolute;
+            top: -10px;
+        }
+        .guide .guide_content .tag .text .bottomBack{
+            width: 77px;
+            height: 76px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/new_bottom_icon.png') no-repeat;
+            position: absolute;
+            bottom: -10px;
+        }
+        .guide .guide_content .tag .text .bottomBack .dept{
+            display: inline-block;
+            font-size: 12px;
+            color: #fff;
+            text-align: center;
+            width: 10px;
+            position: absolute;
+            right: -3px;
+        }
+        .guide .guide_content .right .column{
+            margin-right: 100px;
+        }
+        .guide .guide_content .right .column .text{
+            max-height: 378px;
+            float: left;
+            font-size: 19px;
+            color: #333333;
+            letter-spacing: 2px;
+            writing-mode: vertical-rl;
+            border-right: 2px solid #333333;
+            padding: 50px 11px 0px 46px;
+            position: relative;
+        }
+        .guide .guide_content .right .column .text:hover{
+            cursor: pointer;
+            color: #815b3f;
+            border-right: 2px solid #815b3f;
+        }
+        .guide .guide_content .right .column .text:hover .yuan_icon{
+            background: url('{ms:global.host/}/{ms:global.style/}/images/yc_yuan_icon_active.png');
+        }
+        .guide .guide_content .right .column .text .yuan_icon{
+            display: block;
+            position: absolute;
+            bottom: -16px;
+            right: -9px;
+            width: 16px;
+            height: 16px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/yc_yuan_icon.png');
+        }
+        .wrap .maxImage{
+            background: url('{ms:global.host/}/{ms:global.style/}/images/bannerTwo_6.jpg') no-repeat;
+            background-size: 100% 100%;
+            background-position: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="maxImage">
+            <div class="max_img_content">
+                <!-- <div class="Breadcrumb">
+                    <span>您现在的位置:  </span>
+                    <span class="black" id="homePage">首页 ></span>
+                    <span>远程医疗</span>
+                </div> -->
+                <#include "location.html" />
+                <div class="layOut_panel">
+                    <div class="l_img"></div>
+                    <div class="r_cont_wrap">
+                        <div class="flex">
+                            <div class="preview">
+                                <i class="icon top_icon"></i>
+                                <p class="text">查看详细</p>
+                                <i class="icon bottom_icon"></i>
+                            </div>
+                            <div class="article">
+                                <p class="column">
+                                    互联网诊疗服务系统是依托互联网技术，实现患者远程挂号、咨询、诊断、处方、药品配送为一体的业务体系。在疫情防控期间，互联网诊疗满
+                                </p>
+                            </div>
+                            <div class="tag">
+                                <div class="text">
+                                    <div class="topBack"></div>
+                                    远程医疗
+                                    <div class="bottomBack">
+                                        <span class="dept"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="guide">
+            <div class="guide_wrap">
+                <div class="guide_content">
+                    <div class="tag">
+                        <div class="text">
+                            <div class="topBack"></div>
+                            就医指南
+                            <div class="bottomBack">
+                                <span class="dept"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="column">
+                            <p class="text">
+                                · 山西省中医院互联网医院就诊指南
+                                <i class="yuan_icon"></i>
+                            </p>
+                            <p class="text">
+                                · 山西省中医院互联网视频诊疗出诊信息
+                                <i class="yuan_icon"></i>
+                            </p>
+                            <p class="text">
+                                · 手把手教您互联网诊疗系统使用方法
+                                <i class="yuan_icon"></i>
+                            </p>
+                            <p class="text">
+                                · 视频诊疗相关问题
+                                <i class="yuan_icon"></i>
+                            </p>
+                            <p class="text">
+                                · 图文咨询相关问题
+                                <i class="yuan_icon"></i>
+                            </p>
+                            <p class="text">
+                                · 药品相关问题
+                                <i class="yuan_icon"></i>
+                            </p>
+                            <p class="text">
+                                · 邮寄相关问题
+                                <i class="yuan_icon"></i>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">特色服务</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+                <p class="more">
+                    更多查看
+                </p>
+            </div>
+            <div class="dynamic" id="memorabiliaId">
+                <div class="box">
+                    <div class="box_child">
+                        <div class="img">
+                            <div class="timeBox">
+                                <p class="time">04</p>
+                                <p class="year">2020-12</p>
+                            </div>
+                        </div>
+                        <div class="textWrap">
+                            <p class="text">
+                                山西省中医药研究院研究生部组织的“师仲景、学伤寒”趣味知识竞
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="boxSolid">
+                        <div class="textCont">
+                            <p class="color">大腿根部突现“肿块”，几个月疯长成足球般大小</p>
+                            <p class="desc">
+                                案例回放大腿根部突现“肿块”今年63岁的薛阿姨家住新会，平时健康的薛阿姨突然发现自己的右大腿根部长了东西
+                            </p>
+                        </div>
+                        <div class="bottom">
+                            <div class="l_time_box">
+                                <p class="time">04</p>
+                                <p class="year">2020-12</p>
+                            </div>
+                            <div class="youjiantou"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_child">
+                        <div class="img">
+                            <div class="timeBox">
+                                <p class="time">04</p>
+                                <p class="year">2020-12</p>
+                            </div>
+                        </div>
+                        <div class="textWrap">
+                            <p class="text">
+                                山西省中医药研究院研究生部学生会成立大会顺利召开
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_child">
+                        <div class="img">
+                            <div class="timeBox">
+                                <p class="time">04</p>
+                                <p class="year">2020-12</p>
+                            </div>
+                        </div>
+                        <div class="textWrap">
+                            <p class="text">
+                                山西省中医药研究院研究生部学生会成立大会顺利召开
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal_modal">
+            <div class="popupWrap">
+                <div class="block">
+                    <div class="swiper-container_modal">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yyfm_1.1.jpg" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yyfm_1.1.jpg" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yyfm_1.1.jpg" alt="">
+                            </div>
+                        </div>
+                        <div >
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="title">陈列展示</p>
+                        <p class="cancel" id="modal_cancel">
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+</script>
+</html>

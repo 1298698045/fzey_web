@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/postgraduate.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="maxImage">
+            <div class="max_img_content">
+                <#include "location.html" />
+                <div class="layOut_panel">
+                    <div class="r_cont_wrap">
+                        <div class="flex">
+                            {ms:arclist artid='1407942628843040770'}
+                            <div class="preview">
+                                <i class="icon top_icon"></i>
+                                <p class="text" @click="goto('{ms:global.url/}${field.link}')">查看详细</p>
+                                <i class="icon bottom_icon"></i>
+                            </div>
+                            <div class="article">
+                                <p class="column">${field.descrip}</p>
+                            </div>
+                            <div class="tag">
+                                <div class="text">
+                                    <div class="topBack"></div>
+                                    ${field.title}
+                                    <div class="bottomBack">
+                                        <span class="dept"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {ms:channel type='son' size=2}
+        <#assign typeurl=field.typeurl />
+        <div class="ysImageWrap activeOne">
+            <div class="ys_container">
+                <div class="tag">
+                    <div class="text">
+                        <div class="topBack"></div>
+                        ${field.typetitle}
+                        <div class="bottomBack">
+                        </div>
+                    </div>
+                    <div class="tagMore">
+                        <a href='#' @click="goto('{ms:global.url/}${typeurl}')">
+                            <p>查看</p>
+                            <p>更多</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="rightBox" id="rightBox">
+                    <div class="boxWrap">
+                        <div class="scrollbox">
+                            {ms:arclist type='son'}
+                            <div class="box">
+                                <div class="boxBlock">
+                                    <div class="preview">
+                                        <i class="icon top_icon"></i>
+                                        <p class="texta" @click="goto('{ms:global.url/}${typeurl}?AID=${field.id}')">查看详细</p>
+                                        <i class="icon bottom_icon"></i>
+                                    </div>
+                                    <p class="text">
+                                        ${field.descrip}
+                                    </p>
+                                    <div class="subject">
+                                        ${field.title}
+                                    </div>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {/ms:channel}
+        <div class="center">
+            <!-- <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">导师团队</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+                <a class="more" href="/page/talentDevelopment/tudorTeam.html?id=d_yjsjy">
+                    更多查看
+                </a>
+            </div> -->
+            <!-- <div class="headPhoto">
+                <div class="box" v-for="line in lines" @click="handleRouter(line)">
+                    <div class="block">
+                        <div class="hover">
+                            <div class="box_child">
+                                <div class="pad">
+                                    <div class="img">
+                                        <img :src="line.portraitUrl" alt="">
+                                    </div>
+                                    <p class="name">{{line.name}}</p>
+                                    <p class="position">{{line.technicalTitle}}</p>
+                                </div>
+                            </div>
+                            <div class="box_active_wrap">
+                                <div class="box_active">
+                                    <div class="descWrap">
+                                        <p class="text">
+                                            {{line.briefIntro}}
+                                        </p>
+                                        <p class="title" v-if="line.show">擅长：</p>
+                                        <p class="text d_multiline" v-if="line.show">
+                                            {{line.goodAt}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+            </div> -->
+            <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">导师工作</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+                {ms:channel type='self' typeid='1403331474317471746'}
+                <a href="#"  @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')" class="more">
+                    更多查看
+                </a>
+                {/ms:channel}
+            </div>
+            {ms:channel type='self' typeid='1403331474317471746'}
+            <#assign typeurl=field.typeurl />
+            <div class="dynamic tudorTeam">
+                {ms:arclist size=4}
+                <#if (field.litpic?? && field.litpic?length > 0)>
+                <div class="box" @click="goto('{ms:global.url/}${typeurl}?AID=${field.id}')">
+                    <div class="box_child">
+                        <div class="img">
+                            <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                            <div class="timeBox">
+                                <p class="time">${field.date?string("dd")}</p>
+                                <p class="year">${field.date?string("yyyy-MM")}</p>
+                            </div>
+                        </div>
+                        <div class="textWrap">
+                            <p class="text">
+                                ${field.title}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <#else>
+                </#if>
+                {/ms:arclist}
+                <div class="fake_item"></div>
+            </div>
+            {/ms:channel}
+            <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">学生工作</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+                {ms:channel type='self' typeid='1403331492332007425'}
+                <a href="#" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')" class="more">
+                    更多查看
+                </a>
+                {/ms:channel}
+            </div>
+            {ms:channel type='self' typeid='1403331492332007425'}
+            <#assign typeurl=field.typeurl />
+            <div class="dynamic student">
+                {ms:arclist size=4}
+                <div class="box" @click="goto('{ms:global.url/}${typeurl}?AID=${field.id}')">
+                    <div class="box_child">
+                        <div class="img">
+                            <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                            <div class="timeBox">
+                                <p class="time">${field.date?string("dd")}</p>
+                                <p class="year">${field.date?string("yyyy-MM")}</p>
+                            </div>
+                        </div>
+                        <div class="textWrap">
+                            <p class="text">
+                                 ${field.title}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {/ms:arclist}
+                <div class="fake_item"></div>
+            </div>
+            {/ms:channel}
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/scroll.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            lines:[]
+        },
+        mixins: [mixin],
+        methods: {
+            // list: function() {
+            //     var that = this
+            //         var page = {pageNo: 1}
+            //         ms.http.post("/cms/expert/list.do", Object.assign({}, {
+                        
+            //         }, page)).then(function(res) {
+            //             //that.page.contentCount = res.data.total
+            //             that.lines = res.data.rows.map(function(row) {
+            //                 if (row.portrait) {
+            //                     var img = JSON.parse(row.portrait)
+            //                     if (img.length > 0) {
+            //                         row.portraitUrl = '{ms:global.url/}' + img[0].url
+            //                     }
+            //                 }
+            //                 if(row.briefIntro.length>=109){
+            //                     row.show = false;
+            //                 }else {
+            //                     row.show = true;
+            //                 }
+            //                 return row
+            //             })
+            //             console.log('lines:', that.lines)
+            //         }).catch(function(err) {
+            //             console.error('error:', err)
+            //         })
+            // },
+            // handleRouter(item){
+            //     {ms:channel type='self'}
+            //     this.goto("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+            //     {/ms:channel}
+            // }
+        },
+        created: function() {
+            // this.list()
+        }
+    })
+    $(function(){
+        $('.cancel').click(function(){
+            $('.modal').css('display','none');
+            document.documentElement.style.overflow='auto';
+        })
+        $('.ysImageWrap').eq(1).addClass('activeTwo');
+
+        // 处理文字显示问题
+        funText();
+        function funText(){
+            for(var i=0; i < $('.ysImageWrap').length; i++){
+                for(var j=0; j < $('.ysImageWrap').eq(i).find('.box').length; j++){
+                    let text = $('.ysImageWrap').eq(i).find('.box').eq(j).find('.text').html();
+                    let textNum = getByteLen(text);
+                    console.log(text,textNum,'----------')
+                    if(textNum<=148){
+                        $('.ysImageWrap').eq(i).find('.box').eq(j).find('.text').css('width','auto')
+                    }
+                }
+            }
+        }
+        function getByteLen(val) {
+            var len = 0;
+            for (var i = 0; i < val.length; i++) {
+                var a = val.charAt(i);
+                if (a.match(/[^\x00-\xff]/gi) != null) {
+                len += 2;
+                } else {
+                len += 1;
+                }
+            }
+            return len;
+        }
+        
+        var scrollView = new scrollBar('#rightBox','.scrollbox',50,0,'X');
+        scrollView.init();
+    })
+</script>
+</html>

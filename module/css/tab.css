@@ -1,0 +1,44 @@
+.wrap .center .container .tabs {
+    display: flex;
+}
+.wrap .center .container .tabs .tab {
+    display: flex;
+    align-items: center;
+    margin-right: 30px;
+}
+.wrap .center .container .tabs .tab .imgs {
+    width: 10px;
+    height: 46px;
+}
+.wrap .center .container .tabs .tab .imgs img {
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+}
+.wrap .center .container .tabs .tab .l {
+    background: url('/images/l-1.png') no-repeat;
+}
+.wrap .center .container .tabs .tab .r {
+    background: url('/images/r-1.png') no-repeat;
+}
+.wrap .center .container .tabs .tab .l.active {
+    background: url('/images/backl.png') no-repeat;
+}
+.wrap .center .container .tabs .tab .r.active {
+    background: url('/images/backr.png') no-repeat;
+}
+.wrap .center .container .tabs .tab .text {
+    width: 285px;
+    height: 47px;
+    line-height: 47px;
+    background: url('/images/tab_child.png') no-repeat;
+    text-align: center;
+    color: #086252;
+    cursor: pointer;
+    background-size: 100% 100%;
+}
+.wrap .center .container .tabs .tab .text.active {
+    color: #fff;
+    background: url('/images/tab_child_active.png') no-repeat;
+    background-size: 100% 100%;
+}

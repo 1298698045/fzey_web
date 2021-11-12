@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/department.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <#include "location.html" />
+            <div class="department">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">科室导航</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="formSearch">
+                    <span class="">出诊信息查询：</span>
+                    <div class="filed">
+                        <input type="text" v-model="params.goodAt" class="inp" placeholder="疾病名称">
+                    </div>
+                    <div class="filed">
+                        <div class="inp select" id="departSel">
+                            <input type="text" @focus="handleFocus" @blur="handleBlur" v-model="params.departmentName" placeholder="科室名称" readonly>
+                            <i class="bottom_icon">
+                                
+                            </i>
+                            <div class="selectModal" v-if="isShow">
+                                <p class="subject">科室名称</p>
+                                <ul>
+                                    <li v-for="(line,index) in deptListAll" :key="index" @mousedown="handleCheckDept(line,index)">{{line.categoryTitle}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filed">
+                        <input type="text" v-model="params.doctorName" class="inp" placeholder="医师名称">
+                    </div>
+                    <div class="filed">
+                        <button class="btn" @click="handleSearch">
+                            搜索
+                        </button>
+                    </div>
+                    <div class="filed">
+                        <button class="btn" @click="handleReset">
+                            重置
+                        </button>
+                    </div>
+                </div>
+                {ms:channel type='self' typeid='1401911485158789121'}
+                <div class="boxContent" id='${field.pinyin}'>
+                    <div class="row">
+                        ${field.typetitle}
+                    </div>
+                    <div class="label_box panel">
+                        {ms:channel type='son' orderby='sort'}
+                        <div class="label" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                            <p class="text">
+                                ${field.typetitle}
+                            </p>
+                        </div>
+                        {/ms:channel}
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                    </div>
+                </div>
+                {/ms:channel}
+                {ms:channel type='self' typeid='1401911628809506818'}
+                <div class="boxContent" id='${field.pinyin}'>
+                    <div class="row">
+                        ${field.typetitle}
+                    </div>
+                    <div class="label_box panel">
+                        {ms:channel type='son' orderby='sort'}
+                        <div class="label" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                            <p class="text">
+                                ${field.typetitle}
+                            </p>
+                        </div>
+                        {/ms:channel}
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                    </div>
+                </div>
+                {/ms:channel}
+                {ms:channel type='self' typeid='1403322150820081665'}
+                <div class="boxContent" id='${field.pinyin}'>
+                    <div class="row">
+                        ${field.typetitle}
+                    </div>
+                    <div class="label_box panel">
+                        {ms:arclist orderby='sort'}
+                        <div class="label" @click="goto('{ms:global.url/}${field.link}')">
+                            <p class="text">
+                                ${field.title}
+                            </p>
+                        </div>
+                        {/ms:arclist}
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                    </div>
+                </div>
+                {/ms:channel}
+                {ms:channel type='self' typeid='1403323261928960002'}
+                <div class="boxContent" id='${field.pinyin}'>
+                    <div class="row">
+                        ${field.typetitle}
+                    </div>
+                    <div class="label_box panel">
+                        {ms:arclist orderby='sort'}
+                        <div class="label" @click="goto('{ms:global.url/}${field.link}')">
+                            <p class="text">
+                                ${field.title}
+                            </p>
+                        </div>
+                        {/ms:arclist}
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                        <div class="fake_item"></div>
+                    </div>
+                </div>
+                {/ms:channel}
+                <div class="imgList panel">
+                    {ms:channel type='self'  typeid='1403323700237922306'}
+                    <div class="box back_1" @click="goto('{ms:global.url/}${field.typelink}')">“治未病”健康体检中心</div>
+                    {/ms:channel}
+                    {ms:channel type='self'  typeid='1403324570597945346'}
+                    <div class="box back_2" @click="goto('{ms:global.url/}${field.typelink}')">名医门诊</div>
+                    {/ms:channel}
+                    {ms:channel type='self'  typeid='1403305833035558913'}
+                    <div class="box back_3" @click="goto('{ms:global.url/}${field.typelink}')">胜利分院</div>
+                    {/ms:channel}
+                    {ms:channel type='self'  typeid='1403305871824482305'}
+                    <div class="box back_4" @click="goto('{ms:global.url/}${field.typelink}')">和平分院</div>
+                    {/ms:channel}
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/department.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="${base}/static/plugins/ms/1.0.0/ms.util.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            isShow:false,
+            departments:[],
+            params:{
+                goodAt:'',
+                departmentId:'',
+                departmentName:'',
+                doctorName:''
+            },
+            lcks:[],
+            yjks:[]
+        },
+        mixins: [mixin],
+        computed:{
+            deptListAll(){
+                return [...this.lcks,this.yjks]
+            }
+        },
+        methods: {
+            departmentList: function() {
+                var that = this
+                var parentId = '1400724656644583425'
+                return ms.http.get('/cms/category/list.do', 
+                    {categoryParentIds: parentId, pageSize:99999}).then(function (res) {
+                        that.departments = ms.util.treeData(res.data.rows, 'id', 'categoryId', 'children', parentId)
+                        console.log('that.departments:', that.departments)
+                        that.departments.forEach(function(dept) {
+                            if (dept.categoryTitle == '临床科室') {
+                                that.lcks = dept.children
+                                console.log('that.lcks:', that.lcks)
+                            } else if (dept.categoryTitle == '医技科室') {
+                                that.yjks = dept.children
+                                console.log('that.yjks:', that.yjks)
+                            }
+                        })
+                        
+                        return Promise.resolve()
+                    }).catch(function (err) {
+                        console.log(err)
+                        return Promise.reject(err)
+                    })
+            },
+            handleCheckDept(item,index){
+                this.params.departmentId = item.id;
+                this.params.departmentName = item.categoryTitle;
+                this.isShow = false;
+            },
+            handleFocus(){
+                this.isShow = true;
+            },
+            handleBlur(){
+                this.isShow = false;
+            },
+            handleSearch(){
+                {ms:channel type='self' typeid='1403306741349838850'}
+                    this.goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>?goodAt='+this.params.goodAt+'&departmentId='+this.params.departmentId
+                    +'&departmentName='+this.params.departmentName+'&doctorName='+this.params.doctorName+"${'#/chuzhendongtai/chuzhenchawen'}")
+                {/ms:channel}
+            },
+            handleReset(){
+                this.params = {
+                    goodAt:'',
+                    departmentId:'',
+                    departmentName:'',
+                    doctorName:''
+                }
+            }
+        },
+        created() {
+            this.departmentList();
+        },
+    })
+</script>
+</html>

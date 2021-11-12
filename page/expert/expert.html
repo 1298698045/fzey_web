@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/expert.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+
+        <div class="center">
+            <#include "location.html" />
+            <div class="content">
+                <div class="row_title" id="anchor1">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">专家介绍</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="formSearch">
+                    <span class="">出诊信息查询：</span>
+                    <div class="filed">
+                        <input type="text" v-model="params.goodAt" class="inp" placeholder="疾病名称">
+                    </div>
+                    <div class="filed">
+                        <div class="inp select" id="departSel">
+                            <input type="text" @focus="handleFocus" @blur="handleBlur" v-model="params.departmentName" placeholder="科室名称" readonly>
+                            <i class="bottom_icon">
+                                
+                            </i>
+                            <div class="selectModal" v-if="isShow">
+                                <p class="subject">科室名称</p>
+                                <ul>
+                                    <li v-for="(line,index) in deptListAll" :key="index" @mousedown="handleCheckDept(line,index)">{{line.categoryTitle}}</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filed">
+                        <input type="text" v-model="params.doctorName" class="inp" placeholder="医师名称">
+                    </div>
+                    <div class="filed">
+                        <button class="btn" @click="handleSearch">搜索</button>
+                    </div>
+                    <div class="filed">
+                        <button class="btn" @click="handleReset">重置</button>
+                    </div>
+                </div>
+                <div class="classWrap">
+                    <div class="boxTop">
+                        <p class="label">所在科室：</p>
+                        <div class="rightBox"  id="departTabs">
+                            <div class="tabs">
+                                <p class="tab" :class="{active:tabNum==index}" v-for="(line,index) in tabs" :key="index" @click="handleTab(line,index)">
+                                    <span>{{line.name}}</span>
+                                </p>
+                            </div>
+                            <div class="block" v-if="tabNum==0">
+                                <div class="tabContent">
+                                    <p class="depart_text" :class="{'active':dept.id==departmentId}" v-for="dept in lcks" @click="getCheck(dept)">
+                                        {{dept.categoryTitle}}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="block" v-if="tabNum==1">
+                                <div class="tabContent">
+                                    <p class="depart_text" :class="{'active':dept.id==departmentId}" v-for="dept in yjks" @click="getCheck(dept)">
+                                        {{dept.categoryTitle}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rowSel">
+                    <div>
+                        <ul>
+                            <p class="label">
+                                您已经选择：
+                            </p>
+                            <li v-if="departmentName!=''">
+                                {{departmentName}}
+                                <i class="close" @click="handleCancel"></i>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="rightText">
+                        共
+                        <span style="color:#815b3f;">{{page.contentCount || ''}}</span>
+                        个专家
+                    </div>
+                </div>
+                <div class="headPhoto">
+                    <div class="box" v-for="line in lines">
+                        <div class="block">
+                            <div class="hover" @click="handleRouter(line)">
+                                <div class="box_child">
+                                    <div class="pad">
+                                        <div class="img">
+                                            <img :src="line.portraitUrl" alt="">
+                                        </div>
+                                        <p class="name">{{line.name}}</p>
+                                        <p class="position">{{line.technicalTitle}}</p>
+                                    </div>
+                                </div>
+                                <div class="box_active_wrap">
+                                    <div class="box_active">
+                                        <div class="descWrap">
+                                            <p class="text">
+                                                {{line.briefIntro}}
+                                            </p>
+                                            <p class="title">擅长：</p>
+                                            <p class="text">
+                                                {{line.goodAt}}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="back_bord">
+                                <div class="back" @click="handleDept(line)">
+                                    {{line.departmentName}}
+                                </div>
+                            </div>
+                            <div class="back_row">
+                                <div class="cel_o">挂号</div>
+                                <div class="cel_t" @click="goto('https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ9')">问诊</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fake_item"></div>
+                    <div class="fake_item"></div>
+                    <div class="fake_item"></div>
+                    <div class="fake_item"></div>
+                </div>
+            </div>
+            <!-- <div id="pages">
+                
+            </div> -->
+            <div v-if="page.contentCount>12">
+                <el-pagination
+                    background
+                    @current-change="list"
+                    :page-size="page.pageSize"
+                    :current-page.sync="page.pageNo"
+                    layout="prev, pager, next, jumper"
+                    :total="page.contentCount">
+                </el-pagination>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/expert.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/pagination.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="${base}/static/plugins/ms/1.0.0/ms.util.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<style>
+    .el-pagination{
+        display: flex!important;
+        justify-content: center!important;
+    }
+    .el-pagination .el-pager .number{
+        width: 57px!important;
+        height: 58px!important;
+        line-height: 58px;
+        background: url('{ms:global.host/}/{ms:global.style/}/images/page_icon.png') no-repeat!important;
+        list-style: none!important;
+        vertical-align: top!important;
+        color: #333!important;
+    }
+    .el-pagination .el-pager .number.active{
+        color: #ffffff!important;
+        background: url('{ms:global.host/}/{ms:global.style/}/images/page_icon_active.png') no-repeat !important;
+    }
+    .el-pagination .btn-next, .el-pagination .btn-prev{
+        width: 15px!important;
+        height: 34px!important;
+        margin-top: 16px!important;
+    }
+    .el-pagination .btn-prev{
+        background: url('{ms:global.host/}/{ms:global.style/}/images/page_left.png') no-repeat!important;
+    }
+    .el-pagination .btn-next{
+        background: url('{ms:global.host/}/{ms:global.style/}/images/page_right.png') no-repeat!important;
+        margin-left: 18px!important;
+    }
+    .el-pagination .btn-next .el-icon, .el-pagination .btn-prev .el-icon{
+        display: none!important;
+    }
+    .el-pagination .more{
+        width: 57px!important;
+        height: 58px!important;
+        line-height: 58px;
+        background: url('http://t-think.com/hospital/template/1/new_hospital/images/page_icon.png') no-repeat!important;
+        list-style: none!important;
+        vertical-align: top!important;
+        color: #333!important;
+    }
+    .el-pager .more::before{
+        line-height: 58px!important;
+    }
+    .el-pagination__jump{
+        width: 156px!important;
+        height: 42px!important;
+        background: url('{ms:global.host/}/{ms:global.style/}/images/jump.png') no-repeat!important;
+        background-size: 100% 100%!important;
+        display: inline-block!important;
+        color: #606266!important;
+        margin-left: 10px!important;
+        padding: 10px 10px 10px 20px!important;
+        margin-top: 5px!important;
+    }
+    .el-input__inner{
+        background: none!important;
+        border: none!important;
+    }
+</style>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            lines:[],
+            departments: [],
+            lcks: [],
+            yjks: [],
+            page: {
+                //当前页数
+                pageNo: 1,
+                //每页文章条数
+                pageSize: 12,
+                //页数总数
+                pageTotal: 0,
+                //内容总数
+                contentCount: 0
+            },
+            departmentId:"",
+            departmentName:"",
+            doctorName:"",
+            tabs:[
+                {
+                    name:'临床科室',
+                    contentType:''
+                },
+                {
+                    name:'医技科室',
+                    contentType:''
+                },
+                {
+                    name:'名医门诊',
+                    contentType:'mymz'
+                },
+                {
+                    name:'胜利分院',
+                    contentType:'slfy'
+                },
+                {
+                    name:'和平分院',
+                    contentType:'hpfy'
+                }
+            ],
+            tabNum:0,
+            contentType:'',
+            isShow:false,
+            params:{
+                goodAt:'',
+                departmentId:'',
+                departmentName:'',
+                doctorName:''
+            }
+
+        },
+        watch:{
+            doctorName(val){
+                this.doctorName = val;
+            }
+        },
+        computed:{
+            deptListAll(){
+                return [...this.lcks,this.yjks]
+            }
+        },
+        mixins: [mixin],
+        methods: {
+            list: function(pageCur) {
+                    var that = this
+                    that.page.pageNo = pageCur;
+                    let params = {};
+                    if(that.departmentId!=''){
+                        params.departmentId = that.departmentId;
+                    }
+                    if(that.contentType!=''){
+                        params.contentType = that.contentType;
+                    }
+                    ms.http.post("/cms/expert/list.do", Object.assign(params, {
+                        
+                    }, that.page)).then(function(res) {
+                        that.page.contentCount = res.data.total
+                        that.lines = res.data.rows.map(function(row) {
+                            let name = row.name.split('_');
+                            if(name.length>1){
+                                row.name = name[0];
+                                row.sortIdx = name[1];
+                            }
+                            if (row.portrait) {
+                                var img = JSON.parse(row.portrait)
+                                if (img.length > 0) {
+                                    row.portraitUrl = '{ms:global.host/}' + img[0].url
+                                }
+                            }
+                            return row
+                        })
+                        that.lines = that.unique(that.lines);
+                        if(pageCur){
+                            $("html, body").scrollTop(0).animate({scrollTop: $("#anchor1").offset().top});
+                        }
+                    }).catch(function(err) {
+                        console.error('error:', err)
+                    })
+            },
+            unique(arr){
+                const res = new Map();
+                return arr.filter(item=>!res.has(item.jobNumber)&&res.set(item.jobNumber,1));
+            },
+
+            departmentList: function() {
+                var that = this
+                var parentId = '1400724656644583425'
+                return ms.http.get('/cms/category/list.do', 
+                    {categoryParentIds: parentId, pageSize:99999}).then(function (res) {
+                        that.departments = ms.util.treeData(res.data.rows, 'id', 'categoryId', 'children', parentId)
+                        console.log('that.departments:', that.departments)
+                        that.departments.forEach(function(dept) {
+                            if (dept.categoryTitle == '临床科室') {
+                                that.lcks = dept.children
+                                console.log('that.lcks:', that.lcks)
+                            } else if (dept.categoryTitle == '医技科室') {
+                                that.yjks = dept.children
+                                console.log('that.yjks:', that.yjks)
+                            }
+                        })
+                        
+                        return Promise.resolve()
+                    }).catch(function (err) {
+                        console.log(err)
+                        return Promise.reject(err)
+                    })
+            },
+            
+            handleRouter(item){
+                {ms:channel type='self'}
+                this.goto("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                {/ms:channel}
+            },
+            // 搜索部门筛选
+            handleCheckDept(item,index){
+                this.params.departmentId = item.id;
+                this.params.departmentName = item.categoryTitle;
+                this.isShow = false;
+            },
+            handleFocus(){
+                this.isShow = true;
+            },
+            handleBlur(){
+                this.isShow = false;
+            },
+            // 出诊信息查询
+            handleSearch(){
+                console.log(this.params);
+                // this.params.goodAt = escape(this.params.goodAt);
+                // this.params.departmentId = escape(this.params.departmentId);
+                // this.params.departmentName = escape(this.params.departmentName);
+                // this.params.doctorName = escape(this.params.doctorName);
+                // let paramsData = JSON.stringify(
+                //     {
+                //         goodAt:escape(this.params.goodAt),
+                //         departmentId:escape(this.params.departmentId),
+                //         departmentName:escape(this.params.departmentName),
+                //         doctorName:escape(this.params.doctorName)
+                //     }
+                // );
+                // console.log(paramsData,'paramsData')
+                // ${'#/chuzhendongtai/chuzhenchawen'}
+                {ms:channel type='self' typeid='1403306741349838850'}
+                    this.goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>?goodAt='+this.params.goodAt+'&departmentId='+this.params.departmentId
+                    +'&departmentName='+this.params.departmentName+'&doctorName='+this.params.doctorName+"${'#/chuzhendongtai/chuzhenchawen'}")
+                {/ms:channel}
+            },
+            getCheck(item){
+                console.log(item);
+                this.departmentId = item.id;
+                this.departmentName = item.categoryTitle;
+                this.list();
+            },
+            handleCancel(){
+                this.departmentId = '';
+                this.departmentName = '';
+                this.list();
+            },
+            handleDept(item){
+                window.open("{ms:global.url/}"+ item.departmentPath +'/index.html');
+            },
+            handleTab(line,index){
+                this.tabNum = index;
+                if(line.contentType!=''){
+                    this.departmentId = '';
+                    this.departmentName = '';
+                    this.contentType = line.contentType;
+                }else {
+                    this.contentType = '';
+                }
+                this.list();
+            },
+            // 重置
+            handleReset(){
+                this.params = {
+                    goodAt:'',
+                    departmentId:'',
+                    departmentName:'',
+                    doctorName:''
+                }
+            }
+        },
+        created() {
+            this.departmentList()
+            this.list()
+        },
+    })
+    $(function(){
+        let arr = [];
+        $('#departTabs .tabContent .depart_text').click(function(){
+            $('#departTabs .tabContent .depart_text').removeClass('active');
+            $(this).addClass('active');
+            let name = $(this).html();
+            arr.push(name);
+            arr =  uniq(arr);
+            arrFun(arr);
+        })
+        $('#zjzc .depart_text').click(function(){
+            $('#zjzc .depart_text').removeClass('active');
+            $(this).addClass('active');
+            let name = $(this).html();
+            arr.push(name);
+            arr =  uniq(arr);
+            arrFun(arr);
+        })
+        function arrFun(arr){
+            let modouleStr = '';
+            for(let i = 0; i < arr.length; i++){
+                modouleStr = '<li>'+
+                        arr[i] +
+'                        <i class="close"></i>'+
+'                    </li>';
+            }
+            
+            $('#paramsId').append(modouleStr);
+        }
+        function uniq(array){
+            var temp = []; //一个新的临时数组
+            for(var i = 0; i < array.length; i++){
+                if(temp.indexOf(array[i]) == -1){
+                    temp.push(array[i]);
+                }
+            }
+            return temp;
+        }
+
+    })
+</script>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京凤凰世纪科技-人才招聘</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/header.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/aside.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/static/iconfont/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/tab.png" type="image/x-icon" />
+    <style>
+        .banners {
+            text-align: center;
+            padding-top: 66px;
+            width: 100%;
+            height: 256px;
+            background-image: url('{ms:global.host/}/{ms:global.style/}/images/gy_bg.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .banners h3 {
+            font-size: 50px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .banners .text {
+            font-size: 20px;
+            color: #ffffff;
+            margin-top: 20px;
+        }
+
+        .contents {
+            width: 1200px;
+            padding: 100px 0;
+            margin: auto;
+            background: #fff;
+        }
+
+        .case_wrap .dividerWrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom:75px;
+        }
+
+        .case_wrap .dividerWrap .divider {
+            /* display: flex; */
+        }
+        .case_wrap .dividerWrap .divider .text{
+            font-size: 14px;
+            color: #626775;
+        }
+        .case_wrap .dividerWrap .divider .l,
+        .r {
+            display: flex;
+            align-items: center;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line {
+            width: 200px;
+            height: 2px;
+            display: inline-block;
+            background: #c7c6c6;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line .dian {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #c7c6c6;
+            display: inline-block;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line .dian .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2f3342;
+            padding: 0 20px;
+        }
+
+        .contents .case_wrap .dividerWrap .divider .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2f3342;
+            padding: 0 20px;
+        }
+            .content_wrap  .tabs{
+            display: flex;
+            justify-content: center;
+            cursor: pointer;
+            }
+            .content_wrap  .tabs .tab{
+              width: 196px;
+              height: 48px;
+              line-height: 48px;
+              text-align: center;
+              color: #333333;
+              font-size: 16px;
+            }
+            .content_wrap  .tabs .active{
+              width: 196px;
+              height: 48px;
+              line-height: 48px;
+              text-align: center;
+              font-size: 16px;
+              color: #b31e23;
+              border-bottom: 1px solid #b31e23;
+            }
+          .content_wrap .boxCont{
+            width: 100%;
+            padding: 30px;
+            background: #fafafc;
+            border: 1px solid #f1f1f1;
+            display: flex;
+            justify-content: space-between;
+            }
+            .content_wrap .boxCont .lCont{
+              width: 45%;
+              }
+              .content_wrap .boxCont .lCont .title{
+                font-size: 20px;
+                font-weight: bold;
+                color: #2f3342;
+                }
+                .content_wrap .boxCont .lCont .title    span{
+                  display: inline-block;
+                  width: 10px;
+                  height: 10px;
+                  border-radius: 50%;
+                  background: #b31e23;
+                  margin-right: 10px;
+                }
+              .content_wrap .boxCont .lCont  .desc p{
+                  font-size: 16px;
+                  color: #626775;
+                  /* white-space: pre-line; */
+                  line-height: 2;
+                }
+            .content_wrap .boxCont  .rCont{
+              width: 49%;
+              margin-left: 90px;
+              }
+              .content_wrap .boxCont  .rCont  .title{
+                font-size: 20px;
+                font-weight: bold;
+                color: #2f3342;
+                }
+                .content_wrap .boxCont  .rCont  .title  span{
+                  display: inline-block;
+                  width: 10px;
+                  height: 10px;
+                  border-radius: 50%;
+                  background: #b31e23;
+                  margin-right: 10px;
+                }
+              .content_wrap .boxCont  .rCont  .desc p{
+                  font-size: 16px;
+                  color: #626775;
+                  /* white-space: pre-line; */
+                  line-height: 2;
+                }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper" id="app">
+        <#include "head.html" />
+        <div class="center">
+            <div class="banners">
+                <h3>
+                    让智慧医疗管理更便捷，让信任更简单
+                </h3>
+                <p class="text">
+                    20+年医疗行业经验 1500+医院用户 面向医院管理，链接移动办公，成就智慧医院
+                </p>
+            </div>
+            <div class="contents">
+                <div class="case_wrap">
+                    <div class="dividerWrap">
+                        <div class="divider">
+                            <div class="title">
+                                人才招聘
+                            </div>
+                            <div class="text">
+                                简历投递邮箱/hr@phxinfo.com.cn
+                            </div>
+                        </div>
+                    </div>
+                    <div class="content_wrap">
+                        <div class="tabs">
+                            {ms:channel type='son'}
+                                <p class="tab" :class="{active : $route.path == '${field.typepath}'}"  @click="push('${field.typepath}')">${field.typetitle}</p>
+                            {/ms:channel}
+                            <!-- <p class="tab" :class="{active:tabIdx==0}" @click="setTab(0)">高级.NET开发工程师</p>
+                            <p class="tab" :class="{active:tabIdx==1}" @click="setTab(1)">高级JAVA开发工程</p>
+                            <p class="tab" :class="{active:tabIdx==2}" @click="setTab(2)">项目实施工程师</p> -->
+                        </div>
+                        <router-view></router-view>
+                        <!-- {ms:arclist orderby='sort' size=9999}
+                        <div class="boxCont" v-if="tabIdx==0">
+                            <div class="lCont">
+                                <div class="title">
+                                    <span></span>
+                                    工作职责
+                                </div>
+                                <div class="desc">
+                                    <br/>
+                                    <p>
+                                        1、根据开发进度和任务分配，完成相应模块开发、编程任务；
+                                        <br/>
+                                        2、具备高质量的专业技术文档编写能力；
+                                        <br/>
+                                        3、对业务需求描述文档有较强的理解能力。
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="rCont">
+                                <div class="title">
+                                    <span></span>
+                                    岗位要求
+                                </div>
+                                <div class="desc">
+                                    <br/>
+                                    <p>
+                                        1、 计算机软件相关专业大专以上学历；
+                                        <br/>
+                                        2、 精通C#程序设计开发，至少具有2年的C#程序设计开发经验，能熟练运用ADO.NET/Web Services/WCF等技术。
+                                        <br/>
+                                        3、 精通面向对象设计开发思想，熟悉多层和分布式架构；
+                                        <br/>
+                                        4、 精通MVC开发模式，有2年及以上的项目开发经验。
+                                        <br/>
+                                        5、 精通SQL server，MySQL数据库，熟悉数据库设计及优化技术，并具备相关安全知识；
+                                        <br/>
+                                        6、 熟悉前端相关的技术html,css3,javascript,能熟练使用用相关的UI框架，如jQuery、jQuery UI或Bootstrap等。
+                                        <br/>
+                                        7、 技术能力强，自我学习能力强,对技术发展具有良好的理解能力，能够迅速掌握新技术，能够在短时间内攻克技术难关；
+                                        <br/>
+                                        8、 有良好的技术文档习惯，具有规范化标准化的代码编写习惯；
+                                        <br/>
+                                        9、 善于与他人沟通、合作，具有团队精神，良好的自学能力、严密的思维能力，反应敏捷，应变力强，责任心强，能承受较大的工作压力；
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {/ms:arclist}
+                        <div class="boxCont" v-if="tabIdx==1">
+                            <div class="lCont">
+                                <div class="title">
+                                    <span></span>
+                                    工作职责
+                                </div>
+                                <div class="desc">
+                                    <br/>
+                                    <p>
+                                        1. 负责项目现场的产品实施工作（安装，部署，测试，培训、验收等工作）；
+                                        <br/>
+                                        2. 负责收集、整理、录入产品所需的初始化数据；
+                                        <br/>
+                                        3. 了解医院业务流程，归纳客户在使用产品过程中的问题并及时反馈；
+                                        <br/>
+                                        4. 完善并总结实施过程中的文档，根据实施具体情况提出合理建议，提高实施效率；
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="rCont">
+                                <div class="title">
+                                    <span></span>
+                                    岗位要求
+                                </div>
+                                <div class="desc">
+                                    <br/>
+                                    <p>
+                                        1. 计算机相关专业，本科及以上学历，2年及以上实施相关工作经验；
+                                        <br/>
+                                        2. 熟悉SQL Server/ MySQL数据库，精通SQL语句；
+                                        <br/>
+                                        3. 具备医疗行业相关实施经验为佳，熟悉管理软件系统优先；
+                                        <br/>
+                                        4. 具有良好的职业素养，责任心强，具有较强理解、表达、沟通协调能力，具有良好的服务意识及团队精神。
+                                        <br/>
+                                        5. 工作积极主动，吃苦耐劳，适应能力、抗压能力强，能适应一定频率出差。
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="boxCont" v-if="tabIdx==2">
+                            <div class="lCont">
+                                <div class="title">
+                                    <span></span>
+                                    工作职责
+                                </div>
+                                <div class="desc">
+                                    <br/>
+                                    <p>
+                                        1.深入理解业务，参与需求评审，业务架构设计，开发对应的业务需求；
+                                        <br/>
+                                        2.负责到人力资源系统业务开发，负责日常业务需求的迭代开发；
+                                        <br/>
+                                        3.负责日常项目的需求评审，详细设计评审，code review工作。
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="rCont">
+                                <div class="title">
+                                    <span></span>
+                                    岗位要求
+                                </div>
+                                <div class="desc">
+                                    <br/>
+                                    <p>
+                                        1.大学本科以上学历，计算机或相关专业，3年以上Java实际项目开发经验；
+                                        <br/>
+                                        2.熟悉设计模式、DDD，熟悉主流开源应用框架，如Spring、iBatis、XML、JSON、Maven等开发技术；
+                                        <br/>
+                                        3.熟悉关系型数据库SQL SERVER 、MySQL、SQL优化，熟悉Memcached、MongoDB、Redis、HBase等；
+                                        <br/>
+                                        4.熟悉分布式系统的设计和应用，熟悉分布式、缓存、消息、负载均衡等机制和实现；
+                                        <br/>
+                                        5.有扎实的Java基础，Java多线程、并发以及网络通信有深厚的经验优先；
+                                        <br/>
+                                        6.热爱技术，对技术有不懈的追求，喜欢研究开源代码；
+                                        <br/>
+                                        7.良好的学习能力、团队协作能力和沟通能力；能主动承担压力，态度端正积极，善于思考，能独立分析和解决问题。
+
+                                        <br/>
+                                        1.有机会参与到公司医疗系统产品框架底层框架设计开发；
+                                        <br/>
+                                        2.业务的量级比较大，对技术的挑战比较高。
+                                        <br/>
+                                    </p>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+        <#include "right.html" />
+        <Modal ref="childModal" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    var router = new VueRouter({routes:[
+            {ms:channel type='son'}
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component: {
+                    template: `
+                        <div class="boxCont">
+                            {ms:arclist size=2 orderby='sort'}
+                            <div class="lCont">
+                                <div class="title">
+                                    <span></span>
+                                    ${field.title}
+                                </div>
+                                <div class="desc">
+                                    <br/>
+                                    ${field.content}
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                    `
+                }
+            },
+            {/ms:channel}
+    ]})
+    var vum = new Vue({
+        el: '#app',
+        mixins: [mixin],
+        router: router,
+        components:{
+            Modal
+        },
+        data() {
+            return {
+                page: {
+                    //当前页数
+                    pageNo: 1,
+                    //每页文章条数
+                    pageSize: 9,
+                    //页数总数
+                    pageTotal: 0,
+                    //内容总数
+                    contentCount: 0
+                },
+                tabIdx: 0,
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                hasRoute: true
+            }
+        },
+        methods: {
+            setTab(index){
+                this.tabIdx = index;
+            }
+            
+        },
+        created() {
+            {ms:channel type='son' size=1}
+            if (this.$route.path == '/') {
+                this.push('${field.typepath}')
+            }
+            {/ms:channel}
+        }
+    })
+</script>
+
+</html>

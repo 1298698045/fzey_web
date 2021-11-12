@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/characteristicDetail.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+
+        <div class="container">
+            <#include "location.html" />
+            <div class="Breadcrumb">
+                <span>您现在的位置:  </span>
+                <span class="black" id="homePage">首页 ></span>
+                <span class="black" id="return">特色诊疗  ></span>
+                <span>肿瘤科中医特色治疗</span>
+            </div>
+            <div class="content">
+                <div class="top"></div>
+                <div class="centerWrap">
+                    <h1 class="title">肿瘤科中医特色治疗</h1>
+                    <div class="time_wrap">
+                        <p class="time">
+                            发布时间：2012-12-29 11:31:07 <span>来源：肿瘤科</span>点击数： 241 次
+                        </p>
+                        <div class="row_right">
+                            <span>分享到：</span>
+                        </div>
+                    </div>
+                    <div class="hr"></div>
+                    <div class="article">
+                        <p class="c_subject">一、率先在省内开展海扶无创治疗肿瘤</p>
+                        <p class="text">20世纪40年代美国人首先提出了应用超声进行手术的设想，20世纪90年代中国人研制成功了海扶超声聚焦刀，实现了无创手术治疗肿瘤。</p>
+                        <p class="indent">
+                            治肿瘤，先开刀”——这几乎是以往肿瘤治疗的主要手段，然而，由于患者的身体因素、肿瘤部位、肿瘤分期以及各种疾病的影响，许多患者失去了手术的机会，如何拯救这些患者，是困扰医学界的主要难题。
+                        </p>
+                        <p class="indent">
+                            作为医疗战线的先行者，山西省中医院以“服务患者至上”为宗旨，在全省率先引进了被国际医学界公认为全新、安全、高效治疗的海扶超声聚焦刀，该设备不开刀、不流血、无放化疗毒副作用，避免出血、感染等并发症，是真正的“无创治疗”。海扶超声聚焦刀目前已获得46个国际发明专利，产品出口英国、日本、西班牙等13个国家及地区。它的问世引起了国内外媒体的关注，2010年9月3日，《人民日报》头版刊登题为《中国领跑“无创治疗”》的报道；9月4日，中央电视台《新闻联播》节目报道了“海扶超声聚焦刀”在超声无创治疗领域所做的贡献。国家领导人江泽民、习近平多次视察该设备并予以极高的评价。下面让我们进一步介绍一下海扶超声聚焦刀。
+                        </p>
+                        <p class="indent">
+                            什么是海扶超声聚焦刀？
+                        </p>
+                        <p class="indent">
+                            海扶（High Intensity Focused Ultrasound，HIFU）即高强度超声聚焦，海扶超声聚焦刀是利用超声波的组织穿透性和可聚焦性，将超声波在体外定位，在体内癌灶处聚焦，瞬时使聚焦处升温达60摄氏度以上，通过热效应、空化效应、机械效应使肿瘤凝固性坏死而又不损伤周围正常组织，实现“无创”切除实体肿瘤，这就相当于在体外进行手术切除癌块，好比一把隐形的“手术刀”。
+                        </p>
+                        <div class="imgs">
+                            <img src="/images/article_photo.png" alt="">
+                        </div>
+                        <p class="indent">
+                            如今，海扶超声聚焦刀已经由一项顶尖的高科技技术变成了临床适宜技术，累计治疗良、恶性实体肿瘤近5万人，而海扶超声聚焦刀治疗一个直径8厘米的肿瘤的时间也由最初的10个小时大大缩短到不足2小时。在治疗子宫肌瘤的时候，该设备不开刀、不流血，病人甚至不用麻醉，做完手术休息片刻就能回家，且费用不足传统手术一半。该设备在山西省中医院的投入使用，无疑为山西省肿瘤患者增加了一道坚实的健康屏障。
+                        </p>
+                    </div>
+                </div>
+                <div class="bottom"></div>
+            </div>
+            <div class="jd_wrap">
+                <p class="titleRow">医师介绍</p>
+                <div class="headPhoto"></div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+
+    $(function(){
+        $('#return').click(function(){
+            window.location.href = '/page/characteristic/characteristic.html?index=2';
+        })
+        function tempFun(){
+            let template = '';
+            for(let i = 0; i < 6 ; i++){
+                // template += `
+                //     <div class="box">
+                //         <div class="block">
+                //             <div class="hover">
+                //                 <div class="box_child">
+                //                     <div class="pad">
+                //                         <div class="img">
+                //                             <img src="{ms:global.host/}/{ms:global.style/}/images/avatar1_1.png" alt="">
+                //                         </div>
+                //                         <p class="name">王晞星</p>
+                //                         <p class="position">肿瘤病专家</p>
+                //                     </div>
+                //                 </div>
+                //                 <div class="box_active_wrap">
+                //                     <div class="box_active">
+                //                         <div class="descWrap">
+                //                             <p class="text">
+                //                                 王晞星，主任医师，教授，博/硕士研究生导师，国贴专家，山西名医，全国中医药专家学术经验继承导师，山西省中医院院长，重点专科带头人。
+                //                             </p>
+                //                             <p class="title">擅长：</p>
+                //                             <p class="text">
+                //                                 中西医结合治疗肺癌、胃癌、食管癌、结直肠癌、肾癌等；对消化道疾病有独到的治疗方法
+                //                             </p>
+                //                         </div>
+                //                     </div>
+                //                 </div>
+                //             </div>
+                //             <div class="back_row">
+                //                 <div class="cel_o">挂号</div>
+                //                 <div class="cel_t">问诊</div>
+                //             </div>
+                //         </div>
+                //     </div>
+                // `
+                template += '<div class="box">'+
+'                        <div class="block">'+
+'                            <div class="hover">'+
+'                                <div class="box_child">'+
+'                                    <div class="pad">'+
+'                                        <div class="img">'+
+'                                            <img src="{ms:global.host/}/{ms:global.style/}/images/avatar1_1.png" alt="">'+
+'                                        </div>'+
+'                                        <p class="name">王晞星</p>'+
+'                                        <p class="position">肿瘤病专家</p>'+
+'                                    </div>'+
+'                                </div>'+
+'                                <div class="box_active_wrap">'+
+'                                    <div class="box_active">'+
+'                                        <div class="descWrap">'+
+'                                            <p class="text">'+
+'                                                王晞星，主任医师，教授，博/硕士研究生导师，国贴专家，山西名医，全国中医药专家学术经验继承导师，山西省中医院院长，重点专科带头人。'+
+'                                            </p>'+
+'                                            <p class="title">擅长：</p>'+
+'                                            <p class="text">'+
+'                                                中西医结合治疗肺癌、胃癌、食管癌、结直肠癌、肾癌等；对消化道疾病有独到的治疗方法'+
+'                                            </p>'+
+'                                        </div>'+
+'                                    </div>'+
+'                                </div>'+
+'                            </div>'+
+'                            <div class="back_row">'+
+'                                <div class="cel_o">挂号</div>'+
+'                                <div class="cel_t">问诊</div>'+
+'                            </div>'+
+'                        </div>'+
+'                    </div>';
+            }
+            return template;
+        }
+        $('.headPhoto').append(tempFun());
+    })
+</script>
+</html>

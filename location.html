@@ -1,0 +1,17 @@
+<#assign curtypeid=field.typeid>
+<div class="Breadcrumb">
+    <span>您现在的位置:  </span>
+    <span class="black" @click="goto('{ms:global.url/}/home.html')">首页</span>
+    {ms:channel type="path"}
+    <#if curtypeid==field.typeid>
+        <span v-if="hasRoute || isArticle" class="black" @click="goto('{ms:global.url/}<#if field.type==3>${field.typeurl}<#else>${field.typelink}</#if>')"> &gt; ${field.typetitle}</span>
+        <span v-else> &gt; ${field.typetitle}</span>
+        <span v-if="isArticle"> &gt; 详情</span>
+    <#elseif field.type==3>
+          <span class="black" @click="goto('{ms:global.url/}${field.typeurl}')"> &gt; ${field.typetitle}</span>
+    <#else>
+        <span class="black" @click="goto('{ms:global.url/}${field.typelink}')"> &gt; ${field.typetitle}</span>
+    </#if>
+    {/ms:channel}
+    <span v-if="hasRoute"> &gt; {{$route.name}}</span>
+</div>

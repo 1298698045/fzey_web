@@ -1,0 +1,47 @@
+.wrap  .container .content .download{
+  margin: 20px 72px 100px;
+  }
+  .wrap  .container .content .download .row{
+    display: flex;
+    align-items: center;
+    padding: 19px 0;
+    border-bottom: 1px solid #ccc;
+    cursor: pointer;
+  }
+  .wrap  .container .content .download .row::before{
+    /* width: 24px;
+    height: 24px;
+    background: url('/images/shu_icon.png') no-repeat;
+    content: '';
+    display: block; */
+  }
+  .wrap  .container .content .download .row .name{
+    font-size: 20px;
+    color: #333333;
+    flex: 1;
+    margin-left: 18px;
+  }
+  .wrap  .container .content .download .row:hover .name{
+    color: #815b3f;
+  }
+  .wrap  .container .content .download .row .btn{
+    width: 110px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 3px;
+    background: #815b3f;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 14px;
+    color: #ffffff;
+  }
+  .wrap  .container .content .download .row .btn .icon{
+    width: 20px;
+    height: 20px;
+    background: url('../../images/down_icon.png');
+  }
+  .wrap  .container .content .download .row:hover .btn{
+    background: #6a3f24;
+  }
+  

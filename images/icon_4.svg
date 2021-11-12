@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 22.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 90 88" style="enable-background:new 0 0 90 88;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#路径_3_);}
+	.st1{opacity:0.9;fill:url(#路径_4_);enable-background:new    ;}
+	.st2{opacity:0.5;fill:url(#路径_5_);enable-background:new    ;}
+</style>
+<title>混合培训</title>
+<desc>Created with Sketch.</desc>
+<g id="编组-15" transform="translate(8.000000, 9.000000)">
+	
+		<linearGradient id="路径_3_" gradientUnits="userSpaceOnUse" x1="-256.5995" y1="430.841" x2="-256.0998" y2="430.5145" gradientTransform="matrix(79.9384 0 0 -46.786 20529.0215 20200.457)">
+		<stop  offset="0" style="stop-color:#8AD1FF"/>
+		<stop  offset="1" style="stop-color:#4267E7"/>
+	</linearGradient>
+	<path id="路径" class="st0" d="M40,73.3l36-20.6c1-0.5,1.3-1.8,0.7-2.7c-0.2-0.3-0.4-0.6-0.7-0.7L38,27.6c-0.6-0.4-1.4-0.4-2,0
+		L-2,49.3c-1,0.5-1.3,1.8-0.7,2.7c0.2,0.3,0.4,0.6,0.7,0.7l36,20.6C35.9,74.4,38.1,74.4,40,73.3z"/>
+	
+		<linearGradient id="路径_4_" gradientUnits="userSpaceOnUse" x1="-256.5447" y1="430.6849" x2="-256.1096" y2="430.4496" gradientTransform="matrix(79.9384 0 0 -46.179 20529.0215 19919.6641)">
+		<stop  offset="0" style="stop-color:#C1EAD3"/>
+		<stop  offset="1" style="stop-color:#8DD1A7"/>
+	</linearGradient>
+	<path id="路径_1_" class="st1" d="M40,58.3l36-20.6c1-0.5,1.3-1.8,0.7-2.7c-0.2-0.3-0.4-0.6-0.7-0.7L40,13.7
+		c-1.8-1.1-4.1-1.1-6,0L-2,34.3c-1,0.5-1.3,1.8-0.7,2.7c0.2,0.3,0.4,0.6,0.7,0.7l36,20.6C35.9,59.4,38.1,59.4,40,58.3z"/>
+	
+		<linearGradient id="路径_5_" gradientUnits="userSpaceOnUse" x1="-256.6069" y1="430.675" x2="-256.1424" y2="430.5017" gradientTransform="matrix(79.9384 0 0 -46.179 20529.0215 19902.668)">
+		<stop  offset="0" style="stop-color:#ABE6C5"/>
+		<stop  offset="1" style="stop-color:#73C893"/>
+	</linearGradient>
+	<path id="路径_2_" class="st2" d="M40,41.3l36-20.6c1-0.5,1.3-1.8,0.7-2.7c-0.2-0.3-0.4-0.6-0.7-0.7L40-3.3c-1.8-1.1-4.1-1.1-6,0
+		L-2,17.3c-1,0.5-1.3,1.8-0.7,2.7c0.2,0.3,0.4,0.6,0.7,0.7l36,20.6C35.9,42.4,38.1,42.4,40,41.3z"/>
+</g>
+</svg>

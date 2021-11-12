@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>中医特色</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/healthyTime.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+
+        <div class="center">
+            <#include "location.html" />
+            <div class="container">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">中医特色</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="tabs">
+                    <div class="tab">
+                        <p class="text active" title="中医药博物馆">
+                            中医药博物馆
+                        </p>
+                    </div>
+                    <div class="tab">
+                        <p class="text" title="健康时间">
+                            健康时间
+                        </p>
+                    </div>
+                    <div class="tab">
+                        <p class="text" title="中医药文化宣传">
+                            中医药文化宣传
+                        </p>
+                    </div>
+                </div>
+                <div class="content_wrap" style="display: block;"></div>
+                <div class="content_wrap">
+                    <div class="content">
+                        <div class="videoWrap marginAuto">
+                            <div class="dynamic" id="videoId">
+        
+                            </div>
+                            <div id="videoPages" style="display: flex;
+                            justify-content: center;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content_wrap">
+                    <div class="content">
+                        <div class="memorabilia marginAuto">
+                            <div class="dynamic" id="memorabiliaId">
+                            </div>
+                            <div id="pageThree" style="display: flex;
+                            justify-content: center;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/pagination.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/healthyTime.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+</script>
+</html>

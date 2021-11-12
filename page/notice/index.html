@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/infoOpen.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/rightScroll.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+    <style>
+        .wrap .center .container .tabs {
+            display: flex;
+        }
+        .wrap .center .container .tabs .tab {
+            display: flex;
+            align-items: center;
+            margin-right: 30px;
+        }
+        .wrap .center .container .tabs .tab .imgs {
+            width: 10px;
+            height: 46px;
+        }
+        .wrap .center .container .tabs .tab .imgs img {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .wrap .center .container .tabs .tab .l {
+            background: url('/images/l-1.png') no-repeat;
+        }
+        .wrap .center .container .tabs .tab .r {
+            background: url('/images/r-1.png') no-repeat;
+        }
+        .wrap .center .container .tabs .tab .l.active {
+            background: url('/images/backl.png') no-repeat;
+        }
+        .wrap .center .container .tabs .tab .r.active {
+            background: url('/images/backr.png') no-repeat;
+        }
+        .wrap .center .container .tabs .tab .text {
+            width: 285px;
+            height: 47px;
+            line-height: 47px;
+            background: url('/images/tab_child.png') no-repeat;
+            text-align: center;
+            color: #086252;
+            cursor: pointer;
+            background-size: 100% 100%;
+        }
+        .wrap .center .container .tabs .tab .text.active {
+            color: #fff;
+            background: url('/images/tab_child_active.png') no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <div class="headerWrap"></div>
+        <div class="posBoxWrap"></div>
+        <div class="center">
+            <div class="Breadcrumb">
+                <span>您现在的位置:  </span>
+                <span class="black" id="homePage">首页 ></span>
+                <span class="black" id="return">通知公告 ></span>
+                <span id="defaultVal">通知公告</span>
+            </div>
+            <div class="container">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">通知公告</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="tabs">
+                    {ms:channel type='son'}
+                    <div class="tab">
+                        <p class="text<#if field.index==1> active</#if>" title="${field.typetitle}">
+                            ${field.typetitle}
+                        </p>
+                    </div>
+                    {/ms:channel}
+                </div>
+                <div class="content" style="display: block;">
+                    <div class="NoticeBody">
+                        <div class="left_wrap leftId">
+                            <div class="l_text">
+                                <div class="row_back active">
+                                    <i class="icon_l"></i>
+                                    <span class="active">
+                                        山西省中医院电梯维保中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院不间断电源（CPU）项目中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院户外亮化照明工程废标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院住院楼、综合楼保养PVC地面中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        生活垃圾分类清运中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        综合门诊楼、住院部PVC地面维护保养项目谈判公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        放射诊疗设备与工作场所防护检测项目招标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院住院部1#3#4#电梯大修项目中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院生活垃圾（分类）清运服务项目废标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        生活垃圾分类清运中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        综合门诊楼、住院部PVC地面维护保养项目谈判公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院2020年公开招聘工作人员成绩公示
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- <div class="scrollBar">
+                                <div class="sliderWrap">
+                                    <div class="slider">
+    
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="right_wrap">
+                            <div class="rightHead">
+                                <div class="title">
+                                    <i class="left"></i>
+                                    <span>山西省中医院电梯维保中标公告</span>
+                                </div>
+                                <div class="time">
+                                    时间：2019-12-30      点击：5121次
+                                </div>
+                            </div>
+                            <div class="article">
+                                <div class="descWrap">
+                                    <div class="desc">
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                        <p class="text">
+                                            山西省中医院于2021年1月27日对该项目进行了竞争性谈判招标采购。谈判小组依据谈判文件的具体要求，经过客观公正的评定，形成了集体意见。现将结果公告如下：
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="NoticeBody">
+                        <div class="left_wrap left_wrap_two">
+                            <div class="l_text l_text_two">
+                                <div class="row_back active">
+                                    <i class="icon_l"></i>
+                                    <span class="active">
+                                        【敬告患者】关于刘光珍院长出诊时间调整的通知
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        综合门诊楼、住院部PVC地面维护保养项目谈判公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        关于2020年公开招聘入围面试人员递补的通知
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        欢迎参加2020年患者满意度调查
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        关于延长春节假期的通知
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        2020年春节门急诊安排
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        2019年“劳动节”门诊工作安排
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院住院楼、综合楼保养PVC地面中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        2021年硕士研究生招生简章及专业目录
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        生活垃圾分类清运中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        综合门诊楼、住院部PVC地面维护保养项目谈判公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院2020年公开招聘工作人员成绩公示
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- <div class="scrollBar">
+                                <div class="sliderWrap">
+                                    <div class="slider">
+    
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="right_wrap">
+                            <div class="rightHead">
+                                <div class="title">
+                                    <i class="left"></i>
+                                    <span>【敬告患者】关于刘光珍院长出诊时间调整的通知</span>
+                                </div>
+                                <div class="time">
+                                    时间：2019-12-30      点击：5121次
+                                </div>
+                            </div>
+                            <div class="article articleTwo">
+                                <div class="descWrap">
+                                    <div class="desc descTwo">
+                                        <p class="text">
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div class="NoticeBody">
+                        <div class="left_wrap left_wrap_three">
+                            <div class="l_text l_text_three">
+                                <div class="row_back active">
+                                    <i class="icon_l"></i>
+                                    <span class="active">
+                                        【敬告患者】关于刘光珍院长出诊时间调整的通知
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        综合门诊楼、住院部PVC地面维护保养项目谈判公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        关于2020年公开招聘入围面试人员递补的通知
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        欢迎参加2020年患者满意度调查
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        关于延长春节假期的通知
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        2020年春节门急诊安排
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        2019年“劳动节”门诊工作安排
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院住院楼、综合楼保养PVC地面中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        2021年硕士研究生招生简章及专业目录
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        生活垃圾分类清运中标公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        综合门诊楼、住院部PVC地面维护保养项目谈判公告
+                                    </span>
+                                </div>
+                                <div class="row_back">
+                                    <i class="icon_l"></i>
+                                    <span>
+                                        山西省中医院2020年公开招聘工作人员成绩公示
+                                    </span>
+                                </div>
+                            </div>
+                            <!-- <div class="scrollBar">
+                                <div class="sliderWrap">
+                                    <div class="slider">
+    
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                        <div class="right_wrap">
+                            <div class="rightHead">
+                                <div class="title">
+                                    <i class="left"></i>
+                                    <span>【敬告患者】关于刘光珍院长出诊时间调整的通知</span>
+                                </div>
+                                <div class="time">
+                                    时间：2019-12-30      点击：5121次
+                                </div>
+                            </div>
+                            <div class="article articleThree">
+                                <div class="descWrap">
+                                    <div class="desc descThree">
+                                        <p class="text">
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                            刘光珍院长于11月23日起调整出诊时间为：每周二、四全天、周六上午出诊（周五停诊），请前来就诊的患者调整就诊时间，望周知。
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="content">
+                    <div class="devIng">
+                        网页更新中......
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <#include "foot.html" />
+
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/infoOpen.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}js/pagination.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}js/scroll.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+    $(function(){
+        $('#return').click(function(){
+            window.location.href = '/page/notice/index.html?index=7&name=招标公告'+'&id='+'d_tzgg';
+            $('#defaultVal').html('通知公告')
+        })
+        let name = getUrlParam("name");
+        $('#defaultVal').html(name)
+        // console.log(name,'name')
+        // $('#swiperId .swiper-slide').removeClass('active');
+        // $('#swiperId .swiper-slide[title="'+name+'"]').addClass('active');
+        // var index = $('#swiperId .swiper-slide[title="'+name+'"]').index();
+        // $('.container .content').hide().eq(index).show()
+        $('.tabs .tab p').removeClass('active');
+        $('.tabs .tab p[title="'+name+'"]').addClass('active');
+        var index = $('.tabs .tab p[title="'+name+'"]').parent().index();
+        $('.container .content').hide().eq(index).show()
+        function getUrlParam(key) {
+            // 获取参数
+            var url = window.location.search;
+            // 正则筛选地址栏
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            // 匹配目标参数
+            var result = url.substr(1).match(reg);
+            //返回参数值
+            return result ? decodeURIComponent(result[2]) : null;
+        }
+        $('.tabs .tab').click(function(){
+            $('.tabs .tab').children().removeClass('active');
+            $(this).children().addClass('active');
+            let value = $(this).children().html();
+            $('#defaultVal').html(value);
+            $('.container .content').hide();
+            let index = $(this).index();
+            $('.container .content').eq(index).show();
+            let idx = $(this).index();
+            if(idx==0){
+                // funScroll();
+                var scrollLeft = new scrollBar('.left_wrap','.l_text',55,40,'Y');
+                scrollLeft.init();
+                var scrollRight = new scrollBar('.article','.descWrap .desc',55,40,'Y');
+                scrollRight.init();
+            }else if(idx==1){
+                var scrollLeft1 = new scrollBar('.left_wrap_two','.l_text_two',55,40,'Y');
+                scrollLeft1.init();
+                var scrollRight1 = new scrollBar('.articleTwo','.descWrap .descTwo',55,40,'Y');
+                scrollRight1.init();
+            }else if(idx==2){
+                var scrollLeft2 = new scrollBar('.left_wrap_three','.l_text_three',55,40,'Y');
+                scrollLeft2.init();
+                var scrollRight2 = new scrollBar('.articleThree','.descWrap .descThree',55,40,'Y');
+                scrollRight2.init();
+            }
+        })
+        var scrollLeft = new scrollBar('.leftId','.l_text',55,40,'Y');
+        scrollLeft.init();
+        var scrollRight = new scrollBar('.article','.descWrap .desc',55,40,'Y');
+        scrollRight.init();
+        // funScroll();
+        function funScroll(){
+            //设置滑块的高度 
+            //$('.slider').css('height',h1+'px'); 
+            //设置y轴的增量 
+            var y = 0; 
+
+            //确定每次滚动滚轮右侧滚动条移动的距离
+            var ystepnumber = (($('.l_text').height()+40 - $('.left_wrap').height())/55)
+            var ysteplength = $('.scrollBar').height()/ystepnumber
+            
+            //为wrap添加滚轮事件 
+            var wrapDiv = document.querySelector('.left_wrap');
+            wrapDiv.onmousewheel = function(e){
+                e.preventDefault();
+                var event1 = event || e 
+                if (event.wheelDelta < 0) { 
+                    //滑动条向下滚动 
+                    y += ysteplength; 
+                }else if (event.wheelDelta > 0) { 
+                    //滑动条向上滚动 
+                    y -= ysteplength; 
+                } 
+                //y变化时说明在滚动，此时使滚动条发生滚动，以及设置content内容部分滚动 
+                //判断极端情况，滑块不能划出屏幕 
+                if (y <= 0) { 
+                    //滑块最多滑到顶部 
+                    y = 0; 
+                } 
+                if(y >= $('.sliderWrap').height() - $('.slider').height()){ 
+                    //滑块最多滑到最底部 
+                    y = $('.sliderWrap').height() - $('.slider').height(); 
+                } 
+                var scale = y/($('.sliderWrap').height() - $('.slider').height()); 
+                // console.log(scale)
+                $('.slider').css('top',y+'px')
+                $('.l_text').css('top',-scale*(($('.l_text').height()+40) - $('.left_wrap').height())+'px');
+            }
+        }
+    })
+</script>
+</html>

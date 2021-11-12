@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/patient.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/module/css/traffic.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/articleContent.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+    <script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+    <script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+    <script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+    <script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+    <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+    <style>
+        #swiperId{
+            transition-timing-function:linear !important;
+        }
+        #swiperId.swiperId{
+            transition-duration: 150ms !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <#include "location.html" />
+            <div class="container">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">出诊动态</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="tab_wrap">
+                    <div class="left_icon icon">
+                    </div>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper" id="swiperId">
+                            {ms:channel type='son'}
+                            <#if field.typetitle!='预约挂号'>
+                            <div class="swiper-slide tabs-item"
+                            :class="{active : $route.path == '${field.typepath}'}"
+                            title="${field.typetitle}"  @click="push('${field.typepath}')">
+                                ${field.typetitle}
+                            </div>
+                            <#else>
+                            <div class="swiper-slide"
+                            title="${field.typetitle}">
+                                ${field.typetitle}
+                            </div>
+                            </#if>
+                            {/ms:channel}
+                        </div>
+                    </div>
+                    <div class="right_icon icon">
+                    </div>
+                </div>
+                <router-view></router-view>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/pagination.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/visitingNews.js"></script>
+<script src="${base}/static/plugins/moment/2.29.1/moment.min.js"></script>
+<script>
+    var aggregateDept = function(rows) {
+        var lastDept = ''
+        var lastRow = null
+        function aggregate(row) {
+            if (lastDept != row.departmentId) {
+                lastDept = row.departmentId
+                lastRow = row
+                lastRow.rowSpan = 1
+                lastRow.showDept = true
+            } else {
+                row.showDept = false
+                lastRow.rowSpan += 1
+            }
+        }
+        rows.forEach(aggregate)
+    }
+
+    Storage.prototype.setExpire = (key, value, expire) => {
+        let obj = {
+        data: value,
+        time: Date.now(),
+        expire: expire
+        };
+        //localStorage 设置的值不能为对象,转为json字符串
+        localStorage.setItem(key, JSON.stringify(obj));
+    }
+
+    Storage.prototype.getExpire = key => {
+        let val = localStorage.getItem(key);
+        if (!val) {
+            return val;
+        }
+        val = JSON.parse(val);
+        if (Date.now() - val.time > val.expire) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        return val.data;
+    }
+
+    var fetchExpert = function() {
+        var KEY = 'expertList'
+        var list = localStorage.getExpire(KEY)
+        if (list) {
+            return Promise.resolve(list)
+        }
+        return ms.http.post("/cms/expert/list.do", {pageSize:9999}).then(function(res) {
+            localStorage.setExpire(KEY, res.data.rows, 30000)
+            return Promise.resolve(res.data.rows)
+        })
+    }
+    var router = new VueRouter({routes:[
+        {ms:channel type='son'}
+            <#if field.typeid='1403306687218151426'>
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component:{
+                    template:`
+                    <div class="content newcontent" id="visitInfo" style="display:block;">
+                        <div class="box" id="tab_child">
+                            <p class="tabC active">专家出诊（总院）</p>
+                            <p class="tabC">专家出诊（名医门诊）</p>
+                            <p class="tabC">专家出诊（胜利分院）</p>
+                            <p class="tabC">专家出诊（和平分院）</p>
+                        </div>
+                        <div class="blockWrap active">
+                            <div class="top_back"></div>
+                            <div class="cont_wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="100">科室</th>
+                                            <th width="100">姓名</th>
+                                            <th width="180">职称</th>
+                                            <th>主治</th>
+                                            <th>出诊时间</th>
+                                            <th width="200">预约/咨询</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr class="dataRow" v-for='line in mainBranch'>
+                                            <td @click="handleDept(line)" v-show="line.showDept" :rowspan="line.rowSpan" class="name departmentId">{{line.departmentName}}</td>
+                                            <td @click="handleRouter(line)">{{line.name}}</td>
+                                            <td>{{line.technicalTitle}}</td>
+                                            <td>{{line.goodAt}}</td>
+                                            <td>{{line.schedule}}</td>
+                                            
+                                            <td class="operation">
+                                                <a target="_blank" href="#">
+                                                    <button class="btn">预约</button>
+                                                </a>
+                                                <a target="_blank" href="https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ">
+                                                    <button class="btn msg">问诊</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="bottom_back"></div>
+                        </div>
+                        <div class="blockWrap">
+                            <div class="top_back"></div>
+                            <div class="cont_wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="120">姓名</th>
+                                            <th width="180">职称</th>
+                                            <th width="309">主治</th>
+                                            <th widht="400">出诊时间</th>
+                                            <th width="197">挂号/咨询</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody" id="tbodyOne">
+                                        <tr class="dataRow" v-for='line in mymzBranch'>
+                                            <td @click="handleRouter(line)">{{line.name}}</td>
+                                            <td>{{line.technicalTitle}}</td>
+                                            <td>{{line.goodAt}}</td>
+                                            <td>{{line.schedule}}</td>
+                                            <td class="operation">
+                                                <a target="_blank" href="#">
+                                                    <button class="btn">预约</button>
+                                                </a>
+                                                <a target="_blank" href="https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ">
+                                                    <button class="btn msg">问诊</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                            <div class="bottom_back"></div>
+                        </div>
+                        
+                        <div class="blockWrap">
+                            <div class="top_back"></div>
+                            <div class="cont_wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="100">科室</th>
+                                            <th width="100">姓名</th>
+                                            <th width="180">职称</th>
+                                            <th>主治</th>
+                                            <th>出诊时间</th>
+                                            <th width="200">预约/咨询</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody" id="tbodyVictory">
+                                        <tr class="dataRow" v-for='line in slfyBranch'>
+                                            <td @click="handleDept(line)" v-show="line.showDept" :rowspan="line.rowSpan" class="name departmentId">{{line.departmentName}}</td>
+                                            <td @click="handleRouter(line)">{{line.name}}</td>
+                                            <td>{{line.technicalTitle}}</td>
+                                            <td>{{line.goodAt}}</td>
+                                            <td>{{line.schedule}}</td>
+                                            
+                                            <td class="operation">
+                                                <a target="_blank" href="#">
+                                                    <button class="btn">预约</button>
+                                                </a>
+                                                <a target="_blank" href="https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ">
+                                                    <button class="btn msg">问诊</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                            <div class="bottom_back"></div>
+                        </div>
+                        <div class="blockWrap">
+                            <div class="top_back"></div>
+                            <div class="cont_wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="100">科室</th>
+                                            <th width="100">姓名</th>
+                                            <th width="180">职称</th>
+                                            <th>主治</th>
+                                            <th>出诊时间</th>
+                                            <th width="200">预约/咨询</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody" id="tbodyPeace">
+                                        <tr class="dataRow" v-for='line in hpfyBranch'>
+                                            <td @click="handleDept(line)" v-show="line.showDept" :rowspan="line.rowSpan" class="name departmentId">{{line.departmentName}}</td>
+                                            <td @click="handleRouter(line)">{{line.name}}</td>
+                                            <td>{{line.technicalTitle}}</td>
+                                            <td>{{line.goodAt}}</td>
+                                            <td>{{line.schedule}}</td>
+                                            
+                                            <td class="operation">
+                                                <a target="_blank" href="#">
+                                                    <button class="btn">预约</button>
+                                                </a>
+                                                <a target="_blank" href="https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ">
+                                                    <button class="btn msg">问诊</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                            <div class="bottom_back"></div>
+                        </div>
+                    </div>
+                    `,
+                    mixins: [mixin],
+                    data: function() {
+                        return {
+                            mainBranch: [],
+                            slfyBranch: [],
+                            hpfyBranch: [],
+                            mymzBranch: []
+                        }
+                    },
+                    methods: {
+                        list: function() {
+                            // debugger
+                            var that = this
+                            fetchExpert().then(function(list) {
+                                list.forEach(function(row) {
+                                    let name = row.name.split('_');
+                                    if(name.length>1){
+                                        that.$set(row,'name',name[0])
+                                        row.name = name[0];
+                                    }
+                                    switch (row.contentType) {
+                                    case 'mymz':
+                                        that.mymzBranch.push(row)
+                                        break
+                                    case 'slfy':
+                                        that.slfyBranch.push(row)
+                                        break
+                                    case 'hpfy':
+                                        that.hpfyBranch.push(row)
+                                        break
+                                    default:
+                                        that.mainBranch.push(row)
+                                    }
+                                })
+                                
+                                aggregateDept(that.mainBranch)
+                                aggregateDept(that.slfyBranch)
+                                aggregateDept(that.hpfyBranch)
+                            }).catch(function(err) {
+                                console.error('error:', err)
+                            })
+                        },
+                        handleRouter(item){
+                            window.open("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                        },
+                        // 跳转部门
+                        handleDept(item){
+                            window.open("{ms:global.url/}"+ item.departmentPath + '/index.html')
+                        }
+                    },
+                    created: function() {
+                        this.list()
+                    }
+                }
+            },
+            <#elseif field.typeid='1403306723171725314'>
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component:{
+                    template:`
+                    <div class="content newcontent">
+                        <div class="cont"></div>
+                        <div class="blockWrap">
+                            <div class="top_back"></div>
+                            <div class="cont_wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="100">科室</th>
+                                            <th width="100">姓名</th>
+                                            <th width="180">职称</th>
+                                            <th>主治</th>
+                                            <th>开始时间</th>
+                                            <th>结束时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr class="dataRow" v-for="expert in expertList">
+                                            <td @click="handleDept(expert)" v-show="expert.showDept" :rowspan="expert.rowSpan" class="name departmentId">{{expert.departmentName}}</td>
+                                            <td @click="handleRouter(expert)">{{expert.name}}</td>
+                                            <td>{{expert.technicalTitle}}</td>
+                                            <td>{{expert.goodAt}}</td>
+                                            <td>{{expert.stoppingStart}}</td>
+                                            <td>{{expert.stoppingEnd}}</td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                            <div class="bottom_back"></div>
+                        </div>
+                    </div>
+                    `,
+                    mixins: [mixin],
+                    data: function() {
+                        return {
+                            expertList: []
+                        }
+                    },
+                    methods: {
+                        list: function() {
+                            var that = this
+                            fetchExpert().then(function(experts) {
+                                that.expertList = experts.filter(function(expert){
+                                    return expert.stoppingStart && expert.stoppingEnd 
+                                    && moment().isBefore(expert.stoppingStart) 
+                                })
+                                aggregateDept(that.expertList);
+                            })
+                        },
+                        formatContentType: function(contentType) {
+                            if(contentType.includes('mymz')) {
+                                return '名医门诊'
+                            }
+                            if(contentType.includes('slfy')) {
+                                return '胜利分院'
+                            }
+                            if(contentType.includes('hpfy')) {
+                                return '和平分院'
+                            }
+                            return ''
+                        },
+                        handleRouter(item){
+                            window.open("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                        },
+                        // 跳转部门
+                        handleDept(item){
+                            window.open("{ms:global.url/}"+ item.departmentPath  + '/index.html')
+                        }
+                    },
+                    created: function() {
+                        this.list()
+                    }
+                }
+            },
+            <#elseif field.typeid='1403306741349838850'>
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component:{
+                    template:`
+                    <div class="content newcontent" id="visitQuery">
+                        <div class="formSearch" style="margin-bottom:20px;">
+                            <span class="">出诊信息查询：</span>
+                            <div class="filed">
+                                <input type="text" v-model="goodAt" class="inp" placeholder="疾病名称">
+                            </div>
+                            <div class="filed">
+                                <div class="inp select" id="departSel">
+                                    <input type="text" @focus="handleFocus" @blur="handleBlur" v-model="departmentName" placeholder="科室名称" readonly>
+                                    <i class="bottom_icon">
+                                        
+                                    </i>
+                                    <div class="selectModal" v-if="isShow">
+                                        <p class="subject">科室名称</p>
+                                        <ul>
+                                            <li v-for="(line,index) in deptList" :key="index" @mousedown="handleCheckDept(line,index)">{{line.departmentName}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filed">
+                                <input type="text" v-model="doctorName" class="inp" placeholder="医师名称">
+                            </div>
+                            <div class="filed">
+                                <button class="btn" @click="handleSearch">搜索</button>
+                            </div>
+                            <div class="filed">
+                                <button class="btn" @click="handleReset">重置</button>
+                            </div>
+                        </div>
+                        <div class="blockWrap active" v-if="queryList.length>0">
+                            <div class="top_back"></div>
+                            <div class="cont_wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="100">科室</th>
+                                            <th width="100">姓名</th>
+                                            <th width="180">职称</th>
+                                            <th>主治</th>
+                                            <th>出诊时间</th>
+                                            <th width="200">预约/咨询</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr class="dataRow" v-for='line in queryList'>
+                                            <td @click="handleDept(line)" v-show="line.showDept" :rowspan="line.rowSpan" class="name departmentId">{{line.departmentName}}</td>
+                                            <td @click="handleRouter(line)">{{line.name}}</td>
+                                            <td>{{line.technicalTitle}}</td>
+                                            <td>{{line.goodAt}}</td>
+                                            <td>{{line.schedule}}</td>
+                                            <td class="operation">
+                                                <a target="_blank" href="#">
+                                                    <button class="btn">预约</button>
+                                                </a>
+                                                <a target="_blank" href="https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ">
+                                                    <button class="btn msg">问诊</button>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                            <div class="bottom_back"></div>
+                        </div>
+                    </div>
+                    `,
+                    mixins: [mixin],
+                    data: function() {
+                        return {
+                            queryList: [],
+                            deptList:[],
+                            departmentId:"",
+                            departmentName:"",
+                            isShow:false,
+                            goodAt:"",
+                            doctorName: "",
+                            localList: []
+                        }
+                    },
+                    methods: {
+                        list: function() {
+                            var that = this
+                            
+                            return fetchExpert().then(function(list) {
+                                that.localList = list;
+                                aggregateDept(that.localList)
+                                that.localList.forEach(function(item) {
+                                    let name = item.name.split('_');
+                                    if(name.length>1){
+                                        that.$set(item,'name',name[0])
+                                    }
+                                    if(item.showDept){
+                                        that.deptList.push(item)
+                                    }
+                                })
+                                return Promise.resolve(list);
+                            }).catch(function(err) {
+                                console.error('error:', err)
+                            })
+                        },
+                        handleRouter: function(item){
+                            window.open("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                        },
+                        // 跳转部门
+                        handleDept(item){
+                            window.open("{ms:global.url/}"+ item.departmentPath  + '/index.html')
+                        },
+                        handleCheckDept(item,index){
+                            this.departmentId = item.departmentId;
+                            this.departmentName = item.departmentName;
+                            this.isShow = false;
+                        },
+                        handleFocus(){
+                            this.isShow = true;
+                        },
+                        handleBlur(){
+                            this.isShow = false;
+                        },
+                        handleSearch(){
+                            console.log(this.goodAt,this.departmentId,this.doctorName);
+
+                            if(this.departmentId!=''&&this.goodAt!=''&&this.doctorName!=''){
+                                this.queryList = this.localList.filter(item=>{
+                                    if(this.departmentId == item.departmentId){
+                                        return item.departmentId == this.departmentId && RegExp(this.doctorName).test(item.name) && RegExp(this.goodAt).test(item.goodAt);
+                                    }
+                                })
+                            }else if(this.goodAt!=''&&this.departmentId!=''){
+                                this.queryList = this.localList.filter(item=>{
+                                    return RegExp(this.goodAt).test(item.goodAt) && item.departmentId == this.departmentId;
+                                })
+                            }else if(this.goodAt!=''&&this.doctorName!=''){
+                                this.queryList = this.localList.filter(item=>{
+                                    return RegExp(this.goodAt).test(item.goodAt) && RegExp(this.doctorName).test(item.name);
+                                })
+                            }else if(this.departmentId!=''&&this.doctorName!=''){
+                                this.queryList = this.localList.filter(item=>{
+                                    if(this.departmentId == item.departmentId&&this.doctorName!=''){
+                                        return item.departmentId == this.departmentId && RegExp(this.doctorName).test(item.name)
+                                    }
+                                })
+                            }else if(this.departmentId!=''){
+                                this.queryList = this.localList.filter(item=>{
+                                    if(this.departmentId == item.departmentId){
+                                        return item.departmentId == this.departmentId
+                                    }
+                                })
+                            }else if(this.goodAt!=''){
+                                this.queryList = this.localList.filter(item=>{
+                                    if(this.goodAt!=''){
+                                        return RegExp(this.goodAt).test(item.goodAt);
+                                    }
+                                })
+                            }else if(this.doctorName!=''){
+                                this.queryList = this.localList.filter(item=>{
+                                    if(this.doctorName!=''){
+                                        return RegExp(this.doctorName).test(item.name)
+                                    }
+                                })
+                            }
+                            // this.queryList = this.queryList.filter(item=>{
+                            //     if((this.departmentId!=''&&this.departmentId == item.departmentId)&&this.doctorName!=''){
+                            //         return item.departmentId == this.departmentId && RegExp(this.doctorName).test(item.name)
+                            //     }else if(this.goodAt!='' && !isBook){
+                            //         return RegExp(this.goodAt).test(item.goodAt);
+                            //     }else if(this.departmentId!=''&&this.departmentId == item.departmentId&& !isBook){
+                            //         return item.departmentId == this.departmentId;
+                            //     }else if(this.doctorName!=''&& !isBook){
+                            //         return RegExp(this.doctorName).test(item.name)
+                            //     }
+                            // })
+                            aggregateDept(this.queryList)
+                        },
+                        // 重置
+                        handleReset(){
+                            this.doctorName = '';
+                            this.goodAt = '';
+                            this.departmentId = '';
+                            this.departmentName = '';
+                            this.queryList = [];
+                        }
+                    },
+                    created: function() {
+                        this.list().then(res=>{
+                            let data = this.$route.query;
+                            if(data.goodAt||data.departmentId||data.doctorName){
+                                this.goodAt = data.goodAt;
+                                this.departmentId = data.departmentId;
+                                this.departmentName = data.departmentName;
+                                this.doctorName = data.doctorName;
+                                this.handleSearch();
+                            }
+                        })
+                    }
+                }
+            },
+            <#elseif field.typeid='1403306757426606082'>
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component:{
+                    template:`
+                    <div class="content newcontent">
+                        <div class="cont"></div>
+                        <div class="blockWrap">
+                            <div class="top_back"></div>
+                            <div class="cont_wrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th width="100">科室</th>
+                                            <th width="100">姓名</th>
+                                            <th width="180">职称</th>
+                                            <th>主治</th>
+                                            <th>开始时间</th>
+                                            <th>结束时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="tbody">
+                                        <tr class="dataRow" v-for="expert in expertList">
+                                            <td @click="handleDept(expert)" v-show="expert.showDept" :rowspan="expert.rowSpan" class="name departmentId">{{expert.departmentName}}</td>
+                                            <td @click="handleRouter(expert)">{{expert.name}}</td>
+                                            <td>{{expert.technicalTitle}}</td>
+                                            <td>{{expert.goodAt}}</td>
+                                            <td>{{expert.stoppingStart}}</td>
+                                            <td>{{expert.stoppingEnd}}</td>
+                                        </tr>
+                                    </tbody>
+                                    
+                                </table>
+                            </div>
+                            <div class="bottom_back"></div>
+                        </div>
+                    </div>
+                    `,
+                    mixins: [mixin],
+                    data: function() {
+                        return {
+                            expertList: []
+                        }
+                    },
+                    methods: {
+                        list: function() {
+                            var that = this
+                            fetchExpert().then(function(experts) {
+                                that.expertList = experts.filter(function(expert){
+                                    return expert.stoppingStart && expert.stoppingEnd 
+                                    && moment().isBefore(expert.stoppingStart) 
+                                })
+                                aggregateDept(that.expertList);
+                            })
+                        },
+                        formatContentType: function(contentType) {
+                            if(contentType.includes('mymz')) {
+                                return '名医门诊'
+                            }
+                            if(contentType.includes('slfy')) {
+                                return '胜利分院'
+                            }
+                            if(contentType.includes('hpfy')) {
+                                return '和平分院'
+                            }
+                            return ''
+                        },
+                        handleRouter(item){
+                            window.open("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                        },
+                        // 跳转部门
+                        handleDept(item){
+                            window.open("{ms:global.url/}"+ item.departmentPath + '/index.html' )
+                        }
+                    },
+                    created: function() {
+                        this.list()
+                    }
+                }
+            },
+            <#elseif field.typeid='1403306782714064897'>
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component:{
+                    template:`
+                    <div class="content newcontent">
+                        <div class="NoticeBody">
+                            <div class="left_wrap">
+                                <div class="left_wrap_view">
+                                    <div class="l_text">
+                                        {ms:arclist orderby='sort' size=9999}
+                                        <div class="row_back<#if field.index==1> active</#if>" id='${field.id}'>
+                                            <i class="icon_l"></i>
+                                            <span class="<#if field.index==1>active</#if>">
+                                                ${field.title}
+                                            </span>
+                                        </div>
+                                        {/ms:arclist}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right_wrap">
+                                {ms:arclist orderby='sort' size=9999}
+                                <div class="rightCont active">
+                                    <div class="head" style="margin:35px 35 0 35px">
+                                        <div class="title">
+                                            <i class="left"></i>
+                                            <span>${field.title}</span>
+                                        </div>
+                                        <div class="time">
+                                            发布时间：${field.date?string("yyyy-MM-dd")}
+                                        </div>
+                                    </div>
+                                    <div class="article">
+                                        <div class="descWrap" style="margin-left:0;">
+                                            <div class="d-visible">
+                                                ${field.content}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/ms:arclist}
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }
+            }
+            </#if>
+        {/ms:channel}
+    ]})
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            hasRoute: true
+        },
+        mixins: [mixin],
+        router:router,
+        methods: {
+        },
+        created: function(){
+            {ms:channel type='son' size=1}
+            if (this.$route.path == '/') {
+                this.push('${field.typepath}')
+            }
+            {/ms:channel}
+        }
+    })
+    $(function(){
+        // $('#departSel input').focus(function(){
+        //     $('.selectModal').addClass('active');
+        // })
+        // $('#departSel input').blur(function(){
+        //     $('.selectModal').removeClass('active');
+        // })
+        $('#tab_child p').click(function(){
+            $('#tab_child p').removeClass('active');
+            $(this).addClass('active');
+            $('#visitInfo .blockWrap').hide();
+            $('#visitInfo .blockWrap').eq($(this).index()).show();
+        })
+        $('.swiper-wrapper .tabs-item').click(function(){
+            if($(this).attr('title')=='出诊信息'){
+                function load(url){//url：需要加载js路径
+                    var script = document.createElement("script");
+                    script.type="text/javascript";
+                    script.src="{ms:global.host/}/{ms:global.style/}/js/visitingNews.js";
+                    document.body.appendChild(script)
+                }
+                $('#tab_child p').click(function(){
+                    $('#tab_child p').removeClass('active');
+                    $(this).addClass('active');
+                    $('#visitInfo .blockWrap').hide();
+                    $('#visitInfo .blockWrap').eq($(this).index()).show();
+                    let idx = $(this).index();
+                    setTimeout(()=>{
+                        load();
+                    },100)
+                })
+            }
+        })
+    })
+    window.onload = function(){
+        function getUrlParam(key) {
+            // 获取参数
+            var url = window.location.search;
+            // 正则筛选地址栏
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            // 匹配目标参数
+            var result = url.substr(1).match(reg);
+            //返回参数值
+            return result ? decodeURIComponent(result[2]) : null;
+        }
+        var hospitalName = getUrlParam('hospitalName');
+        if(hospitalName=='victory'){
+            $('#tab_child p').removeClass('active');
+            $('#tab_child p').eq(2).addClass('active');
+            $('#visitInfo .blockWrap').hide();
+            $('#visitInfo .blockWrap').eq(2).show();
+        }else if(hospitalName=='peace'){
+            $('#tab_child p').removeClass('active');
+            $('#tab_child p').eq(3).addClass('active');
+            $('#visitInfo .blockWrap').hide();
+            $('#visitInfo .blockWrap').eq(3).show();
+        }
+    }
+</script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/scroll.js" defer></script>
+</html>

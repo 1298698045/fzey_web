@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>搜索结果</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/search.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.12.0/index.css"> 
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+    <script src="{ms:global.host/}/static/plugins/element-ui/2.12.0/index.js"></script> 
+    <style>
+        .el-pagination{
+            display: flex!important;
+            justify-content: center!important;
+        }
+        .el-pagination .el-pager .number{
+            width: 57px!important;
+            height: 58px!important;
+            line-height: 58px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_icon.png') no-repeat!important;
+            list-style: none!important;
+            vertical-align: top!important;
+            color: #333!important;
+        }
+        .el-pagination .el-pager .number.active{
+            color: #ffffff!important;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_icon_active.png') no-repeat !important;
+        }
+        .el-pagination .btn-next, .el-pagination .btn-prev{
+            width: 15px!important;
+            height: 34px!important;
+            margin-top: 16px!important;
+        }
+        .el-pagination .btn-prev{
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_left.png') no-repeat!important;
+        }
+        .el-pagination .btn-next{
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_right.png') no-repeat!important;
+            margin-left: 18px!important;
+        }
+        .el-pagination .btn-next .el-icon, .el-pagination .btn-prev .el-icon{
+            display: none!important;
+        }
+        .el-pagination .more{
+            width: 57px!important;
+            height: 58px!important;
+            line-height: 58px;
+            background: url('http://t-think.com/hospital/template/1/new_hospital/images/page_icon.png') no-repeat!important;
+            list-style: none!important;
+            vertical-align: top!important;
+            color: #333!important;
+        }
+        .el-pager .more::before{
+            line-height: 58px!important;
+        }
+        .el-pagination__jump{
+            width: 156px!important;
+            height: 42px!important;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/jump.png') no-repeat!important;
+            background-size: 100% 100%!important;
+            display: inline-block!important;
+            color: #606266!important;
+            margin-left: 10px!important;
+            padding: 10px 10px 10px 20px!important;
+            margin-top: 5px!important;
+        }
+        .el-input__inner{
+            background: none!important;
+            border: none!important;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrap">
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <div class="Breadcrumb">
+                <span>您现在的位置:  </span>
+                <span class="black" @click="goto('{ms:global.url/}/index.html')">首页</span>
+                <span> &gt; 搜索结果</span>
+            </div>
+            <div class="container">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">搜索结果</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="searchPanel">
+                    <p class="l_text">
+                        关键词“<span class="resultRed keyword">${search.content_title}</span>”搜索结果如下
+                    </p>
+                    <!--<p class="r_text">
+                        共 <sapn class="totalNum resultRed">710</sapn> 篇
+                    </p>-->
+                </div>
+                
+                <div class="content_wrap">
+                    <div class="content">
+                        <div class="lCont" id="news">
+                            <#assign isEmpty=true>
+                            {ms:arclist size=10 ispaging=true}
+                            <#assign isEmpty=false>
+                            <div class="box" @click="goto('{ms:global.url/}${field.link}')">
+                                <p class="leftIcon"></p>
+                                <div class="desc_wrap">
+                                    <p class="title">
+                                        ${field.title}
+                                    </p>
+                                    <p class="desc">
+                                        ${field.descrip}
+                                    </p>
+                                    <p class="time">
+                                        2020.11.15
+                                    </p>
+                                </div>
+                                <p class="rightIcon"></p>
+                            </div>
+                            {/ms:arclist}
+                            <#if isEmpty>
+                            <span style="width: 100%; text-align:center;min-height: 300px;display: flex;justify-content: center;align-items: center;">
+                              没有找到 "<span style="color: red">${search.content_title}</span>" 相关记录
+                            </span>
+                            </#if>
+                        </div>
+                    </div>
+                    <div id="pages">
+                        <el-pagination
+                            background
+                            @current-change="handleCurrentChange"
+                            :page-size="pageSize"
+                            :current-page.sync="pageCur"
+                            layout="prev, pager, next, jumper"
+                            :total="contentCount">
+                        </el-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/pagination.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/searchQuery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            //当前页数
+            pageCur: ${(page.cur)!1},
+            //每页文章条数
+            pageSize: ${(page.size)!20},
+            //页数总数
+            pageTotal: ${(page.total)!0},
+            //内容总数
+            contentCount: ${(page.rcount)!0},
+            keyword: "{ms:search.content_title/}",
+            categoryIds: ""
+        },
+        mixins: [mixin],
+        methods: {
+            handleCurrentChange:function(val) {
+                var form = document.createElement("form");
+                form.setAttribute("method", "post");
+                var input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', 'size');
+                input.setAttribute('value', this.pageSize);
+                form.append(input);
+                input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', 'pageNo');
+                input.setAttribute('value', val);
+                form.append(input);
+                input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', 'content_title');
+                input.setAttribute('value', this.keyword);
+                form.append(input);
+                input = document.createElement('input');
+                input.setAttribute('type', 'hidden');
+                input.setAttribute('name', 'categoryIds');
+                input.setAttribute('value', this.categoryIds);
+                form.append(input);
+
+                form.setAttribute("action",location.pathname);
+                document.body.appendChild(form);
+                form.submit();
+                form.remove();
+                // location.href = location.pathname + "?size=" + this.pageSize + "&pageNo=" + val + "&content_title=" + this.keyword + "&categoryIds=" + this.categoryIds;
+            }
+        }
+    })
+</script>
+</html>

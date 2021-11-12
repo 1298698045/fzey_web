@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>中医特色</title>
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/displayBlock.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <style>
+        .el-pagination{
+            display: flex!important;
+            justify-content: center!important;
+        }
+        .el-pagination .el-pager .number{
+            width: 57px!important;
+            height: 58px!important;
+            line-height: 58px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_icon.png') no-repeat!important;
+            list-style: none!important;
+            vertical-align: top!important;
+            color: #333!important;
+        }
+        .el-pagination .el-pager .number.active{
+            color: #ffffff!important;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_icon_active.png') no-repeat !important;
+        }
+        .el-pagination .btn-next, .el-pagination .btn-prev{
+            width: 15px!important;
+            height: 34px!important;
+            margin-top: 16px!important;
+        }
+        .el-pagination .btn-prev{
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_left.png') no-repeat!important;
+        }
+        .el-pagination .btn-next{
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_right.png') no-repeat!important;
+            margin-left: 18px!important;
+        }
+        .el-pagination .btn-next .el-icon, .el-pagination .btn-prev .el-icon{
+            display: none!important;
+        }
+        .el-pagination .more{
+            width: 57px!important;
+            height: 58px!important;
+            line-height: 58px;
+            background: url('http://t-think.com/hospital/template/1/new_hospital/images/page_icon.png') no-repeat!important;
+            list-style: none!important;
+            vertical-align: top!important;
+            color: #333!important;
+        }
+        .el-pager .more::before{
+            line-height: 58px!important;
+        }
+        .el-pagination__jump{
+            width: 156px!important;
+            height: 42px!important;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/jump.png') no-repeat!important;
+            background-size: 100% 100%!important;
+            display: inline-block!important;
+            color: #606266!important;
+            margin-left: 10px!important;
+            padding: 10px 10px 10px 20px!important;
+            margin-top: 5px!important;
+        }
+        .el-input__inner{
+            background: none!important;
+            border: none!important;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+
+        <div class="center">
+            <#include "location.html" />
+            <div class="row_title" id="anchor1">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">陈列展示</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+            </div>
+            <!-- <div class="features marginAuto">
+                <div class="dynamic" id="featuresId">
+                    {ms:arclist size=9}
+                    <div class="box">
+                        <div class="box_child">
+                            <div class="img">
+                                <img class="imgurl" src="{ms:global.host/}{@ms:file field.litpic/}"/>      
+                                <div class="modal">
+                                    <p class="add_icon"></p>    
+                                </div>
+                            </div>
+                            <div class="text_Wrap">
+                                <p class="text">
+                                    ${field.title}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {/ms:arclist}
+                </div>
+            </div> -->
+            <div class="features marginAuto">
+                <div class="dynamic" id="featuresId">
+                    <div class="box" v-for="(line,index) in lines" @click="handleOpen(line,index)">
+                        <div class="box_child">
+                            <div class="img">
+                                <img class="imgurl" :src="line.imageUrl"/>      
+                                <div class="modal">
+                                    <p class="add_icon"></p>    
+                                </div>
+                            </div>
+                            <div class="text_Wrap">
+                                <p class="text">
+                                    {{line.contentTitle}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="fake_item"></div>
+                </div>
+            </div>
+            <div v-if="page.contentCount>9">
+                <el-pagination background @current-change="list" :page-size="page.pageSize"
+                    :current-page.sync="page.pageNo" layout="prev, pager, next, jumper" :total="page.contentCount">
+                </el-pagination>
+            </div>
+        </div>
+        <#include "foot.html" />
+        
+        <div class="modal_modal">
+            <div class="popupWrap">
+                <div class="block">
+                    <div class="swiper-container_modal">
+                        <div class="swiper-wrapper">
+                            <!-- {ms:arclist size=9}
+                            <div class="swiper-slide">
+                                <div class="imgBox">
+                                    <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                                </div>
+                                <div class="row">
+                                    <p class="title">${field.title}</p>
+                                    <p class="cancel modal_cancel"></p>
+                                </div>
+                            </div>
+                            {/ms:arclist} -->
+                            <div class="swiper-slide" v-for="line in lines">
+                                <div class="imgBox">
+                                    <img :src="line.imageUrl" alt="">
+                                </div>
+                                <div class="row">
+                                    <p class="title">{{line.contentTitle}}</p>
+                                    <p class="cancel modal_cancel"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div >
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        mixins: [mixin],
+        data: function () {
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                page: {
+                    //当前页数
+                    pageNo: 1,
+                    //每页文章条数
+                    pageSize: 9,
+                    //页数总数
+                    pageTotal: 0,
+                    //内容总数
+                    contentCount: 0
+                },
+                lines: [],
+                isShow:false
+            }
+        },
+        methods: {
+            list: function (pageCur) {
+                var that = this
+                that.page.pageNo = pageCur
+                ms.http.post("/cms/content/list.do", Object.assign({}, {
+                    categoryId: '${field.typeid}'
+                }, that.page)).then(function (res) {
+                    that.page.contentCount = res.data.total
+                    that.lines = res.data.rows.map(function (row) {
+                        if (row.contentImg) {
+                            var img = JSON.parse(row.contentImg)
+                            if (img.length > 0) {
+                                row.imageUrl = '{ms:global.host/}' + img[0].path
+                            }
+                        }
+                        return row
+                    })
+                    if(pageCur){
+                        $("html, body").scrollTop(0).animate({scrollTop: $("#anchor1").offset().top});
+                    }
+                    console.log('lines:', that.lines)
+                }).catch(function (err) {
+                    console.error('error:', err)
+                })
+            },
+            dateFormat: function (date, fmt = "YYYY-MM-DD") {
+                return moment(date).format(fmt)
+            },
+            getSimpleText(html) {
+                var re1 = new RegExp("<.+?>", "g");//匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
+                var msg = html.replace(re1, '');//执行替换成空字符
+                return msg;
+            },
+            handleOpen(item,index){
+                this.isShow = true;
+            }
+        },
+        mounted: function () {
+            this.list()
+        }
+    })
+
+    window.onload = function(){
+        setTimeout(()=>{
+            var mySwiper1 = new Swiper ('.swiper-container_modal', {
+                slidesPerView: 1,
+                initialSlide :0,
+                paginationClickable:true,
+                pagination: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                onSlideChangeEnd: function(swiper){
+                    if(swiper.isBeginning){
+                        swiper.prevButton.removeClass('active');
+                    }else{
+                        swiper.prevButton.addClass('active');
+                    }
+                }
+            })
+            for(var i=0; i<$('#featuresId .box').length;i++){
+                $('#featuresId .box').eq(i).click(function(){
+                    // let idx = $(this).index();
+                    $('.modal_modal').show();
+                    modalSwiperFun(i);
+                })
+            }
+            $('#featuresId .box').click(function(){
+                let idx = $(this).index();
+                $('.modal_modal').show();
+                modalSwiperFun(idx);
+            })
+            $('.modal_cancel').click(function(){
+                $('.modal_modal').hide();
+            })
+            function modalSwiperFun(idx){
+                mySwiper1.init();
+                mySwiper1.slideTo(idx, 0, false);
+            }
+        },100)
+    }
+</script>
+</html>

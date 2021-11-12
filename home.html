@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=.3; minimum-scale=.3; maximum-scale=.3"> -->
+    <meta name="viewport" content="width=1300px"/>
+    <title>{ms:global.name/}</title>
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css" />
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css" />
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/index.css" />
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css" />
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+    <script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+    <script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+    <script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+    <script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+    <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+    <#include "expert.html" />
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        {ms:channel type='self' typeid='1433644858958667777' }
+             {ms:arclist}
+            <div id="imgDiv" @click="goto('${field.keyword}')" style="position:fixed;left:50px;top:60px;z-index:9999999;">
+                <div id="a" style="width:20px;height:20px;position: absolute;right:0px;background:rgba(255,255,255,.3);text-align: center;cursor: pointer;">×
+                </div>
+                <!-- <img src="01.jpg" border="0" /> -->
+                <div style="width:260px;height:150px;background:url('{ms:global.host/}{@ms:file field.litpic/}');display:flex;justify-content: center;align-items: center;font-family: 'St';font-size:26px;color:#fff;padding:0 20px;">
+                    ${field.title}
+                </div>
+            </div>
+            {/ms:arclist}
+        {/ms:channel}
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="banner">
+            {ms:channel type='self' typeid='1418535046827040770' }
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {ms:arclist}
+                    <div class="swiper-slide">
+                        <a href="${field.descrip}" target="_blank">
+                            <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                        </a>
+                    </div>
+                    {/ms:arclist}
+                    <!-- <div class="swiper-slide">
+                        <a href="https://v.qq.com/x/page/k0568xqoq2a.html" target="_blank">
+                            <img src="{ms:global.host/}/{ms:global.style/}/images/banner2.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="https://v.qq.com/x/page/o0568iylvnf.html" target="_blank">
+                            <img src="{ms:global.host/}/{ms:global.style/}/images/banner3.jpg" alt="">
+                        </a>
+                    </div>
+                    <div class="swiper-slide">
+                        <a href="#">
+                            <img src="{ms:global.host/}/{ms:global.style/}/images/banner4.jpg" alt="">
+                        </a>
+                    </div> -->
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+                
+                <!-- 如果需要导航按钮 -->
+                <div style="position: relative;width: 1230px;margin: 0 auto;">
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+            </div>
+            {/ms:channel}
+        </div>
+        <div class="center">
+            <div class="module spacing">
+                {ms:channel type='self'  typeid='1403306469080788993'}
+                <div class="box" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}${'#/chuzhendongtai/chuzhenxinxi'}</#if>')">
+                    <div class="box_child">
+                        <div class="imgs">
+                            <img src="{ms:global.host/}/{ms:global.style/}/images/icon_1.png" alt="">
+                        </div>
+                        <p class="text">预约挂号</p>
+                    </div>
+                </div>
+                {/ms:channel}
+                {ms:channel type='self'  typeid='1400724319233798146'}
+                <div class="box" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}${'#/patient/jiuyixuzhi'}</#if>')">
+                    <div class="box_child">
+                        <div class="imgs">
+                            <img src="{ms:global.host/}/{ms:global.style/}/images/icon_2.png" alt="">
+                        </div>
+                        <p class="text">就医须知</p>
+                    </div>
+                </div>
+                {/ms:channel}
+                {ms:channel type='self'  typeid='1402954155253919745'}
+                <div class="box" @click="goto('{ms:global.url/}${field.typeurl}')">
+                    <div class="box_child">
+                        <div class="imgs">
+                            <img src="{ms:global.host/}/{ms:global.style/}/images/icon_3.png" alt="">
+                        </div>
+                        <p class="text">医院位置</p>
+                    </div>
+                </div>
+                {/ms:channel}
+                {ms:channel type='self'  typeid='1400724656644583425'}
+                <div class="box" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}?id=d_ksdh&childId=tszl</#if>')">
+                    <div class="box_child">
+                        <div class="imgs">
+                            <img src="{ms:global.host/}/{ms:global.style/}/images/icon.png" alt="">
+                        </div>
+                        <p class="text">专科专病</p>
+                    </div>
+                </div>
+                {/ms:channel}
+            </div>
+            <div class="News spacing">
+                <div class="left_box">
+                    <div class="row">
+                        <div class="l_name">
+                            新闻中心
+                        </div>
+                        <div class="list_text" id="newsOne">
+                            {ms:channel type='son' typeid='1400716168132456449'}
+                            <p class="back<#if field.index==1> active</#if>"  @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">${field.typetitle}</p>
+                            {/ms:channel}
+                        </div>
+                    </div>
+                    {ms:channel type='son' typeid='1400716168132456449'}
+                    <div class="cont<#if field.index==1> active</#if>">
+                        <div class="banner_wrap">
+                            <div class="swiper-container-child  swiper-no-swiping">
+                                <div class="swiper-wrapper">
+                                    {ms:arclist size=4 flag='c' orderby='sort'}
+                                    <#if field.flag?contains('tv')>
+                                    <div class="swiper-slide" flag="${field.flag}">
+                                        <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                        <div class="bannerChild">
+                                            <img style="width:100%;height:100%;" src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                                        </div>
+                                        <div class="r_desc">
+                                            <p class="title">
+                                                ${field.title}
+                                            </p>
+                                            <p class="time">${field.date?string("yyyy-MM-dd")}</p>
+                                            <p class="desc">
+                                                ${field.descrip}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <#else>
+                                    <div class="swiper-slide" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                                        <div class="bannerChild">
+                                            <img style="width:100%;height:100%;" src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                                        </div>
+                                        <div class="r_desc">
+                                            <p class="title">
+                                                ${field.title}
+                                            </p>
+                                            <p class="time">${field.date?string("yyyy-MM-dd")}</p>
+                                            <p class="desc">
+                                                ${field.descrip}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    </#if>
+                                    {/ms:arclist}
+                                    
+                                </div>
+                                <!-- 如果需要分页器 -->
+                                <div class="swiper-pagination"></div>
+                            </div>
+                        </div>
+                        {ms:arclist size=4 flag='c' orderby='sort'}
+                        <#if field.flag?contains('tv')>
+                        <div class="row_wrap" flag="${field.flag}">
+                            <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                            <div class="block">
+                                <p class="weight">${field.date?string("dd")}</p>
+                                <p class="time">${field.date?string("yyyy-MM")}</p>
+                            </div>
+                            <div class="desc">${field.title}</div>
+                        </div>
+                        <#else>
+                        <div class="row_wrap" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                            <div class="block">
+                                <p class="weight">${field.date?string("dd")}</p>
+                                <p class="time">${field.date?string("yyyy-MM")}</p>
+                            </div>
+                            <div class="desc">${field.title}</div>
+                        </div>
+                        </#if>
+                        {/ms:arclist}
+                    </div>
+                    {/ms:channel}
+                    
+                </div>
+                <div class="right_box">
+                    <div class="row">
+                        <div class="l_name">
+                            通知公告
+                        </div> 
+                        <div class="list_text" id="newsTwo">
+                            {ms:channel size=3 typeid='1400723660430274562'}
+                            <p class="back<#if field.index==1> active</#if> ${field.pinyin}"  @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">${field.typetitle}</p>
+                            {/ms:channel}
+                        </div>
+                    </div>
+                    {ms:channel type='self' typeid='1400723660430274562'}
+                    <#assign parentlink=field.typelink>
+                    {ms:channel size=3}
+                    <div class="cont<#if field.index==1> active</#if>" idx=${field_index}>
+                        {ms:arclist size=4 flag='c' orderby='sort'}
+                        <div class="box"  @click="goto('{ms:global.url/}${parentlink}?articleid=${field.id}/#${field.typepath}')">
+                            <h3 class="time">${field.date?string("MM-dd")}</h3>
+                            <p class="text">
+                                ${field.title}
+                            </p>
+                        </div>
+                        {/ms:arclist}
+                        
+                    </div>
+                    {/ms:channel}
+                    {/ms:channel}
+                </div>
+            </div>
+            <div class="department spacing">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">科室导航</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="cont">
+                    <div class="img_wrap active" @click="goto(selectedDepart.typelink)">
+                        <img :src="selectedDepart.image" alt="">
+                        <div class="mantle">
+                            <div class="text_cont">
+                                <p class="title">
+                                    {{ selectedDepart.typetitle }}
+                                </p>
+                                <p class="desc">
+                                    {{ selectedDepart.descrip }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="departList">
+                        <div class="tabs" id="depart">
+                            <p class="tab" :class="{active: idx==0}" v-for="(depart, idx) in departments">{{depart.typetitle}}</p>
+                            <div class="d_right">
+                                <div class="solid"></div>
+                                {ms:channel type="self" typeid='1400724656644583425' size=1}
+                                <div class="more" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                                    查看更多
+                                </div>
+                                {/ms:channel}
+                            </div>
+                        </div>
+                        <div class="ulsWrap" :class="{active: idx==0}" v-for="(depart, idx) in departments">
+                            <ul class="uls" :class="{active: idx==0}">
+                                <li class="lis" :class="{active: idx2==num}" @click="goto(dep.typelink)" v-for="(dep, idx2) in depart.children" @mouseover="setDepartment(dep,idx2)">
+                                    <span>
+                                        {{dep.typetitle}}
+                                    </span>
+                                </li>
+                                <li class="lis_fack_item"></li>
+                                <li class="lis_fack_item"></li>
+                                <li class="lis_fack_item"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="imgList">
+                    {ms:channel type='self'  typeid='1403323700237922306'}
+                    <div class="box back_1" @click="goto('{ms:global.url/}${field.typelink}')">“治未病”健康体检中心</div>
+                    {/ms:channel}
+                    {ms:channel type='self'  typeid='1403324570597945346'}
+                    <div class="box back_2" @click="goto('{ms:global.url/}${field.typelink}')">名医门诊</div>
+                    {/ms:channel}
+                    {ms:channel type='self'  typeid='1403305833035558913'}
+                    <div class="box back_3" @click="goto('{ms:global.url/}${field.typelink}')">胜利分院</div>
+                    {/ms:channel}
+                    {ms:channel type='self'  typeid='1403305871824482305'}
+                    <div class="box back_4" @click="goto('{ms:global.url/}${field.typelink}')">和平分院</div>
+                    {/ms:channel}
+                </div>
+            </div>
+            <div class="department introduce spacing">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">专家介绍</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <!-- 专家介绍 -->
+                <Expert></Expert>
+                <!--
+                <div class="swiper-container1">
+                    <div class="swiper-wrapper headPhoto">
+                        <div class="swiper-slide ">
+                            <div class="box">
+                                <div class="block">
+                                    <div class="hover">
+                                        <div class="box_child">
+                                            <div class="pad">
+                                                <div class="img">
+                                                    <img src="{ms:global.host/}/{ms:global.style/}/images/avatar1_1.png" alt="">
+                                                </div>
+                                                <p class="name">王晞星</p>
+                                                <p class="position">肿瘤病专家</p>
+                                            </div>
+                                        </div>
+                                        <div class="box_active_wrap">
+                                            <div class="box_active">
+                                                <div class="descWrap">
+                                                    <p class="text">
+                                                        王晞星，主任医师，教授，博/硕士研究生导师，国贴专家，山西名医，全国中医药专家学术经验继承导师，山西省中医院院长，重点专科带头人。
+                                                    </p>
+                                                    <p class="title">擅长：</p>
+                                                    <p class="text">
+                                                        中西医结合治疗肺癌、胃癌、食管癌、结直肠癌、肾癌等；对消化道疾病有独到的治疗方法
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="back_bord">
+                                        <div class="back">
+                                            内综肿瘤科
+                                        </div>
+                                    </div>
+                                    <div class="back_row">
+                                        <div class="cel_o">挂号</div>
+                                        <div class="cel_t">问诊</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                -->
+                <ul class="ul_wrap">
+                    <li>
+                        <div class="box">
+                            <p class="name">网上商城</p>
+                            <p class="more ">查看更多</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="box">
+                            <p class="name active">网上书城</p>
+                            <p class="more d-active">查看更多</p>
+                        </div>
+                    </li>
+                    {ms:channel type='self'  typeid='1400729393410502658'}
+                    <li>
+                        <div class="box">
+                            <p class="name">健康科普</p>
+                            <p class="more" @click="goto('{ms:global.url/}${field.typelink}')">查看更多</p>
+                        </div>
+                    </li>
+                    {/ms:channel}
+                    {ms:channel type='self'  typeid='1400727666594574337'}
+                    <li>
+                        <div class="box">
+                            <p class="name active">中医特色</p>
+                            <p class="more d-active" @click="goto('{ms:global.url/}${field.typelink}')">查看更多</p>
+                        </div>
+                    </li>
+                    {/ms:channel}
+                </ul>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/index.js"></script>
+          <script>
+var xin = true, // true向右偏移,false向左偏移，首次为true，默认向右偏移
+            yin = true; // true向下偏移,false向上偏移，首次为true，默认向下偏移
+        var step = 1; // 每次移动偏移量
+        var delay = 10; // 定时函数定时时间
+        var $obj;
+        $(function () {
+            $obj = $("#imgDiv");
+            var time = window.setInterval("move()", delay);
+            $obj.mouseover(function () {
+                clearInterval(time)
+            });
+            $obj.mouseout(function () {
+                time = window.setInterval("move()", delay)
+            });
+        });
+ 
+        function move() {
+            var left = $obj.offset().left;
+            var top = $obj.offset().top;
+            var L = T = 0; //左边界和顶部边界
+            var R = $(window).width() - $obj.width(); // 右边界
+            var B = $(window).height() - $obj.height(); // 下边界
+ 
+            //难点:怎样判断广告的4个边框有没有超出可视化范围!
+            if (left < L) {
+                xin = true; // 水平向右移动
+            }
+            if (left > R) {
+                xin = false; // 水平向左移动
+            }
+            if (top < T) {
+                yin = true; // 垂直向下移动
+            }
+            if (top > B) {
+                yin = false; // 垂直向上移动
+            }
+            //根据有没有超出范围来确定广告的移动方向
+            left += step * (xin == true ? 1 : -1);
+            top += step * (yin == true ? 1 : -1);
+            // 给div 元素重新定位
+            $obj.offset({
+                top: top,
+                left: left
+            })
+        }
+        //关闭
+        $(function () {
+            $("#a").click(function (e) {
+                e.stopPropagation();
+                var b = $("#a").parent();
+                $(b).remove();
+            })
+        })
+</script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            selectedDepart: {},
+            departments: [
+                {ms:channel type='son' typeid='1400724656644583425' flag='c'}
+                {
+                    typetitle: "${field.typetitle}",
+                    children: [
+                        {ms:channel size=25  orderby='sort'}
+                        {
+                            typetitle: "${field.typetitle}",
+                            typelink: "{ms:global.url/}${field.typelink}",
+                            {ms:arclist flag='c' size=1}
+                            descrip: `${field.descrip}`,
+                            image: "{ms:global.host/}{@ms:file field.litpic/}"
+                            {/ms:arclist}
+                        },
+                        {/ms:channel}
+                    ]
+                },
+                {/ms:channel}
+            ],
+            num:0,
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {
+            setDepartment: function(depart,idx) {
+                console.log("selectDepart is:", depart)
+                $('.departList .uls .lis').removeClass('active');
+                this.selectedDepart = depart
+                this.num = idx;
+                $('.departList .uls .lis').eq(idx).addClass('active');
+            }
+        },
+        created() {
+            this.num = 0;
+            $('.departList .uls .lis').eq(0).addClass('active');
+            if (this.departments.length > 0 && this.departments[0].children.length > 0) {
+                this.setDepartment(this.departments[0].children[0])
+            }
+        }
+    })
+
+    $('.bottomBack').hide();
+    var mySwiper = new Swiper ('.swiper-container', {
+        // autoplay: false,
+        // duration: 1000,
+        // loop: true,
+        autoplay: 3000,
+        mousewheel: {
+            releaseOnEdges: true,//PC端释放滑动
+        },
+        paginationClickable:true,
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+    })
+    $('.swiper-container').hover(function(){
+        mySwiper.stopAutoplay();
+    },function(){
+        mySwiper.startAutoplay();
+    })
+    var mySwiper_child = new Swiper ('.swiper-container-child', {
+        loop: true,
+        autoplay: 2000,
+        mousewheel: {
+            releaseOnEdges: true,//PC端释放滑动
+        }, 
+        paginationClickable:true,
+        pagination: '.swiper-pagination',
+        autoplayDisableOnInteraction : false  /* 注意此参数，默认为true */
+    })
+    $('#newsOne .back').hover(function(){
+        $('#newsOne .back').removeClass('active');
+        $(this).addClass('active');
+        $('.News .left_box .cont').hide();
+        $('.News .left_box .cont').eq($(this).index()).show()
+        let idx = $(this).index();
+        mySwiper_child[idx].init();
+        mySwiper_child[idx].stopAutoplay();
+        mySwiper_child[idx].startAutoplay();
+    },function(){
+        $(this).addClass('active');
+    })
+    $('.swiper-container-child').hover(function(){
+        let idx = $(this).parents('.cont').index()-1;
+        mySwiper_child[idx].stopAutoplay();
+    },function(){
+        let idx = $(this).parents('.cont').index()-1;
+        mySwiper_child[idx].startAutoplay();
+    })
+    var mySwiperChild = new Swiper ('.swiper-container-child_Two ', {
+        autoplay: 2000,
+        mousewheel: {
+            releaseOnEdges: true,//PC端释放滑动
+        }, 
+        paginationClickable:true,
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+    })
+    setTimeout(()=>{
+        var mySwiper1 = new Swiper('.swiper-container1', {
+            slidesPerView: 6,
+            spaceBetween: 18,
+            // loop: true,
+            autoplay: 2000,
+            paginationClickable:true,
+            observer:true,
+            observeParents:true,
+            pagination: '.swiper-pagination1',
+        });
+        mySwiper1.container[0].onmouseover=function() {
+            mySwiper1.stopAutoplay();
+        }
+        // 鼠标移出开始自动滚动
+        mySwiper1.container[0].onmouseout=function() {
+            mySwiper1.startAutoplay();
+        }
+    },300)
+    window.onload = function(){
+        $('.departList .uls .lis').eq(0).addClass('active');
+        
+
+        for(var i = 0; i < $('.News .cont').length; i++){
+            for(var j = 0; j < $('.News .cont').eq(i).find('.swiper-slide').length; j++){
+                let flag = $('.News .cont').eq(i).find('.swiper-slide').eq(j).attr('flag') || '';
+                console.log('flag:',flag);
+                if(flag!=""&&flag.indexOf('tv')!=-1){
+                    let dom = $('.News .cont').eq(i).find('.swiper-slide').eq(j).find('.hidden');
+                    let link = dom.find('a').html();
+                    console.log('link:',link)
+                    $('.News .cont').eq(i).find('.swiper-slide').eq(j).one('click',function(){
+                        window.open(link);
+                    })
+                }
+            }
+            for(var k = 0; k < $('.News .cont').eq(i).find('.row_wrap').length; k++){
+                let flag = $('.News .cont').eq(i).find('.row_wrap').eq(k).attr('flag') || '';
+                console.log('flagj:',flag);
+                if(flag!=""&&flag.indexOf('tv')!=-1){
+                    let dom = $('.News .cont').eq(i).find('.row_wrap').eq(k).find('.hidden');
+                    let link = dom.find('a').html();
+                    console.log('link:',link)
+                    $('.News .cont').eq(i).find('.row_wrap').eq(k).one('click',function(){
+                        window.open(link);
+                    })
+                }
+            }
+        }
+    }
+</script>
+
+</html>

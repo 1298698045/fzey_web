@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1920px" height="723px" viewBox="0 0 1920 723" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>路径 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="1.65450175 150 1921.6545 -2.58439103e-13 1920.6545 723 0.654501746 722"></polygon>
+        <linearGradient x1="89.6819897%" y1="48.695692%" x2="1.86235614%" y2="50.7361838%" id="linearGradient-3">
+            <stop stop-color="#00CDFF" stop-opacity="0" offset="0%"></stop>
+            <stop stop-color="#009FFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="3-0" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="米知云" transform="translate(0.000000, -1060.000000)">
+            <g id="模块1.1" transform="translate(-2.000000, 1060.000000)">
+                <g id="路径-2" transform="translate(0.345498, 0.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="蒙版" fill="#F8FAFF" xlink:href="#path-1"></use>
+                    <path d="M-39.0837918,575.442922 C341.451373,443.147641 635.364137,405.333333 842.654502,462 C1153.59005,547 2136.60706,792.584945 2111.6545,669.792472 C2111.6545,856.578392 2111.6545,949.971351 2111.6545,949.971351 L-42,949.971351 L-39.0837918,575.442922 Z" fill="url(#linearGradient-3)" opacity="0.03" mask="url(#mask-2)"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

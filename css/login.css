@@ -1,0 +1,326 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.wrap .header{
+    height: 32px;
+    background: url('../images/sx_top.png') repeat;
+    position: static;
+}
+.center{
+    position: absolute;
+    top: 32px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: rgba(0,0,0,0.3);
+    background: url('../images/sx_bg.jpg') no-repeat;
+    background-attachment:fixed;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+.center .container{
+    width: 1356px;
+    height: calc(100% - (32px));
+    margin: 0 auto;
+    position: relative;
+}
+.center .container .nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 30px;
+}
+.center .container .nav .logo{
+    width: 356px;
+    height: 80px;
+}
+.center .container .nav .logo img{
+    width: 100%;
+    height: 100%;
+}
+.center .container .nav .right_icons {
+    /* overflow: hidden; */
+    position: relative;
+    z-index: 99999;
+}
+.center .container .nav .right_icons .box{
+    position: relative;
+    width: 61px;
+    height: 56px;
+    margin-right: 15px;
+    background: left no-repeat;
+    font-size: 18px;
+    line-height: 55px;
+    cursor: pointer;
+    float: left;
+}
+.center .container .nav .right_icons .box.l1{
+    background: url('../images/sx_icon_1.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l1:hover{
+    background: url('../images/sx_icon_2.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l2{
+    background: url('../images/sx_icon_3.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l2:hover{
+    background: url('../images/sx_icon_4.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l3{
+    background: url('../images/sx_icon_5.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l3:hover{
+    background: url('../images/sx_icon_6.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l4{
+    background: url('../images/sx_icon_7.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l4:hover{
+    background: url('../images/sx_icon_8.png') no-repeat;
+}
+
+
+
+.center .container .nav .right_icons .box.l5{
+    margin-top: 20px;
+    background: url('../images/sx_icon_9.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l5:hover{
+    background: url('../images/sx_icon_10.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l6{
+    margin-top: 20px;
+    background: url('../images/sx_icon_11.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l6:hover{
+    background: url('../images/sx_icon_12.png') no-repeat;
+}
+
+.center .container .nav .right_icons .box.l7{
+    margin-top: 20px;
+    background: url('../images/sx_icon_13.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l7:hover{
+    background: url('../images/sx_icon_14.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l8{
+    margin-top: 20px;
+    background: url('../images/sx_icon_15.png') no-repeat;
+}
+.center .container .nav .right_icons .box.l8:hover{
+    background: url('../images/sx_icon_16.png') no-repeat;
+}
+.center .container .nav .right_icons .box:hover .qrCode{
+    display: block;
+}
+.center .container .nav .right_icons .box .qrCode{
+    position: absolute;
+    left: 50%;
+    top: 65px;
+    width: 246px;
+    height: 138px;
+    background: #fff;
+    display: none;
+    border-radius: 5px;
+    padding: 10px 10px 20px;
+    margin-left: -200px;
+    z-index: 999999;
+    box-shadow: 0 0 10px 0 rgb(0 0 0 / 20%);
+}
+.contontWrap{
+    width: 100%;
+    position: absolute;
+    bottom: 7%;
+}
+.center .container .nav .right_icons .box .qrCode.active{
+    left: -50%;
+    top: 65px;
+    width: 120px;
+    height: 138px;
+    padding: 10px 10px 20px;
+    margin-left: -6px;
+}
+.center .container .nav .right_icons .box .qrCode.active::before{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: -12px;
+    z-index: 1;
+    width: 8px;
+    height: 16px;
+    margin: auto;
+    content: '';
+    background: url('../images/arr2.png') no-repeat center;
+    transform: rotate(270deg);
+}
+.center .container .nav .right_icons .box .qrCode::before{
+    position: absolute;
+    right: 0;
+    left: 136px;
+    top: -12px;
+    z-index: 1;
+    width: 8px;
+    height: 16px;
+    margin: auto;
+    content: '';
+    background: url('../images/arr2.png') no-repeat center;
+    transform: rotate(270deg);
+}
+.center .container .content{
+    margin-top: 300px;
+    display: flex;
+    justify-content: space-between;
+}
+.center .container .content .left{
+    display: flex;
+    align-items: flex-end;
+}
+.center .container .content .left .row{
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.5;
+}
+.center .container .content .right {
+    position: relative;
+    z-index: 99999;
+}
+.center .container .content .right .columns{
+    display: flex;
+}
+.center .container .content .right .columns{
+    display: flex;
+}
+.center .container .content .right .columns .column{
+    position: relative;
+    cursor: pointer;
+}
+.center .container .content .right .columns .column+.column::before{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1px;
+    height: 140px;
+    background-color: rgba(129, 91, 65,.2);
+}
+.center .container .content .right .columns .column .box{
+    width: 51px;
+    height: 150px;
+    /* border-right: 1px solid rgba(129, 91, 65,.2); */
+    padding: 0 45px;
+    display: inline-block;
+    position: relative;
+    background: url('../images/hzb.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    -webkit-transition: all .5s;
+}
+.center .container .content .right .columns .column .box.ygb{
+    background: url('../images/ygb.png');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.center .container .content .right .columns .column .box img{
+    width: 100%;
+    height: 100%;
+}
+.center .container .content .right .columns .column:last-child .box{
+    border-right: none;
+}
+.center .container .content .right .columns .column .radio{
+    position: relative;
+    text-align: center;
+    padding-top: 54px;
+    display: block;
+    text-decoration: none;
+    font-size: 14px;
+    color: #666;
+}
+.center .container .content .right .columns .column:hover .radio{
+    color: #815b3f;
+}
+.center .container .content .right .columns .column .radio::before{
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    background: url('../images/huan.png') no-repeat;
+    background-position: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 10px;
+    margin: auto;
+    -webkit-transition: all .5s;
+}
+/* .center .container .content .right .columns .column .radio.active{
+    width: 40px;
+    height: 40px;
+    margin: 20px auto;
+    background: url('/images/huan.png') no-repeat;
+} */
+.center .container .content .right .columns .column .text{
+    font-size: 18px;
+    text-align: center;
+}
+.center .container .content .right .columns .column:hover .radio::before{
+    /* width: 40px;
+    height: 40px;
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top:30px;
+    margin: auto;
+    -webkit-transition: all .5s; */
+    top: 10px;
+    background: url('../images/dahuan.png') no-repeat;
+    background-position: center;
+}
+.center .container .content .right .columns .column:hover .box{
+    transform: scale(1.1);
+}
+.center .container .content .right .columns .column:hover .box img{
+    transform: scale(1.2);
+}
+.center .container .content .right .columns .column:hover .box{
+    bottom: 20px;
+}
+.center .poFixed{
+    width: 970px;
+    height: 618px;
+    background: url('../images/sz_border.png') no-repeat;
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 999;
+}
+.center .poFixed .banner{
+    width: 424px;
+    height: 424px;
+    background: transparent;
+    margin: 95px auto;
+    border-radius: 50%;
+}
+.center .poFixed .banner .swiper-container{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.center .poFixed .banner .swiper-container img{
+    width:100%;
+    height: 100%;
+    object-fit: cover;
+}

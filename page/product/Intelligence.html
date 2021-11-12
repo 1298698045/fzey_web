@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京凤凰世纪科技-智能报销管理系统</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/header.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/aside.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/static/iconfont/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css" />
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/tab.png" type="image/x-icon" />
+    <style>
+        .header.active{
+            z-index: -1;
+        }
+        .new_banner {
+            width: 100%;
+            height: 500px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/1_banner_5_1.jpg') no-repeat;
+        }
+
+        .new_banner .bannerText {
+            width: 1200px;
+            margin: 0 auto;
+            padding-top: 102px;
+        }
+
+        .new_banner .bannerText .bannerText_child {
+            width: 1200px;
+            margin: auto;
+            z-index: 999;
+            text-align: left;
+        }
+
+        .new_banner .bannerText .bannerText_child .title {
+            font-size: 44px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .new_banner .bannerText .bannerText_child .desc {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        .new_banner .bannerText .bannerText_child .btn {
+            width: 160px;
+            height: 45px;
+            line-height: 45px;
+            border: 1px solid #fff;
+            margin-top: 40px;
+            border-radius: 3px;
+            font-size: 18px;
+            text-align: center;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .new_banner .bannerText .bannerText_child .btn:hover {
+            background: #4f98ff;
+            color: #ffffff;
+            border: 1px solid #4f98ff;
+        }
+
+        .center {
+            width: 100%;
+        }
+        .center .content{
+            font-size: 36px;
+            font-weight: bold;
+            padding: 134px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper" id="app">
+        <#include "head.html" />
+        <div class="new_banner">
+            <div class="bannerText">
+                <div class="bannerText_child">
+                    <p class="title">智能报销管理系统</p>
+                    <p class="desc">建立涵盖“预算管理、事前申请、借还款管理、员工报销、付款管理、台账管理、
+                    </p>
+                    <p class="desc" style="margin-top:20px">凭证中心”等一体化的费用管控平台，为企业/机构提供线上化、智能化的费控服务</p>
+                    <p class="btn" @click="handleOpen">
+                        申请试用
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="content">
+                网页更新中......
+            </div>
+        </div>
+        <#include "foot.html" />
+        <#include "right.html" />
+        <Modal ref="childModal" />
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    const vum = new Vue({
+        el: '#app',
+        mixins:[mixin],
+        components:{
+            Modal
+        },
+        data() {
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                productList: [
+                    {
+                        name: '员工'
+                    },
+                    {
+                        name: "组织",
+                        desc: "灵活配置管理权限，⽀持复杂组织架构。灵活设置多级部⻔，快速搭建架构体系直观查看组织架构图，⽀持⼀键导出强大的权限定义，多维度精细设置编制直观查看，成本控制⼼中有数。"
+                    },
+                    {
+                        name: "人员调配",
+                        desc: "审批模式⾃定义 简明⾼效随时处理设置不同审批流程，满⾜不同业务场景审批数据结果⾃动关联各模块审批结果存档备忘，随时搜索审批详情移动端审批⼊⼝，随时随地⾼效处理。"
+                    },
+                    {
+                        name: "考勤",
+                        desc: "考勤⽅案⾃定义，灵活打卡更便捷。设置不同考勤⽅案，⽀持多种打卡⽅式灵活多样的班次设置，考勤管理更清晰⼀键获取考勤报表，数据精准同步⼯资考勤异常及时提醒，员工自主管理更高效。"
+                    },
+                    {
+                        name: "排班",
+                        desc: "排班支持多种方式按组、按部门，按周、月排班，灵活统计查询，夜班费用计算等。"
+                    },
+                    {
+                        name: "保险福利",
+                        desc: "保险福利全流程操作保险缴纳调整，导入，月缴纳生成，未缴纳提醒，保险报表。"
+                    },
+                    {
+                        name: "薪资",
+                        desc: "个性化薪酬⽅案 系统算薪更准确针对不同员⼯类别，灵活配置薪酬⽅案。"
+                    },
+                    {
+                        name: "考评",
+                        desc: "360度考评、年度考评，续签试用考评等。灵活定义指标，考评表，测评维度，批量发布考评，汇总报表，统计。"
+                    },
+                    {
+                        name: "招聘",
+                        desc: "招聘全流程处理职位/简历一站式管理，招聘全过程管理。"
+                    },
+                    {
+                        name: "人员调配",
+                        desc: "追踪所有人员变动"
+                    },
+                    {
+                        name: "开放互联",
+                        desc: "协同办公更便捷 满足事业单位一体化管理需求。与OA、HIS打通、集成微信小程序，实现系统之间互联互通，系统与用户的简单使用。"
+                    }
+                ],
+                tabIdx: 0,
+                defaultIndexInfo: [
+                    {index:0, top: 800, id:'yg'},
+                    {index:1, top: 800,  id: 'zz'},
+                    {index:2, top: 800,  id: 'sp'},
+                    {index:3, top: 800,  id: 'kq'},
+                    {index:4, top: 800,  id: 'pb'},
+                    {index:5, top: 800,  id: 'bxfl'},
+                    {index:6, top: 800,  id: 'xz'},
+                    {index:7, top: 800,  id: 'kp'},
+                    {index:8, top: 800,  id: 'zp'},
+                    {index:9, top: 800,  id: 'rydp'},
+                    {index:10, top: 800,  id: 'kfhl'}
+                ],
+                isFixed:false
+            }
+        },
+        mounted(){
+            window.addEventListener('mousewheel',this.handleScroll)
+        },
+        beforeDestroy() {
+            window.removeEventListener('mousewheel',this.handleScroll)
+        },
+        methods: {
+            handleMouseover(e, item, index) {
+                this.activeTab = index;
+            },
+            handleTab(idx) {
+                this.tabIdx = idx;
+                this.defaultIndexInfo.map(item=>{
+                    let top = document.getElementById(item.id).offsetTop-140;
+                    console.log(top);
+                    if(item.index==idx){
+                        window.scrollTo({top: top+10})
+                    }
+                })
+            },
+            handleScroll(e){
+                let anchorY = this.$refs.anchor.getBoundingClientRect().top;
+                if(anchorY<=60){
+                    this.isFixed = true;
+                }else {
+                    this.isFixed = false;
+                }
+                let top = e.clientY;
+                let idx = this.defaultIndexInfo.findIndex((item,index)=>{
+                    return top <= this.$refs[item.id].getBoundingClientRect().top;
+                });
+                console.log('idx:', idx)
+                this.tabIdx = idx < 0 ? 10 : idx;
+            }
+        },
+    })
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        mousewheel: {
+            releaseOnEdges: true,//PC端释放滑动
+        },
+        paginationClickable: true,
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+    })
+    $('.swiper-container').hover(function () {
+        mySwiper.stopAutoplay();
+    }, function () {
+        mySwiper.startAutoplay();
+    })
+</script>
+
+</html>

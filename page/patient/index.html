@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/patient.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/module/css/download.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/js/layui/css/layui.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/articleContent.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+    <script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+    <style>
+        .formSearch .filed .label{
+            display: inline-block;
+            line-height: 40px;
+        }
+        .formSearch{
+            flex-wrap: wrap;
+            justify-content: initial!important;
+        }
+        .formSearch .filed{
+            /* margin-right: 20px!important; */
+        }
+        .formSearch .filed.max{
+            margin-right: 30px!important;
+            margin-bottom: 20px;
+        }
+        .formSearch .filed.filedBtn{
+            margin-right: 10px!important;
+        }
+        .formSearch .filed .inp.minWidth{
+            width: 163px !important;;
+        }
+        .fl_l{
+            float: left;
+        }
+        .fl_r{
+            float: right;
+        }
+        .wrap .center .container .tab_wrap .swiper-container .swiper-wrapper {
+            display: flex;
+            justify-content: center;
+        }
+        .wrap .center .container .content .box{
+            justify-content: center;
+        }
+        .wrap .center .container .content .formSearch{
+            margin: 60px 0 0 72px;
+        }
+        .wrap .center .container .content .formSearch .filed .inp{
+            width: 230px;
+            height: 40px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/inp_back.png') no-repeat;
+            background-size: 100% 100%;
+            border: none;
+            outline: 0;
+            padding: 0 21px;
+            font-size: 14px;
+        }
+    </style>
+        
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <#include "location.html" />
+            <div class="container">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    {ms:channel type='self' typeid='1400724319233798146'}
+                    <p class="name">${field.typetitle}</p>
+                    {/ms:channel}
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="tab_wrap">
+                    <div class="swiper-container swiper-no-swiping">
+                        <div class="swiper-wrapper" id="swiperId">
+                            {ms:channel type='son'}
+                            <div class="swiper-slide tabs-item"
+                            :class="{active : $route.path == '${field.typepath}'}"
+                            title="${field.typetitle}"  @click="push('${field.typepath}')">
+                                ${field.typetitle}
+                            </div>
+                            {/ms:channel}
+                        </div>
+                    </div>
+                </div>
+                <!-- 就医须知 -->
+                <router-view></router-view>
+                
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+
+
+<script src="{ms:global.host/}/{ms:global.style/}/js/layui/layui.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script>
+    var router = new VueRouter({routes:[
+        {ms:channel type='son'}
+            <#if field.typeid='1403220112515674114'>
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component: {
+                    template: `
+                    <div class="content newcontent">
+                        
+                    </div>
+                    `
+                }
+            },
+            <#else>
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component: {
+                    template: `
+                    <div class="content newcontent">
+                        <div class="NoticeBody">
+                            <div class="left_wrap">
+                                <div class="left_wrap_view">
+                                    <div class="l_text">
+                                        {ms:arclist orderby='sort' size=9999}
+                                        <div class="row_back<#if field.index==1> active</#if>" id='${field.id}'>
+                                            <i class="icon_l"></i>
+                                            <span class="<#if field.index==1>active</#if>">
+                                                ${field.title}
+                                            </span>
+                                        </div>
+                                        {/ms:arclist}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right_wrap">
+                                {ms:arclist orderby='sort' size=9999}
+                                <div class="rightCont active">
+                                    <div class="head" style="margin:35px 35 0 35px">
+                                        <div class="title">
+                                            <i class="left"></i>
+                                            <span>${field.title}</span>
+                                        </div>
+                                        <div class="time">
+                                            发布时间：${field.date?string("yyyy-MM-dd")}
+                                        </div>
+                                    </div>
+                                    <div class="article">
+                                        <div class="descWrap" style="margin-left:0;">
+                                            <div class="d-visible">
+                                                ${field.content}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/ms:arclist}
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }
+            },
+            </#if>
+        {/ms:channel}
+    ]})
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            hasRoute: true
+        },
+        mixins: [mixin],
+        router: router,
+        methods: {},
+        created: function(){
+            {ms:channel type='son' size=1}
+            if (this.$route.path == '/') {
+                this.push('${field.typepath}')
+            }
+            {/ms:channel}
+        }
+    })
+    $(function(){
+        layui.use('laydate', function(){
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#startTime'
+            });
+            laydate.render({
+                elem: '#endTime'
+            });
+        })
+        $('#departSel input').focus(function(){
+            $('.selectModal').addClass('active');
+        })
+        $('#departSel input').blur(function(){
+            $('.selectModal').removeClass('active');
+        })
+    })
+    
+</script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/scroll.js" defer></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/patient.js" defer></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/pagination.js" defer></script>
+</html>

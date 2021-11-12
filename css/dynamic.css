@@ -1,0 +1,144 @@
+.dynamic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0 100px 0;
+}
+.dynamic .fake_item{
+    flex: 0 0 290px;
+    height: 0;
+}
+.dynamic .box {
+    width: 290px;
+    height: 260px;
+    background: url('../images/c_time_box.png') no-repeat;
+    padding: 5px;
+    box-sizing: border-box;
+}
+.dynamic .fake_item {
+    flex: 0 0 290px;
+    height: 0px;
+}
+.dynamic .box .box_child{
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    cursor: pointer;
+}
+.dynamic .box .box_child .img{
+    width: 100%;
+    height: 166px;
+    /* background: url('../images/c_img1.1.png') no-repeat; */
+    position: relative;
+    background-size: 100% 100%!important;
+} 
+.dynamic .box .box_child .img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.dynamic .box .box_child .img .timeBox{
+    position: absolute;
+    left: 19px;
+    top: 23px;
+    width: 54px;
+    height: 54px;
+    /* background: url('../images/tuceng.png') no-repeat; */
+    text-align: center;
+    background: url('../images/g_box.png') no-repeat;
+}
+.dynamic .box:hover .box_child .img .timeBox{
+    background: url('../images/g_box_active.png') no-repeat;
+}
+.dynamic .box:hover .box_child .text{
+    color: #815b3f;
+}
+.dynamic .box .box_child .img .timeBox .time{
+    font-size: 24px;
+    color: #fff;
+}
+.dynamic .box .box_child .img .timeBox .year{
+    font-size: 12px;
+    color: #ffffff;
+}
+.dynamic .box .box_child .textWrap{
+    padding: 21px 18px;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: #fff;
+    height: 84px;
+}
+.dynamic .box .box_child .textWrap .text{
+    width: 241px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.dynamic .box .boxSolid{
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    background: #fff;
+    padding: 21px 18px;
+    cursor: pointer;
+}
+.dynamic .box .boxSolid .textCont{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e5e5e5;
+}
+.dynamic .box .boxSolid .textCont .color{
+    color: #333333;
+    font-size: 16px;
+    width: 244px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    
+}
+.dynamic .box .boxSolid:hover .textCont .color{
+    color: #815b3f;
+    cursor: pointer;
+}
+.dynamic .box .boxSolid .textCont .desc{
+    font-size: 14px;
+    color: #999999;
+    margin-top: 19px;
+    /* padding-bottom: 10px; */
+    width: 242px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+}
+.dynamic .box .boxSolid .bottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+}
+.dynamic .box .boxSolid .bottom .l_time_box{
+    width: 54px;
+    height: 54px;
+    background: url('../images/g_box.png') no-repeat;
+    background-size: 100% 100%;
+    text-align: center;
+}
+.dynamic .box .boxSolid:hover .bottom .l_time_box{
+    background: url('../images/g_box_active.png') no-repeat;
+    cursor: pointer;
+}
+.dynamic .box .boxSolid .bottom .youjiantou{
+    width: 20px;
+    height: 14px;
+    background: url('../images/youjiantou.png') no-repeat;
+}
+.dynamic .box .boxSolid .bottom .l_time_box .time{
+    font-size: 24px;
+    color: #fff;
+}
+.dynamic .box .boxSolid .bottom .l_time_box .year{
+    font-size: 12px;
+    color: #fff;
+}

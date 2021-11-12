@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/doctorDetail.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <div class="headerWrap"></div>
+        <div class="posBoxWrap"></div>
+        <div class="center">
+            <#include "location.html" />
+            <div class="content">
+                <div class="box_wrap">
+                    <div class="l_box">
+                        <img src="/images/team_detail_photo.png" alt="">
+                    </div>
+                    <div class="r_box">
+                        <div class="rowTitle">
+                            <p class="name">郝旭亮</p>
+                            <p class="moreText">
+                                查看专业更多导师
+                            </p>
+                        </div>
+                        <div class="block">
+                            <div class="left_cont">
+                                <div class="row">
+                                    <p class="label">专　　业：</p>
+                                    <p class="val">中药学</p>
+                                </div>
+                                <div class="row">
+                                    <p class="label">教学任职：</p>
+                                    <p class="val">博/硕士研究生导师</p>
+                                </div>
+                                <div class="row">
+                                    <p class="label">职　　称：</p>
+                                    <p class="val">主任药师</p>
+                                </div>
+                                <div class="row">
+                                    <p class="label">职　　务：</p>
+                                    <p class="val">山西省中医药研究院、山西省中医院副院长、山西省省属中药成型技术开发实验室主任</p>
+                                </div>
+                                <div class="row">
+                                    <p class="label">擅　　长：</p>
+                                    <p class="val">
+                                        主要从事中医药作用物质基础和作用机制、中药新药的开发研究工作
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="right_box">
+                                <div class="rowColumn">
+                                    <!-- <div class="box">
+                                        <p>预约挂号</p>
+                                    </div>
+                                    <div class="box" id="czxx">
+                                        <p>出诊信息</p>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rowBox">
+                    <p class="name">导师简介</p>
+                    <div class="cont">
+                        <p class="indent">
+                            郝旭亮，男，1975年10月生，主任药师，博士，硕士研究生导师。现任山西省中医药研究院、山西省中医院副院长、山西省省属中药成型技术开发实验室主任。主要从事中医药作用物质基础和作用机制、中药新药的开发研究工作。
+                        </p>
+                        <p class="indent">
+                            兼任中国中药协会中药产品开发与培育专业委员会副主任委员，中国药理学会理事，山西省药学会副理事长，山西省科技计划战略咨询与综合评审委员会基础行业专家组成员，山西省研究生指导委员会委员等职务。
+                        </p>
+                        <p class="indent">
+                            先后主持完成和在研的包括国家自然科学基金面上项目、国家中药标准化子课题、山西省重点研发计划等国家级及省部级科研项目10项，主持完成的中药新药柴青消癖胶囊2015年获国家新药临床研究批件，并成功转化山西振东制药，2017年获山西省科技进步类二等奖，主持完成的治疗高脂血症中药新药脂清胶囊的研制，2014年获山西省科技进步类二等奖。先后于2017年获第九届山西省优秀科技工作者，2015年获得山西省卫生计生委百千万卫生人才培养工程高端领军人才人选，2013年获山西省学术技术带头人，2009年获国家科技部“中药现代化科技产业基地建设十周年先进个人”的荣誉称号，2011年获中国中西医结合学会首届全国中国中西医结合优秀青年贡献奖。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer_wrap">
+
+        </div>
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+    $(function(){
+        $('.bottomBack').hide();
+        $('.rowColumn #czxx').click(function(){
+            let val = encodeURI('出诊信息');
+            window.location.href = '/page/visitingNews/index.html?index='+1+'&name='+val+'&id='+'d_czdt'+'&hospitalName='+'total';
+        })
+        let childId = getUrlParam("childId");
+        if(childId){
+            $("html, body").scrollTop(0).animate({scrollTop: $("."+childId).offset().top});
+        }
+        let hospitalCode = getUrlParam('hospitalCode');
+        if(hospitalCode=='victory'){
+            $('.Breadcrumb .black').eq(3).hide();
+            $('.Breadcrumb .black').eq(2).html('<span class="black"><a href="/page/hospital/victory.html?id=d_fyjs">胜利分院<a/> ></span>')
+        }else if(hospitalCode=='peace'){
+            $('.Breadcrumb .black').eq(3).hide();
+            $('.Breadcrumb .black').eq(2).html('<span class="black"><a href="/page/hospital/peace.html?id=d_fyjs">和平分院<a/> ></span>')
+        }
+        function getUrlParam(key) {
+            // 获取参数
+            var url = window.location.search;
+            // 正则筛选地址栏
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            // 匹配目标参数
+            var result = url.substr(1).match(reg);
+            //返回参数值
+            return result ? decodeURIComponent(result[2]) : null;
+        }
+    })
+</script>
+</html>

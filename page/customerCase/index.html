@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/header.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/aside.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/static/iconfont/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/tab.png" type="image/x-icon" />
+    <style>
+        .banners {
+            text-align: center;
+            padding-top: 66px;
+            width: 100%;
+            height: 256px;
+            background-image: url('{ms:global.host/}/{ms:global.style/}/images/913.png');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .banners h3 {
+            font-size: 50px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .banners .text {
+            font-size: 20px;
+            color: #ffffff;
+            margin-top: 20px;
+        }
+
+        .contents {
+            width: 1200px;
+            padding: 100px 0;
+            margin: auto;
+            background: #fff;
+        }
+
+        .case_wrap .dividerWrap {
+            display: flex;
+            justify-content: center;
+        }
+
+        .case_wrap .dividerWrap .divider {
+            display: flex;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r {
+            display: flex;
+            align-items: center;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line {
+            width: 200px;
+            height: 2px;
+            display: inline-block;
+            background: #c7c6c6;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line .dian {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #c7c6c6;
+            display: inline-block;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line .dian .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2f3342;
+            padding: 0 20px;
+        }
+
+        .contents .case_wrap .dividerWrap .divider .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2f3342;
+            padding: 0 20px;
+        }
+
+        .customerWrap::after {
+            content: "";
+            width: 350px;
+        }
+
+        .customerWrap {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding: 30px 0;
+        }
+
+        .customerWrap .box_box:hover {
+            box-shadow: 0px 2px 34px 0px rgba(21, 54, 83, 0.1);
+            transition: all 1ms ease-in;
+        }
+
+        .customerWrap .box_box {
+            width: 350px;
+            background: #fff;
+            margin-top: 50px;
+            border: 1px solid #dbdbdb;
+            cursor: pointer;
+            box-sizing: border-box;
+        }
+
+        .customerWrap .box_box .img {
+            width: 100%;
+            height: 165px;
+        }
+
+        .customerWrap .box_box .img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .cont_wrap {
+            padding: 16px;
+        }
+
+        .cont_wrap .desc {
+            font-size: 16px;
+            color: #2f3342;
+            padding-bottom: 26px;
+        }
+
+        .cont_wrap .row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            color: #626775;
+        }
+
+        .pagination {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <div class="center">
+            <div class="banners" id="anchor1">
+                <h3>
+                    注重客户应用因客户成功而成功
+                </h3>
+                <p class="text">
+                    帮助医院建立管理在日常办公中有效提高效率的管理平台，形成随时随地轻松办公
+                </p>
+            </div>
+            <div class="contents">
+                <div class="case_wrap">
+                    <div class="dividerWrap">
+                        <div class="divider">
+                            <div class="title">
+                                ${field.typetitle}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="customerWrap">
+                        <div class="box_box" @click="handleJournlism(item)" v-for="(item,index) in lines" :key="index">
+                            <p class="img">
+                                <img :src="item.imageUrl" alt="">
+                            </p>
+                            <div class="cont_wrap">
+                                <div class="desc">
+                                    {{item.contentTitle}}
+                                </div>
+                                <div class="row">
+                                    <p>
+                                        {{item.contentSource}}
+                                    </p>
+                                    <p>
+                                        {{item.createDate}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pagination" v-if="page.contentCount>9">
+                        <el-pagination background @current-change="getQueryList" :page-size="page.pageSize"
+                            :current-page.sync="page.pageNo" layout="prev, pager, next, jumper" :total="page.contentCount">
+                        </el-pagination>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+        <#include "right.html" />
+        <Modal ref="childModal" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        mixins: [mixin],
+        components:{
+            Modal
+        },
+        data: {
+            hasRoute: true,
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            page: {
+                //当前页数
+                pageNo: 1,
+                //每页文章条数
+                pageSize: 9,
+                //页数总数
+                pageTotal: 0,
+                //内容总数
+                contentCount: 0
+            },
+            lines: []
+        },
+        mounted: function () {
+            this.getQueryList()
+        },
+        methods: {
+            getQueryList: function(pageCur) {
+                var that = this
+                that.page.pageNo = pageCur
+                ms.http.post("/cms/content/list.do", Object.assign({}, {
+                    categoryId: '${field.typeid}'
+                }, that.page)).then(function(res) {
+                    that.page.contentCount = res.data.total
+                    that.lines = res.data.rows.map(function(row) {
+                        if (row.contentImg) {
+                            var img = JSON.parse(row.contentImg)
+                            if (img.length > 0) {
+                            row.imageUrl = '{ms:global.host/}' + img[0].path
+                            }
+                        }
+                        return row
+                    })
+                    if(pageCur){
+                        $("html, body").scrollTop(0).animate({scrollTop: $("#anchor1").offset().top});
+                    }
+                    console.log('lines:', that.lines)
+                }).catch(function(err) {
+                    console.error('error:', err)
+                })
+            },
+            handleCurrentChange: function(val) {
+                if(val==1) {
+                    location.href = "{ms:global.url/}${field.categoryPath}/index.html";
+                } else {
+                    location.href = "{ms:global.url/}${field.categoryPath}/list-" + val + ".html";
+                }
+            },
+            dateFormat: function (date, fmt = "YYYY-MM-DD") {
+                return moment(date).format(fmt)
+            },
+            handleJournlism(item){
+                // {ms:channel type='self'}
+                //     this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
+                // {/ms:channel}
+            },
+        }
+        
+    })
+</script>
+</html>

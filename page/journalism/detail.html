@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/} - ${field.typetitle}</title>
+    <!-- <title>新闻详情</title> -->
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/header.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/aside.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/static/iconfont/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/tab.png" type="image/x-icon" />
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/journalismDetail.css">
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <!-- <#include "location.html" /> -->
+            <div class="Breadcrumb">
+                <span>您现在的位置:  </span>
+                <span class="black" @click="goto('{ms:global.url/}/home.html')">首页</span>
+                {ms:channel type='self' typeid='1400716168132456449'}
+                <span class="black" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')"> &gt;新闻中心</span>
+                {/ms:channel}
+                <span> &gt; 详情</span>
+            </div>
+            
+            <div class="container">
+                <div class="l_box">
+                    <div class="l_top"></div>
+                    <div class="l_center">
+                        <div class="title">
+                           ${field.title}
+                        </div>
+                        <div class="row">
+                            <p class="time">
+                                <span>
+                                    发布时间：${(field.date?string("yyyy-MM-dd"))!}
+                                </span>
+                                <!-- <span>
+                                    来源：${field.source}
+                                </span>
+                                <span>
+                                    点击数： ${field.hit} 次
+                                </span> -->
+                            </p>
+                        </div>
+                        <div class="hr">
+
+                        </div>
+                        <div class="article">
+                            ${field.content}
+                        </div>
+                        <!-- <div class="row">
+                            <p class="time">&nbsp;</p>
+                            <div class="r_img">
+                                <span class="time">分享到：</span>
+                                <a class="bds_tsina" subject="文章标题" data-cmd="tsina" title="微博"></a>
+                                <a class="bds_qzone" subject="文章标题" data-cmd="qzone" title="QQ空间"></a>
+                            </div>
+                        </div> -->
+                        <div class="hr"></div>
+                    </div>
+                    <div class="l_bottom"></div>
+                </div>
+                <div class="r_box">
+                    <div class="trends">
+                        热门推荐
+                    </div>
+                    {ms:arclist size=10 flag='hot' orderby='sort'}
+                        <#if field.flag?contains('tv')>
+                        <div class="middle" flag="${field.flag}">
+                            <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                            <a href="#" class="link" target="_blank">${field.title}</a>
+                        </div>
+                        <#else>
+                        <div class="middle" flag="${field.flag}">
+                            <a href="#" @click="goto('{ms:global.url/}${field.link}')" target="_blank">${field.title}</a>
+                        </div>
+                        </#if>
+                    {/ms:arclist}
+
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+        <Modal ref="childModal" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            isArticle: true
+        },
+        components:{
+            Modal
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+    var share_config = {
+        'bdText': $('.title').text(),
+        'bdUrl': location.href,
+        'bdDesc': $('.article').attr('desc')
+    };
+    $('.bds_tsina').click(function(){
+        window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + share_config.bdUrl)
+    })
+    $('.bds_qzone').click(function(){
+        window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+share_config.bdUrl+'&title='+share_config.bdText+'&desc='+share_config.bdDesc.slice(0,60))
+    })
+    window.onload = function(){
+        for(let i=0; i<$('.middle').length; i++){
+            let flag = $('.middle').eq(i).attr('flag') || '';
+            if(flag!=""&&flag.indexOf('tv')!=-1){
+                let dom = $('.middle').eq(i).find('.hidden');
+                let link = dom.find('a').html();
+                $('.middle').eq(i).find('.link').attr('href',link);
+            }
+        }
+    }
+</script>
+</html>

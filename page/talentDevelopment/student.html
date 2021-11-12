@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/infoOpen.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/rightScroll.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/articleContent.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/patient.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+    <script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+    <style>
+        .wrap .center .container .tabs {
+            display: flex;
+        }
+        .wrap .center .container .tabs .tab {
+            margin-right: 30px;
+        }
+        .wrap .center .container .tabs .tab .imgs {
+            width: 10px;
+            height: 46px;
+        }
+        .wrap .center .container .tabs .tab .imgs img {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+        .wrap .center .container .tabs .tab .l {
+            background: url('{ms:global.host/}/{ms:global.style/}/images/l-1.png') no-repeat;
+        }
+        .wrap .center .container .tabs .tab .r {
+            background: url('{ms:global.host/}/{ms:global.style/}/images/r-1.png') no-repeat;
+        }
+        .wrap .center .container .tabs .tab .l.active {
+            background: url('{ms:global.host/}/{ms:global.style/}/images/backl.png') no-repeat;
+        }
+        .wrap .center .container .tabs .tab .r.active {
+            background: url('{ms:global.host/}/{ms:global.style/}/images/backr.png') no-repeat;
+        }
+        .wrap .center .container .tabs .tab.text {
+            width: 285px;
+            height: 47px;
+            line-height: 47px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/tab_child.png') no-repeat;
+            text-align: center;
+            color: #086252;
+            cursor: pointer;
+            background-size: 100% 100%;
+        }
+        .wrap .center .container .tabs .tab.text.active {
+            color: #fff;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/tab_child_active.png') no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <#assign curtypeid=field.typeid>
+            <div class="Breadcrumb">
+                <span>您现在的位置:  </span>
+                <span class="black" @click="goto('{ms:global.url/}/home.html')">首页</span>
+                {ms:channel type="path"}
+                <#if curtypeid==field.typeid>
+                <#elseif field.type==3>
+                    <span class="black" @click="goto('{ms:global.url/}${field.typeurl}')"> &gt; ${field.typetitle}</span>
+                <#else>
+                    <span class="black" @click="goto('{ms:global.url/}${field.typelink}')"> &gt; ${field.typetitle}</span>
+                </#if>
+                {/ms:channel}
+                <span v-if="hasRoute"> &gt; {{$route.name}}</span>
+            </div>
+
+            <div class="container">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">研究生教育</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="tabs">
+                    {ms:channel type='son' typeid='1403327431889219586'}
+                    <div class="tab text tabs-item"
+                     :class="{active : $route.path == '${field.typepath}'}"
+                       title="${field.typetitle}" @click="push('${field.typepath}')">
+                            ${field.typetitle}
+                    </div>
+                    {/ms:channel}
+                </div>
+                <router-view></router-view>
+
+                
+            </div>
+        </div>
+        <#include "foot.html" />
+
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/infoOpen.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/pagination.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript">
+    var router = new VueRouter({routes:[
+            {ms:channel type='son' typeid='1403327431889219586'}
+            {   
+                path: '${field.typepath}',
+                name: '${field.typetitle}',
+                component: {
+                    template:`
+                    <div class="content newcontent">
+                        <div class="NoticeBody">
+                            <div class="left_wrap">
+                                <div class="left_wrap">
+                                    <div class="left_wrap_view">
+                                        <div class="l_text">
+                                            {ms:arclist orderby='sort' size=9999}
+                                            <div class="row_back<#if field.index==1> active</#if>" id='${field.id}'>
+                                                <i class="icon_l"></i>
+                                                <span class="<#if field.index==1>active</#if>">
+                                                    ${field.title}
+                                                </span>
+                                            </div>
+                                            {/ms:arclist}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="right_wrap">
+                                {ms:arclist orderby='sort' size=9999}
+                                <div class="rightCont<#if field.index==1> active</#if>">
+                                    <div class="head" style="margin:35px 35 0 35px">
+                                        <div class="title">
+                                            <i class="left"></i>
+                                            <span>${field.title}</span>
+                                        </div>
+                                        <div class="time">
+                                            发布时间：${field.date?string("yyyy-MM-dd")}
+                                        </div>
+                                    </div>
+                                    <div class="article">
+                                        <div class="descWrap" style="margin-left:0;">
+                                            <div class="d-visible">
+                                                ${field.content}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/ms:arclist}
+                            </div>
+                        </div>
+                    </div>
+                    `
+                }
+            },
+            {/ms:channel}
+        ]})
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            hasRoute: true
+        },
+        mixins: [mixin],
+        router: router,
+        created: function(){
+            {ms:channel type='self'}
+            if (this.$route.path == '/') {
+                this.push('${field.typepath}')
+            }
+            {/ms:channel}
+        }
+    })
+</script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/scroll.js" defer></script>
+</html>

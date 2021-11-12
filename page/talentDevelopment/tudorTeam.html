@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/tudorTeam.css">
+    <link rel="stylesheet" href={ms:global.host/}/{ms:global.style/}/css/student.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <div class="headerWrap"></div>
+        <div class="posBoxWrap"></div>
+        <div class="center">
+            <#include "location.html" />
+            <div class="department">
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">导师团队</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="formSearch">
+                    <div class="filed">
+                        <div class="inp select" id="departSel">
+                            <input type="text" placeholder="中药学专业" readonly>
+                            <i class="bottom_icon">
+                                
+                            </i>
+                            <div class="selectModal">
+                                <!-- <p class="subject">科室名称</p> -->
+                                <ul>
+                                    <li>中药学专业</li>
+                                    <li>中西医结合临床</li>
+                                    <li>中医内科学</li>
+                                    <li>中医外科学</li>
+                                    <li>中医骨伤科学</li>
+                                    <li>中医妇科学</li>
+                                    <li>针灸推拿学专业</li>
+                                    <li>中医结合基础专业</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="filed">
+                        <input type="text" class="inp" placeholder="导师名称">
+                    </div>
+                    <div class="filed">
+                        <button class="btn">
+                            <a href="/page/visitingNews/index.html?index=1&name=出诊查询&id=d_czdt">搜索</a>
+                        </button>
+                    </div>
+                </div>
+                <div class="boxContent" id='lcks'>
+                    <div class="row">
+                        中药学专业
+                    </div>
+                    <div class="headPhoto"></div>
+                </div>
+                <div class="boxContent" id='lcks'>
+                    <div class="row">
+                        中西医结合临床
+                    </div>
+                    <div class="headPhoto"></div>
+                </div>
+                <div class="boxContent" id='lcks'>
+                    <div class="row">
+                        中医内科学
+                    </div>
+                    <div class="headPhoto"></div>
+                </div>
+            </div>
+        </div>
+        <div class="footer_wrap"></div>
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/department.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+            function tempFun(){
+            let template = '';
+            for(let i = 0; i < 6 ; i++){
+                template += '<div class="box">'+
+'                        <div class="block">'+
+'                            <div class="hover">'+
+'                                <div class="box_child">'+
+'                                    <div class="pad">'+
+'                                        <div class="img">'+
+'                                            <img src="{ms:global.host/}/{ms:global.style/}/images/avatar1_1.png" alt="">'+
+'                                        </div>'+
+'                                        <p class="name">郝旭亮</p>'+
+'                                        <p class="position">中药学</p>'+
+'                                    </div>'+
+'                                </div>'+
+'                                <div class="box_active_wrap">'+
+'                                    <div class="box_active">'+
+'                                        <div class="descWrap">'+
+'                                            <p class="text">'+
+'                                                郝旭亮，主任医师，教授，博/硕士研究生导师，国贴专家，山西名医，全国中医药专家学术经验继承导师，山西省中医院院长，重点专科带头人。'+
+'                                            </p>'+
+'                                            <p class="title">擅长：</p>'+
+'                                            <p class="text d_multiline">'+
+'                                                中西医结合治疗肺癌、胃癌、食管癌、结直肠癌、肾癌等；对消化道疾病有独到的治疗方法'+
+'                                            </p>'+
+'                                        </div>'+
+'                                    </div>'+
+'                                </div>'+
+'                            </div>'+
+'                        </div>'+
+'                    </div>';
+            }
+            return template;
+        }
+        $('.headPhoto').append(tempFun());
+        $('.headPhoto .box').click(function(){
+            window.location.href = '/page/talentDevelopment/tudorDetail.html?id='+'d_yjsjy';
+        })
+</script>
+</html>

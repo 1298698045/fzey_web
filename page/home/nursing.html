@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/nursing.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+
+        <div class="maxImage">
+            <div class="max_img_content">
+                <#include "location.html" />
+                <div class="layOut_panel">
+                    <div class="l_img">
+                        {ms:channel type='self'}
+                            {ms:arclist size=1}
+                            <p id="backPhoto" virtualPath='{ms:global.host/}{@ms:file field.litpic/}'></p>
+                            {/ms:arclist}
+                        {/ms:channel}
+                    </div>
+                    <div class="r_cont_wrap">
+                        <div class="flex">
+                            {ms:arclist artid='1406929080855670785'}
+                            <div class="preview">
+                                <i class="icon top_icon"></i>
+                                <p class="text" @click="goto('{ms:global.url/}${field.link}')">查看详细</p>
+                                <i class="icon bottom_icon"></i>
+                            </div>
+                            <div class="article">
+                                <p class="column">
+                                    ${field.descrip}
+                                </p>
+                            </div>
+                            <div class="tag">
+                                <div class="text" style="line-height: 1;font-size: 39px;">
+                                    <div class="topBack"></div>
+                                    ${field.typetitle}
+                                    <div class="bottomBack">
+                                        <span class="dept"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">特色服务</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+            </div>
+            {ms:channel type='self' typeid='1415970964085252098'}
+            <div class="swiper-container">
+                <div class="swiper-wrapper dynamic">
+                    {ms:arclist}
+                    <div @click="goto('{ms:global.url/}${field.link}')" class="box swiper-slide">
+                        <div class="box_child">
+                            <div class="img">
+                                <img src="{ms:global.host/}{@ms:file field.litpic/}"/>
+                                <div class="timeBox">
+                                    <p class="time">${field.date?string("dd")}</p>
+                                    <p class="year">${field.date?string("yyyy-MM")}</p>
+                                </div>
+                            </div>
+                            <div class="textWrap">
+                                <p class="text">
+                                    ${field.title}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {/ms:arclist}
+                    <div class="fake_item"></div>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+            {/ms:channel}
+            <!-- <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">医生团队</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+                {ms:channel type='self'}
+                <p class="more" id="departs" @click="goto('{ms:global.url/}${'/page/department/team.html'}')">
+                    更多查看
+                </p>
+                {/ms:channel}
+            </div> -->
+            <!-- <div class="headPhoto">
+                <div class="box" v-for="line in lines">
+                    <div class="block">
+                        <div class="hover" @click="handleRouter(line)">
+                            <div class="box_child">
+                                <div class="pad">
+                                    <div class="img">
+                                        <img :src="line.portraitUrl" alt="">
+                                    </div>
+                                    <p class="name">{{line.name}}</p>
+                                    <p class="position">{{line.technicalTitle}}</p>
+                                </div>
+                            </div>
+                            <div class="box_active_wrap">
+                                <div class="box_active">
+                                    <div class="descWrap">
+                                        <p class="text">
+                                            {{line.briefIntro}}
+                                        </p>
+                                        <p class="title" v-if="line.show">擅长：</p>
+                                        <p class="text ellipsis" v-if="line.show">
+                                            {{line.goodAt}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="back_row">
+                            <div class="cel_o" @click="goto('jytdz.jin1.com.cn:8888/?hospitalCode=sxszyy&openId=oCTxTwz9RKlm8UNAJTqC2fTxkPfQ ')">挂号</div>
+                            <div class="cel_t" @click="goto('https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ9')">问诊</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+                <div class="fake_item"></div>
+            </div> -->
+            
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            lines:[]
+        },
+        mixins: [mixin],
+        methods: {
+            list: function() {
+                var that = this
+                    var page = {pageNo: 1}
+                    ms.http.post("/cms/expert/list.do", Object.assign({}, {
+                        
+                    }, page)).then(function(res) {
+                        //that.page.contentCount = res.data.total
+                        that.lines = res.data.rows.map(function(row) {
+                            if (row.portrait) {
+                                var img = JSON.parse(row.portrait)
+                                if (img.length > 0) {
+                                    row.portraitUrl = '{ms:global.url/}' + img[0].url
+                                }
+                            }
+                            if(row.briefIntro.length>=109){
+                                row.show = false;
+                            }else {
+                                row.show = true;
+                            }
+                            return row
+                        })
+                        console.log('lines:', that.lines)
+                    }).catch(function(err) {
+                        console.error('error:', err)
+                    })
+            },
+            handleRouter(item){
+                {ms:channel type='self'}
+                this.goto("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                {/ms:channel}
+            }
+        },
+        created: function() {
+            this.list()
+        }
+    })
+    $(function(){
+        var swiperTwo = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            slidesPerView: 3,
+            paginationClickable: true
+        });
+        if($('.swiper-slide').length<=3){
+            $('.swiper-pagination').hide();
+        }
+        function tempFun(){
+            let template = '';
+            for(let i = 0; i < 6 ; i++){
+                template += '<div class="box">'+
+'                        <div class="block">'+
+'                            <div class="hover">'+
+'                                <div class="box_child">'+
+'                                    <div class="pad">'+
+'                                        <div class="img">'+
+'                                            <img src="{ms:global.host/}/{ms:global.style/}/images/avatar1_1.png" alt="">'+
+'                                        </div>'+
+'                                        <p class="name">王晞星</p>'+
+'                                        <p class="position">肿瘤病专家</p>'+
+'                                    </div>'+
+'                                </div>'+
+'                                <div class="box_active_wrap">'+
+'                                    <div class="box_active">'+
+'                                        <div class="descWrap">'+
+'                                            <p class="text">'+
+'                                                王晞星，主任医师，教授，博/硕士研究生导师，国贴专家，山西名医，全国中医药专家学术经验继承导师，山西省中医院院长，重点专科带头人。'+
+'                                            </p>'+
+'                                            <p class="title">擅长：</p>'+
+'                                            <p class="text">'+
+'                                                中西医结合治疗肺癌、胃癌、食管癌、结直肠癌、肾癌等；对消化道疾病有独到的治疗方法'+
+'                                            </p>'+
+'                                        </div>'+
+'                                    </div>'+
+'                                </div>'+
+'                            </div>'+
+'                            <div class="back_row">'+
+'                                <div class="cel_o">挂号</div>'+
+'                                <div class="cel_t">问诊</div>'+
+'                            </div>'+
+'                        </div>'+
+'                    </div>';
+            }
+            return template;
+        }
+        // $('.headPhoto').append(tempFun());
+        var swiperTwo = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            slidesPerView: 3,
+            paginationClickable: true
+        });
+        $('#featuresId .box .add_icon').click(function(){
+            $('.modal_modal').show();
+        })
+        $('#modal_cancel').click(function(){
+            $('.modal_modal').hide();
+        })
+    })
+</script>
+</html>

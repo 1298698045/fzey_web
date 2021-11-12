@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/huli.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+
+        <div class="maxImage">
+            <div class="max_img_content">
+                <#include "location.html" />
+                
+                <div class="layOut_panel">
+                    <div class="l_img"></div>
+                    <div class="r_cont_wrap">
+                        <div class="flex">
+                            <div class="preview">
+                                <i class="icon top_icon"></i>
+                                <p class="text" id="previewDetail">查看详细</p>
+                                <i class="icon bottom_icon"></i>
+                            </div>
+                            <div class="article">
+                                <p class="column">
+                                    山西省中医院中医院护理人在“厚德精医，传承创新”院训的熏陶下，形成了一支充满活力、凝聚力强的专业中医护理团队。在护理管理、教育...
+                                </p>
+                            </div>
+                            <div class="tag">
+                                <div class="text">
+                                    <div class="topBack"></div>
+                                    护理天地
+                                    <div class="bottomBack">
+                                        <span class="dept"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">护理团队</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+            </div>
+            <div class="features marginAuto">
+                <div class="dynamic" id="featuresId">
+                </div>
+            </div>
+            <div class="row_title">
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                </div>
+                <p class="name">特色服务</p>
+                <div class="imgs">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                </div>
+                <p class="more" id="ts_server_id">
+                    更多查看
+                </p>
+            </div>
+            <div class="dynamic">
+                <div class="box">
+                    <div class="box_child">
+                        <div class="img">
+                            <div class="timeBox">
+                                <p class="time">04</p>
+                                <p class="year">2020-12</p>
+                            </div>
+                        </div>
+                        <div class="textWrap">
+                            <p class="text">
+                                我市完成全国首例机器人辅助下治疗肱骨外科颈骨折手术（市）
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="boxSolid">
+                        <div class="textCont">
+                            <p class="color">大腿根部突现“肿块”，几个月疯长成足球般大小</p>
+                            <p class="desc">
+                                案例回放大腿根部突现“肿块”今年63岁的薛阿姨家住新会，平时健康的薛阿姨突然发现自己的右大腿根部长了东西
+                            </p>
+                        </div>
+                        <div class="bottom">
+                            <div class="l_time_box">
+                                <p class="time">04</p>
+                                <p class="year">2020-12</p>
+                            </div>
+                            <div class="youjiantou"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_child">
+                        <div class="img">
+                            <div class="timeBox">
+                                <p class="time">04</p>
+                                <p class="year">2020-12</p>
+                            </div>
+                        </div>
+                        <div class="textWrap">
+                            <p class="text">
+                                我市完成全国首例机器人辅助下治疗肱骨外科颈骨折手术（市）
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="box_child">
+                        <div class="img">
+                            <div class="timeBox">
+                                <p class="time">04</p>
+                                <p class="year">2020-12</p>
+                            </div>
+                        </div>
+                        <div class="textWrap">
+                            <p class="text">
+                                我市完成全国首例机器人辅助下治疗肱骨外科颈骨折手术（市）
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal_modal">
+            <div class="popupWrap">
+                <div class="block">
+                    <div class="swiper-container_modal">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <img src="/images/yyfm_1.1.png" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/yyfm_1.1.png" alt="">
+                            </div>
+                            <div class="swiper-slide">
+                                <img src="/images/yyfm_1.1.png" alt="">
+                            </div>
+                        </div>
+                        <div >
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="title">陈列展示</p>
+                        <p class="cancel" id="modal_cancel">
+                            
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer_wrap">
+
+        </div>
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+    $(function(){
+        // 陈列展示
+        let list = [
+            {
+                imgUrl:"/images/t10.jpg",
+                name:"护理团队"
+            },
+            {
+                imgUrl:"/images/t10.jpg",
+                name:"护理团队"
+            },
+            {
+                imgUrl:"/images/t10.jpg",
+                name:"护理团队"
+            }
+        ]
+        let strfeatures = '';
+        for(let i=0; i < list.length; i++){
+            strfeatures += '<div class="box">'+
+'                    <div class="box_child">'+
+'                        <div class="img">'+
+'                         <img class="imgurl" src="'+ list[i].imgUrl +'"/>  '+    
+'                            <div class="modal">'+
+'                                <p class="add_icon"></p>    '+
+'                            </div>'+
+'                        </div>'+
+'                        <div class="text_Wrap">'+
+'                            <p class="text">'
+                                + list[i].name +
+'                            </p>'+
+'                        </div>'+
+'                    </div>'+
+'                </div>';
+        }
+        $('#featuresId').append(strfeatures);
+        // 查看详细
+        $('#previewDetail').click(function(){
+            window.location.href = '/page/characteristic/detail.html?index=2';
+        })
+        var swiperTwo = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            slidesPerView: 3,
+            paginationClickable: true
+        });
+        $('#featuresId .box .add_icon').click(function(){
+            $('.modal_modal').show();
+        })
+        $('#modal_cancel').click(function(){
+            $('.modal_modal').hide();
+        })
+    })
+</script>
+</html>

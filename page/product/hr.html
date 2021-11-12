@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京凤凰世纪科技-人力资源管理系统</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/header.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/aside.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/static/iconfont/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css" />
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/tab.png" type="image/x-icon" />
+    <style>
+        .header.active{
+            z-index: -1;
+        }
+        .new_banner {
+            width: 100%;
+            height: 500px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/1_banner_2_1.jpg') no-repeat;
+        }
+
+        .new_banner .bannerText {
+            width: 1200px;
+            margin: 0 auto;
+            padding-top: 102px;
+        }
+
+        .new_banner .bannerText .bannerText_child {
+            width: 1200px;
+            margin: auto;
+            z-index: 999;
+            text-align: left;
+        }
+
+        .new_banner .bannerText .bannerText_child .title {
+            font-size: 44px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .new_banner .bannerText .bannerText_child .desc {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        .new_banner .bannerText .bannerText_child .btn {
+            width: 160px;
+            height: 45px;
+            line-height: 45px;
+            border: 1px solid #fff;
+            margin-top: 40px;
+            border-radius: 3px;
+            font-size: 18px;
+            text-align: center;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .new_banner .bannerText .bannerText_child .btn:hover {
+            background: #4f98ff;
+            color: #ffffff;
+            border: 1px solid #4f98ff;
+        }
+
+        .center {
+            width: 100%;
+        }
+
+        .nav_wrap {
+            border-bottom: 1px solid #e2e3e5;
+            box-shadow: 0px 1px 0px 0px rgba(228, 228, 228, 1);
+            z-index: 9999;
+        }
+        .nav_wrap.active{
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 99999;
+            background: #fff;
+        }
+        .nav_wrap .nav {
+            width: 1200px;
+            margin: auto;
+            display: flex;
+        }
+
+        .nav_wrap .nav p {
+            margin: 0;
+            padding: 0;
+            /* //transition: all 0.4s ease-in-out; */
+        }
+
+        .nav_wrap .nav .tab {
+            flex: 1;
+            /* //width: 220px; */
+            font-size: 16px;
+            color: #333333;
+            cursor: pointer;
+            text-align: center;
+            padding: 18px 0;
+        }
+
+        .nav_wrap .nav .active {
+            /* //width: 220px; */
+            flex: 1;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 18px 0;
+            border-bottom: 3px solid #4f98ff;
+            box-sizing: border-box;
+            color: #4f98ff;
+            text-align: center;
+        }
+
+        .container {
+            height: auto;
+        }
+
+        .container .normal {
+            margin: 0px auto;
+        }
+
+        .container .normal .edit_heda .name {
+            font-size: 20px;
+            color: #4f98ff;
+            font-weight: bold;
+        }
+
+        .container .normal .edit_heda .name_title {
+            font-size: 30px;
+            font-weight: bold;
+            color: #2f3342;
+            padding: 10px 0 20px 0;
+        }
+
+        .container .normal .descs {
+            font-size: 16px;
+            color: #626775;
+            line-height: 2;
+        }
+
+        .container .normal .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #000;
+            line-height: 56px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container .normal .text {
+            font-size: 14px;
+            text-align: center;
+            color: #626775;
+        }
+
+        .container .normal .content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 75px auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 50px 0;
+            border-bottom: 2px solid #f5f7f9;
+        }
+
+        .container .normal .content .lImg {
+            width: 480px;
+            height: 346px;
+        }
+
+        .container .normal .content .lImg img {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .container .normal .content .rBox {
+            width: 458px;
+        }
+
+        .container .normal .content .rBox .name_wrap {
+            display: flex;
+            align-items: center;
+        }
+
+        .container .normal .content .rBox .solid {
+            width: 5px;
+            height: 30px;
+            border-radius: 3px;
+            background: #4f98ff;
+        }
+
+        .container .normal .content .rBox h1 {
+            font-size: 32px;
+            color: #2f3342;
+            font-weight: bold;
+            margin-left: 25px;
+            margin-bottom: 0;
+        }
+
+        .container .normal .content .desc {
+            font-size: 16px;
+            color: #626775;
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+
+        .container .normal .content .desclin {
+            font-size: 26px;
+            color: #2f3342;
+            margin: 10px 0;
+            margin-left: 30px;
+            font-weight: bold;
+        }
+
+        .container .normal .content .apply {
+            width: 148px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            border: 1px solid #2f3342;
+            color: #2f3342;
+            margin-left: 30px;
+        }
+
+        .container .normal .content .apply:hover {
+            cursor: pointer;
+            color: #4f98ff;
+            border: 1px solid #4f98ff;
+        }
+
+        .container .normal .content .i_item {
+            width: 23%;
+            background: #f6f6f9;
+            padding: 10px 29px 100px 10px;
+            margin-bottom: 40px;
+        }
+
+        .container .normal .content .i_item .tag {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #b31e23;
+        }
+
+        .container .normal .content .i_item .name {
+            font-size: 20px;
+            color: #2f3342;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-left: 13px;
+        }
+
+        .container .normal .content .i_item .item_text {
+            font-size: 16px;
+            color: #626775;
+            margin-left: 13px;
+        }
+
+        .item_box:hover .position {
+            background: rgba(0, 0, 0, .4);
+        }
+
+        .item_box:hover .position .name {
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        .item_box:hover .position .desc {
+            display: block;
+        }
+
+        .container .normal .link {
+            text-align: center;
+            color: #b31e23;
+            cursor: pointer;
+        }
+
+        .container .normal .flex {
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            height: 340px;
+        }
+
+        .container .normal .flex .item {
+            flex: 1;
+            height: 234px;
+            background-color: transparent;
+            border: 1px solid #eee;
+            margin-left: -1px;
+            padding: 51px 35px;
+            transition: all 0.2s linear;
+            margin-top: 53px;
+            box-shadow: 0px 4px 16px 0px rgba(8, 30, 80, 0);
+            overflow: hidden;
+        }
+
+        .container .normal .flex .item img {
+            display: block;
+            width: 70px;
+            height: auto;
+            margin: 0 auto 10px;
+        }
+
+        .container .normal .flex .item .title {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: #202640;
+            line-height: 28px;
+            margin-bottom: 32px;
+        }
+
+        .container .normal .flex .item.desc {
+            font-size: 16px;
+            font-weight: 400;
+            color: #626775;
+            display: none;
+        }
+
+        .container .normal .flex .item .hover {
+            flex: 3;
+            height: 100%;
+            padding-top: 44px;
+            margin-top: 0;
+            box-shadow: 0px 4px 16px 0px rgba(8, 30, 80, 0.1);
+            border: 1px solid #eeeeee;
+        }
+
+        .container .normal .flex .item .item .descHover {
+            display: block;
+            animation: move 1s;
+            animation-delay: 0.2s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+
+        .container .reverse .content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 75px auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-bottom: 2px solid #f5f7f9;
+            padding-bottom: 20px;
+        }
+
+        .container .reverse .content .lImg {
+            width: 480px;
+            height: 346px;
+        }
+
+        .container .reverse .content .lImg img {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .container .reverse .content .rBox {
+            width: 458px;
+        }
+
+        .edit_heda .container .reverse .content .rBox .name {
+            font-size: 20px;
+            color: #4f98ff;
+            font-weight: bold;
+        }
+
+        .container .reverse .content .rBox .name_title {
+            font-size: 30px;
+            font-weight: bold;
+            color: #2f3342;
+            padding: 10px 0 20px 0;
+        }
+
+        .container .reverse .content .rBox .descs {
+            font-size: 16px;
+            color: #626775;
+            line-height: 2;
+        }
+
+        .container .reverse .content .rBox .name_wrap {
+            display: flex;
+            align-items: center;
+        }
+
+        .container .reverse .content .rBox .name_wrap .solid {
+            width: 5px;
+            height: 30px;
+            border-radius: 3px;
+            background: #4f98ff;
+        }
+
+        .container .reverse .content .rBox .name_wrap h1 {
+            font-size: 32px;
+            color: #2f3342;
+            font-weight: bold;
+            margin-left: 25px;
+            margin-bottom: 0;
+        }
+
+        .container .reverse .content .rBox .name_wrap .desc {
+            font-size: 16px;
+            color: #626775;
+            margin-top: 20px;
+            margin-left: 30px;
+        }
+
+        .container .reverse .content .rBox .name_wrap .desclin {
+            font-size: 26px;
+            color: #2f3342;
+            margin: 10px 0;
+            margin-left: 30px;
+            font-weight: bold;
+        }
+
+        .container .reverse .content .rBox .name_wrap .apply {
+            width: 148px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            border: 1px solid #2f3342;
+            color: #2f3342;
+            margin-left: 30px;
+        }
+
+        .container .reverse .content .rBox .name_wrap .apply:hover {
+            cursor: pointer;
+            color: #4f98ff;
+            border: 1px solid #4f98ff;
+        }
+
+        .container .shadow {
+            padding: 70px 40px;
+            background: #f6f6f9;
+        }
+
+        .container .shadow .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #000;
+            line-height: 56px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container .shadow .text {
+            font-size: 14px;
+            text-align: center;
+            color: #626775;
+        }
+
+        .container .shadow .yingyong {
+            max-width: 1200px;
+            margin: 39px auto;
+        }
+
+        .container .shadow .product {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .container .shadow .product .item_box {
+            width: 376px;
+            padding: 29px 19px;
+            background: #fff;
+            border: 1px solid #eeeeee;
+            margin-bottom: 37px;
+            display: flex;
+        }
+
+        .container .shadow .product .item_box .imgs {
+            width: 70px;
+            height: 70px;
+        }
+
+        .container .shadow .product .item_box .imgs .img {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .container .shadow .product .rText {
+            width: 256px;
+            margin-left: 10px;
+        }
+
+        .container .shadow .product .rText .name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2f3342;
+        }
+
+        .container .shadow .product .rText .desc {
+            font-size: 16px;
+            color: #626775;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper" id="app">
+        <#include "head.html" />
+        <div class="new_banner">
+            <div class="bannerText">
+                <div class="bannerText_child">
+                    <p class="title">人力资源管理系统</p>
+                    <p class="desc">支持复合组织架构和员工全生命周期在线管理
+
+
+                    </p>
+                    <p class="desc" style="margin-top:20px">人力薪税 随需应变的全模块人力资源管理云平台</p>
+                    <p class="btn" @click="handleOpen">
+                        申请试用
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="nav_wrap" :class="{active:isFixed}" ref="anchor">
+                <div class="nav">
+                    <p v-for="(item,index) in productList" :key="index" class="tab" :class="{active:index==tabIdx}"
+                        @click="handleTab(index)">{{item.name}}</p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="normal" ref="yg" id="yg">
+                    <div class="content">
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_1.jpg' alt="" />
+                        </div>
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>员工</h1>
+                            </div>
+                            <p class="desc">
+                                从入职到离退，记录员工成长轨迹；员工信息全面归档，打造高效信息平台；重要事项准时提醒，有效规避劳动风险；人事报表随时取用，实时掌握人员异动。
+                            </p>
+                            <p class="desclin">360度全景人员资料管理</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reverse" ref="zz" id="zz">
+                    <div class="content">
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>组织</h1>
+                            </div>
+                            <p class="desc">
+                                灵活配置管理权限，⽀持复杂组织架构。灵活设置多级部⻔，快速搭建架构体系直观查看组织架构图，⽀持⼀键导出强大的权限定义，多维度精细设置编制直观查看，成本控制⼼中有数。
+                            </p>
+                            <p class="desclin">灵活配置管理权限，⽀持复杂组织架构</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_2.jpg' alt="" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="reverse" ref="sp" id="sp">
+                    <div class="content">
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_3.jpg' alt="" />
+                        </div>
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>人员调配</h1>
+                            </div>
+                            <p class="desc">
+                                从入职到离退，记录员工成长轨迹；员工信息全面归档，打造高效信息平台；重要事项准时提醒，有效规避劳动风险；人事报表随时取用，实时掌握人员异动。
+                            </p>
+                            <p class="desclin">追踪所有人员变动</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="reverse" ref="kq" id="kq">
+                    <div class="content">
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>考勤</h1>
+                            </div>
+                            <p class="desc">
+                                设置不同考勤⽅案，⽀持多种打卡⽅式；灵活多样的班次设置，考勤管理更清晰；⼀键获取考勤报表，数据精准同步⼯资；考勤异常及时提醒，员工自主管理更高效。
+                            </p>
+                            <p class="desclin">考勤⽅案⾃定义 灵活打卡更便捷</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_4.jpg' alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="reverse" ref="pb" id="pb">
+                    <div class="content">
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_5.jpg' alt="" />
+                        </div>
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>排班</h1>
+                            </div>
+                            <p class="desc">
+                                按组、按部门，按周、月排班；灵活统计查询，夜班费用计算等。
+                            </p>
+                            <p class="desclin">排班支持多种方式</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="normal" ref="bxfl" id="bxfl">
+                    <div class="content">
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>保险福利</h1>
+                            </div>
+                            <p class="desc">
+                                保险缴纳调整，导入；月缴纳生成，未缴纳提醒；保险报表。
+                            </p>
+                            <p class="desclin">保险福利全流程操作</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_6.jpg' alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="reverse" ref="xz" id="xz">
+                    <div class="content">
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_7.jpg' alt="" />
+                        </div>
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>薪资</h1>
+                            </div>
+                            <p class="desc">
+                                针对不同员⼯类别，灵活配置薪酬⽅案
+                            </p>
+                            <p class="desclin">个性化薪酬⽅案 系统算薪更准确</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="normal" ref="kp" id="kp">
+                    <div class="content">
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>考评</h1>
+                            </div>
+                            <p class="desc">
+                                灵活定义指标，考评表，测评维度；批量发布考评，汇总报表，统计。
+                            </p>
+                            <p class="desclin">360度考评、年度考评，续签试用考评等</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_8.jpg' alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="reverse" ref="zp" id="zp">
+                    <div class="content">
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_9.jpg' alt="" />
+                        </div>
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>招聘</h1>
+                            </div>
+                            <p class="desc">
+                                职位/简历一站式管理，招聘全过程管理
+                            </p>
+                            <p class="desclin">招聘全流程处理</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="normal" ref="rydp" id="rydp">
+                    <div class="content">
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>审批</h1>
+                            </div>
+                            <p class="desc">
+                                设置不同审批流程，满⾜不同业务场景；审批数据结果⾃动关联各模块；审批结果存档备忘，随时搜索审批详情；移动端审批⼊⼝，随时随地⾼效处理。
+                            </p>
+                            <p class="desclin">审批模式⾃定义 简明⾼效随时处理</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_10.jpg' alt="" />
+                        </div>
+                    </div>
+                </div>
+                <div class="reverse" ref="kfhl" id="kfhl">
+                    <div class="content" style="border: none;">
+                        <div class="lImg">
+                            <img src='{ms:global.host/}/{ms:global.style/}/images/2.2_img_11.jpg' alt="" />
+                        </div>
+                        <div class="rBox">
+                            <div class="name_wrap">
+                                <p class="solid"></p>
+                                <h1>开放互联</h1>
+                            </div>
+                            <p class="desc">
+                                与OA、HIS打通、集成微信小程序，实现系统之间互联互通；系统与用户的简单使用。
+                            </p>
+                            <p class="desclin">协同办公更便捷 满足事业单位一体化管理需求</p>
+                            <p class="apply"  @click="handleOpen">申请试用</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+        <#include "right.html" />
+        <Modal ref="childModal" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    const vum = new Vue({
+        el: '#app',
+        mixins: [mixin],
+        components:{
+            Modal
+        },
+        data() {
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                productList: [
+                    {
+                        name: '员工'
+                    },
+                    {
+                        name: "组织",
+                        desc: "灵活配置管理权限，⽀持复杂组织架构。灵活设置多级部⻔，快速搭建架构体系直观查看组织架构图，⽀持⼀键导出强大的权限定义，多维度精细设置编制直观查看，成本控制⼼中有数。"
+                    },
+                    {
+                        name: "人员调配",
+                        desc: "审批模式⾃定义 简明⾼效随时处理设置不同审批流程，满⾜不同业务场景审批数据结果⾃动关联各模块审批结果存档备忘，随时搜索审批详情移动端审批⼊⼝，随时随地⾼效处理。"
+                    },
+                    {
+                        name: "考勤",
+                        desc: "考勤⽅案⾃定义，灵活打卡更便捷。设置不同考勤⽅案，⽀持多种打卡⽅式灵活多样的班次设置，考勤管理更清晰⼀键获取考勤报表，数据精准同步⼯资考勤异常及时提醒，员工自主管理更高效。"
+                    },
+                    {
+                        name: "排班",
+                        desc: "排班支持多种方式按组、按部门，按周、月排班，灵活统计查询，夜班费用计算等。"
+                    },
+                    {
+                        name: "保险福利",
+                        desc: "保险福利全流程操作保险缴纳调整，导入，月缴纳生成，未缴纳提醒，保险报表。"
+                    },
+                    {
+                        name: "薪资",
+                        desc: "个性化薪酬⽅案 系统算薪更准确针对不同员⼯类别，灵活配置薪酬⽅案。"
+                    },
+                    {
+                        name: "考评",
+                        desc: "360度考评、年度考评，续签试用考评等。灵活定义指标，考评表，测评维度，批量发布考评，汇总报表，统计。"
+                    },
+                    {
+                        name: "招聘",
+                        desc: "招聘全流程处理职位/简历一站式管理，招聘全过程管理。"
+                    },
+                    {
+                        name: "人员调配",
+                        desc: "追踪所有人员变动"
+                    },
+                    {
+                        name: "开放互联",
+                        desc: "协同办公更便捷 满足事业单位一体化管理需求。与OA、HIS打通、集成微信小程序，实现系统之间互联互通，系统与用户的简单使用。"
+                    }
+                ],
+                tabIdx: 0,
+                defaultIndexInfo: [
+                    {index:0, top: 800, id:'yg'},
+                    {index:1, top: 800,  id: 'zz'},
+                    {index:2, top: 800,  id: 'sp'},
+                    {index:3, top: 800,  id: 'kq'},
+                    {index:4, top: 800,  id: 'pb'},
+                    {index:5, top: 800,  id: 'bxfl'},
+                    {index:6, top: 800,  id: 'xz'},
+                    {index:7, top: 800,  id: 'kp'},
+                    {index:8, top: 800,  id: 'zp'},
+                    {index:9, top: 800,  id: 'rydp'},
+                    {index:10, top: 800,  id: 'kfhl'}
+                ],
+                isFixed:false
+            }
+        },
+        watch:{
+            isTop(val,old){
+                if(val){
+                    this.tabIdx = 0
+                    this.isFixed = false
+                }
+            }
+        },
+        mounted(){
+            window.addEventListener('mousewheel',this.handleScroll)
+        },
+        beforeDestroy() {
+            window.removeEventListener('mousewheel',this.handleScroll)
+        },
+        methods: {
+            handleMouseover(e, item, index) {
+                this.activeTab = index;
+            },
+            handleTab(idx) {
+                this.tabIdx = idx;
+                this.defaultIndexInfo.map(item=>{
+                    let top = document.getElementById(item.id).offsetTop-140;
+                    console.log(top);
+                    if(item.index==idx){
+                        window.scrollTo({top: top+10})
+                    }
+                })
+            },
+            handleScroll(e){
+                let anchorY = this.$refs.anchor.getBoundingClientRect().top;
+                if(anchorY<=60){
+                    this.isFixed = true;
+                }else {
+                    this.isFixed = false;
+                }
+                let top = e.clientY;
+                let idx = this.defaultIndexInfo.findIndex((item,index)=>{
+                    return top <= this.$refs[item.id].getBoundingClientRect().top;
+                });
+                console.log('idx:', idx)
+                this.tabIdx = idx < 0 ? 10 : idx;
+            }
+        },
+    })
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: 3000,
+        mousewheel: {
+            releaseOnEdges: true,//PC端释放滑动
+        },
+        paginationClickable: true,
+        pagination: '.swiper-pagination',
+        nextButton: '.swiper-button-next',
+        prevButton: '.swiper-button-prev',
+    })
+    $('.swiper-container').hover(function () {
+        mySwiper.stopAutoplay();
+    }, function () {
+        mySwiper.startAutoplay();
+    })
+</script>
+
+</html>

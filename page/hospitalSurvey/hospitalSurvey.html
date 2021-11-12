@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=1300px"/>
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/pagination.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/hostipalSurvey.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/module/css/traffic.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/articleContent.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <style>
+        #swiperId{
+            transition-timing-function:linear !important;
+        }
+        #swiperId.swiperId{
+            transition-duration:150ms !important;
+        }
+    </style>
+    <style>
+        .el-pagination .el-pager .number{
+            width: 57px!important;
+            height: 58px!important;
+            line-height: 58px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_icon.png') no-repeat!important;
+            list-style: none!important;
+            vertical-align: top!important;
+            color: #333!important;
+        }
+        .el-pagination .el-pager .number.active{
+            color: #ffffff!important;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_icon_active.png') no-repeat !important;
+        }
+        .el-pagination .btn-next, .el-pagination .btn-prev{
+            width: 15px!important;
+            height: 34px!important;
+            margin-top: 16px!important;
+        }
+        .el-pagination .btn-prev{
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_left.png') no-repeat!important;
+        }
+        .el-pagination .btn-next{
+            background: url('{ms:global.host/}/{ms:global.style/}/images/page_right.png') no-repeat!important;
+            margin-left: 18px!important;
+        }
+        .el-pagination .btn-next .el-icon, .el-pagination .btn-prev .el-icon{
+            display: none!important;
+        }
+        .el-pagination .more{
+            width: 57px!important;
+            height: 58px!important;
+            line-height: 58px;
+            background: url('http://t-think.com/hospital/template/1/new_hospital/images/page_icon.png') no-repeat!important;
+            list-style: none!important;
+            vertical-align: top!important;
+            color: #333!important;
+        }
+        .el-pager .more::before{
+            line-height: 58px!important;
+        }
+        .el-pagination__jump{
+            width: 156px!important;
+            height: 42px!important;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/jump.png') no-repeat!important;
+            background-size: 100% 100%!important;
+            display: inline-block!important;
+            color: #606266!important;
+            margin-left: 10px!important;
+            padding: 10px 10px 10px 20px!important;
+            margin-top: 5px!important;
+        }
+        .el-input__inner{
+            background: none!important;
+            border: none!important;
+        }
+        .el-pagination{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="container">
+            <div class="hospitalWrap">
+                <#include "location.html" />
+                <div class="row_title">
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
+                    </div>
+                    <p class="name">医院概况</p>
+                    <div class="imgs">
+                        <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
+                    </div>
+                </div>
+                <div class="tab_wrap">
+                    <div class="left_icon icon">
+                    </div>
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper" id="swiperId">
+                            {ms:channel type='son'}
+                            <div class="swiper-slide tabs-item"
+                            :class="{active : $route.path == '${field.typepath}'}"
+                            title="${field.typetitle}"  @click="push('${field.typepath}')">
+                                ${field.typetitle}
+                            </div>
+                            {/ms:channel}
+                        </div>
+                    </div>
+                    <div class="right_icon icon">
+                    </div>
+                </div>
+            </div>
+            <router-view></router-view>
+    </div>
+        <#include "foot.html" />
+
+        <!-- 弹框 -->
+        <div class="modal_modal">
+            <div class="popupWrap">
+                <div class="block">
+                    <div class="swiper-container_modal swiper-no-swiping">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" v-for="line in lines">
+                                <div class="imgBox">
+                                    <img :src="line.imageUrl" alt="">
+                                </div>
+                                <div class="row">
+                                    <p class="title">{{line.contentTitle}}</p>
+                                    <p class="cancel modal_cancel"></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div >
+                            <div class="swiper-button-prev"></div>
+                            <div class="swiper-button-next"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+
+<script>
+    var router = new VueRouter({routes:[
+        {ms:channel type='son'}
+            <#if field.typeid='1400880251846684674'>
+            {
+                path:'${field.typepath}',
+                name:'${field.typetitle}',
+                component: {
+                    template:`
+                        {ms:channel type='self' typeid='1400880251846684674'}
+                        <div class="content content_wrap newcontent" style="display:block;">
+                            {ms:arclist size=1 artid='1405068714693468161'}
+                            <div class="bg_block">
+                                <div class="jd_wrap">
+                                    <div class="lbox">
+                                        <div class="rowTitle">
+                                            ${field.title}
+                                        </div>
+                                        <p class="textIndent">
+                                            ${field.content}
+                                        </p>
+                                    </div>
+                                    <div class="rbox"></div>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                            {ms:arclist size=1 artid='1405423639541686274'}
+                            <div class="mingjia">
+                                <div class="mj_warp marginAuto">
+                                    <div class="row">
+                                        <p class="top_icon"></p>
+                                        <p class="text">${field.title}</p>
+                                        <p class="bottom_icon"></p>
+                                    </div>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                            {ms:arclist size=1 artid='1405068899708411906'}
+                            <div class="bg_block_two">
+                                <div class="z_cont_wrap marginAuto">
+                                    <div class="lBox">
+                                        <p class="l_img"></p>
+                                        <p class="r_img"></p>
+                                    </div>
+                                    <div class="rBox">
+                                        <div class="rowTitle">
+                                            ${field.title}
+                                        </div>
+                                        <p class="textIndent">
+                                            ${field.content}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                            <div class="banner_wrap">
+                                <div class="honor marginAuto">
+                                    {ms:arclist size=1 artid='1405069865467879425'}
+                                    <div class="rowTitle">
+                                        ${field.title}
+                                    </div>
+                                    <p class="desc">
+                                        ${field.content}
+                                    </p>
+                                    {/ms:arclist}
+                                    <div class="banner">
+                                        <div class="swiper-container _swiper-container_new">
+                                            <div class="swiper-wrapper">
+                                                {ms:arclist typeid='1422037648759967745'}
+                                                <div class="swiper-slide">
+                                                    <div class="box">
+                                                        <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                                                    </div>
+                                                </div>
+                                                {/ms:arclist}
+                                            </div>
+                                            <!-- Add Pagination -->
+                                            <div class="swiper-pagination"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {/ms:channel}
+                    `
+                }
+            },
+            <#elseif field.typeid='1400882774863147010'>
+                {
+                    path:'${field.typepath}',
+                    name:'${field.typetitle}',
+                    component: {
+                        template: `
+                        <div class="content newcontent">
+                            <div class="historyWrap marginAuto">
+                                <div class="leftWrap">
+                                    <div class="prev_btn"></div>
+                                    <div class="swiper-container-vertical swiper-no-swiping">
+                                        <div class="swiper-wrapper boxCont">
+                                            {ms:arclist orderby='sort'}
+                                            <div class="swiper-slide">
+                                                <div class="box<#if field.index==1> active</#if>">
+                                                    <p class="time">
+                                                        ${field.keyword}
+                                                    </p>
+                                                    <p class="name">
+                                                        ${field.title}
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            {/ms:arclist}
+                                        </div>
+                                    </div>
+                                    <div class="next_btn"></div>
+                                </div>
+                                <div class="rightWrap">
+                                    {ms:arclist orderby='sort'}
+                                    <div class="stepBox<#if field.index==1> removeTop</#if>">
+                                        <p class="title top">${field.title}</p>
+                                        <p class="desc">
+                                            ${field.descrip}
+                                            <i class="tag_icon"></i>
+                                        </p>
+                                    </div>
+                                    {/ms:arclist}
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    }
+                },
+                <#elseif field.typeid='1400883350950801409'>
+                {
+                    path:'${field.typepath}',
+                    name:'${field.typetitle}',
+                    component: {
+                        template: `
+                        <div class="content newcontent">
+                            <div class="features marginAuto">
+                                <div class="dynamic" id="featuresId">
+                                    <div class="box" v-for="line in lines">
+                                        <div class="box_child">
+                                            <div class="img">
+                                            <img class="imgurl" :src="line.imageUrl"/>
+                                                <div class="modal">
+                                                    <p class="add_icon"></p>
+                                                </div>
+                                            </div>
+                                            <div class="textWrap">
+                                                <p class="text">
+                                                    {{line.contentTitle}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <el-pagination
+                                v-if="lines.length>page.pageSize"
+                                background
+                                @current-change="list"
+                                :page-size="page.pageSize"
+                                :current-page.sync="page.pageNo"
+                                layout="prev, pager, next, jumper"
+                                :total="page.contentCount">
+                            </el-pagination>
+                        </div>
+                        `,
+                        mixins: [mixin],
+                        data: function() {
+                            return {
+                                page: {
+                                    //当前页数
+                                    pageNo: 1,
+                                    //每页文章条数
+                                    pageSize: 9,
+                                    //页数总数
+                                    pageTotal: 0,
+                                    //内容总数
+                                    contentCount: 0
+                                },
+                                lines: []
+                            }
+                        },
+                        methods: {
+                            list: function(pageCur) {
+                                var that = this
+                                that.page.pageNo = pageCur
+                                ms.http.post("/cms/content/list.do", Object.assign({}, {
+                                    categoryId: '${field.typeid}'
+                                }, that.page)).then(function(res) {
+                                    that.page.contentCount = res.data.total
+                                    that.lines = res.data.rows.map(function(row) {
+                                        if (row.contentImg) {
+                                            var img = JSON.parse(row.contentImg)
+                                            if (img.length > 0) {
+                                            row.imageUrl = '{ms:global.host/}' + img[0].path
+                                            }
+                                        }
+                                        return row
+                                    })
+                                    console.log('lines:', that.lines)
+                                    setTimeout(()=>{
+                                        $('#featuresId .box').click(function(){
+                                            let idx = $(this).index();
+                                            $('.modal_modal').show();
+                                            modalSwiperFun(idx);
+                                        })
+                                            
+                                        var mySwiper1 = new Swiper ('.swiper-container_modal', {
+                                            // autoplay: 3000,
+                                            // mousewheel: {
+                                            //     releaseOnEdges: true,//PC端释放滑动
+                                            // }, 
+                                            slidesPerView: 1,
+                                            initialSlide :0,
+                                            paginationClickable:true,
+                                            pagination: '.swiper-pagination',
+                                            nextButton: '.swiper-button-next',
+                                            prevButton: '.swiper-button-prev',
+                                            onSlideChangeEnd: function(swiper){
+                                                if(swiper.isBeginning){
+                                                    swiper.prevButton.removeClass('active');
+                                                }else{
+                                                    swiper.prevButton.addClass('active');
+                                                }
+                                            }
+                                        })
+                                        function modalSwiperFun(idx){
+                                            mySwiper1.init();
+                                            mySwiper1.slideTo(idx, 0, false);
+                                        }
+                                        $('.modal_cancel').click(function(){
+                                            $('.modal_modal').hide();
+                                        })
+                                    },100)
+                                }).catch(function(err) {
+                                    console.error('error:', err)
+                                })
+                            },
+                            dateFormat: function(date, fmt="YYYY-MM-DD"){
+                                return moment(date).format(fmt)
+                            }
+                        },
+                        mounted: function() {
+                            this.list()
+                        }
+                    }
+                    
+                },
+                <#elseif field.typeid='1400883480944865281'>
+                {
+                    path:'${field.typepath}',
+                    name:'${field.typetitle}',
+                    component:{
+                        template:`
+                        <div class="content newcontent">
+                            <div class="NoticeBody marginAuto">
+                                <div class="left_wrap">
+                                    <div class="left_wrap_view">
+                                        <div class="l_text">
+                                            {ms:arclist orderby='sort' size=9999}
+                                            <div class="row_back<#if field.index==1> active</#if>" id='${field.id}'>
+                                                <i class="icon_l"></i>
+                                                <span class="<#if field.index==1>active</#if>">
+                                                    ${field.title}
+                                                </span>
+                                            </div>
+                                            {/ms:arclist}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right_wrap">
+                                    {ms:arclist orderby='sort' size=9999}
+                                    <div class="rightCont active">
+                                        <div class="head" style="margin:35px 35 0 35px">
+                                            <div class="title">
+                                                <i class="left"></i>
+                                                <span>${field.title}</span>
+                                            </div>
+                                            <div class="time">
+                                                发布时间：${field.date?string("yyyy-MM-dd")}
+                                            </div>
+                                        </div>
+                                        <div class="article">
+                                            <div class="descWrap" style="margin-left:0;">
+                                                <div class="d-visible">
+                                                    ${field.content}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/ms:arclist}
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    }
+                },
+                <#elseif field.typeid='1402953682421641217'>
+                {
+                    path:'${field.typepath}',
+                    name:'${field.typetitle}',
+                    component:{
+                        template:`
+                        <div class="content newcontent">
+                            <div class="NoticeBody marginAuto">
+                                <div class="left_wrap">
+                                    <div class="left_wrap_view">
+                                        <div class="l_text">
+                                            {ms:arclist orderby='sort' size=9999}
+                                            <div class="row_back<#if field.index==1> active</#if>" id='${field.id}'>
+                                                <i class="icon_l"></i>
+                                                <span class="<#if field.index==1>active</#if>">
+                                                    ${field.title}
+                                                </span>
+                                            </div>
+                                            {/ms:arclist}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="right_wrap">
+                                    {ms:arclist orderby='sort' size=9999}
+                                    <div class="rightCont active">
+                                        <div class="head" style="margin:35px 35 0 35px">
+                                            <div class="title">
+                                                <i class="left"></i>
+                                                <span>${field.title}</span>
+                                            </div>
+                                            <div class="time">
+                                                发布时间：${field.date?string("yyyy-MM-dd")}
+                                            </div>
+                                        </div>
+                                        <div class="article">
+                                            <div class="descWrap" style="margin-left:0;">
+                                                <div class="d-visible">
+                                                    ${field.content}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/ms:arclist}
+                                </div>
+                            </div>
+                        </div>
+                        `
+                    }
+                },
+                <#elseif field.typeid='1402954155253919745'>
+                {
+                    path:'${field.typepath}',
+                    name:'${field.typetitle}',
+                    component:{
+                        template:`
+                            <div class="content newcontent">   
+                                <div class="traffic marginAuto" id="traffic">
+                                    <div class="left_box">
+                                        <div class="imgs">
+                                            <div id="localcontainer"></div>
+                                        </div>
+                                    </div>
+                                    <div class="right_box">
+                                        <div class="tabs">
+                                            <p class="tab active">总院</p>
+                                            <p class="tab">胜利分院</p>
+                                            <p class="tab marginNo">和平分院</p>
+                                        </div>
+                                        <div class="trafficContent" style="display: block;">
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconOne"></i>
+                                                    <p class="text">地址：</p>
+                                                </div>
+                                                <p class="row-text">山西省太原市迎泽区并州西街46号</p>
+                                            </div>
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconTwo"></i>
+                                                    <p class="text">乘车路线：</p>
+                                                </div>
+                                                <p class="row-text">省中医院（25路、814路）</p>
+                                                <p class="row-text">青年路双塔西街口（25路、814路）</p>
+                                                <p class="row-text">并州西街（814路）</p>
+                                            </div>
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconThree"></i>
+                                                    <p class="text">电话：</p>
+                                                </div>
+                                                <p class="row-text">0351-4668200</p>
+                                            </div>
+                                        </div>
+                                        <div class="trafficContent">
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconOne"></i>
+                                                    <p class="text">地址：</p>
+                                                </div>
+                                                <p class="row-text">太原市胜利街160号（胜利街解放路路口东200米路南）</p>
+                                            </div>
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconTwo"></i>
+                                                    <p class="text">乘车路线：</p>
+                                                </div>
+                                                <p class="row-text">解放北路胜利街口（2、2支、826、827、828、829、841、842、845、850、850支、852）</p>
+                                                <p class="row-text">胜利街解放北路口（101、102、104、36、820、820支）</p>
+                                                <p class="row-text">营西街（25路）</p>
+                                            </div>
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconThree"></i>
+                                                    <p class="text">电话：</p>
+                                                </div>
+                                                <p class="row-text">0351-3030099</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="trafficContent">
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconOne"></i>
+                                                    <p class="text">地址：</p>
+                                                </div>
+                                                <p class="row-text">太原市和平南路336号</p>
+                                            </div>
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconTwo"></i>
+                                                    <p class="text">乘车路线：</p>
+                                                </div>
+                                                <p class="row-text">义井北（606路、5路、839路、832路、403路、402路、451路）</p>
+                                            </div>
+                                            <div class="address">
+                                                <div class="icon_text">
+                                                    <i class="icon iconThree"></i>
+                                                    <p class="text">电话：</p>
+                                                </div>
+                                                <p class="row-text">0351-6073285/6073952</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+                }
+            </#if>
+        {/ms:channel}
+    ]})
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid},<#if field.parentids?has_content>${field.parentids}</#if><#else>0</#if>',
+            page: {
+                //当前页数
+                pageNo: 1,
+                //每页文章条数
+                pageSize: 9,
+                //页数总数
+                pageTotal: 0,
+                //内容总数
+                contentCount: 0
+            },
+            lines: [],
+            hasRoute: true
+        },
+        mixins: [mixin],
+        router:router,
+        created: function(){
+            {ms:channel type='son' size=1}
+            if (this.$route.path == '/') {
+                this.push('${field.typepath}')
+            }
+            {/ms:channel}
+        },
+        methods: {
+            list: function(pageCur) {
+                var that = this
+                that.page.pageNo = pageCur
+                ms.http.post("/cms/content/list.do", Object.assign({}, {
+                    categoryId: '1400883350950801409'
+                }, that.page)).then(function(res) {
+                    that.page.contentCount = res.data.total
+                    that.lines = res.data.rows.map(function(row) {
+                        if (row.contentImg) {
+                            var img = JSON.parse(row.contentImg)
+                            if (img.length > 0) {
+                            row.imageUrl = '{ms:global.host/}' + img[0].path
+                            }
+                        }
+                        return row
+                    })
+                    console.log('lines:', that.lines)
+                }).catch(function(err) {
+                    console.error('error:', err)
+                })
+            },
+            dateFormat: function(date, fmt="YYYY-MM-DD"){
+                return moment(date).format(fmt)
+            }
+        },
+        mounted(){
+            var swiper = new Swiper('.swiper-container', {
+                pagination: '.swiper-pagination',
+                slidesPerView: 5,
+                paginationClickable: true,
+                spaceBetween: 30,
+                nextButton: '.right_icon',
+                prevButton: '.left_icon',
+                onSlideChangeEnd: function(swiper){
+                    if(swiper.isBeginning){
+                        swiper.prevButton.removeClass('prev_active');
+                    }else{
+                        swiper.prevButton.addClass('prev_active');
+                    }
+                    if(swiper.isEnd){
+                        swiper.nextButton.addClass('next_active');
+                        $('#swiperId').css('transition-duration','0ms')
+                        $('#swiperId').addClass('swiperId')
+                        var X =$('#swiperId').css('transform').replace(/[^0-9\-,]/g,'').split(',')[4]-40
+                                        $('#swiperId').css('transform','translate3d('+X+'px,0px,0px)')
+                        setTimeout(function(){
+                            $('#swiperId').removeClass('swiperId')
+                        },150);
+                    }else{
+                        swiper.nextButton.removeClass('next_active');
+                    }
+                }
+            });
+            var swiperVertical = new Swiper('.swiper-container-vertical', {
+                pagination: '.swiper-pagination',
+                direction: 'vertical',
+                slidesPerView: 5,
+                paginationClickable: true,
+                // spaceBetween: 30,
+                // mousewheelControl: true,
+                nextButton: '.next_btn',
+                prevButton: '.prev_btn',
+                onSlideChangeEnd: function(swiper){
+                    if(swiper.isBeginning){
+                        swiper.prevButton.removeClass('active');
+                    }else{
+                        swiper.prevButton.addClass('active');
+                    }
+                    if(swiper.isEnd){
+                        swiper.nextButton.addClass('active');
+                    }else{
+                        swiper.nextButton.removeClass('active');
+                    }
+                }
+            });
+            var swiperTwo = new Swiper('._swiper-container_new', {
+                pagination: '.swiper-pagination',
+                slidesPerView: 3,
+                paginationClickable: true
+            });
+            let title = $('.swiper-slide.active').attr('title');
+            if(title=='交通路线'){
+                swiper.slideTo(2, 1000, false);
+                $('#traffic .tabs .tab').click(function(){
+                    $('#traffic .tabs .tab').removeClass('active');
+                    $(this).addClass('active');
+                    let idx = $(this).index();
+                    $('.trafficContent').hide();
+                    $('.trafficContent').eq(idx).show();
+                })
+            }else if(title=='院容院貌'){
+                this.list();
+            }
+        },
+        activated(){
+            var swiperVertical = new Swiper('.swiper-container-vertical', {
+                pagination: '.swiper-pagination',
+                direction: 'vertical',
+                slidesPerView: 5,
+                paginationClickable: true,
+                // spaceBetween: 30,
+                // mousewheelControl: true,
+                nextButton: '.next_btn',
+                prevButton: '.prev_btn',
+                onSlideChangeEnd: function(swiper){
+                    if(swiper.isBeginning){
+                        swiper.prevButton.removeClass('active');
+                    }else{
+                        swiper.prevButton.addClass('active');
+                    }
+                    if(swiper.isEnd){
+                        swiper.nextButton.addClass('active');
+                    }else{
+                        swiper.nextButton.removeClass('active');
+                    }
+                }
+            });
+        }
+    })
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 5,
+        paginationClickable: true,
+        spaceBetween: 30,
+        nextButton: '.right_icon',
+        prevButton: '.left_icon',
+        onSlideChangeEnd: function(swiper){
+            if(swiper.isBeginning){
+                swiper.prevButton.removeClass('prev_active');
+            }else{
+                swiper.prevButton.addClass('prev_active');
+            }
+            if(swiper.isEnd){
+                swiper.nextButton.addClass('next_active');
+                $('#swiperId').css('transition-duration','0ms')
+                $('#swiperId').addClass('swiperId')
+                var X =$('#swiperId').css('transform').replace(/[^0-9\-,]/g,'').split(',')[4]-40
+                                $('#swiperId').css('transform','translate3d('+X+'px,0px,0px)')
+                setTimeout(function(){
+                    $('#swiperId').removeClass('swiperId')
+                },150);
+            }else{
+                swiper.nextButton.removeClass('next_active');
+            }
+        }
+    });
+    setTimeout(()=>{
+        var swiperVertical = new Swiper('.swiper-container-vertical', {
+            pagination: '.swiper-pagination',
+            direction: 'vertical',
+            slidesPerView: 5,
+            paginationClickable: true,
+            nextButton: '.next_btn',
+            prevButton: '.prev_btn',
+            onSlideChangeEnd: function(swiper){
+                if(swiper.isBeginning){
+                    swiper.prevButton.removeClass('active');
+                }else{
+                    swiper.prevButton.addClass('active');
+                }
+                if(swiper.isEnd){
+                    swiper.nextButton.addClass('active');
+                }else{
+                    swiper.nextButton.removeClass('active');
+                }
+            }
+        });
+    },100)
+    var swiperTwo = new Swiper('._swiper-container_new', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 3,
+        paginationClickable: true
+    });
+    $('.swiper-container-vertical .swiper-slide .box').click(function(){
+        let idx = $(this).parent('.swiper-slide').index();
+        $('.swiper-container-vertical .swiper-slide .box').removeClass('active');
+        $(this).addClass('active');
+        $('.rightWrap .stepBox').show();
+        $('.rightWrap .stepBox').eq(idx).prevAll().hide();
+        $('.rightWrap .stepBox .title').addClass('top');
+        $('.rightWrap .stepBox').eq(idx).children('.title').removeClass('top');
+    })
+    
+    
+    // let slideIdx = getUrlParam("slideIdx");
+    // swiper[0].slideTo(slideIdx, 1000, false);
+    
+    $('.tab_wrap .swiper-wrapper .swiper-slide').click(function(){
+        // swiper[0].init();
+        let idx = $(this).index();
+        if(($(this).attr('title')=='院容院貌')){
+            setTimeout(()=>{
+                $('#featuresId .box').click(function(){
+                    let idx = $(this).index();
+                    $('.modal_modal').show();
+                    modalSwiperFun(idx);
+                })
+                var mySwiper1 = new Swiper ('.swiper-container_modal', {
+                    slidesPerView: 1,
+                    initialSlide :0,
+                    paginationClickable:true,
+                    pagination: '.swiper-pagination',
+                    nextButton: '.swiper-button-next',
+                    prevButton: '.swiper-button-prev',
+                    onSlideChangeEnd: function(swiper){
+                        if(swiper.isBeginning){
+                            swiper.prevButton.removeClass('active');
+                        }else{
+                            swiper.prevButton.addClass('active');
+                        }
+                    }
+                })
+                function modalSwiperFun(idx){
+                    mySwiper1.init();
+                    mySwiper1.slideTo(idx, 0, false);
+                }
+                $('.modal_cancel').click(function(){
+                    $('.modal_modal').hide();
+                })
+            },100)
+            
+        }else if(($(this).attr('title')=='交通路线')){
+            $('#traffic .tabs .tab').click(function(){
+                $('#traffic .tabs .tab').removeClass('active');
+                $(this).addClass('active');
+                let idx = $(this).index();
+                $('.trafficContent').hide();
+                $('.trafficContent').eq(idx).show();
+            })
+            var pointer = new BMap.Point(112.572875,37.85717);
+            var hospitalName = "山西省中医药";
+            var hospitalAddr = "山西省太原市迎泽区并州西街46号";
+            var map = new BMap.Map("localcontainer");
+            var hosName = ['山西省中医院（总院）','山西省中医院（胜利分院）','山西省中医院 （和平分院）'], i=0;
+            var options = {
+                title: hosName[i], //标题
+                width: 300, //宽度
+                height: 24, //高度
+                panel: "panel", //检索结果面板
+                enableAutoPan: true, //自动平移
+                searchTypes: [
+                    BMAPLIB_TAB_TO_HERE, //到这里去
+                    BMAPLIB_TAB_FROM_HERE //从这里出发
+                ]
+            };
+            var searchInfoWindow = new BMapLib.SearchInfoWindow(map, hospitalAddr, options);
+            var marker = new BMap.Marker(pointer);
+            // marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 动画--弹跳
+            map.enableScrollWheelZoom();
+            map.addControl(new BMap.NavigationControl());
+            map.addControl(new BMap.MapTypeControl({
+                mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
+            }));
+            init(pointer);
+            marker.addEventListener('click', function () {
+                searchInfoWindow.open(marker);
+            });
+
+            resetMap.prototype = new BMap.Control();
+            resetMap.prototype.initialize = function (map) {
+                var div = document.createElement("div");
+                div.appendChild(document.createTextNode("返回"));
+                div.style = "box-shadow:rgba(0, 0, 0, 0.34902) 2px 2px 3px;border:1px solid #008059;background:#009d6d;padding: 2px 6px;font-size: 12px;line-height:1.3em; border-radius:3px;color:#fff;cursor:pointer";
+                div.onclick = function (e) {
+                    map.clearOverlays();
+                    init(pointer);
+                }
+                map.getContainer().appendChild(div);
+                return div;
+            }
+            map.addControl(new resetMap());
+
+            function resetMap() {
+                this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+                this.defaultOffset = new BMap.Size(90, 10);
+            }
+
+            function init(pointer) {
+                map.centerAndZoom(pointer, 16);
+                map.addOverlay(marker);
+                map.panBy(415, 292);//中心点偏移多少像素（width,height）为div 宽高的一半;
+                setTimeout(()=>{
+                    searchInfoWindow.open(marker);
+                },300)
+            }
+            // 搜索周边
+            var LocalSearch = new BMap.LocalSearch(map, {
+                renderOptions: {
+                    map: map,
+                    panel: "resultList"
+                }
+            });
+            $('#mapSearch a').click(function () {
+                var searchContent = $(this).attr('data-tit');
+                var circle = new BMap.Circle(pointer, 1000, {
+                    fillColor: "#333",
+                    strokeWeight: 1,
+                    fillOpacity: 0.3,
+                    strokeOpacity: 0.3
+                });
+                map.addOverlay(circle);
+                LocalSearch.searchNearby(searchContent, pointer, 1000);
+                $(".map-search-result").show();
+            });
+            $('#switch').click(function () {
+                $("#resultList").toggle('fast');
+            }); 
+            $('#traffic .tabs .tab').click(function(){
+                $('#traffic .tabs .tab').removeClass('active');
+                $(this).addClass('active');
+                let idx = $(this).index();
+                $('.trafficContent').hide();
+                $('.trafficContent').eq(idx).show();
+                if(idx==0){
+                    changeMap(idx, 112.572875,37.85717, 16,"山西省太原市迎泽区并州西街46号");
+                }else if(idx==1){
+                    changeMap(idx, 112.571083, 37.899465, 16, "太原市胜利街160号（胜利街解放路路口东200米路南）");
+                }else if(idx==2){
+                    changeMap(idx, 112.515826, 37.833667, 16, "太原市和平南路336号");
+                }
+            })   
+            function changeMap(i, pointer0, pointer1, mul, addr) {
+                options = {
+                    title: hosName[i], //标题
+                    width: 300, //宽度
+                    height: 24, //高度
+                    panel: "panel", //检索结果面板
+                    enableAutoPan: true, //自动平移
+                    searchTypes: [
+                        BMAPLIB_TAB_TO_HERE, //到这里去
+                        BMAPLIB_TAB_FROM_HERE //从这里出发
+                    ]
+                };
+                pointer = new BMap.Point(pointer0, pointer1);
+                searchInfoWindow = new BMapLib.SearchInfoWindow(map, addr, options)
+                marker = new BMap.Marker(pointer);
+                init(pointer, mul);
+            }
+        }else  if($(this).attr('title')=='历史沿革'){
+            setTimeout(()=>{
+                var swiperVertical = new Swiper('.swiper-container-vertical', {
+                    pagination: '.swiper-pagination',
+                    direction: 'vertical',
+                    slidesPerView: 5,
+                    paginationClickable: true,
+                    nextButton: '.next_btn',
+                    prevButton: '.prev_btn',
+                    onSlideChangeEnd: function(swiper){
+                        if(swiper.isBeginning){
+                            swiper.prevButton.removeClass('active');
+                        }else{
+                            swiper.prevButton.addClass('active');
+                        }
+                        if(swiper.isEnd){
+                            swiper.nextButton.addClass('active');
+                        }else{
+                            swiper.nextButton.removeClass('active');
+                        }
+                    }
+                });
+            },300)
+            $('.swiper-container-vertical .swiper-slide .box').click(function(){
+                let idx = $(this).parent('.swiper-slide').index();
+                $('.swiper-container-vertical .swiper-slide .box').removeClass('active');
+                $(this).addClass('active');
+                $('.rightWrap .stepBox').show();
+                $('.rightWrap .stepBox').eq(idx).prevAll().hide();
+                $('.rightWrap .stepBox .title').addClass('top');
+                $('.rightWrap .stepBox').eq(idx).children('.title').removeClass('top');
+            })
+        }else if($(this).attr('title')=='医院介绍'){
+            var swiperTwo = new Swiper('._swiper-container_new', {
+                pagination: '.swiper-pagination',
+                slidesPerView: 3,
+                paginationClickable: true
+            });
+        }
+    })
+   
+    
+    // swiperVertical.init();
+    function HistoricalFun(){
+        swiperVertical.init();
+    }
+    
+    window.onload = function(){
+        setTimeout(()=>{
+            $('#featuresId .box').click(function(){
+                let idx = $(this).index();
+                $('.modal_modal').show();
+                modalSwiperFun(idx);
+            })
+                
+            var mySwiper1 = new Swiper ('.swiper-container_modal', {
+                // autoplay: 3000,
+                // mousewheel: {
+                //     releaseOnEdges: true,//PC端释放滑动
+                // }, 
+                slidesPerView: 1,
+                initialSlide :0,
+                paginationClickable:true,
+                pagination: '.swiper-pagination',
+                nextButton: '.swiper-button-next',
+                prevButton: '.swiper-button-prev',
+                onSlideChangeEnd: function(swiper){
+                    if(swiper.isBeginning){
+                        swiper.prevButton.removeClass('active');
+                    }else{
+                        swiper.prevButton.addClass('active');
+                    }
+                }
+            })
+            function modalSwiperFun(idx){
+                mySwiper1.init();
+                mySwiper1.slideTo(idx, 0, false);
+            }
+            $('.modal_cancel').click(function(){
+                $('.modal_modal').hide();
+            })
+        },100)
+        function getUrlParam(key) {
+            // 获取参数
+            var url = window.location.search;
+            // 正则筛选地址栏
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            // 匹配目标参数
+            var result = url.substr(1).match(reg);
+            //返回参数值
+            return result ? decodeURIComponent(result[2]) : null;
+        }
+        
+    }    
+</script>
+// <script type="text/javascript" src="//api.map.baidu.com/api?type=webgl&v=1.0&ak=dpYUGNcGjk0Kx0p3o8zR7z3QI53HuGEc&s=1"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=dpYUGNcGjk0Kx0p3o8zR7z3QI53HuGEc&s=1"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+
+<script>
+    let title = $('.swiper-slide.active').attr('title');
+    if(title=='交通路线'){
+        var pointer = new BMap.Point(112.572875,37.85717);
+        var hospitalName = "山西省中医药";
+        var hospitalAddr = "山西省太原市迎泽区并州西街46号";
+        var map = new BMap.Map("localcontainer");
+        var hosName = ['山西省中医院（总院）','山西省中医院（胜利分院）','山西省中医院 （和平分院）'], i=0;
+        var options = {
+            title: hosName[i], //标题
+            width: 300, //宽度
+            height: 24, //高度
+            panel: "panel", //检索结果面板
+            enableAutoPan: true, //自动平移
+            searchTypes: [
+                BMAPLIB_TAB_TO_HERE, //到这里去
+                BMAPLIB_TAB_FROM_HERE //从这里出发
+            ]
+        };
+        var searchInfoWindow = new BMapLib.SearchInfoWindow(map, hospitalAddr, options);
+        var marker = new BMap.Marker(pointer);
+        // marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 动画--弹跳
+        map.enableScrollWheelZoom();
+        map.addControl(new BMap.NavigationControl());
+        map.addControl(new BMap.MapTypeControl({
+            mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
+        }));
+        init(pointer);
+        marker.addEventListener('click', function () {
+            searchInfoWindow.open(marker);
+        });
+
+        resetMap.prototype = new BMap.Control();
+        resetMap.prototype.initialize = function (map) {
+            var div = document.createElement("div");
+            div.appendChild(document.createTextNode("返回"));
+            div.style = "box-shadow:rgba(0, 0, 0, 0.34902) 2px 2px 3px;border:1px solid #008059;background:#009d6d;padding: 2px 6px;font-size: 12px;line-height:1.3em; border-radius:3px;color:#fff;cursor:pointer";
+            div.onclick = function (e) {
+                map.clearOverlays();
+                init(pointer);
+            }
+            map.getContainer().appendChild(div);
+            return div;
+        }
+        map.addControl(new resetMap());
+
+        function resetMap() {
+            this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+            this.defaultOffset = new BMap.Size(90, 10);
+        }
+
+        function init(pointer) {
+            map.centerAndZoom(pointer, 16);
+            map.addOverlay(marker);
+            map.panBy(415, 292);//中心点偏移多少像素（width,height）为div 宽高的一半;
+            setTimeout(()=>{
+                searchInfoWindow.open(marker);
+            },300)
+        }
+        // 搜索周边
+        var LocalSearch = new BMap.LocalSearch(map, {
+            renderOptions: {
+                map: map,
+                panel: "resultList"
+            }
+        });
+        $('#mapSearch a').click(function () {
+            var searchContent = $(this).attr('data-tit');
+            var circle = new BMap.Circle(pointer, 1000, {
+                fillColor: "#333",
+                strokeWeight: 1,
+                fillOpacity: 0.3,
+                strokeOpacity: 0.3
+            });
+            map.addOverlay(circle);
+            LocalSearch.searchNearby(searchContent, pointer, 1000);
+            $(".map-search-result").show();
+        });
+        $('#switch').click(function () {
+            $("#resultList").toggle('fast');
+        }); 
+        $('#traffic .tabs .tab').click(function(){
+            $('#traffic .tabs .tab').removeClass('active');
+            $(this).addClass('active');
+            let idx = $(this).index();
+            $('.trafficContent').hide();
+            $('.trafficContent').eq(idx).show();
+            if(idx==0){
+                changeMap(idx, 112.572875,37.85717, 16,"山西省太原市迎泽区并州西街46号");
+            }else if(idx==1){
+                changeMap(idx, 112.571083, 37.899465, 16, "太原市胜利街160号（胜利街解放路路口东200米路南）");
+            }else if(idx==2){
+                changeMap(idx, 112.515826, 37.833667, 16, "太原市和平南路336号");
+            }
+        })   
+        function changeMap(i, pointer0, pointer1, mul, addr) {
+            options = {
+                title: hosName[i], //标题
+                width: 300, //宽度
+                height: 24, //高度
+                panel: "panel", //检索结果面板
+                enableAutoPan: true, //自动平移
+                searchTypes: [
+                    BMAPLIB_TAB_TO_HERE, //到这里去
+                    BMAPLIB_TAB_FROM_HERE //从这里出发
+                ]
+            };
+            pointer = new BMap.Point(pointer0, pointer1);
+            searchInfoWindow = new BMapLib.SearchInfoWindow(map, addr, options)
+            marker = new BMap.Marker(pointer);
+            init(pointer, mul);
+        }
+        window.onload = function(){
+            var hospitalName = window.location.href.split('?')[1].split('=')[1] || '';
+            if(hospitalName=='victory'){
+                $('#traffic .tabs .tab').removeClass('active');
+                $('#traffic .tabs .tab').eq(1).addClass('active');
+                $('.trafficContent').hide();
+                $('.trafficContent').eq(1).show();
+                changeMap(1, 112.571083, 37.899465, 16, "太原市胜利街160号（胜利街解放路路口东200米路南）");
+            }else if(hospitalName=='peace'){
+                $('#traffic .tabs .tab').removeClass('active');
+                $('#traffic .tabs .tab').eq(2).addClass('active');
+                $('.trafficContent').hide();
+                $('.trafficContent').eq(2).show();
+                changeMap(2, 112.515826, 37.833667, 16, "太原市和平南路336号");
+            }
+        }
+    }
+</script>
+<style type="text/css">  
+    html{height:100%}    
+    body{height:100%;margin:0px;padding:0px}    
+    #localcontainer{
+        width: 100%;
+        height: 100%;
+    }
+    #BMapLib_trans0,.BMapLib_trans{
+        left: 125px!important;
+        top: auto!important;
+        width:58px!important;
+        height:31px!important;
+    }
+    .BMap_stdMpType1 .BMap_stdMpSlider, .BMap_stdMpType2 .BMap_stdMpSlider, .BMap_stdMpType3 .BMap_stdMpSlider, .BMap_stdMpType2 .BMap_stdMpZoom, .BMap_stdMpType0 .BMap_stdMpPan, .BMap_stdMpType1 .BMap_stdMpPan, .BMap_stdMpType3 .BMap_stdMpPan, .BMap_stdMpType4 .BMap_stdMpPan{
+        display:block!important;
+    }
+    .BMap_stdMpZoom{
+        top:45px!important;
+    }
+    .BMap_stdMpZoom .BMap_button{
+        width: 22px!important;
+        height: 21px!important;
+        left: 12px!important;
+        overflow: hidden!important;
+        background-image: url(http://api0.map.bdimg.com/images/mapctrls2d0.png)!important;
+        background-repeat: no-repeat!important;
+        z-index: 10!important;
+    }
+    .BMap_stdMpZoomOut{
+        background-position: 0px -265px!important;
+    }
+</style> 
+<script src="{ms:global.host/}/{ms:global.style/}/js/pagination.js" defer></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/scroll.js" defer></script>
+</html>

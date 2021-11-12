@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京凤凰世纪科技-联系我们</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/header.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/aside.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/static/iconfont/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/tab.png" type="image/x-icon" />
+    <style>
+        .banners {
+            text-align: center;
+            padding-top: 66px;
+            width: 100%;
+            height: 256px;
+            background-image: url('{ms:global.host/}/{ms:global.style/}/images/gy_bg.jpg');
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .banners h3 {
+            font-size: 50px;
+            font-weight: bold;
+            color: #ffffff;
+            margin: 0;
+        }
+
+        .banners .text {
+            font-size: 20px;
+            color: #ffffff;
+            margin-top: 20px;
+        }
+
+        .contents {
+            width: 1200px;
+            padding: 100px 0;
+            margin: auto;
+            background: #fff;
+        }
+
+        .case_wrap .dividerWrap {
+            display: flex;
+            justify-content: center;
+            margin-bottom:75px;
+        }
+
+        .case_wrap .dividerWrap .divider {
+            display: flex;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r {
+            display: flex;
+            align-items: center;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line {
+            width: 200px;
+            height: 2px;
+            display: inline-block;
+            background: #c7c6c6;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line .dian {
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background: #c7c6c6;
+            display: inline-block;
+        }
+
+        .case_wrap .dividerWrap .divider .l,
+        .r .line .dian .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2f3342;
+            padding: 0 20px;
+        }
+
+        .contents .case_wrap .dividerWrap .divider .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2f3342;
+            padding: 0 20px;
+        }
+
+
+        .location_wrap{
+          box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.06);
+          position: relative;
+        }
+          .location_wrap .location{
+            width: 100%;
+            height: 410px;
+            /* background: url('{ms:global.host/}/{ms:global.style/}/images/1450.png') no-repeat; */
+            background-size: cover;
+          }
+          .location_wrap  .boxshow{
+              width: 470px;
+              height: 270px;
+              background: #ffffff;
+              box-shadow: 0px 2px 16px 0px rgba(21, 54, 83, 0.2);
+              float: right;
+              margin: 70px 42px 70px 0;
+              padding: 24px;
+              position: absolute;
+              z-index: 99999999;
+              top: 0;
+              right: 5%;
+          }
+          .location_wrap .boxshow  .companyName{
+                font-size: 22px;
+                font-weight: bold;
+                color: #2f3342;
+                padding-bottom:18px;
+                border-bottom:1px solid #eeeeee;
+              }
+              .location_wrap .boxshow .row{
+                font-size: 16px;
+                color: #626775;
+                margin-top: 20px;
+              }
+                .location_wrap .boxshow .row i{
+                  margin-right: 21px;
+                }
+          .location_wrap  .contact{
+            background: #fff;
+            display: flex;
+            justify-content: space-around;
+          }
+            .location_wrap  .contact .item{
+              display: flex;
+              align-items: center;
+              padding: 30px 0;
+            }
+              .location_wrap  .contact .item  .imgs{
+                width: 60px;
+                height: 60px;
+              }
+                .location_wrap  .contact .item  .imgs  img{
+                  width: 100%;
+                  height: 100%;
+                }
+              .location_wrap  .contact .item  .rText{
+                margin-left: 20px;
+              }
+                .location_wrap  .contact .item  .rText .name{
+                  font-size: 20px;
+                  font-weight: bold;
+                  color: #2f3342;
+                }
+                .location_wrap  .contact .item  .rText .phone{
+                  font-size: 16px;
+                  color: #626775;
+                }
+    #localcontainer{
+        width: 100%;
+        height: 410px;
+    }
+    #BMapLib_trans0,.BMapLib_trans{
+        left: 125px!important;
+        top: auto!important;
+        width:58px!important;
+        height:31px!important;
+    }
+    .BMap_stdMpType1 .BMap_stdMpSlider, .BMap_stdMpType2 .BMap_stdMpSlider, .BMap_stdMpType3 .BMap_stdMpSlider, .BMap_stdMpType2 .BMap_stdMpZoom, .BMap_stdMpType0 .BMap_stdMpPan, .BMap_stdMpType1 .BMap_stdMpPan, .BMap_stdMpType3 .BMap_stdMpPan, .BMap_stdMpType4 .BMap_stdMpPan{
+        display:block!important;
+    }
+    .BMap_stdMpZoom{
+        top:45px!important;
+    }
+    .BMap_stdMpZoom .BMap_button{
+        width: 22px!important;
+        height: 21px!important;
+        left: 12px!important;
+        overflow: hidden!important;
+        background-image: url(https://api.map.baidu.com/images/mapctrls2d0.png)!important;
+        background-repeat: no-repeat!important;
+        z-index: 10!important;
+        position: absolute!important;
+    }
+    .BMap_stdMpZoomIn {
+        background-position: 0 -221px!important;
+    }
+    .BMap_stdMpZoomOut{
+        background-position: 0px -265px!important;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper" id="app">
+        <#include "head.html" />
+        <div class="center">
+            <div class="banners">
+                <h3>
+                    让智慧医疗管理更便捷，让信任更简单
+                </h3>
+                <p class="text">
+                    20+年医疗行业经验 1500+医院用户 面向医院管理，链接移动办公，成就智慧医院
+                </p>
+            </div>
+            <div class="contents">
+                <div class="case_wrap">
+                    <div class="dividerWrap">
+                        <div class="divider">
+                            <div class="title">
+                                联系我们
+                            </div>
+                        </div>
+                    </div>
+                    <div class="location_wrap">
+                        <div class="location" id="localcontainer">
+                        </div>
+                        <div class="boxshow">
+                            <div class="companyName">北京凤凰世纪科技有限公司</div>
+                            <div class="row">
+                                <IconStyle/>
+                                <i class="iconfont">&#xe627;</i>
+                                010-87897479
+                            </div>
+                            <div class="row">
+                                <IconStyle/>
+                                <i class="iconfont">&#xe62e;</i>
+                                lzy@phxinfo.com.cn
+                            </div>
+                            <div class="row">
+                                <IconStyle/>
+                                <i class="iconfont">&#xe61f;</i>
+                                北京市海淀区花园路5号5幢（天博中润）2层221室
+                            </div>
+                        </div>
+                        <div class="contact">
+                            <div class="item">
+                                <div class="imgs">
+                                    <img src='{ms:global.host/}/{ms:global.style/}/images/1461.png' alt=""/>
+                                </div>
+                                <div class="rText">
+                                    <p class="name">咨询电话</p>
+                                    <p class="phone">010-87897479</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="imgs">
+                                    <img src='{ms:global.host/}/{ms:global.style/}/images/1462.png' alt=""/>
+                                </div>
+                                <div class="rText">
+                                    <p class="name">市场邮箱</p>
+                                    <p class="phone">pyk@phxinfo.com.cn</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <div class="imgs">
+                                    <img src='{ms:global.host/}/{ms:global.style/}/images/1463.png' alt=""/>
+                                </div>
+                                <div class="rText">
+                                    <p class="name">客服微信</p>
+                                    <p class="phone">小易（phxinfo）</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+        <#include "right.html" />
+        <Modal ref="childModal" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=dpYUGNcGjk0Kx0p3o8zR7z3QI53HuGEc&s=1"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script>
+    const vum = new Vue({
+        el: '#app',
+        mixins:[mixin],
+        components:{
+            Modal
+        },
+        data() {
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                page: {
+                    //当前页数
+                    pageNo: 1,
+                    //每页文章条数
+                    pageSize: 9,
+                    //页数总数
+                    pageTotal: 0,
+                    //内容总数
+                    contentCount: 0
+                }
+            }
+        },
+        methods: {
+            changePage(e) {
+
+            }
+        },
+    })
+
+    var pointer = new BMap.Point(116.370075,39.979172);
+    var hospitalName = "北京凤凰世纪科技有限公司";
+    var hospitalAddr = "北京市海淀区花园路13号院";
+    var map = new BMap.Map("localcontainer");
+    var hosName = '北京凤凰世纪科技有限公司';
+    var options = {
+        title: hosName, //标题
+        width: 300, //宽度
+        height: 24, //高度
+        panel: "panel", //检索结果面板
+        enableAutoPan: true, //自动平移
+        searchTypes: [
+            BMAPLIB_TAB_TO_HERE, //到这里去
+            BMAPLIB_TAB_FROM_HERE //从这里出发
+        ]
+    };
+    var searchInfoWindow = new BMapLib.SearchInfoWindow(map, hospitalAddr, options);
+    var marker = new BMap.Marker(pointer);
+    // marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 动画--弹跳
+    map.enableScrollWheelZoom();
+    map.addControl(new BMap.NavigationControl());
+    map.addControl(new BMap.MapTypeControl({
+        mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
+    }));
+    init(pointer);
+    marker.addEventListener('click', function () {
+        searchInfoWindow.open(marker);
+    });
+
+    resetMap.prototype = new BMap.Control();
+    resetMap.prototype.initialize = function (map) {
+        var div = document.createElement("div");
+        div.appendChild(document.createTextNode("返回"));
+        div.style = "box-shadow:rgba(0, 0, 0, 0.34902) 2px 2px 3px;border:1px solid #008059;background:#009d6d;padding: 2px 6px;font-size: 12px;line-height:1.3em; border-radius:3px;color:#fff;cursor:pointer";
+        div.onclick = function (e) {
+            map.clearOverlays();
+            init(pointer);
+        }
+        map.getContainer().appendChild(div);
+        return div;
+    }
+    map.addControl(new resetMap());
+
+    function resetMap() {
+        this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+        this.defaultOffset = new BMap.Size(90, 10);
+    }
+
+    function init(pointer) {
+        map.centerAndZoom(pointer, 16);
+        map.addOverlay(marker);
+        map.panBy(415, 292);//中心点偏移多少像素（width,height）为div 宽高的一半;
+        setTimeout(()=>{
+            searchInfoWindow.open(marker);
+        },300)
+    }
+    // 搜索周边
+    var LocalSearch = new BMap.LocalSearch(map, {
+        renderOptions: {
+            map: map,
+            panel: "resultList"
+        }
+    });
+    $('#mapSearch a').click(function () {
+        var searchContent = $(this).attr('data-tit');
+        var circle = new BMap.Circle(pointer, 1000, {
+            fillColor: "#333",
+            strokeWeight: 1,
+            fillOpacity: 0.3,
+            strokeOpacity: 0.3
+        });
+        map.addOverlay(circle);
+        LocalSearch.searchNearby(searchContent, pointer, 1000);
+        $(".map-search-result").show();
+    });
+    $('#switch').click(function () {
+        $("#resultList").toggle('fast');
+    }); 
+</script>
+
+</html>

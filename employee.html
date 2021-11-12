@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300">
+    <title>山西省中医院 员工版</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+</head>
+<style>
+    .wrap .container .center{
+        width: 1230px;
+        margin: auto;
+    }
+    .wrap .container{
+        /* width: 100%;
+        height: 871px; */
+        padding: 50px 0;
+        background: url('{ms:global.host/}/{ms:global.style/}/images/yg_bg.jpg') no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        background-size: cover;
+    }
+    .wrap .container .center .list_box{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .wrap .container .center .list_box .box{
+        width: 223px;
+        height: 223px;
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        background: url('{ms:global.host/}/{ms:global.style/}/images/bg_c.jpg') no-repeat;
+        position: relative;
+        opacity: 0;
+        animation:mymove .5s infinite;
+        animation-iteration-count:1;
+        animation-fill-mode:forwards;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .wrap .container .center .list_box .box:nth-child(2){
+        animation:mymove .8s infinite;
+        animation-iteration-count:1;
+        animation-fill-mode:forwards;
+    }
+    .wrap .container .center .list_box .box:nth-child(3){
+        animation:mymove 1.1s infinite;
+        animation-iteration-count:1;
+        animation-fill-mode:forwards;
+    }
+    .wrap .container .center .list_box .box:nth-child(4){
+        animation:mymove 1.4s infinite;
+        animation-iteration-count:1;
+        animation-fill-mode:forwards;
+    }
+    .wrap .container .center .list_box .box:nth-child(5){
+        animation:mymove 1.7s infinite;
+        animation-iteration-count:1;
+        animation-fill-mode:forwards;
+    }
+    .wrap .container .center .list_box .box:nth-child(6){
+        animation:mymove 1.9s infinite;
+        animation-iteration-count:1;
+        animation-fill-mode:forwards;
+    }
+    .wrap .container .center .list_box .box:nth-child(7){
+        animation:mymove 2s infinite;
+        animation-iteration-count:1;
+        animation-fill-mode:forwards;
+    }
+    .wrap .container .center .list_box .box:nth-child(8){
+        animation:mymove 2.1s infinite;
+        animation-iteration-count:1;
+        animation-fill-mode:forwards;
+    }
+    @keyframes mymove {
+        from {bottom:-30px;opacity: 0;}
+        to {bottom:0px;opacity: 1;}
+    }
+    .wrap .container .center .list_box .box_title img{
+        margin: 0 auto;
+        display: block;
+    }
+    .wrap .container .center .list_box .box_title p {
+        font-size: 22px;
+        color: #fff;
+        font-weight: 500;
+        text-align: center;
+        margin-top: 20px;
+    }
+    .wrap .container .center .list_box .box_title{
+        transition: transform 0.8s ease 0s;
+        transform: scale(1);
+    }
+    .wrap .container .center .list_box .box:hover .box_title{
+        transition: transform 0.8s ease 0s;
+        transform: scale(1.1);
+    }
+    a{
+        text-decoration: none!important;
+    }
+</style>
+<body>
+    <div class="wrap" id="app" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="container">
+            <div class="center">
+                <ul class="list_box">
+                    <li class="box">
+                        <a href="http://39.100.209.170:9006/secur/signin.aspx" target="_blank">
+                            <div class="box_title">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yg_OA.png" alt="">
+                                <p>OA系统</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box">
+                        <a href="http://202.97.134.70:8091/Login.aspx" target="_blank">
+                            <div class="box_title">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yg_telemedicine.png" alt="">
+                                <p>远程医疗</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box">
+                        <a href="http://sxzyy.dayi100.com/" target="_blank">
+                            <div class="box_title">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yg_libray.png" alt="">
+                                <p>电子图书馆</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box">
+                        <a href="#">
+                            <div class="box_title">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yg_database.png" alt="">
+                                <p>中医药数据平台</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box">
+                        <a href="#">
+                            <div class="box_title">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yg_GCP.png" alt="">
+                                <p>GCP中心</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box">
+                        <a href="#">
+                            <div class="box_title">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yg_scientific.png" alt="">
+                                <p>科研信息平台</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box">
+                        <a href="#">
+                            <div class="box_title">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yg_master.png" alt="">
+                                <p>研究生部</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="box">
+                        <a href="#">
+                            <div class="box_title">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/yg_recruit.png" alt="">
+                                <p>招聘系统</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+    $(function(){
+        $('.spacing li').eq(0).find('span').removeClass('active');
+        $('.header_child #edition .back_url').removeClass('active');
+        $('.header_child #edition .back_url').eq(1).addClass('active');
+        $('.bottomBack').hide();
+        function getUrlParam(key) {
+            // 获取参数
+            var url = window.location.search;
+            // 正则筛选地址栏
+            var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+            // 匹配目标参数
+            var result = url.substr(1).match(reg);
+            //返回参数值
+            return result ? decodeURIComponent(result[2]) : null;
+        }
+    })
+</script>
+</html>

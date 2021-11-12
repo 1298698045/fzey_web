@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/doctorDetail.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+
+        <div class="center">
+            <div class="Breadcrumb">
+                <span>您现在的位置:  </span>
+                <span class="black" @click="goto('{ms:global.url/}/home.html')">首页 ></span>
+                {ms:channel type='self' typeid='1400724656644583425'}
+                <span class="black" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">科室导航 ></span>
+                {/ms:channel}
+                <span class="black" @click="handleMoreDoctor()">{{info.departmentName}} ></span>
+                <span>详情</span>
+            </div>
+            <div class="content">
+                <div class="box_wrap">
+                    <div class="l_box">
+                        <img :src="info.portrait" alt="">
+                    </div>
+                    <div class="r_box">
+                        <div class="rowTitle">
+                            <p class="name">{{info.name}}</p>
+                            {ms:channel type='self' size=1}
+                            <p class="moreText" @click="handleMoreDoctor">
+                                查看科室更多医生
+                            </p>
+                            {/ms:channel}
+                        </div>
+                        <div class="block">
+                            <div class="left_cont">
+                                <div class="row" v-if="info.departmentId">
+                                    <p class="label">科　　室：</p>
+                                    <p class="val">{{info.departmentName}}</p>
+                                </div>
+                                <div class="row" v-if="info.technicalTitle">
+                                    <p class="label">职　　称：</p>
+                                    <p class="val">{{info.technicalTitle}}</p>
+                                </div>
+                                <div class="row" v-if="info.position">
+                                    <p class="label">职　　务：</p>
+                                    <p class="val">{{info.position}}</p>
+                                </div>
+                                <div class="row" v-if="info.techingPost">
+                                    <p class="label">教学任职：</p>
+                                    <p class="val">{{info.techingPost}}</p>
+                                </div>
+                                <div class="row" v-if="info.goodAt">
+                                    <p class="label">擅　　长：</p>
+                                    <p class="val">{{info.goodAt}}</p>
+                                </div>
+                            </div>
+                            <div class="right_box">
+                                <div class="rowColumn">
+                                    <div class="box">
+                                        <p>预约挂号</p>
+                                    </div>
+                                    {ms:channel type='self'  typeid='1403306687218151426'}
+                                    <div class="box" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                                        <p>出诊信息</p>
+                                    </div>
+                                    {/ms:channel}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="rowBox">
+                    <p class="name">专家简介</p>
+                    <div class="cont">
+                        <p class="indent" v-for="item in info.infoArr">{{item}}</p>
+                    </div>
+                </div>
+                <div class="info">
+                    <p class="name">出诊信息</p>
+                    <!-- <p class="hr"></p>
+                    <p class="moreText">
+                        更多查看
+                    </p> -->
+                </div>
+                <div class="blockWrap">
+                    <div class="top_back"></div>
+                    <div class="cont_wrap">
+                        <table class="table">
+                            <thead>
+                                <tr class="tableTr">
+                                    <th width="60">时间</th>
+                                </tr>
+                            </thead>
+                            <tbody class="tbody">
+                                <tr class="dataRow AM">
+                                    <td>上午</td>
+                                </tr>
+                                <tr class="dataRow PM">
+                                    <td>下午</td>
+                                </tr>
+                            </tbody>
+                            
+                        </table>
+                    </div>
+                    <div class="bottom_back"></div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '1400724656644583425',
+            info:{},
+            departName:''
+        },
+        mixins: [mixin],
+        id:"",
+        methods: {
+            list: function() {
+                var that = this
+                ms.http.get("/cms/expert/get.do", Object.assign({}, {
+                    id: that.id
+                }, '')).then(function(res) {
+                    console.log('res:',res);
+                    that.info = res.data;
+                    let name = that.info.name.split('_');
+                    if(name.length>1){
+                        that.info.name = name[0];
+                    }
+                    that.info.infoArr = that.info.introduce.split('\n');
+                    if(that.info.portrait){
+                        var img = JSON.parse(that.info.portrait);
+                        if(img.length>0){
+                            that.info.portrait = '{ms:global.host/}'+img[0].url
+                        }
+                    }
+                }).catch(function(err) {
+                    console.error('error:', err)
+                })
+            },
+            
+            getUrlParam(key) {
+                // 获取参数
+                var url = window.location.search;
+                // 正则筛选地址栏
+                var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+                // 匹配目标参数
+                var result = url.substr(1).match(reg);
+                //返回参数值
+                return result ? decodeURIComponent(result[2]) : null;
+            },
+            handleMoreDoctor(){
+                this.goto("{ms:global.url/}"+ this.info.departmentPath)
+            }
+        },
+        mounted: function() {
+            this.id = this.getUrlParam('id');
+            this.list()
+        }
+    })
+
+    $(function(){
+        $('.bottomBack').hide();
+    })
+</script>
+<script type="text/javascript" defer>
+    window.onload = function(){
+        let date = new Date();
+        let yy = date.getFullYear();
+        let mm = date.getMonth()+1;
+        let dd = date = date.getDate();
+        // let currenTime = `${yy}-${mm}-${dd}`
+        let currenTime = yy+'-'+mm+'-'+dd;
+        let today = new Date().getTime()
+        let lastDay = getTimeByDay(16) //获取30天后的日期
+        let lastTime = formatTime(lastDay)
+
+        console.log('lastTime:',lastTime);
+         /* 
+        num 获取当天多少天后的日期
+        */
+        function getTimeByDay(num) {
+            return today + 60 * 60 * 1000 * 24 * num;
+        }
+
+        function formatTime(time) {
+            //new Date(time).toISOString()    => 2019-02-23T08:40:35.825Z
+            return new Date(time).toISOString().split('T')[0];
+        }
+
+
+        function getDayAll(starDay, endDay) {
+        
+        　　 var arr = [];
+            var dates = [];
+        
+            // 设置两个日期UTC时间
+        　　　var db = new Date(starDay.replace(/-/g,'/'));
+        　　　var de = new Date(endDay.replace(/-/g,'/'));
+        
+            // 获取两个日期GTM时间
+        　　　var s = db.getTime() - 24 * 60 * 60 * 1000;
+        　　　var d = de.getTime() - 24 * 60 * 60 * 1000;
+        
+            // 获取到两个日期之间的每一天的毫秒数
+        　　　for (var i = s; i <= d;) {
+        　　　　　　i = i + 24 * 60 * 60 * 1000;
+                arr.push(parseInt(i))
+        　　　}
+            
+            var week = ['周日','周一','周二','周三','周四','周五','周六'];
+            // 获取每一天的时间  YY-MM-DD
+            for( var j in arr ){
+                var time = new Date(arr[j]);
+                var year = time.getFullYear(time);
+                var mouth = (time.getMonth() + 1)>=10?(time.getMonth() + 1):('0'+(time.getMonth() + 1));
+                var day = time.getDate()>=10?time.getDate():('0'+time.getDate());
+                var weekDay = week[time.getDay()];
+                console.log('weekDay',weekDay)
+                var YYMMDD = year + '-' + mouth + '-' + day;
+                var MMDD = mouth + '-' + day;
+                dates.push({
+                    weekDay,
+                    MMDD,
+                    YYMMDD
+                })
+            }
+            
+            return dates
+        }
+    
+        var dataAll = getDayAll(currenTime,lastTime);
+        console.log(dataAll)
+        
+        var str = '';
+        for(var i = 0; i < dataAll.length; i++){
+            
+            str += "<th>";
+            str += "<p>"+dataAll[i].MMDD+"</p>";
+            str += "<p>"+dataAll[i].weekDay+"</p>";
+            str += "</th>";
+        }
+        $('.tableTr').append(str);
+        var strAM = '';
+        var mathAm = getRandomArrayElements(dataAll, 4);
+        function getRandomArrayElements(arr, count) {
+            var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+            while (i-- > min) {
+                index = Math.floor((i + 1) * Math.random());
+                temp = shuffled[index];
+                shuffled[index] = shuffled[i];
+                shuffled[i] = temp;
+            }
+            return shuffled.slice(min);
+        }
+        for(var i=0; i<dataAll.length; i++){
+            for(var j=0; j<mathAm.length; j++){
+                if(dataAll[i].MMDD==mathAm[j].MMDD){
+                    dataAll[i].text = '有号';
+                }
+            }
+        }
+        console.log(dataAll);
+        for(let i = 0; i < dataAll.length; i++){
+            if(dataAll[i].text){
+                strAM+="<td class='text'>";
+                strAM+=dataAll[i].text;
+                strAM+="</td>";
+            }else {
+                strAM+="<td></td>";
+            }
+        }
+        $('.AM').append(strAM);
+        $('.PM').append(strAM);
+        $('.text').one('click',function(){
+            // window.open('jytdz.jin1.com.cn:8888/?hospitalCode=sxszyy&openId=oCTxTwz9RKlm8UNAJTqC2fTxkPfQ ');
+        })
+    }
+</script>
+</html>

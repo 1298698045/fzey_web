@@ -1,0 +1,92 @@
+/* 交通路线 */
+.traffic{
+    margin-top: 40px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .traffic .left_box{
+    width: 840px;
+    height: 594px;
+    background: url('../..//images/location_back.png') no-repeat;
+    background-size: 100% 100%;
+    /* padding: 5px; */
+    /* box-sizing: border-box; */
+  }
+  .traffic .left_box .imgs{
+    width: 830px;
+    height: 584px;
+    margin: 5px auto;
+  }
+  .traffic .left_box img{
+    width: 100%;
+    height: 100%;
+    vertical-align: middle;
+  }
+  .traffic .right_box{
+    width: 406px;
+    height: 595px;
+    background: url('../../images/location_right_back.png') no-repeat;
+    background-size: 100% 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+  .traffic .right_box .trafficContent{
+    display: none;
+  }
+  .traffic .right_box .tabs{
+    width: 100%;
+    margin-top: 40px;
+    display: flex;
+    /* justify-content: space-around; */
+  }
+  .traffic .right_box .tabs .tab{
+    width: 100px;
+    height: 41px;
+    line-height: 41px;
+    font-size: 14px;
+    color: #086252;
+    text-align: center;
+    background: url('../../images/location_tab.png') no-repeat;
+    margin-right: 18px;
+    cursor: pointer;
+  }
+  .traffic .right_box .tabs .marginNo{
+    margin-right: 0!important;
+  }
+  .traffic .right_box .tabs .tab.active{
+    color: #feffff;
+    background: url('../../images/location_tab_active.png') no-repeat;
+  }
+  .traffic .right_box .address{
+    margin-top: 38px;
+  }
+  .traffic .right_box .address .icon_text{
+    display: flex;
+    align-items: center;
+  }
+  .traffic .right_box .address .icon_text .icon{
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+  }
+  .traffic .right_box .address .icon_text .icon.iconOne{
+    background: url('../../images/location_icon1.png') no-repeat;
+  }
+  .traffic .right_box .address .icon_text .icon.iconTwo{
+    background: url('../../images/location_icon2.png') no-repeat;
+  }
+  .traffic .right_box .address .icon_text .icon.iconThree{
+    background: url('../../images/location_icon3.png') no-repeat;
+  }
+  .traffic .right_box .address .icon_text .text{
+    font-size: 16px;
+    color: #333333;
+    font-weight: bold;
+    margin-left: 16px;
+  }
+  .traffic .right_box .address .row-text{
+    font-size: 16px;
+    color: #333333;
+    margin-left: 32px;
+    line-height: 2;
+  }

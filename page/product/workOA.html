@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>北京凤凰世纪科技 - 协同办公管理系统（OA）</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/header.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/aside.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/home.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/static/iconfont/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css" />
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/tab.png" type="image/x-icon" />
+    <style>
+        .header.active{
+            z-index: -1;
+        }
+        .el-dialog__header {
+            text-align: center;
+            line-height: 48px;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 0;
+        }
+
+        .el-dialog__body {
+            padding: 0;
+        }
+
+        .modalContent {
+            padding: 20px;
+        }
+
+        .modalContent .desc {
+            font-size: 14px;
+            color: #626775;
+        }
+
+        .form_item {
+            margin-top: 10px;
+        }
+
+        .el-dialog__footer {
+            text-align: center;
+        }
+
+        .submitBtn {
+            background: rgb(179, 30, 35);
+            border: none;
+            width: 400px;
+            height: 40px;
+            border-radius: 3px;
+        }
+
+        .submitBtn:hover {
+            background: rgb(179, 30, 35);
+            border-color: transparent !important;
+            color: #fff !important;
+        }
+
+        .new_banner {
+            width: 100%;
+            height: 600px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/banner_1.jpg') no-repeat;
+            position: relative;
+            z-index: 1;
+        }
+
+        .new_banner .bannerText {
+            width: 1200px;
+            margin: 0 auto;
+            padding-top: 102px;
+        }
+
+        .new_banner .bannerText .bannerText_child {
+            width: 1200px;
+            margin: auto;
+            z-index: 999;
+            text-align: left;
+        }
+
+        .new_banner .bannerText .bannerText_child .title {
+            font-size: 44px;
+            font-weight: bold;
+            color: #ffffff;
+        }
+
+        .new_banner .bannerText .bannerText_child .desc {
+            color: #ffffff;
+            font-size: 20px;
+        }
+
+        .new_banner .bannerText .bannerText_child .btn {
+            width: 160px;
+            height: 45px;
+            line-height: 45px;
+            border: 1px solid #fff;
+            margin-top: 40px;
+            border-radius: 3px;
+            font-size: 18px;
+            text-align: center;
+            color: #ffffff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .new_banner .bannerText .bannerText_child .btn:hover {
+            background: #4f98ff;
+            color: #ffffff;
+            border: 1px solid #4f98ff;
+        }
+
+        .nav_wrap {
+            border-bottom: 1px solid #e2e3e5;
+            box-shadow: 0px 1px 0px 0px rgba(228, 228, 228, 1);
+            z-index: 9999;
+        }
+
+        .nav_wrap.active {
+            width: 100%;
+            position: sticky;
+            top: 0;
+            z-index: 99999;
+            background: #fff;
+        }
+
+        .nav_wrap .nav {
+            width: 1200px;
+            margin: auto;
+            display: flex;
+        }
+
+        .nav_wrap .nav p {
+            margin: 0;
+            padding: 0;
+            /* //transition: all 0.4s ease-in-out; */
+        }
+
+        .nav_wrap .nav .tab {
+            flex: 1;
+            /* //width: 220px; */
+            font-size: 16px;
+            color: #333333;
+            cursor: pointer;
+            text-align: center;
+            padding: 18px 0;
+        }
+
+        .nav_wrap .nav .active {
+            /* //width: 220px; */
+            flex: 1;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 18px 0;
+            border-bottom: 3px solid #4f98ff;
+            box-sizing: border-box;
+            color: #4f98ff;
+            text-align: center;
+        }
+
+
+
+        .container {
+            height: auto;
+        }
+
+        .container .normal {
+            margin: 70px auto;
+        }
+
+        .container .normal .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #000;
+            line-height: 56px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container .normal .text {
+            font-size: 14px;
+            text-align: center;
+            color: #626775;
+        }
+
+        .container .normal .row_column {
+            max-width: 1200px;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .container .normal .row_column .rbox {
+            width: 378px;
+            border: 1px solid #e9ebf3;
+            padding: 30px 25px;
+            display: flex;
+            margin-top: 33px;
+        }
+
+        .container .normal .row_column .rbox .l_img {
+            width: 60px;
+            height: 60px;
+        }
+
+        .container .normal .row_column .rbox .l_img img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .container .normal .row_column .rbox .r_cont_box {
+            flex: 1;
+            margin-left: 30px;
+        }
+
+        .container .normal .row_column .rbox .name {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2f3342;
+        }
+
+        .container .normal .row_column .rbox .desc {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #474e5f;
+        }
+
+        .container .normal .content {
+            max-width: 1200px;
+            width: 100%;
+            margin: 75px auto;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .container .normal .content .i_item {
+            width: 23%;
+            background: #f6f6f9;
+            padding: 10px 29px 100px 10px;
+            margin-bottom: 40px;
+        }
+
+        .container .normal .content .i_item .tag {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #b31e23;
+        }
+
+        .container .normal .content .i_item .name {
+            font-size: 20px;
+            color: #2f3342;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-left: 13px;
+        }
+
+        .container .normal .content .i_item .item_text {
+            font-size: 16px;
+            color: #626775;
+            margin-left: 13px;
+        }
+
+        .container .normal .content .item_box:hover .position {
+            background: rgba(0, 0, 0, .4);
+        }
+
+        .container .normal .content .item_box:hover .position .name {
+            color: #fff;
+            margin-top: 50px;
+        }
+
+        .container .normal .content .item_box:hover .position .desc {
+            display: block;
+        }
+
+        .container .normal .content .item_box {
+            width: 23%;
+            height: 320px;
+            background: #ccc;
+            text-align: center;
+            position: relative;
+        }
+
+        .container .normal .content .item_box .position {
+            width: 100%;
+            height: 100%;
+            padding: 0 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+
+        .container .normal .content .item_box .position .name {
+            text-align: center;
+            margin-top: 107px;
+            font-weight: bold;
+            font-size: 20px;
+            transition: all 0.2s linear;
+        }
+
+        .container .normal .content .item_box .position .border {
+            display: inline-block;
+            width: 30px;
+            height: 3px;
+            background: #4f98ff;
+            margin-top: 10px;
+        }
+
+        .container .normal .content .item_box .position .desc {
+            color: #fff;
+            display: none;
+            text-align: left;
+            transition: all 0.2s linear;
+            font-size: 16px;
+        }
+
+        .container .normal .content .box_wrap {
+            display: flex;
+            justify-content: center;
+            margin: auto;
+        }
+
+        .container .normal .content .box_wrap .item_box:hover {
+            box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.1);
+            z-index: 999;
+            cursor: pointer;
+        }
+        .container .normal .content .item_box:nth-child(1){
+            width: 23%;
+            height:320px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/2.1_a_tu_1.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .container .normal .content .item_box:nth-child(2){
+            width: 23%;
+            height:320px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/2.1_a_tu_2.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .container .normal .content .item_box:nth-child(3){
+            width: 23%;
+            height:320px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/2.1_a_tu_3.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .container .normal .content .item_box:nth-child(4){
+            width: 23%;
+            height:320px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/2.1_a_tu_4.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .container .normal .content .box_wrap .item_box:hover .back {
+            display: none;
+        }
+
+        .container .normal .content .box_wrap .item_box:hover .back_active {
+            display: block;
+        }
+
+        .container .normal .content .box_wrap .item_box {
+            width: 200px;
+            height: 200px;
+            background: #fff;
+        }
+
+        .container .normal .content .box_wrap .item_box .back_active {
+            width: 103px;
+            height: 103px;
+            margin: 0 auto;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .container .normal .content .box_wrap .item_box .back_active .imgs {
+            width: 100%;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .container .normal .content .box_wrap .item_box .back {
+            width: 103px;
+            height: 103px;
+            margin: 0 auto;
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container .normal .content .box_wrap .item_box .back .imgs {
+            width: 46px;
+            height: 46px;
+            vertical-align: middle;
+        }
+
+        .container .normal .content .box_wrap .item_box .text {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2f3342;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+
+
+        .container .normal .link {
+            text-align: center;
+            color: #b31e23;
+            cursor: pointer;
+        }
+
+
+
+        .container .shadow {
+            padding: 33px 40px;
+            background: #f6f6f9;
+        }
+
+        .container .shadow .title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #000;
+            line-height: 56px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container .shadow .text {
+            font-size: 14px;
+            text-align: center;
+            color: #626775;
+        }
+        #yy{
+            padding: 33px 40px;
+            background: #f6f6f9;
+        }
+        .yingyong{
+          max-width: 1200px;
+          width: 100%;
+          margin: 0 auto;
+          display: flex;
+          justify-content: space-around;
+        }
+          .yingyong  .imgs{
+            width: 605px;
+            height: 400px;
+          }
+            .yingyong  .imgs   img{
+              width: 100%;
+              height: 100%;
+            }
+          .yingyong .r_text{
+            width: 480px;
+            margin-left: 129px;
+            padding-top: 30px;
+          }
+            .yingyong .r_text .box_cont:first-child{
+              margin: 0;
+            }
+            .yingyong .r_text .h3_title{
+              font-size: 40px;
+              font-weight: bold;
+              color: #2f3342;
+            }
+            .yingyong .r_text .cont{
+              font-size: 16px;
+              color: #626775;
+            }
+            .yingyong .r_text  .apply{
+              width: 148px;
+              height: 48px;
+              line-height: 48px;
+              text-align: center;
+              font-size: 14px;
+              color: #2f3342;
+              border: 1px solid #2f3342;
+              margin-top: 60px;
+            }
+            .yingyong .r_text .apply:hover{
+              color: #4f98ff;
+              border: 1px solid #4f98ff;
+              cursor: pointer;
+            }
+            .yingyong .r_text .box_cont{
+              margin-top: 52px;
+            }
+            .yingyong .r_text .box_cont  .img_title{
+            font-size: 20px;
+            color: #2f3342;
+            font-weight: bold;
+            }
+            .yingyong .r_text .box_cont  .img_title img{
+                width: 24px;
+                height: 24px;
+                margin-right: 5px;
+            }
+            .yingyong .r_text .box_cont  .desc{
+            font-size: 16px;
+            color: #626775;
+            margin-top: 14px;
+            }
+
+        .container .shadow .box_cont:first-child {
+            margin: 0;
+        }
+
+        .container .shadow .h3_title {
+            font-size: 40px;
+            font-weight: bold;
+            color: #2f3342;
+        }
+
+        .container .shadow .cont {
+            font-size: 16px;
+            color: #626775;
+        }
+
+        .container .shadow .apply {
+            width: 148px;
+            height: 48px;
+            line-height: 48px;
+            text-align: center;
+            font-size: 14px;
+            color: #2f3342;
+            border: 1px solid #2f3342;
+            margin-top: 60px;
+        }
+
+        .container .shadow .apply:hover {
+            color: #4f98ff;
+            border: 1px solid #4f98ff;
+            cursor: pointer;
+        }
+
+        .container .shadow .box_cont {
+            margin-top: 52px;
+        }
+
+        .container .shadow .box_cont .img_title {
+            font-size: 20px;
+            color: #2f3342;
+            font-weight: bold;
+        }
+
+        .container .shadow .box_cont .img_title img {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+        }
+
+        .container .shadow .box_cont .desc {
+            font-size: 16px;
+            color: #626775;
+            margin-top: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper" id="app">
+        <#include "head.html" />
+        <div class="new_banner">
+            <div class="bannerText">
+                <div class="bannerText_child">
+                    <p class="title">协同办公管理系统（OA）</p>
+                    <p class="desc">解决全周期、全领域办公需求
+                    </p>
+                    <p class="desc" style="margin-top: 20px;">基于平台化的产品架构，随需定制功能应用</p>
+                    <p class="btn" @click="handleOpen">
+                        申请试用
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="nav_wrap" :class="{active:isFixed}" ref="anchor">
+                <div class="nav">
+                    <p v-for="(item,index) in productList" :key="index" class="tab" :class="{active:index==tabIdx}"
+                        @click="handleTab(index)">{{item.name}}</p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="normal" ref="xq" id="xq">
+                    <h3 class="title">需求分析</h3>
+                    <p class="text">基于人性化管理的人力资源平台，统一规划、统一建设、统一投入、统一运营</p>
+                    <div class="content">
+                        <div class="i_item">
+                            <p class="tag"></p>
+                            <h3 class="name">
+                                审批效率低
+                            </h3>
+                            <p class="item_text">整合所有与人相关的信息数据</p>
+                        </div>
+                        <div class="i_item">
+                            <p class="tag"></p>
+                            <h3 class="name">
+                                缺乏沟通渠道
+                            </h3>
+                            <p class="item_text">人员数据分散，不集中，不统一，部门间数据不协作</p>
+                        </div>
+                        <div class="i_item">
+                            <p class="tag"></p>
+                            <h3 class="name">
+                                信息缺乏
+                            </h3>
+                            <p class="item_text">数据收集 </p>
+                        </div>
+                        <div class="i_item">
+                            <p class="tag"></p>
+                            <h3 class="name">
+                                缺乏科学依据、平台
+                            </h3>
+                            <p class="item_text">系统间数据不联通</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="normal" ref="fa" id="fa">
+                    <h3 class="title">方案思路</h3>
+                    <p class="text">基于互联网+现代人力资源管理的建设思路，以人为基础，建设“一个平台、多处应用系统”，实现部门数据协作共享、系统之间互联互通。</p>
+                    <div class="content">
+                        <div class="item_box">
+                            <div class="position">
+                                <p class="name">360全景</p>
+                                <span class="border"></span>
+                                <p class="desc">
+                                    搭建全医院流程协作、移动办公平台 ，实现随时随地办公
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item_box">
+                            <div class="position">
+                                <p class="name">流程协作化</p>
+                                <span class="border"></span>
+                                <p class="desc">
+                                    构建医院知识、通知与公告、规章、新闻等内容发布平台与门户、建立全院知识库，
+                                    让OA成为全院职工了解医院动态平台
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item_box">
+                            <div class="position">
+                                <p class="name">电子化</p>
+                                <span class="border"></span>
+                                <p class="desc">
+                                    构建医院统一沟通平台、通过APP、邮件、AM等客户端形成快速沟通，实现人与人，
+                                    职员与领导，科室与科室之间沟通无障碍
+                                </p>
+                            </div>
+                        </div>
+                        <div class="item_box">
+                            <div class="position">
+                                <p class="name">互联互通</p>
+                                <span class="border"></span>
+                                <p class="desc">
+                                    构建综合(BI)数据平台，展现医院经营、OA、HR、HIS等系统各类报表，形成决策支持
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="shadow" ref="yy" id="yy">
+                    <div class="yingyong">
+                        <div class="imgs">
+                            <img src="{ms:global.host/}/{ms:global.style/}/images/2.1_b_img.png" alt="" />
+                        </div>
+                        <div class="r_text">
+                            <h3 class="h3_title">应用优势</h3>
+                            <p class="cont">
+                                围绕客户管理、HR管理、费用管理、项目管理、合同管理、资产管理等应用的全场景，连同CAP协同业务定制平台，M3企业移动协同管理平台提供自定义的业务管理应用，支持多端运行，数据统一管理，实现伴随业务的发生，各角色随时随地在移动端完成各项业务操作
+                            </p>
+                            <p class="apply" @click="handleOpen">申请试用</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="normal" ref="gn" id="gn">
+                    <h3 class="title">产品功能</h3>
+                    <p class="text">最专业的医院OA系统</p>
+                    <div class="row_column">
+                        <div v-for="(item,index) in workList" class="rbox" :key="index">
+                            <div class="l_img">
+                                <img :src="item.img" alt="" />
+                            </div>
+                            <div class="r_cont_box">
+                                <p class="name">{{item.name}}</p>
+                                <p class="desc">
+                                    {{item.desc}}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="normal" ref="kh" id="kh">
+                    <h3 class="title">下载关注</h3>
+                    <div class="content">
+                        <div class="box_wrap">
+                            <div class="item_box">
+                                <div class="back">
+                                    <img class="imgs" src='{ms:global.host/}/{ms:global.style/}/images/1_img_15.png' alt="" />
+                                </div>
+                                <div class="back_active">
+                                    <img class="imgs" src='{ms:global.host/}/{ms:global.style/}/images/apple_link.png' alt="" />
+                                </div>
+                                <div class="text">苹果版</div>
+                            </div>
+                            <div class="item_box">
+                                <div class="back">
+                                    <img class="imgs" src='{ms:global.host/}/{ms:global.style/}/images/1_img_16.png' alt="" />
+                                </div>
+                                <div class="back_active">
+                                    <img class="imgs" src='{ms:global.host/}/{ms:global.style/}/images/android.png' alt="" />
+                                </div>
+                                <div class="text">安卓版</div>
+                            </div>
+                            <div class="item_box">
+                                <div class="back">
+                                    <img class="imgs" src='{ms:global.host/}/{ms:global.style/}/images/1_img_17.png' alt="" />
+                                </div>
+                                <div class="back_active">
+                                    <img class="imgs" src='{ms:global.host/}/{ms:global.style/}/images/wechat.jpg' alt="" />
+                                </div>
+                                <div class="text">微信小程序端</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+        <#include "right.html" />
+        <Modal ref="childModal" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script>
+    const vum = new Vue({
+        el: '#app',
+        mixins:[mixin],
+        components:{
+            Modal
+        },
+        data() {
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                activeTab: 0,
+                productList: [
+                    {
+                        name:'需求分析'
+                    },
+                    {
+                        name:'方案思路'
+                    },
+                    {
+                        name:'应用优势'
+                    },
+                    {
+                        name:'功能模块'
+                    },
+                    {
+                        name:'下载关注'
+                    }
+                ],
+                workList: [
+                    {
+                        img: '{ms:global.host/}/{ms:global.style/}/images/2.1_c_icon_1.png',
+                        name: '人事管理',
+                        desc: '16个人事管理功能应用，建立医护人员技术档案，信息化管理医护人员招聘，灵活的医院排班考勤方式'
+                    },
+                    {
+                        img: '{ms:global.host/}/{ms:global.style/}/images/2.1_c_icon_2.png',
+                        name: '门户',
+                        desc: '整合信息资源，集中展现，方便用户查看；办公人员在权限范围内对门户的模块进行修改或个性化自定义布局'
+                    },
+                    {
+                        img: '{ms:global.host/}/{ms:global.style/}/images/2.1_c_icon_3.png',
+                        name: '会议管理',
+                        desc: '支持会议申请、审批、通知与会人员、会议签到、会议纪要，归档等整个会议进程的管理'
+                    },
+                    {
+                        img: '{ms:global.host/}/{ms:global.style/}/images/2.1_c_icon_4.png',
+                        name: '文件管理',
+                        desc: '管理全院文档，方便知识累积、分享、利用；按科室、部门、项目自定义文档目录；分级权限管理；支持在线查阅；多维度的文件搜索功能'
+                    },
+                    {
+                        img: '{ms:global.host/}/{ms:global.style/}/images/2.1_c_icon_5.png',
+                        name: '流程审批',
+                        desc: '实现院内所有业务流程的集中管控，规范审批过程；支持流程跟踪，监控；支持流程催办；支持附件上传下载'
+                    },
+                    {
+                        img: '{ms:global.host/}/{ms:global.style/}/images/2.1_c_icon_6.png',
+                        name: '公文管理',
+                        desc: '全面实现公文数字化办理，覆盖发文、收文、归档、分发等全周期的管理'
+                    }
+                ],
+                tabIdx: 0,
+                isFixed: false,
+                defaultIndexInfo: [
+                    {index:0, id:'xq'},
+                    {index:1, id: 'fa'},
+                    {index:2, id: 'yy'},
+                    {index:3, id: 'gn'},
+                    {index:4, id: 'kh'}
+                ],
+            }
+        },
+        watch:{
+            isTop(val,old){
+                if(val){
+                    this.tabIdx = 0
+                    $('.header').css('z-index','999')
+                }
+            }
+        },
+        mounted(){
+            window.addEventListener('mousewheel',this.handleScroll)
+        },
+        beforeDestroy() {
+            window.removeEventListener('mousewheel',this.handleScroll)
+        },
+        methods: {
+            handleMouseover(e, item, index) {
+                this.activeTab = index;
+            },
+            handleTab(idx) {
+                this.defaultIndexInfo.map(item=>{
+                    let top = document.getElementById(item.id).offsetTop - 140;
+                    console.log(top);
+                    if(item.index==idx){
+                        window.scrollTo({top: top+10})
+                    }
+                })
+                this.tabIdx = idx;
+                let anchorY = this.$refs.anchor.getBoundingClientRect().top;
+                if(anchorY<=60){
+                    this.isFixed = true;
+                    $('.header').css('z-index','-1')
+                }else {
+                    this.isFixed = false;
+                    $('.header').css('z-index','999')
+                }
+            },
+            handleScroll(e){
+                let anchorY = this.$refs.anchor.getBoundingClientRect().top;
+                if(anchorY<=60){
+                    this.isFixed = true;
+                    $('.header').css('z-index','-1')
+                }else {
+                    this.isFixed = false;
+                    $('.header').css('z-index','999')
+                }
+                let top = e.clientY= 50;
+                let idx = this.defaultIndexInfo.findIndex((item,index)=>{
+                    return top <= this.$refs[item.id].getBoundingClientRect().top;
+                });
+                console.log('idx:', idx)
+                this.tabIdx = idx < 0 ? this.defaultIndexInfo.length-1 : idx;
+            }
+        },
+    })
+
+</script>
+
+</html>

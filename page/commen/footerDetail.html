@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1300px">
+    <title>${field.title}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/characteristicDetail.css">
+    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+</head>
+<body>
+    <div id="app" class="wrap" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="container">
+            <div class="Breadcrumb">
+                <span>您现在的位置:  </span>
+                <span class="black" @click="goto('{ms:global.url/}/home.html')">首页</span>
+                <span> &gt; 详情</span>
+            </div>
+            <div class="content">
+                <div class="top"></div>
+                <div class="centerWrap">
+                    <h1 class="title">${field.title}</h1>
+                    <div class="time_wrap">
+                        <p class="time">
+                            发布时间：${(field.date?string("yyyy-MM-dd"))!} <span>来源：${field.source}</span>点击数： ${field.hit} 次
+                        </p>
+                        <div class="row_right">
+                            <span>分享到：</span>
+                            <a class="bds_tsina" subject="${field.title}" data-cmd="tsina" title="微博"></a>
+                            <a class="bds_qzone" subject="${field.title}" data-cmd="qzone" title="QQ空间"></a>
+                        </div>
+                    </div>
+                    <div class="hr"></div>
+                    <div class="article">
+                        <div class="desc" style="overflow: hidden; visibility: hidden;height: 0;">${field.descrip}</div>
+                        ${field.content}
+                    </div>
+                </div>
+                <div class="bottom"></div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            isArticle: true,
+            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+        },
+        mixins: [mixin],
+        methods: {}
+    })
+    var share_config = {
+        'bdText': $('.title').text(),
+        'bdUrl': location.href,
+        'bdDesc': $('.article .desc').html()
+    };
+    $('.bds_tsina').click(function(){
+        window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + share_config.bdUrl)
+    })
+    $('.bds_qzone').click(function(){
+        window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+share_config.bdUrl+'&title='+share_config.bdText+'&desc='+share_config.bdDesc.slice(0,60))
+    })
+</script>
+</html>
