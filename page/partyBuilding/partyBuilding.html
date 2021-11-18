@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>党建之窗</title>
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/common.css">
+    <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <style>
+        .wrapper .center .content{
+            padding: 40px 0 100px 0;
+        }
+        .wrapper .center .content .section .left_cont{
+            width: 620px;
+            height: 396px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .wrapper .center .content .section .left_cont .box{
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+        .wrapper .center .content .section .left_cont .box.active{
+            display: block;
+        }
+        .wrapper .center .content .section .left_cont img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .wrapper .center .content .section .left_cont .fixed_desc{
+            width: 100%;
+            height: 47px;
+            line-height: 47px;
+            background: rgba(0, 0, 0, .7);
+            position: absolute;
+            bottom: 0;
+            color: #fff;
+            font-size: 16px;
+            padding: 0 14px;
+            box-sizing: border-box;
+        }
+        .wrapper .center .content .section .left_cont .fixed_desc .desc{
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .wrapper .center .content .section .right_cont{
+            width: 620px;
+        }
+        .wrapper .center .content .section .right_cont .panel{
+            padding: 14px;
+            box-sizing: border-box;
+        }
+        .wrapper .center .content .section .right_cont .panel .title{
+            font-size: 18px;
+            color: #333333;
+            font-weight: bold;
+            text-align: left;
+        }
+        .wrapper .center .content .section .right_cont .panel .time{
+            font-size: 14px;
+            color: #999999;
+            padding: 7px 0;
+        }
+        .wrapper .center .content .section .right_cont .panel .article{
+            font-size: 14px;
+            color: #666666;
+            line-height: 1.5;
+            text-indent: 2em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .wrapper .center .content .section .right_cont .panel.active{
+            background: #f2f2f2;
+            cursor: pointer;
+        }
+        .wrapper .center .content .section .right_cont .panel:hover{
+            background: #f2f2f2;
+            cursor: pointer;
+        }
+        .wrapper .center .content .section .right_cont .panel:hover .title{
+            color: #7f0e12;
+        }
+        .wrapper .center .content .more_content{
+            margin-top: 37px;
+        }
+        .wrapper .center .content .more_content .panel_box{
+            margin-bottom: 40px;
+        }
+        .wrapper .center .content .more_content .panel_box .row{
+            width: 620px;
+            height: 71px;
+            line-height: 71px;
+            font-size: 18px;
+            color: #333333;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .wrapper .center .content .more_content .panel_box .row:nth-child(2n){
+            margin-left: 40px;
+        }
+        .wrapper .center .content .more_content .panel_box .row .time{
+            font-size: 14px;
+            color: #999999;
+            padding-right: 20px;
+        }
+        .wrapper .center .content .more_content .panel_box .row:hover .label{
+            color: #7f0e12;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id="app" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <div class="banner">
+                <img src="{ms:global.host/}{ms:global.style/}/images/djzc.jpg" alt="">
+            </div>
+            <div class="content">
+                <div class="section fixedWidth clearfix">
+                    <div class="left_cont fl">
+                        {ms:channel type='son'}
+                        <#assign typeurl=field.typeurl />
+                        {ms:arclist size=3 flag='hot'}
+                        <div class="box" @click="goto('{ms:global.url/}${field.link}')">
+                            <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                            <div class="fixed_desc">
+                                <p class="desc">
+                                    ${field.descrip}
+                                </p>
+                            </div>
+                        </div>
+                        {/ms:arclist}
+                        {/ms:channel}
+                    </div>
+                    <div class="right_cont fr">
+                        {ms:channel type='son'}
+                        <#assign typeurl=field.typeurl />
+                        {ms:arclist size=3 flag='hot'}
+                        <div class="panel" @click="goto('{ms:global.url/}${field.link}')">
+                            <p class="title">
+                                ${field.title}
+                            </p>
+                            <p class="time">
+                                ${field.date?string("yyyy-MM-dd")}
+                            </p>
+                            <p class="article">
+                                ${field.descrip}
+                            </p>
+                        </div>
+                        {/ms:arclist}
+                        {/ms:channel}
+                    </div>
+                </div>
+                <div class="more_content">
+                    <div class="panel_box fixedWidth clearfix">
+                        {ms:channel type='son'}
+                        {ms:arclist}
+                        <div class="row fl">
+                            <span class="time">${field.date?string("yyyy-MM-dd")}</span>
+                            <span class="label">${field.descrip}</span>
+                        </div>
+                        {/ms:arclist}
+                        {/ms:channel}
+                    </div>
+                    {ms:channel type='self' typeid='1460811717586362369'}
+                    <div class="more" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                        查看全部
+                        <i class="iconfont icon-youjiantou"></i>
+                    </div>
+                    {/ms:channel}
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="${base}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script>
+    var app = new Vue({
+        mixins:[mixin],
+        data:function(){
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            }
+        },
+        created:function(){
+        }
+    }).$mount('#app')
+    window.onload = function(){
+        $('.content .section .left_cont .box').eq(0).addClass('active');
+        $('.content .section .right_cont .panel').eq(0).addClass('active');
+        $('.content .section .right_cont .panel').hover(function(){
+            $('.content .section .left_cont .box').removeClass('active');
+            $('.content .section .right_cont .panel').removeClass('active');
+            let idx = $(this).index()
+            $('.content .section .left_cont .box').eq(idx).addClass('active');
+            $(this).addClass('active');
+        })
+    }
+</script>
+</html>

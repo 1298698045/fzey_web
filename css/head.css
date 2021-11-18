@@ -125,7 +125,10 @@
     color: #c0a868;
     cursor: pointer;
 }
-.wrapper .header .header_nav .nav .column.active .content{
+.wrapper .header .header_nav .nav .column.active a{
+    color: #c0a868;
+}
+.wrapper .header .header_nav .nav .column.active:hover .content{
     display: block;
 }
 .wrapper .header .header_nav .nav .column .content{

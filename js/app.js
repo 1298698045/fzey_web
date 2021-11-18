@@ -6,7 +6,8 @@ var mixin = {
             selectMenu: '',
             isGotop:false,
             qrCodeIdx: 0,
-            isTop:true // 是否在页面顶部
+            isTop:true, // 是否在页面顶部
+            isFixed: false
         }
     },
     computed: {
@@ -16,6 +17,7 @@ var mixin = {
     },
     mounted:function() {
         window.addEventListener('scroll',this.handleIsScroll,true)
+        window.addEventListener('scroll',this.handleSroll)
     },
     methods: {
         push: function(path) {
@@ -52,6 +54,14 @@ var mixin = {
                     this.isTop = false;
                 }
             }, 10);
+        },
+        handleSroll:function(e){
+            let top = document.documentElement.scrollTop || document.body.scrollTop;
+            if(top>=140){
+                this.isFixed = true;
+            }else {
+                this.isFixed = false;
+            }
         },
         handleOpen:function(){
             this.$refs.childModal.dialogVisible = true;

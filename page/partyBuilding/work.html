@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/common.css">
+    <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+</head>
+<body>
+    <div class="wrapper" id='app' v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <div class="banner">
+                <img src="{ms:global.host/}{ms:global.style/}/images/yygk_banner.jpg" alt="">
+            </div>
+            <div class="container">
+                <div class="common_nav">
+                    <ul class="common_tabs fixedWidth">
+                        {ms:channel type='son' typeid='1438711587575345153'}
+                        <li class="common_tab" :class="{active : $route.path == '${field.typepath}'}" title="${field.typetitle}" @click="push('${field.typepath}')">${field.typetitle}</li>
+                        {/ms:channel}
+                    </ul>
+                </div>
+                <router-view></router-view>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="${base}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script>
+       var router = new VueRouter({routes:[
+        {ms:channel type='son' typeid='1438711587575345153'}
+        {
+            path: '${field.typepath}',
+            name: '${field.typetitle}',
+            component: {
+                template: '<div class="common_content fixedWidth" style="display: block;">'+
+'                    <ul class="column_list">'+
+'                        <li class="column_item" v-for="item in listData" @click="handleDetail(item)">'+
+'                            <a href="#" class="clearfix">'+
+'                                <p class="name fl">'+
+'                                    {{item.contentTitle}}'+
+'                                </p>'+
+'                                <p class="time fr">'+
+'                                    {{item.contentDatetime}}'+
+'                                </p>'+
+'                            </a>'+
+'                        </li>'+
+'                    <div class="pagePC" v-if="listData.length>0&&listData.length>10">'+
+'                        <el-pagination'+
+'                            background'+
+'                            @current-change="getQueryList"'+
+'                            :page-size="page.pageSize"'+
+'                            prev-text="上一页"'+
+'                            next-text="下一页"'+
+'                            :current-page.sync="page.pageNo"'+
+'                            layout="prev, pager, next, jumper"'+
+'                            :total="page.contentCount">'+
+'                        </el-pagination>'+
+'                    </div>'+
+'                    </ul>'+
+
+'                </div>',
+                mixins:[mixin],
+                data:function(){
+                    return {
+                        page: {
+                            //当前页数
+                            pageNo: 1,
+                            //每页文章条数
+                            pageSize: 10,
+                            //页数总数
+                            pageTotal: 0,
+                            //内容总数
+                            contentCount: 0
+                        },
+                        listData:[]
+                    }
+                },
+                mounted: function() {
+                    this.getQueryList()
+                },
+                methods:{
+                    getQueryList: function(pageCur) {
+                        var that = this
+                        that.page.pageNo = pageCur
+                        ms.http.post("/cms/content/list.do", Object.assign({}, {
+                            categoryId: '${field.typeid}'
+                        }, that.page)).then(function(res) {
+                            that.page.contentCount = res.data.total
+                            that.listData = res.data.rows.map(function(row) {
+                                if (row.contentImg) {
+                                    var img = JSON.parse(row.contentImg)
+                                    if (img.length > 0) {
+                                    row.imageUrl = '{ms:global.host/}' + img[0].path
+                                    }
+                                }
+                                if(row.contentDatetime){
+                                    var date = new Date(row.contentDatetime);
+                                    var yy = date.getFullYear();
+                                    var mm = date.getMonth() + 1;
+                                    var day = date.getDate();
+                                    var yymm = yy + '/' + mm
+                                    row.day = day;
+                                    row.yymm = yymm;
+                                }
+                                return row
+                            })
+                            console.log('listData:', that.listData)
+                        }).catch(function(err) {
+                            console.error('error:', err)
+                        })
+                    },
+                    handleDetail(item){
+                        {ms:channel type='self'}
+                            this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
+                        {/ms:channel}
+                    }
+                }
+            }
+        },
+        {/ms:channel}
+    ]})
+    var app = new Vue({
+        mixins:[mixin],
+        router:router,
+        data:function(){
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                commonTabs:[
+                    {
+                        name:'党建工作',
+                        path: 'djgz'
+                    },
+                    {
+                        name: '党建信息',
+                        path: 'djxx'
+                    },
+                    {
+                        name: '工会之家',
+                        path: 'ghzj'
+                    },
+                    {
+                        name: '团员天地',
+                        path: 'tytd'
+                    },
+                    {
+                        name: '青年文明号建设',
+                        path: 'qnwmhjs'
+                    }
+                ],
+                tabIdx: 0,
+                page:{
+                    //当前页数
+                    pageNo: 1,
+                    //每页文章条数
+                    pageSize: 10,
+                    //页数总数
+                    pageTotal: 0,
+                    //内容总数
+                    contentCount: 1000
+                }
+            }
+        },
+        created:function() {
+            {ms:channel type='self'}
+            if (this.$route.path == '/') {
+                this.push('${field.typepath}')
+            }
+            {/ms:channel}
+        },
+        methods: {
+            handleComonTabs:function(item,index){
+                this.tabIdx = index;
+                // $('.common_content').hide();
+                // $('.common_content').eq(index).show();
+            },
+            changePage:function(e){
+
+            }   
+        }
+    }).$mount('#app')
+</script>
+</html>
