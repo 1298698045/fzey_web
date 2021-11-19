@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>护理园地</title>
+    <title>在线院刊</title>
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/swiper-3.4.2.min.css">
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/fontIcon/iconfont.css">
@@ -13,41 +13,75 @@
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/common.css">
     <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <style>
+        .journal_content{
+            padding-bottom: 100px;
+        }
+        .journal_content .box_wrap .box{
+            width: 284px;
+            height: 440px;
+            margin-top: 40px;
+            margin-right: 48px;
+            cursor: pointer;
+        }
+        .journal_content .box_wrap .box:nth-child(4n){
+            margin-right: 0;
+        }
+        .journal_content .box_wrap .box .imgs{
+            width: 100%;
+            height: 356px;
+            background: #ccc;
+        }
+        .journal_content .box_wrap .box .imgs img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .journal_content .box_wrap .box .info{
+            background: #f0f0f0;
+            padding: 15px 30px;
+            box-sizing: border-box;
+            font-size: 18px;
+            color: #333;
+            text-align: center;
+            line-height: 1.5;
+            height: 84px;
+        }
+        .journal_content .box_wrap .box .info:hover{
+            color: #7f0e12;
+        }
+    </style>
 </head>
 <body>
-    <div class="wrapper" id='app' v-cloak>
+    <div class="wrapper" id="app" v-cloak>
         <#include "head.html" />
         <#include "right.html" />
         <div class="center">
             <div class="banner">
                 <img src="{ms:global.host/}{ms:global.style/}/images/yygk_banner.jpg" alt="">
             </div>
-            <div class="container">
-                <div class="common_content fixedWidth" style="display: block;">
-                    <ul class="column_list">
-                        <li class="column_item" v-for="item in listData" @click="handleDetail(item)">
-                            <a href="#" class="clearfix">
-                                <p class="name fl">
-                                    {{item.contentTitle}}
-                                </p>
-                                <p class="time fr">
-                                    {{item.contentDatetime}}
-                                </p>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="pagePC" v-if="page.contentCount>10">
-                        <el-pagination
-                            background
-                            @current-change="getQueryList"
-                            :page-size="page.pageSize"
-                            prev-text="上一页"
-                            next-text="下一页"
-                            :current-page.sync="page.pageNo"
-                            layout="prev, pager, next, jumper"
-                            :total="page.contentCount">
-                        </el-pagination>
+            <div class="journal_content fixedWidth">
+                <div class="box_wrap clearfix">
+                    <div class="box fl" v-for="item in listData" @click="handleDetail(item)">
+                        <div class="imgs">
+                            <img :src="item.imageUrl" alt="">
+                        </div>
+                        <div class="info">
+                            <p class="year">{{item.contentTitle}}</p>
+                        </div>
                     </div>
+                </div>
+                <div class="pagePC" v-if="page.contentCount>8">
+                    <el-pagination
+                        background
+                        @current-change="getQueryList"
+                        :page-size="page.pageSize"
+                        prev-text="上一页"
+                        next-text="下一页"
+                        :current-page.sync="page.pageNo"
+                        layout="prev, pager, next, jumper"
+                        :total="page.contentCount">
+                    </el-pagination>
                 </div>
             </div>
         </div>
@@ -67,7 +101,7 @@
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
 <script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
 <script>
-    var app = new Vue({
+    const app = new Vue({
         mixins:[mixin],
         data:function(){
             return {
@@ -80,7 +114,7 @@
                     //页数总数
                     pageTotal: 0,
                     //内容总数
-                    contentCount: 0
+                    contentCount: 1000
                 },
                 listData:[]
             }
@@ -119,11 +153,6 @@
                     console.error('error:', err)
                 })
             },
-            handleComonTabs:function(item,index){
-                this.tabIdx = index;
-                // $('.common_content').hide();
-                // $('.common_content').eq(index).show();
-            },
             handleDetail:function(item){
                 {ms:channel type='self'}
                     this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
@@ -131,5 +160,7 @@
             }
         },
     }).$mount('#app')
+</script>
+<script>
 </script>
 </html>

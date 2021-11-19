@@ -1,0 +1,44 @@
+        /* .wrapper .center{
+    padding-bottom: 100px;
+} */
+
+/* 地图 */
+.wrapper .center .common_content .richText_wrap .map_view{
+  padding: 0 40px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 501px;
+  margin-bottom: 30px;
+}
+#localcontainer{
+  width: 100%;
+  height: 100%;
+}
+#BMapLib_trans0,.BMapLib_trans{
+  left: 125px!important;
+  top: auto!important;
+  width:58px!important;
+  height:31px!important;
+}
+.BMap_stdMpType1 .BMap_stdMpSlider, .BMap_stdMpType2 .BMap_stdMpSlider, .BMap_stdMpType3 .BMap_stdMpSlider, .BMap_stdMpType2 .BMap_stdMpZoom, .BMap_stdMpType0 .BMap_stdMpPan, .BMap_stdMpType1 .BMap_stdMpPan, .BMap_stdMpType3 .BMap_stdMpPan, .BMap_stdMpType4 .BMap_stdMpPan{
+  display:block!important;
+}
+.BMap_stdMpZoom{
+  top:45px!important;
+}
+.BMap_stdMpZoom .BMap_button{
+  width: 22px!important;
+  height: 21px!important;
+  left: 12px!important;
+  overflow: hidden!important;
+  background-image: url(https://api.map.baidu.com/images/mapctrls2d0.png)!important;
+  background-repeat: no-repeat!important;
+  z-index: 10!important;
+  position: absolute!important;
+}
+.BMap_stdMpZoomIn {
+  background-position: 0 -221px!important;
+}
+.BMap_stdMpZoomOut{
+  background-position: 0px -265px!important;
+}

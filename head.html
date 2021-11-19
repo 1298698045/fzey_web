@@ -15,14 +15,18 @@
                </div>
             </div>
             <div class="optionsBtn fr">
-                <p class="btn">
-                    <a class="" href="#">在线院刊</a>
+                {ms:channel typeid="1461616109217812481" type="self"}
+                <p class="btn" :class="{active: activeMenu.indexOf('1461616109217812481')!=-1}">
+                    <a class="" href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">在线院刊</a>
                 </p>
+                {/ms:channel}
+                {ms:channel typeid="1461598141775777794" type="self"}
+                <p class="btn" :class="{active: activeMenu.indexOf('1461598141775777794')!=-1}">
+                    <a class="" href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">客户服务</a>
+                </p>
+                {/ms:channel}
                 <p class="btn">
                     <a class="" href="#">医保政策</a>
-                </p>
-                <p class="btn">
-                    <a class="" href="#">客户服务</a>
                 </p>
             </div>
         </div>

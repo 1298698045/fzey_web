@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/head.css">
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/footer.css">
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/common.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/hospitalSurvey.css">
     <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
     <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
 </head>
@@ -216,6 +217,8 @@
 <!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
 <script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=dpYUGNcGjk0Kx0p3o8zR7z3QI53HuGEc&s=1"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script>
     // var Foo = { template: '<div class="fixedWidth">foo</div>' }
     // var Bar = { template: '<div class="fixedWidth">bar</div>' }
@@ -365,6 +368,107 @@
                         }
                     },
                 },
+                <#elseif field.typeid='1459088027093250049'>
+                {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template: '{ms:arclist size=1 artid="1461545074451714050"}'+
+'                       <div class="common_content">'+
+'                        <div class="richText_wrap">'+
+'                            <div class="title">'+
+'                                ${field.title}'+
+'                            </div>'+
+'                            <div class="map_view">'+
+'                                <div id="localcontainer"></div>'+
+'                            </div>'+
+'                            <div class="rich">'+
+'                                ${field.content}'+
+'                            </div>'+
+'                            <div class="shareView">'+
+'                                分享到：'+
+'                                <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt="">'+
+'                                <img src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">'+
+'                                <img src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">'+
+'                            </div>'+
+'                        </div>'+
+'                    </div>'+
+'                    {/ms:arclist}',
+                        data:function(){
+                            return {
+
+                            }
+                        },
+                        created:function() {
+                            this.$nextTick(function(){
+                                var pointer = new BMap.Point(119.326629,26.052131);
+                                var hospitalName = "福州市第二医院";
+                                var hospitalAddr = "福州市仓山区上藤路47号";
+                                var map = new BMap.Map("localcontainer");
+                                var hosName = ['福州市第二医院'], i=0;
+                                var options = {
+                                    title: hosName[i], //标题
+                                    width: 300, //宽度
+                                    height: 24, //高度
+                                    panel: "panel", //检索结果面板
+                                    enableAutoPan: true, //自动平移
+                                    searchTypes: [
+                                        BMAPLIB_TAB_TO_HERE, //到这里去
+                                        BMAPLIB_TAB_FROM_HERE, //从这里出发
+                                        BMAPLIB_TAB_SEARCH // 周边检索
+                                    ]
+                                };
+                                var searchInfoWindow = new BMapLib.SearchInfoWindow(map, hospitalAddr, options);
+                                var marker = new BMap.Marker(pointer);
+                                // marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 动画--弹跳
+                                map.enableScrollWheelZoom();
+                                map.addControl(new BMap.NavigationControl()); 
+                                map.addControl(new BMap.MapTypeControl({
+                                    mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
+                                }));
+                                init(pointer);
+                                marker.addEventListener('click', function () {
+                                    searchInfoWindow.open(marker);
+                                });
+    
+                                resetMap.prototype = new BMap.Control();
+                                resetMap.prototype.initialize = function (map) {
+                                    var div = document.createElement("div");
+                                    div.appendChild(document.createTextNode("返回"));
+                                    div.style = "box-shadow:rgba(0, 0, 0, 0.34902) 2px 2px 3px;border:1px solid #008059;background:#009d6d;padding: 2px 6px;font-size: 12px;line-height:1.3em; border-radius:3px;color:#fff;cursor:pointer";
+                                    div.onclick = function (e) {
+                                        map.clearOverlays();
+                                        init(pointer);
+                                    }
+                                    map.getContainer().appendChild(div);
+                                    return div;
+                                }
+                                map.addControl(new resetMap());
+    
+                                function resetMap() {
+                                    this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+                                    this.defaultOffset = new BMap.Size(90, 10);
+                                }
+    
+                                function init(pointer) {
+                                    map.centerAndZoom(pointer, 16);
+                                    map.addOverlay(marker);
+                                    map.panBy(100, 150); //中心点偏移多少像素（width,height）为div 宽高的一半;
+                                    setTimeout(function(){
+                                        searchInfoWindow.open(marker);
+                                    },300)
+                                }
+                                // 搜索周边
+                                var LocalSearch = new BMap.LocalSearch(map, {
+                                    renderOptions: {
+                                        map: map,
+                                        panel: "resultList"
+                                    }
+                                });
+                            })
+                        },
+                    }  
+                },
             </#if>
             {/ms:channel}
         ]
@@ -375,44 +479,6 @@
         data:function(){
             return {
                 typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
-                commonTabs:[
-                    {
-                        name:'医院简介',
-                        path:'yyjj'
-                    },
-                    {
-                        name:'机构证件',
-                        path:'jgzj'
-                    },
-                    {
-                        name:'医院文化',
-                        path:'yywh'
-                    },
-                    {
-                        name:'医院分布图',
-                        path:'fbt'
-                    },
-                    {
-                        name:'交通指南',
-                        path:'jtzn'
-                    },
-                    {
-                        name:'院领导',
-                        path:'yld'
-                    }
-                ],
-                tabIdx:0,
-                hasRoute: true,
-                page:{
-                    //当前页数
-                    pageNo: 1,
-                    //每页文章条数
-                    pageSize: 10,
-                    //页数总数
-                    pageTotal: 0,
-                    //内容总数
-                    contentCount: 1000
-                },
                 hasRoute: true
             }
         },
@@ -424,81 +490,7 @@
             {/ms:channel}
         },
         methods: {
-            changePage:function(e){
 
-            },
-            handleComonTabs:function(item,index){
-                this.tabIdx = index;
-                $('.common_content').hide();
-                $('.common_content').eq(index).show();
-                router.push({path: item.path})
-                if(index==4){
-                    var pointer = new BMap.Point(119.326629,26.052131);
-                    var hospitalName = "福州市第二医院";
-                    var hospitalAddr = "福州市仓山区上藤路47号";
-                    var map = new BMap.Map("localcontainer");
-                    var hosName = ['福州市第二医院'], i=0;
-                    var options = {
-                        title: hosName[i], //标题
-                        width: 300, //宽度
-                        height: 24, //高度
-                        panel: "panel", //检索结果面板
-                        enableAutoPan: true, //自动平移
-                        searchTypes: [
-                            BMAPLIB_TAB_TO_HERE, //到这里去
-                            BMAPLIB_TAB_FROM_HERE, //从这里出发
-                            BMAPLIB_TAB_SEARCH // 周边检索
-                        ]
-                    };
-                    var searchInfoWindow = new BMapLib.SearchInfoWindow(map, hospitalAddr, options);
-                    var marker = new BMap.Marker(pointer);
-                    // marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 动画--弹跳
-                    map.enableScrollWheelZoom();
-                    map.addControl(new BMap.NavigationControl()); 
-                    map.addControl(new BMap.MapTypeControl({
-                        mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
-                    }));
-                    init(pointer);
-                    marker.addEventListener('click', function () {
-                        searchInfoWindow.open(marker);
-                    });
-
-                    resetMap.prototype = new BMap.Control();
-                    resetMap.prototype.initialize = function (map) {
-                        var div = document.createElement("div");
-                        div.appendChild(document.createTextNode("返回"));
-                        div.style = "box-shadow:rgba(0, 0, 0, 0.34902) 2px 2px 3px;border:1px solid #008059;background:#009d6d;padding: 2px 6px;font-size: 12px;line-height:1.3em; border-radius:3px;color:#fff;cursor:pointer";
-                        div.onclick = function (e) {
-                            map.clearOverlays();
-                            init(pointer);
-                        }
-                        map.getContainer().appendChild(div);
-                        return div;
-                    }
-                    map.addControl(new resetMap());
-
-                    function resetMap() {
-                        this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
-                        this.defaultOffset = new BMap.Size(90, 10);
-                    }
-
-                    function init(pointer) {
-                        map.centerAndZoom(pointer, 16);
-                        map.addOverlay(marker);
-                        map.panBy(100, 150); //中心点偏移多少像素（width,height）为div 宽高的一半;
-                        setTimeout(function(){
-                            searchInfoWindow.open(marker);
-                        },300)
-                    }
-                    // 搜索周边
-                    var LocalSearch = new BMap.LocalSearch(map, {
-                        renderOptions: {
-                            map: map,
-                            panel: "resultList"
-                        }
-                    });
-                }
-            }
         },
     }).$mount('#app')
 </script>

@@ -89,6 +89,13 @@
     /* padding: 0 10px; */
     box-sizing: border-box;
 }
+.wrapper .header .header_bd .optionsBtn .btn.active{
+    background: #7f0e12;
+    border: none;
+}
+.wrapper .header .header_bd .optionsBtn .btn.active a{
+    color: #fff;
+}
 .wrapper .header .header_bd .optionsBtn .btn:hover{
     background: #7f0e12;
     border: none;
