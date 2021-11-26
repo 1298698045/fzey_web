@@ -253,6 +253,10 @@
 }
 .wrapper .center .notice_wrap .notice .notice_content .block{
     margin: 35px 0 0 0;
+    display: none;
+}
+.wrapper .center .notice_wrap .notice .notice_content .block.active{
+    display: block;
 }
 .wrapper .center .notice_wrap .notice .notice_content .block .box{
     width: 320px;
@@ -414,6 +418,10 @@
 }
 .wrapper .department_wrap .depart_content .dept_bd{
     padding: 0 24px;
+    display: none;
+}
+.wrapper .department_wrap .depart_content .dept_bd.active{
+    display: block;
 }
 .wrapper .department_wrap .depart_content .dept_bd .item:nth-child(7n){
     margin-right: 0;

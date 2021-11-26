@@ -2,311 +2,418 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1300px">
-    <title>{ms:global.name/}</title>
-    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
-    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
-    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
-    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
-    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/dynamic.css">
-    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/departmentDetail.css">
-    <script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科室导航</title>
+    <link rel="stylesheet" href="/css/public.css">
+    <link rel="stylesheet" href="/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="/css/head.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/hospitalSurvey.css">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <style>
+        .content .briefInfo{
+             margin: 29px 0;
+        }
+        .content .briefInfo .left_cover{
+            width: 136px;
+            height: 520px;
+            background: url('/images/special.jpg') no-repeat;
+            background-size: 100% 100%;
+            color: #ffffff;
+            font-size: 40px;
+            font-weight: bold;
+        }
+        .content .briefInfo .left_cover .text{
+            width: 59px;
+            height: 360px;
+            margin: 30px auto 0;
+            text-align: center;
+        }
+        .content .briefInfo .right_cont{
+            width: calc(100% - 136px);
+            height: 520px;
+            padding: 50px 60px;
+            box-sizing: border-box;
+            background: #ffffff;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+        }
+        .content .briefInfo .right_cont .block{
+            height: 430px;
+            padding-right: 46px;
+            font-size: 16px;
+            color: #333333;
+            overflow: auto;
+        }
+        .content .briefInfo .right_cont .block::-webkit-scrollbar{
+            width: 2px;
+            background: #e5e5e5;
+        }
+        .content .briefInfo .right_cont .block::-webkit-scrollbar-thumb{
+            width: 30px !important;
+            background: #7f0e12;
+        }
+        .content .briefInfo .right_cont .block .title{
+            font-size: 26px;
+            font-weight: bold;
+            color: #333333;
+            padding-bottom: 27px;
+        }
+        .content .briefInfo .right_cont .block  .article{
+            line-height: 2;
+        }
+        .dynamic{
+            margin: 60px 0;
+        }
+        .dynamic .title{
+            font-size: 26px;
+            font-weight: bold;
+            color: #333333;
+        }
+        .dynamic .bd .box{
+            width: 394px;
+            height: 146px;
+            background: #ffffff;
+            box-shadow: 0 2px 8px 0px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+            margin-right: 49px;
+            padding: 30px 25px;
+            box-sizing: border-box;
+            border-right: 5px solid #d9d9d9;
+            cursor: pointer;
+        }
+        .dynamic .bd .box:hover{
+            border-right: 5px solid #7f0e12;
+        }
+        .dynamic .bd .box:nth-child(3n){
+            margin-right: 0;
+        }
+        .dynamic .bd .box .info{
+            font-size: 18px;
+            height: 54px;
+        }
+        .dynamic .bd .box:hover .info{
+            color: #7f0e12;
+        }
+        .dynamic .bd .box .time{
+            font-size: 14px;
+            padding-top: 10px;
+            color: #999999;
+        }
+    </style>
 </head>
 <body>
-    <div id="app" class="wrap" v-cloak>
-        <#include "head.html" />
-        <#include "right.html" />
-
-        <div class="maxImage" id="maxImage">
-            <div class="dm-second-mask">
-                <div class="max_img_content">
-                    <#include "location.html" />
-                    <div class="layOut_panel">
-                        <div class="l_img">
-                            {ms:arclist size=1 flag='c'}
-                            <p id="backPhoto" virtualPath='{ms:global.host/}{@ms:file field.litpic/}'></p>
-                            {/ms:arclist}
+    <div class="wrapper" id="app" v-cloak>
+        <div class="header_view"></div>
+        <div class="rightNav"></div>
+        <div class="center">
+            <div class="banner">
+                <img src="/images/yygk_banner.jpg" alt="">
+            </div>
+            <div class="crumbs_wrap">
+                <div class="crumbs fixedWidth">
+                    <span class="label">您的位置：</span>
+                    <a class="black home" href="#">首页</a> >
+                    <a href="#" class="black">医院概况</a> >
+                    <a href="#" class="black">机构证件</a> >
+                    <span class="default">详细</span>
+                </div>
+            </div>
+            <div class="container">
+                <div class="content fixedWidth">
+                    <div class="briefInfo clearfix">
+                        <div class="left_cover fl">
+                            <p class="text">
+                                8区关节外科
+                            </p>
                         </div>
-                        <div class="r_cont_wrap">
-                            <div class="flex">
-                                {ms:channel type='self' size=1}
-                                {ms:arclist size=1 flag='c'}
-                                <div class="preview">
-                                    <i class="icon top_icon"></i>
-                                    <p class="text" @click="goto('{ms:global.url/}${field.link}')">查看详细</p>
-                                    <i class="icon bottom_icon"></i>
-                                </div>
-                                {/ms:arclist}
-                                {/ms:channel}
-				{ms:channel type='parent'}
-				<#assign parenttitle=field.typetitle>
-				{/ms:channel}
-                                {ms:arclist size=1 flag='c'}
+                        <div class="right_cont fl">
+                            <div class="block">
+                                <div class="title">科室简介</div>
                                 <div class="article">
-                                    <p class="column">${field.descrip}</p>
+                                    福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压+植骨/陶瓷棒内固定，保膝技术如胫骨高位截骨、股骨远端截骨；髋臼发育不良骨盆截骨技术；3D打印技术、计算机导航应用于复杂髋、膝置换、人工关节翻修手术及人工关节置换手术后感染的治疗等。目前，科室拥有强大的医护团队及康复团队，年关节手术量3000余台，居全省第一，国内前列。
+    福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压+植骨/陶瓷棒内固定，保膝技术如胫骨高福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压
+    福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压
+    福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压
                                 </div>
-                                <div class="tag">
-                                    <div class="text">
-                                        <div class="topBack"></div>
-                                        <span class="fieldTitle">${field.title}</span>
-                                        <div class="bottomBack">
-                                            <span class="dept">${parenttitle}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dynamic">
+                        <p class="title">科室动态</p>
+                        <div class="bd clearfix">
+                            <div class="box fl">
+                                <p class="info">大骨科行政科室主任简介</p>
+                                <p class="time">2021/10/21</p>
+                            </div>
+                            <div class="box fl"></div>
+                            <div class="box fl"></div>
+                            <div class="box fl"></div>
+                            <div class="box fl"></div>
+                            <div class="box fl"></div>
+                        </div>
+                    </div>
+                    <div class="dynamic">
+                        <p class="title">科室专家</p>
+                        <div class="doctor_wrap clearfix">
+                            <div class="doctor_cart fl">
+                                <div class="avatar">
+                                    <img src="" alt="">
+                                    <div class="hover">
+                                        <div class="hover_box">
+                                            <p class="x_l border"></p>
+                                            <p class="x_r border"></p>
+                                            <p class="y_l border"></p>
+                                            <p class="y_r border"></p>
+                                            <div class="dept">
+                                                神经内科
+                                            </div>
+                                            <div class="desc">
+                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                            </div>
+                                            <div class="btn">
+                                                点击查看出诊排班表
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                {/ms:arclist}
-                            </div>
-                            <div class="rowColumn">
-                                <div class="box">
-                                    <p>预约挂号</p>
-                                </div>
-                                {ms:channel type='self'  typeid='1403306687218151426'}
-                                <div class="box" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
-                                    <p>出诊信息</p>
-                                </div>
-                                {/ms:channel}
-                                {ms:channel type='self'  typeid='1402954155253919745'}
-                                <div class="box" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
-                                    <p>医院位置</p>
-                                </div>
-                                {/ms:channel}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {ms:channel type='son' size=1}
-        <div class="ysImageWrap">
-            <div class="ys_container">
-                <div class="tag">
-                    <div class="text">
-                        <div class="topBack"></div>
-                        ${field.typetitle}
-                        <div class="bottomBack">
-                        </div>
-                    </div>
-                </div>
-                <div class="rightBox">
-                    <div class="boxWrap">
-                        <div class="scrollbox">
-                            {ms:arclist type='son'}
-                            <div class="box">
-                                <div class="boxBlock">
-                                    <p class="text">
-                                        ${field.descrip}
+                                <div class="doctor_info">
+                                    <p class="name">游昌华</p>
+                                    <p class="position">
+                                        教授、主任医师
                                     </p>
-                                    <div class="subject">
-                                        ${field.title}
-                                    </div>
                                 </div>
                             </div>
-                            {/ms:arclist}
+                            <div class="doctor_cart fl">
+                                <div class="avatar">
+                                    <img src="" alt="">
+                                    <div class="hover">
+                                        <div class="hover_box">
+                                            <p class="x_l border"></p>
+                                            <p class="x_r border"></p>
+                                            <p class="y_l border"></p>
+                                            <p class="y_r border"></p>
+                                            <div class="dept">
+                                                神经内科
+                                            </div>
+                                            <div class="desc">
+                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                            </div>
+                                            <div class="btn">
+                                                点击查看出诊排班表
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doctor_info">
+                                    <p class="name">游昌华</p>
+                                    <p class="position">
+                                        教授、主任医师
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="doctor_cart fl">
+                                <div class="avatar">
+                                    <img src="" alt="">
+                                    <div class="hover">
+                                        <div class="hover_box">
+                                            <p class="x_l border"></p>
+                                            <p class="x_r border"></p>
+                                            <p class="y_l border"></p>
+                                            <p class="y_r border"></p>
+                                            <div class="dept">
+                                                神经内科
+                                            </div>
+                                            <div class="desc">
+                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                            </div>
+                                            <div class="btn">
+                                                点击查看出诊排班表
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doctor_info">
+                                    <p class="name">游昌华</p>
+                                    <p class="position">
+                                        教授、主任医师
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="doctor_cart fl">
+                                <div class="avatar">
+                                    <img src="" alt="">
+                                    <div class="hover">
+                                        <div class="hover_box">
+                                            <p class="x_l border"></p>
+                                            <p class="x_r border"></p>
+                                            <p class="y_l border"></p>
+                                            <p class="y_r border"></p>
+                                            <div class="dept">
+                                                神经内科
+                                            </div>
+                                            <div class="desc">
+                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                            </div>
+                                            <div class="btn">
+                                                点击查看出诊排班表
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doctor_info">
+                                    <p class="name">游昌华</p>
+                                    <p class="position">
+                                        教授、主任医师
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="doctor_cart fl">
+                                <div class="avatar">
+                                    <img src="" alt="">
+                                    <div class="hover">
+                                        <div class="hover_box">
+                                            <p class="x_l border"></p>
+                                            <p class="x_r border"></p>
+                                            <p class="y_l border"></p>
+                                            <p class="y_r border"></p>
+                                            <div class="dept">
+                                                神经内科
+                                            </div>
+                                            <div class="desc">
+                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                            </div>
+                                            <div class="btn">
+                                                点击查看出诊排班表
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doctor_info">
+                                    <p class="name">游昌华</p>
+                                    <p class="position">
+                                        教授、主任医师
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="doctor_cart fl">
+                                <div class="avatar">
+                                    <img src="" alt="">
+                                    <div class="hover">
+                                        <div class="hover_box">
+                                            <p class="x_l border"></p>
+                                            <p class="x_r border"></p>
+                                            <p class="y_l border"></p>
+                                            <p class="y_r border"></p>
+                                            <div class="dept">
+                                                神经内科
+                                            </div>
+                                            <div class="desc">
+                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                            </div>
+                                            <div class="btn">
+                                                点击查看出诊排班表
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doctor_info">
+                                    <p class="name">游昌华</p>
+                                    <p class="position">
+                                        教授、主任医师
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="doctor_cart fl">
+                                <div class="avatar">
+                                    <img src="" alt="">
+                                    <div class="hover">
+                                        <div class="hover_box">
+                                            <p class="x_l border"></p>
+                                            <p class="x_r border"></p>
+                                            <p class="y_l border"></p>
+                                            <p class="y_r border"></p>
+                                            <div class="dept">
+                                                神经内科
+                                            </div>
+                                            <div class="desc">
+                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                            </div>
+                                            <div class="btn">
+                                                点击查看出诊排班表
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doctor_info">
+                                    <p class="name">游昌华</p>
+                                    <p class="position">
+                                        教授、主任医师
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="doctor_cart fl">
+                                <div class="avatar">
+                                    <img src="" alt="">
+                                    <div class="hover">
+                                        <div class="hover_box">
+                                            <p class="x_l border"></p>
+                                            <p class="x_r border"></p>
+                                            <p class="y_l border"></p>
+                                            <p class="y_r border"></p>
+                                            <div class="dept">
+                                                神经内科
+                                            </div>
+                                            <div class="desc">
+                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                            </div>
+                                            <div class="btn">
+                                                点击查看出诊排班表
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="doctor_info">
+                                    <p class="name">游昌华</p>
+                                    <p class="position">
+                                        教授、主任医师
+                                    </p>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <!-- <div class="sliderWrap" id="rowSliderWrap">
-                        <div class="slider">
-
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
-        {/ms:channel}
-        <div class="center">
-            <div class="row_title">
-                <div class="imgs">
-                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
-                </div>
-                <p class="name">医生团队</p>
-                <div class="imgs">
-                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
-                </div>
-                <!-- {ms:channel type='self'}
-                <p class="more" id="departs" @click="goto('{ms:global.url/}${'/page/department/team.html'}')">
-                    更多查看
-                </p>
-                {/ms:channel} -->
-            </div>
-            <div class="headPhoto">
-                <div class="box" v-for="line in lines">
-                    <div class="block">
-                        <div class="hover" @click="handleRoute(line)">
-                            <div class="box_child">
-                                <div class="pad">
-                                    <div class="img">
-                                        <img :src="line.portraitUrl" alt="">
-                                    </div>
-                                    <p class="name">{{line.name}}</p>
-                                    <p class="position">{{line.technicalTitle}}</p>
-                                </div>
-                            </div>
-                            <div class="box_active_wrap">
-                                <div class="box_active">
-                                    <div class="descWrap">
-                                        <p class="text">
-                                            {{line.briefIntro}}
-                                        </p>
-                                        <p class="title" v-if="line.show">擅长：</p>
-                                        <p class="text" v-if="line.show">
-                                            {{line.goodAt}}
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="back_row">
-                            <div class="cel_o">挂号</div>
-                            <div class="cel_t" @click="goto('https://weixin.sxyygh.com/#/hospital/onlinevisit/home?hosId=1023&_t=eyJzaG93Ijp0cnVlLCJ0aXRsZSI6IuWxseilv%252BecgeS4reWMu%252BmZoiJ9')">问诊</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="fake_item"></div>
-                <div class="fake_item"></div>
-                <div class="fake_item"></div>
-                <div class="fake_item"></div>
-            </div>
-            <!-- <div class="row_title">
-                <div class="imgs">
-                    <img src="{ms:global.host/}/{ms:global.style/}/images/01.png" alt="">
-                </div>
-                <p class="name">医院新闻</p>
-                <div class="imgs">
-                    <img src="{ms:global.host/}/{ms:global.style/}/images/02.png" alt="">
-                </div>
-                {ms:channel type='self' typeid='1400716168132456449'}
-                <p class="more" id="departDynamic" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
-                    更多查看
-                </p>
-                {/ms:channel}
-            </div> -->
-            <!-- {ms:channel type='self' typeid='1400716168132456449'}
-            <div class="memorabilia marginAuto">
-                <div class="dynamic" id="memorabiliaId">
-                    {ms:arclist size=4}
-                    <div class="box" @click="goto('{ms:global.url/}${field.link}')">
-                        <div class="box_child">
-                            <div class="img">
-                                <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
-                                <div class="timeBox">
-                                    <p class="time">${field.date?string("dd")}</p>
-                                    <p class="year">${field.date?string("yyyy-MM")}</p>
-                                </div>
-                            </div>
-                            <div class="textWrap">
-                                <p class="text">
-                                    ${field.title}
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                    {/ms:arclist}
-                    <div class="box">
-                        <div class="boxSolid">
-                            <div class="textCont">
-                                <p class="color">大腿根部突现“肿块”，几个月疯长成足球般大小</p>
-                                <p class="desc">
-                                    案例回放大腿根部突现“肿块”今年63岁的薛阿姨家住新会，平时健康的薛阿姨突然发现自己的右大腿根部长了东西
-                                </p>
-                            </div>
-                            <div class="bottom">
-                                <div class="l_time_box">
-                                    <p class="time">04</p>
-                                    <p class="year">2020-12</p>
-                                </div>
-                                <div class="youjiantou"></div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                </div>
-            </div>
-            {/ms:channel} -->
-        </div>
-        <#include "foot.html" />
+        <div class="footer_view"></div>
     </div>
 </body>
-<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
-<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
-<script src="{ms:global.host/}/{ms:global.style/}/utils/head.js"></script>
-<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
-
-<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
-<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
-<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
-<script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script>
-<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
-<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
-<script src="{ms:global.host/}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="/js/vue@2.js"></script>
+<script src="/js/vue-router.js"></script>
+<script src="/js/polyfill.js"></script>
+<script src="/js/jquery.js"></script>
+<script src="/js/swiper-3.4.2.min.js"></script>
+<script src="/js/head.js"></script>
+<script src="/js/app.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=dpYUGNcGjk0Kx0p3o8zR7z3QI53HuGEc&s=1"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script>
     var app = new Vue({
-        el: '#app',
-        data: {
-            typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
-            lines:[]
-        },
         mixins: [mixin],
-        methods: {
-            list: function() {
-                var that = this
-                    var page = {pageNo: 1,pageSize: 100}
-                    ms.http.post("/cms/expert/list.do", Object.assign({}, {
-                        {ms:channel type='self'}
-                        departmentId:`${field.typeid}`
-                        {/ms:channel}
-                    }, page)).then(function(res) {
-                        //that.page.contentCount = res.data.total
-                        that.lines = res.data.rows.map(function(row) {
-                            let name = row.name.split('_');
-                            if(name.length>1){
-                                row.name = name[0];
-                                row.sortIdx = name[1];
-                            }
-                            if (row.portrait) {
-                                var img = JSON.parse(row.portrait)
-                                if (img.length > 0) {
-                                    row.portraitUrl = '{ms:global.host/}' + img[0].url
-                                }
-                            }
-                            if(row.briefIntro&&row.briefIntro.length>=109){
-                                row.show = false;
-                            }else {
-                                row.show = true;
-                            }
-                            return row
-                        })
-                        let temp = that.lines.filter(item=>{
-                            return item.jobNumber.indexOf('-') == -1
-                        })
-                        that.lines = temp;
-                        console.log('temp:', temp)
-                        console.log('lines:', that.lines)
-                    }).catch(function(err) {
-                        console.error('error:', err)
-                    })
-            },
-            handleRoute(item){
-                {ms:channel type='self'}
-                this.goto("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
-                {/ms:channel}
+        data:function(){
+            return {
+                hasRoute: true
             }
         },
-        created: function() {
-            this.list()
-        }
-    })
-    window.onload = function(){
-        let title = $('.fieldTitle').html();
-        if(title.length>7){
-            title = title.slice(0,7);
-            $('.fieldTitle').html(title);
-        }
-        let photoUrl = $('#backPhoto').attr('virtualPath');
-        photoUrl = photoUrl.trim();
-        console.log(photoUrl,'photoUrl');
-        $("#maxImage").css({"background":'url("'+photoUrl+'") no-repeat ',"background-position":"27% 60px"});
-    }
-    $(function(){
-    })
+        created:function() {
+        },
+        methods: {
+        },
+    }).$mount('#app')
+</script>
+<script>
+$('.nav .column').eq(10).addClass('active');
 </script>
 </html>

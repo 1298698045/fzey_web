@@ -89,105 +89,58 @@
                     <div class="left_box fl">
                         <div class="banner_news">
                             <div class="swiper-container_news">
+                                {ms:channel type='self'  typeid='1400716168132456449'}
                                 <div class="swiper-wrapper">
-                                    <div class="swiper-slide">
+                                    {ms:arclist size=3 flag='c' orderby='sort'}
+                                    <div class="swiper-slide" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
                                         <div class="cover_img">
-                                            <img src="{ms:global.host/}/{ms:global.style/}/images/banner.jpg" alt="">
+                                            <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
                                         </div>
                                         <div class="panel_box clearfix">
                                             <div class="timeBox">
-                                                <h1 class="num">30</h1>
-                                                <p class="text">2021-08</p>
+                                                <h1 class="num">${field.date?string("dd")}</h1>
+                                                <p class="text">${field.date?string("yyyy-MM")}</p>
                                             </div>
                                             <div class="news_info fr">
-                                                <h3 class="title">凝心聚力 再创辉煌——我院2021年两代会隆重召开</h3>
+                                                <h3 class="title">${field.title}</h3>
                                                 <div class="news_desc">
-                                                    凝心聚力 再创辉煌——我院2021年两代会隆重召开，凝心聚力 再创辉煌——我院2021年两代会隆重召开，凝心聚力 
-                                                    再创辉煌——我院2021年两代会隆重召开，凝心聚力 再创辉煌——我院2021年两代会隆重召开，凝心聚力 再创再创辉煌——我院2021年两代会隆重召开，凝心聚力再创辉煌——我院2021年两代会隆重召开，凝心聚力
+                                                    ${field.descrip}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="swiper-slide">Slide 7</div>
-                                    <div class="swiper-slide">Slide 8</div>
+                                    {/ms:arclist}
                                 </div>
+                                {/ms:channel}
                                 <!-- Add Pagination -->
                                 <div class="swiper-pagination-news"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
                             </div>
                         </div>
                     </div>
                     <div class="right_box fl">
+                        {ms:channel type='self'  typeid='1400716168132456449'}
                         <div class="newsList">
-                            <div class="row clearfix">
+                            {ms:arclist size=7 flag='c' orderby='sort'}
+                            <div class="row clearfix" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
                                 <div class="timeBox fl">
-                                    <p class="num">10</p>
-                                    <p class="time">2020-10</p>
+                                    <p class="num">${field.date?string("dd")}</p>
+                                    <p class="time">${field.date?string("yyyy-MM")}</p>
                                 </div>
                                 <div class="desc fl">
-                                    福建第二院专家指导福建市开展首例“房颤射频消融术+左心耳封堵术一站式福建第二院专家指导福建市开展首例“房颤射频消融术
+                                    ${field.title}
                                 </div>
                             </div>
-                            <div class="row clearfix">
-                                <div class="timeBox fl">
-                                    <p class="num">10</p>
-                                    <p class="time">2020-10</p>
-                                </div>
-                                <div class="desc fl">
-                                    福建第二院专家指导福建市开展首例“房颤射频消融术+左心耳封堵术一站式福建第二院专家指导福建市开展首例“房颤射频消融术
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="timeBox fl">
-                                    <p class="num">10</p>
-                                    <p class="time">2020-10</p>
-                                </div>
-                                <div class="desc fl">
-                                    福建第二院专家指导福建市开展首例“房颤射频消融术+左心耳封堵术一站式福建第二院专家指导福建市开展首例“房颤射频消融术
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="timeBox fl">
-                                    <p class="num">10</p>
-                                    <p class="time">2020-10</p>
-                                </div>
-                                <div class="desc fl">
-                                    福建第二院专家指导福建市开展首例“房颤射频消融术+左心耳封堵术一站式福建第二院专家指导福建市开展首例“房颤射频消融术
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="timeBox fl">
-                                    <p class="num">10</p>
-                                    <p class="time">2020-10</p>
-                                </div>
-                                <div class="desc fl">
-                                    福建第二院专家指导福建市开展首例“房颤射频消融术+左心耳封堵术一站式福建第二院专家指导福建市开展首例“房颤射频消融术
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="timeBox fl">
-                                    <p class="num">10</p>
-                                    <p class="time">2020-10</p>
-                                </div>
-                                <div class="desc fl">
-                                    福建第二院专家指导福建市开展首例“房颤射频消融术+左心耳封堵术一站式福建第二院专家指导福建市开展首例“房颤射频消融术
-                                </div>
-                            </div>
-                            <div class="row clearfix">
-                                <div class="timeBox fl">
-                                    <p class="num">10</p>
-                                    <p class="time">2020-10</p>
-                                </div>
-                                <div class="desc fl">
-                                    福建第二院专家指导福建市开展首例“房颤射频消融术+左心耳封堵术一站式福建第二院专家指导福建市开展首例“房颤射频消融术
-                                </div>
-                            </div>
+                            {/ms:arclist}
                         </div>
+                        {/ms:channel}
                     </div>
                 </div>
-                <div class="news_more">
+                {ms:channel type='self'  typeid='1400716168132456449'}
+                <div class="news_more" @click="goto('{ms:global.url/}${field.typelink}')">
                     查看全部
                     <i class="iconfont icon-youjiantou"></i>
                 </div>
+                {/ms:channel}
              </div>
              <div class="notice_wrap">
                  <div class="notice fixedWidth">
@@ -199,102 +152,114 @@
                              v-for="(item,index) in noticeTab"
                               :key="index">{{item}}</p>
                         </div>
-                        <div class="more fr">
+                        <div class="more fr" @click="handleMore">
                             查看全部
                             <i class="iconfont icon-youjiantou"></i>
                         </div>
                     </div>
                     <div class="notice_content">
-                        <div class="block clearfix">
-                            <div class="box clearfix fl">
+                        {ms:channel typeid='1460811013253668866' type='self'}
+                        <div class="block clearfix" :class="{'active':noticeIdx==0}">
+                            {ms:arclist size=8 flag='c'}
+                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
                                 <div class="icon fl"></div>
                                 <div class="r_info fl">
                                     <p class="text">
-                                        我院关于紧急暂停对外提供核酸检测服务的告知
+                                        ${field.title}
                                     </p>
                                     <p class="time">
-                                        09/14
+                                        ${field.date?string("yyyy/MM")}
                                     </p>
                                 </div>
                             </div>
-                            <div class="box clearfix fl">
-                                <div class="icon fl"></div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        我院关于紧急暂停对外提供核酸检测服务的告知
-                                    </p>
-                                    <p class="time">
-                                        09/14
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="box clearfix fl">
-                                <div class="icon fl"></div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        我院关于紧急暂停对外提供核酸检测服务的告知
-                                    </p>
-                                    <p class="time">
-                                        09/14
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="box clearfix fl">
-                                <div class="icon fl"></div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        我院关于紧急暂停对外提供核酸检测服务的告知
-                                    </p>
-                                    <p class="time">
-                                        09/14
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="box clearfix fl">
-                                <div class="icon fl"></div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        我院关于紧急暂停对外提供核酸检测服务的告知
-                                    </p>
-                                    <p class="time">
-                                        09/14
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="box clearfix fl">
-                                <div class="icon fl"></div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        我院关于紧急暂停对外提供核酸检测服务的告知
-                                    </p>
-                                    <p class="time">
-                                        09/14
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="box clearfix fl">
-                                <div class="icon fl"></div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        我院关于紧急暂停对外提供核酸检测服务的告知
-                                    </p>
-                                    <p class="time">
-                                        09/14
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="box clearfix fl">
-                                <div class="icon fl"></div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        我院关于紧急暂停对外提供核酸检测服务的告知
-                                    </p>
-                                    <p class="time">
-                                        09/14
-                                    </p>
-                                </div>
-                            </div>
+                            {/ms:arclist}
                         </div>
+                        {/ms:channel}
+                        {ms:channel typeid='1459046305936125953' type='self'}
+                        <div class="block clearfix" :class="{'active':noticeIdx==1}">
+                            {ms:arclist size=8 flag='c'}
+                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
+                                <div class="icon fl"></div>
+                                <div class="r_info fl">
+                                    <p class="text">
+                                        ${field.title}
+                                    </p>
+                                    <p class="time">
+                                        ${field.date?string("yyyy/MM")}
+                                    </p>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                        {/ms:channel}
+                        {ms:channel typeid='1438711587575345153' type='self'}
+                        <div class="block clearfix" :class="{'active':noticeIdx==2}">
+                            {ms:arclist size=8 flag='c'}
+                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
+                                <div class="icon fl"></div>
+                                <div class="r_info fl">
+                                    <p class="text">
+                                        ${field.title}
+                                    </p>
+                                    <p class="time">
+                                        ${field.date?string("yyyy/MM")}
+                                    </p>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                        {/ms:channel}
+                        {ms:channel typeid='1460813506188582914' type='self'}
+                        <div class="block clearfix" :class="{'active':noticeIdx==3}">
+                            {ms:arclist size=8 flag='c'}
+                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
+                                <div class="icon fl"></div>
+                                <div class="r_info fl">
+                                    <p class="text">
+                                        ${field.title}
+                                    </p>
+                                    <p class="time">
+                                        ${field.date?string("yyyy/MM")}
+                                    </p>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                        {/ms:channel}
+                        {ms:channel typeid='1459046166186110977' type='self'}
+                        <div class="block clearfix" :class="{'active':noticeIdx==4}">
+                            {ms:arclist size=8 flag='c'}
+                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
+                                <div class="icon fl"></div>
+                                <div class="r_info fl">
+                                    <p class="text">
+                                        ${field.title}
+                                    </p>
+                                    <p class="time">
+                                        ${field.date?string("yyyy/MM")}
+                                    </p>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                        {/ms:channel}
+                        {ms:channel typeid='1460810865870020609' type='self'}
+                        <div class="block clearfix" :class="{'active':noticeIdx==5}">
+                            {ms:arclist size=8 flag='c'}
+                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
+                                <div class="icon fl"></div>
+                                <div class="r_info fl">
+                                    <p class="text">
+                                        ${field.title}
+                                    </p>
+                                    <p class="time">
+                                        ${field.date?string("yyyy/MM")}
+                                    </p>
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                        {/ms:channel}
                     </div>
                  </div>
              </div>
@@ -308,55 +273,14 @@
                         <div class="swiper-btn swiper-prev fl"></div>
                         <div class="swiper-container-expert swiper-container-horizontal fl">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
+                                <div class="swiper-slide" v-for="item in lines">
+                                    <img :src="item.portraitUrl" alt="">
                                     <div class="info_fixed">
-                                        <p class="name">郑明</p>
+                                        <p class="name">{{item.name}}</p>
                                         <div class="dept">
-                                            <span>骨科七区</span><span>主任医师</span>
+                                            <span>{{item.departmentName}}</span>
+                                            <span>{{item.briefIntro}}</span>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
-                                    <div class="info_fixed">
-
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
-                                    <div class="info_fixed">
-
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
-                                    <div class="info_fixed">
-
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
-                                    <div class="info_fixed">
-
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
-                                    <div class="info_fixed">
-
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
-                                    <div class="info_fixed">
-
-                                    </div>
-                                </div>
-                                <div class="swiper-slide">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
-                                    <div class="info_fixed">
-
                                     </div>
                                 </div>
                             </div>
@@ -375,64 +299,23 @@
                  <div class="department fixedWidth">
                      <p class="title">科室导航</p>
                      <div class="depart_content">
-                         <ul class="dept_tabs">
-                            <li class="dept_tab" 
-                            @mouseover="function(e){handleDeptMouseOver(e,index)}"
-                            :class="{'active':deptIdx==index}" v-for="(item,index) in deptTabs" :key="index">
+                         <ul class="dept_tabs clearfix">
+                            <li class="dept_tab fl"  :class="{active: idx==0}"
+                             v-for="(depart, idx) in departments"
+                            @mouseover="function(e){handleDeptMouseOver(e,idx)}"
+                             >
                                 <span>
-                                    {{item}}
+                                    {{depart.typetitle}}
                                 </span>
-                            </li>    
+                            </li>
                          </ul>
-                         <div class="dept_bd clearfix">
-                             <div class="item">
+                         <div class="dept_bd clearfix" :class="{active: idx==0}" v-for="(depart, idx) in departments">
+                             <div class="item" :class="{active: idx2==deptIdx}" @click="goto(dep.typelink)" v-for="(dep, idx2) in depart.children">
                                  <div class="icon">
                                     <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
                                  </div>
-                                 <p class="name">心血管内科</p>
+                                 <p class="name">{{dep.typetitle}}</p>
                              </div>
-                             <div class="item">
-                                <div class="icon">
-                                   <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
-                                </div>
-                                <p class="name">心血管内科</p>
-                            </div>
-                            <div class="item">
-                                <div class="icon">
-                                   <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
-                                </div>
-                                <p class="name">心血管内科</p>
-                            </div>
-                            <div class="item">
-                                <div class="icon">
-                                   <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
-                                </div>
-                                <p class="name">心血管内科</p>
-                            </div>
-                            <div class="item">
-                                <div class="icon">
-                                   <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
-                                </div>
-                                <p class="name">心血管内科</p>
-                            </div>
-                            <div class="item">
-                                <div class="icon">
-                                   <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
-                                </div>
-                                <p class="name">心血管内科</p>
-                            </div>
-                            <div class="item">
-                                <div class="icon">
-                                   <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
-                                </div>
-                                <p class="name">心血管内科</p>
-                            </div>
-                            <div class="item">
-                                <div class="icon">
-                                   <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
-                                </div>
-                                <p class="name">心血管内科</p>
-                            </div>
                          </div>
                      </div>
                  </div>
@@ -515,6 +398,10 @@
 <script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
 <script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
 <script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
 <script>
     var app = new Vue({
         el:'#app',
@@ -637,17 +524,70 @@
                     '妇儿科',
                     '其它'
                 ],
-                deptIdx: 0
+                deptIdx: 0,
+                lines:[],
+                departments: [
+                    {ms:channel type='son' typeid='1459054215978233857' flag='c'}
+                    {
+                        typetitle: "${field.typetitle}",
+                        children: [
+                            {ms:channel size=25  orderby='sort'}
+                            {
+                                typetitle: "${field.typetitle}",
+                                typelink: "{ms:global.url/}${field.typelink}",
+                                {ms:arclist flag='c' size=1}
+                                descrip: `${field.descrip}`,
+                                image: "{ms:global.host/}{@ms:file field.litpic/}"
+                                {/ms:arclist}
+                            },
+                            {/ms:channel}
+                        ]
+                    },
+                    {/ms:channel}
+                ],
             }
         },
         created:function() {
-            
-    
+            this.expertList();
         },
         mounted:function() {
             window.addEventListener('scroll',this.handleSroll)
         },
         methods: {
+            handleMore(){
+                switch(this.noticeIdx){
+                    case 0:
+                        {ms:channel typeid='1460811013253668866' type='self'}
+                            this.goto('{ms:global.url/}${field.typeurl}')
+                        {/ms:channel}
+                        break;
+                    case 1:
+                        {ms:channel typeid='1459046305936125953' type='self'}
+                            this.goto('{ms:global.url/}${field.typelink}')
+                        {/ms:channel}
+                        break;
+                    case 2:
+                        {ms:channel typeid='1438711587575345153' type='self'}
+                            this.goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')
+                        {/ms:channel}
+                        break;
+                    case 3:
+                        {ms:channel typeid='1460813506188582914' type='self'}
+                            this.goto('{ms:global.url/}${field.typeurl}')
+                        {/ms:channel}
+                        break;
+                    case 4:
+                        {ms:channel typeid='1459046166186110977' type='self'}
+                            this.goto('{ms:global.url/}${field.typelink}')
+                        {/ms:channel}
+                        break;
+                    case 5:
+                        {ms:channel typeid='1460810865870020609' type='self'}
+                            this.goto('{ms:global.url/}${field.typeurl}')
+                        {/ms:channel}
+                        break;
+                }
+            },
             handleSroll:function(e){
                 let top = document.documentElement.scrollTop || document.body.scrollTop;
                 if(top>=140){
@@ -679,7 +619,41 @@
             },
             handleDeptMouseOver:function(e,index){
                 this.deptIdx = index;
-            }
+            },
+            expertList: function() {
+                var that = this
+                var page = {pageNo: 1,pageSize:100}
+                ms.http.post("/cms/expert/list.do", Object.assign({}, {
+                    contentType: 'c'
+                }, page)).then(function(res) {
+                    //that.page.contentCount = res.data.total
+                    var list = res.data.rows.map(function(row) {
+                        let name = row.name.split('_');
+                        if(name.length>1){
+                            row.name = name[0];
+                            row.sortIdx = name[1];
+                        }
+                        if (row.portrait) {
+                            var img = JSON.parse(row.portrait)
+                            if (img.length > 0) {
+                                row.portraitUrl = '{ms:global.host/}' + img[0].url
+                            }
+                        }
+                        return row
+                    })
+                    that.lines = list.sort(that.compare('sortIdx'))
+                    console.log('lines:', that.lines)
+                }).catch(function(err) {
+                    console.error('error:', err)
+                })
+            },
+            compare:function(property){
+                return function(a,b){
+                    var val1 = a[property];
+                    var val2 = b[property];
+                    return val1 - val2;
+                }
+            },
         },
     })
 </script>
@@ -692,23 +666,25 @@
         pagination: '.swiper-pagination-news',
         paginationClickable: true
     });
-    var swiper3 = new Swiper('.swiper-container-expert', {
-        nextButton: '.swiper-next',
-        prevButton: '.swiper-prev',
-        slidesPerView: 6,
-        paginationClickable: true,
-        spaceBetween: 30,
-        onSlideChangeEnd:function(swiper){
-            console.log(swiper)
-            if(swiper.isEnd){
-                $('.wrapper .center .expert_wrap .expert_content .swiper-next').addClass('active');
-                $('.wrapper .center .expert_wrap .expert_content .swiper-prev').addClass('active');
-            }else{
-                $('.wrapper .center .expert_wrap .expert_content .swiper-next').removeClass('active');
-                $('.wrapper .center .expert_wrap .expert_content .swiper-prev').removeClass('active');
+    setTimeout(function(){
+        var swiper3 = new Swiper('.swiper-container-expert', {
+            nextButton: '.swiper-next',
+            prevButton: '.swiper-prev',
+            slidesPerView: 6,
+            paginationClickable: true,
+            spaceBetween: 30,
+            onSlideChangeEnd:function(swiper){
+                console.log(swiper)
+                if(swiper.isEnd){
+                    $('.wrapper .center .expert_wrap .expert_content .swiper-next').addClass('active');
+                    $('.wrapper .center .expert_wrap .expert_content .swiper-prev').addClass('active');
+                }else{
+                    $('.wrapper .center .expert_wrap .expert_content .swiper-next').removeClass('active');
+                    $('.wrapper .center .expert_wrap .expert_content .swiper-prev').removeClass('active');
+                }
             }
-        }
-    });
+        });
+    },300)
     var swiperFour = new Swiper('.swiper-container-specail', {
         pagination: '.swiper-pagination-special',
         paginationClickable:true,
@@ -726,5 +702,12 @@
             }
         }
     });
+    $('.dept_tabs .dept_tab').hover(function(){
+        $('.dept_tabs .dept_tab').removeClass('active');
+        $('.dept_bd').removeClass('active');
+        let idx = $(this).index();
+        $(this).addClass('active');
+        $('.dept_bd').eq(idx).addClass('active');
+    })
 </script>
 </html>

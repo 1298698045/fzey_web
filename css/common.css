@@ -165,3 +165,121 @@
     color: #fff;
     cursor: pointer;
 }
+/* 专家名片 */
+.doctor_cart{
+    width: 285px;
+    height: 440px;
+    background: #f9f9f9;
+    margin-top: 48px;
+    margin-right: 46px;
+}
+.doctor_cart:nth-child(4n){
+    margin-right: 0;
+}
+.doctor_cart .avatar{
+    width: 100%;
+    height: 356px;
+    background: #7f0e12;
+    position: relative;
+    border: 1px solid #f2f2f2;
+    box-sizing: border-box;
+}
+
+.doctor_cart .avatar img{
+    width: 100%;
+    height: 100%;
+}
+.doctor_cart .doctor_info{
+    padding-top: 20px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.doctor_cart .doctor_info .name{
+    font-size: 24px;
+    color: #7f0e12;
+}
+.doctor_cart .doctor_info .position{
+    font-size: 14px;
+    color: #333;
+}
+.doctor_cart .avatar .hover{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    background: rgba(0, 0, 0, .6);
+    z-index: 0;
+    padding: 14px;
+    box-sizing: border-box;
+    opacity: 0;
+    cursor: pointer;
+}
+.doctor_cart .avatar:hover .hover{
+    transition: .5s ease-in;
+    opacity: 1;
+}
+.doctor_cart .avatar .hover .hover_box .border{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #ffffff;
+}
+.doctor_cart .avatar .hover .hover_box .border.x_l{
+    left: 14px;
+    border-right: none;
+    border-bottom: none;
+}
+.doctor_cart .avatar .hover .hover_box .border.x_r{
+    right: 14px;
+    border-left: none;
+    border-bottom: none;
+}
+.doctor_cart .avatar .hover .hover_box .border.y_l{
+    left: 14px;
+    bottom: 14px;
+    border-top: none;
+    border-right: none;
+}
+.doctor_cart .avatar .hover .hover_box .border.y_r{
+    right: 14px;
+    bottom: 14px;
+    border-top: none;
+    border-left: none;
+}
+.doctor_cart .avatar .hover .hover_box{
+    color: #fff;
+}
+.doctor_cart .avatar .hover .hover_box .dept{
+    font-size: 20px;
+    color: #fff;
+    padding-top: 140px;
+    text-align: center;
+    font-weight: bold;
+}
+.doctor_cart .avatar .hover .hover_box .dept:hover{
+    color: #c0a868;
+}
+.doctor_cart .avatar .hover .hover_box .desc{
+    padding-top: 37px;
+    font-size: 16px;
+    padding-left: 16px;
+    padding-right: 16px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.doctor_cart .avatar .hover .hover_box .btn{
+    width: 130px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    font-size: 12px;
+    margin: 31px auto 0;
+    border: 1px solid #fff;
+    cursor: pointer;
+}
+.doctor_cart .avatar .hover .hover_box .btn:hover{
+    border: 1px solid #c0a868;
+    color: #c0a868;
+}

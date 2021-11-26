@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>医生详情</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/hospitalSurvey.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/common.css">
+    <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <style>
+        .content .doctor_panel{
+            margin: 40px 0;
+            position: relative;
+            padding-top: 1px;
+        }
+        .doctor_clip {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 360px;
+            height: 405px;
+        }
+        .doctor_img{
+            position: absolute;
+            left: 41px;
+            top: 45px;
+            width: 228px;
+        }
+        .right_content{
+            width: 952px;
+            min-height: 780px;
+            background: #fff;
+            margin-left: 330px;
+            margin-top: 26px;
+            box-shadow:  5px 5px 24px 0 rgba(51, 51, 51, 0.1);
+            padding: 44px 40px;
+            box-sizing: border-box;
+            font-size: 18px;
+        }
+        .right_content .row_name{
+            padding-bottom: 43px;
+            border-bottom: 1px solid #f1f1f1;
+        }
+        .right_content .row_name .name{
+            font-size: 45px;
+            font-weight: bold;
+            color: #7f0e12;
+        }
+        .right_content .row_name .depart{
+            font-size: 28px;
+            color: #333333;
+            padding-left: 40px;
+        }
+        .right_content .postion{
+            margin: 25px 0;
+        }
+        .right_content .beGoodAt{
+            line-height: 2;
+        }
+        .right_content .box .title{
+            margin: 30px 0;
+            font-size: 26px;
+            color: #333333;
+            font-weight: bold;
+        }
+        .right_content .box .desc{
+            line-height: 2;
+        }
+        .wechat{
+            width: 228px;
+            height: 250px;
+            position: absolute;
+            top: 450px;
+            left: 50px;
+            border: 1px solid #7f0e12;
+            background: #fff;
+        }
+        .wechat .head{
+            width: 100%;
+            height: 60px;
+            line-height: 60px;
+            font-size: 24px;
+            text-align: center;
+            background: #7f0e12;
+            color: #fff;
+        }
+        .wechat .box{
+            width: 228px;
+            height: 228px;
+        }
+        .wechat .box .code{
+            width: 110px;
+            height: 110px;
+            background: #e5e5e5;
+            margin: 28px auto 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id="app" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <div class="banner">
+                <img src="{ms:global.host/}/{ms:global.style/}/images/yygk_banner.jpg" alt="">
+            </div>
+            <div class="crumbs_wrap">
+                <div class="crumbs fixedWidth">
+                    <span class="label">您的位置：</span>
+                    <a class="black home" href="{ms:global.url/}/home.html" target="_blank">首页</a> >
+                    {ms:channel type='self' typeid='1459054215978233857'}
+                    <a href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>" target="_blank" class="black">科室导航</a> >
+                    {/ms:channel}
+                    <a href="#" class="black" @click="handleMoreDoctor()">{{info.departmentName}}</a> >
+                    <span class="详情">详细</span>
+                </div>
+            </div>
+            <div class="container">
+                <div class="content fixedWidth">
+                    <div class="doctor_panel">
+                        <div class="doctor_box">
+                            <img class="doctor_img" :src="info.portrait" alt="">
+                            <img class="doctor_clip" src="{ms:global.host/}/{ms:global.style/}/images/doctor_clip.png" alt="">
+                        </div>
+                        <div class="right_content">
+                            <div class="row_name">
+                                <span class="name">{{info.name}}</span>
+                                <span class="depart">
+                                    {{info.departmentName}}
+                                </span>
+                            </div>
+                            <div class="postion">职称：{{info.technicalTitle}}</div>
+                            <div class="beGoodAt">
+                                擅长：
+                                <br />
+                                {{info.goodAt}}
+                            </div>
+                            <div class="box">
+                                <p class="title">专家简介</p>
+                                <p class="desc">
+                                    {{info.introduce}}
+                                </p>
+                            </div>
+                            <div class="box">
+                                <p class="title">出诊时间</p>
+                                <p class="desc">
+                                    {{info.schedule}}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="wechat">
+                            <div class="head">微信预约</div>
+                            <div class="box">
+                                <div class="code">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="${base}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            typePath: '1459054215978233857',
+            info:{},
+            departName:''
+        },
+        mixins: [mixin],
+        id:"",
+        methods: {
+            list: function() {
+                var that = this
+                ms.http.get("/cms/expert/get.do", Object.assign({}, {
+                    id: that.id
+                }, '')).then(function(res) {
+                    console.log('res:',res);
+                    that.info = res.data;
+                    let name = that.info.name.split('_');
+                    if(name.length>1){
+                        that.info.name = name[0];
+                    }
+                    that.info.infoArr = that.info.introduce.split('\n');
+                    if(that.info.portrait){
+                        var img = JSON.parse(that.info.portrait);
+                        if(img.length>0){
+                            that.info.portrait = '{ms:global.host/}'+img[0].url
+                        }
+                    }
+                }).catch(function(err) {
+                    console.error('error:', err)
+                })
+            },
+            
+            getUrlParam(key) {
+                // 获取参数
+                var url = window.location.search;
+                // 正则筛选地址栏
+                var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+                // 匹配目标参数
+                var result = url.substr(1).match(reg);
+                //返回参数值
+                return result ? decodeURIComponent(result[2]) : null;
+            },
+            handleMoreDoctor(){
+                this.goto("{ms:global.url/}"+ this.info.departmentPath + '/index.html')
+            }
+        },
+        mounted: function() {
+            this.id = this.getUrlParam('id');
+            this.list()
+        }
+    })
+
+    $(function(){
+        $('.bottomBack').hide();
+    })
+</script>
+</html>
