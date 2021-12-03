@@ -42,3 +42,42 @@
 .BMap_stdMpZoomOut{
   background-position: 0px -265px!important;
 }
+
+
+.expert_wrap .box{
+  width: 285px;
+  height: 445px;
+  background: #f2f2f2;
+  margin-right: 46px;
+  margin-top: 40px;
+}
+.expert_wrap .box:nth-child(4n){
+  margin-right: 0;
+}
+.expert_wrap .box .imgs{
+  width: 100%;
+  height: 356px;
+  border: 1px solid #f2f2f2;
+  box-sizing: border-box;
+}
+.expert_wrap .box .imgs img{
+  width: 100%;
+  height: 100%;
+}
+.expert_wrap .box .info{
+  width: 100%;
+  height: 89px;
+  text-align: center;
+}
+.expert_wrap .box .info .name{
+  font-size: 24px;
+  color: #7f0e12;
+  line-height: 30px;
+  margin-top: 24px;
+}
+.expert_wrap .box .info .post{
+  font-size: 14px;
+  color: #333333;
+  line-height: 25px;
+  /* margin-top: 10px; */
+}

@@ -40,48 +40,60 @@
                          </div>
                          <p class="name">预约挂号</p>
                      </li>
-                     <li class="itemBox">
+                     {ms:channel type='self' size=1 typeid='1465582294004097025'}
+                     <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-2-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-2-b.png" alt="">
                         </div>
                         <p class="name">专家门诊</p>
                     </li>
-                    <li class="itemBox">
+                    {/ms:channel}
+                    {ms:channel type='self' size=1 typeid='1460812497194229762'}
+                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-3-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-3-b.png" alt="">
                         </div>
                         <p class="name">就诊须知</p>
                     </li>
-                    <li class="itemBox">
+                    {/ms:channel}
+                    {ms:channel type='self' size=1 typeid='1459088027093250049'}
+                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-4-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-4-b.png" alt="">
                         </div>
                         <p class="name">交通指南</p>
                     </li>
-                    <li class="itemBox">
+                    {/ms:channel}
+                    {ms:channel type='self' size=1 typeid='1459087626331697154'}
+                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-b.png" alt="">
                         </div>
                         <p class="name">科室分布</p>
                     </li>
-                    <li class="itemBox">
+                    {/ms:channel}
+                    {ms:channel type='self' size=1 typeid='1460812774580330498'}
+                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-6-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-6-b.png" alt="">
                         </div>
                         <p class="name">就诊流程</p>
                     </li>
-                    <li class="itemBox">
+                    {/ms:channel}
+                    {ms:channel type='self' size=1 typeid='1460812663754235905'}
+                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-7-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-7-b.png" alt="">
                         </div>
                         <p class="name">办事流程</p>
                     </li>
+                    {/ms:channel}
                  </ul>
              </div>
              <div class="news_wrap">
@@ -527,7 +539,7 @@
                 deptIdx: 0,
                 lines:[],
                 departments: [
-                    {ms:channel type='son' typeid='1459054215978233857' flag='c'}
+                    {ms:channel type='son' typeid='1400724656644583425' flag='c'}
                     {
                         typetitle: "${field.typetitle}",
                         children: [

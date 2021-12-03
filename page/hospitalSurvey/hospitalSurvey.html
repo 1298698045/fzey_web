@@ -469,6 +469,34 @@
                         },
                     }  
                 },
+            <#elseif field.typeid='1459088136220651521'>
+                {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template: '<div class="common_content">'+
+'                        <div class="expert_wrap clearfix">'+
+'                          {ms:arclist} '+
+'                            <div class="box fl" @click="goto(\'{ms:global.host/}${field.link}\')">'+
+'                                <div class="imgs">'+
+'                                    <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">'+
+'                                </div>'+
+'                                <div class="info">'+
+'                                    <p class="name">${field.title}</p>'+
+'                                    <p class="post">${field.keyword}</p>'+
+'                                </div>'+
+'                            </div>'+
+'                          {/ms:arclist} '+
+'                        </div>'+
+'                    </div>',
+                        mixins: [mixin],
+                        data:function(){
+                            return {
+
+                            }
+                        }
+                    },
+                }
             </#if>
             {/ms:channel}
         ]

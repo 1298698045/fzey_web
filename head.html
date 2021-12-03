@@ -5,14 +5,16 @@
                 <img src="{ms:global.host/}/{ms:global.style/}/images/logo.png" alt="">
             </div>
             <div class="search fl">
-               <div class="search_box clearfix">
-                   <div class="l_inp fl">
-                       <input type="text" placeholder="请您输入关键词">
-                   </div>
-                   <div class="r_btn fr">
-                       查询
-                   </div>
-               </div>
+                <form id="searchDataForm1" action="{ms:global.host/}mcms/search.do" method="post"> 
+                    <div class="search_box clearfix">
+                        <div class="l_inp fl">
+                            <input type="text" class="inp" name="content_title" placeholder="请您输入关键词">
+                        </div>
+                        <div class="r_btn fr search_icon" onclick="document.getElementById('searchDataForm1').submit();">
+                            查询
+                        </div>
+                    </div>
+                </form>
             </div>
             <div class="optionsBtn fr">
                 {ms:channel typeid="1461616109217812481" type="self"}

@@ -5,13 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>科室导航</title>
-    <link rel="stylesheet" href="/css/public.css">
-    <link rel="stylesheet" href="/css/swiper-3.4.2.min.css">
-    <link rel="stylesheet" href="/css/fontIcon/iconfont.css">
-    <link rel="stylesheet" href="/css/head.css">
-    <link rel="stylesheet" href="/css/footer.css">
-    <link rel="stylesheet" href="/css/hospitalSurvey.css">
-    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/hospitalSurvey.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/common.css">
     <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <style>
         .content .briefInfo{
@@ -20,7 +20,7 @@
         .content .briefInfo .left_cover{
             width: 136px;
             height: 520px;
-            background: url('/images/special.jpg') no-repeat;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/special.jpg') no-repeat;
             background-size: 100% 100%;
             color: #ffffff;
             font-size: 40px;
@@ -106,61 +106,51 @@
 </head>
 <body>
     <div class="wrapper" id="app" v-cloak>
-        <div class="header_view"></div>
-        <div class="rightNav"></div>
+        <#include "head.html" />
+        <#include "right.html" />
         <div class="center">
             <div class="banner">
-                <img src="/images/yygk_banner.jpg" alt="">
+                <img src="{ms:global.host/}/{ms:global.style/}/images/yygk_banner.jpg" alt="">
             </div>
-            <div class="crumbs_wrap">
-                <div class="crumbs fixedWidth">
-                    <span class="label">您的位置：</span>
-                    <a class="black home" href="#">首页</a> >
-                    <a href="#" class="black">医院概况</a> >
-                    <a href="#" class="black">机构证件</a> >
-                    <span class="default">详细</span>
-                </div>
-            </div>
+            <#include "location.html" />
             <div class="container">
                 <div class="content fixedWidth">
+                    {ms:arclist size=1 artid='1465143184407810049'}
                     <div class="briefInfo clearfix">
                         <div class="left_cover fl">
                             <p class="text">
-                                8区关节外科
+                                ${field.title}
                             </p>
                         </div>
                         <div class="right_cont fl">
                             <div class="block">
                                 <div class="title">科室简介</div>
                                 <div class="article">
-                                    福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压+植骨/陶瓷棒内固定，保膝技术如胫骨高位截骨、股骨远端截骨；髋臼发育不良骨盆截骨技术；3D打印技术、计算机导航应用于复杂髋、膝置换、人工关节翻修手术及人工关节置换手术后感染的治疗等。目前，科室拥有强大的医护团队及康复团队，年关节手术量3000余台，居全省第一，国内前列。
-    福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压+植骨/陶瓷棒内固定，保膝技术如胫骨高福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压
-    福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压
-    福州市第二医院关节外科（8区）在学科带头人张怡元副院长的带领下，不断探索与创新。科室的特色医疗为：复杂髋臼发育不良全髋置换手术、同期双侧髋关节置换手术、股骨近端复杂畸形的全髋置换手术，强直、融合髋及僵直髋的全髋关节置换以及合并复杂骨缺损的全髋翻修手术；重度膝关节内、外翻畸形，重度屈曲挛缩畸形以及合并各种骨缺损的膝关节置换手术，同期双侧膝关节置换手术，梅毒等原因引起的夏克氏关节炎的膝关节置换手术，膝关节单间室病变的微创单髁置换手术。检查遵循微创及加速康复理念，不断开展新技术、新疗法，如髋关节置换微创DAA、Bikini切口技术；各种保髋技术如外科脱位、髓芯减压
+                                    ${field.content}
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {/ms:arclist}
                     <div class="dynamic">
+                        {ms:channel type='self'}
                         <p class="title">科室动态</p>
                         <div class="bd clearfix">
-                            <div class="box fl">
-                                <p class="info">大骨科行政科室主任简介</p>
-                                <p class="time">2021/10/21</p>
+                            {ms:arclist size=6 flag='c'}
+                            <div class="box fl" @click="goto('{ms:global.url/}${field.link}')">
+                                <p class="info">${field.title}</p>
+                                <p class="time">${field.date?string("yyyy/MM/dd")}</p>
                             </div>
-                            <div class="box fl"></div>
-                            <div class="box fl"></div>
-                            <div class="box fl"></div>
-                            <div class="box fl"></div>
-                            <div class="box fl"></div>
+                            {/ms:arclist}
                         </div>
+                        {/ms:channel}
                     </div>
                     <div class="dynamic">
                         <p class="title">科室专家</p>
                         <div class="doctor_wrap clearfix">
-                            <div class="doctor_cart fl">
+                            <div class="doctor_cart fl" v-for="item in lines">
                                 <div class="avatar">
-                                    <img src="" alt="">
+                                    <img :src="item.portraitUrl" alt="">
                                     <div class="hover">
                                         <div class="hover_box">
                                             <p class="x_l border"></p>
@@ -168,10 +158,10 @@
                                             <p class="y_l border"></p>
                                             <p class="y_r border"></p>
                                             <div class="dept">
-                                                神经内科
+                                                {{item.departmentName}}
                                             </div>
                                             <div class="desc">
-                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
+                                                {{item.introduce}}
                                             </div>
                                             <div class="btn">
                                                 点击查看出诊排班表
@@ -180,205 +170,9 @@
                                     </div>
                                 </div>
                                 <div class="doctor_info">
-                                    <p class="name">游昌华</p>
+                                    <p class="name">{{item.name}}</p>
                                     <p class="position">
-                                        教授、主任医师
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="doctor_cart fl">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                    <div class="hover">
-                                        <div class="hover_box">
-                                            <p class="x_l border"></p>
-                                            <p class="x_r border"></p>
-                                            <p class="y_l border"></p>
-                                            <p class="y_r border"></p>
-                                            <div class="dept">
-                                                神经内科
-                                            </div>
-                                            <div class="desc">
-                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
-                                            </div>
-                                            <div class="btn">
-                                                点击查看出诊排班表
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doctor_info">
-                                    <p class="name">游昌华</p>
-                                    <p class="position">
-                                        教授、主任医师
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="doctor_cart fl">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                    <div class="hover">
-                                        <div class="hover_box">
-                                            <p class="x_l border"></p>
-                                            <p class="x_r border"></p>
-                                            <p class="y_l border"></p>
-                                            <p class="y_r border"></p>
-                                            <div class="dept">
-                                                神经内科
-                                            </div>
-                                            <div class="desc">
-                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
-                                            </div>
-                                            <div class="btn">
-                                                点击查看出诊排班表
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doctor_info">
-                                    <p class="name">游昌华</p>
-                                    <p class="position">
-                                        教授、主任医师
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="doctor_cart fl">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                    <div class="hover">
-                                        <div class="hover_box">
-                                            <p class="x_l border"></p>
-                                            <p class="x_r border"></p>
-                                            <p class="y_l border"></p>
-                                            <p class="y_r border"></p>
-                                            <div class="dept">
-                                                神经内科
-                                            </div>
-                                            <div class="desc">
-                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
-                                            </div>
-                                            <div class="btn">
-                                                点击查看出诊排班表
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doctor_info">
-                                    <p class="name">游昌华</p>
-                                    <p class="position">
-                                        教授、主任医师
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="doctor_cart fl">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                    <div class="hover">
-                                        <div class="hover_box">
-                                            <p class="x_l border"></p>
-                                            <p class="x_r border"></p>
-                                            <p class="y_l border"></p>
-                                            <p class="y_r border"></p>
-                                            <div class="dept">
-                                                神经内科
-                                            </div>
-                                            <div class="desc">
-                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
-                                            </div>
-                                            <div class="btn">
-                                                点击查看出诊排班表
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doctor_info">
-                                    <p class="name">游昌华</p>
-                                    <p class="position">
-                                        教授、主任医师
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="doctor_cart fl">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                    <div class="hover">
-                                        <div class="hover_box">
-                                            <p class="x_l border"></p>
-                                            <p class="x_r border"></p>
-                                            <p class="y_l border"></p>
-                                            <p class="y_r border"></p>
-                                            <div class="dept">
-                                                神经内科
-                                            </div>
-                                            <div class="desc">
-                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
-                                            </div>
-                                            <div class="btn">
-                                                点击查看出诊排班表
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doctor_info">
-                                    <p class="name">游昌华</p>
-                                    <p class="position">
-                                        教授、主任医师
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="doctor_cart fl">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                    <div class="hover">
-                                        <div class="hover_box">
-                                            <p class="x_l border"></p>
-                                            <p class="x_r border"></p>
-                                            <p class="y_l border"></p>
-                                            <p class="y_r border"></p>
-                                            <div class="dept">
-                                                神经内科
-                                            </div>
-                                            <div class="desc">
-                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
-                                            </div>
-                                            <div class="btn">
-                                                点击查看出诊排班表
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doctor_info">
-                                    <p class="name">游昌华</p>
-                                    <p class="position">
-                                        教授、主任医师
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="doctor_cart fl">
-                                <div class="avatar">
-                                    <img src="" alt="">
-                                    <div class="hover">
-                                        <div class="hover_box">
-                                            <p class="x_l border"></p>
-                                            <p class="x_r border"></p>
-                                            <p class="y_l border"></p>
-                                            <p class="y_r border"></p>
-                                            <div class="dept">
-                                                神经内科
-                                            </div>
-                                            <div class="desc">
-                                                中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病中西医结合治疗各类骨折、脱位，颈肩腰腿痛，骨关节病
-                                            </div>
-                                            <div class="btn">
-                                                点击查看出诊排班表
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="doctor_info">
-                                    <p class="name">游昌华</p>
-                                    <p class="position">
-                                        教授、主任医师
+                                        {{item.techingPost}}
                                     </p>
                                 </div>
                             </div>
@@ -387,33 +181,82 @@
                 </div>
             </div>
         </div>
-        <div class="footer_view"></div>
+        <#include "foot.html" />
     </div>
 </body>
-<script src="/js/vue@2.js"></script>
-<script src="/js/vue-router.js"></script>
-<script src="/js/polyfill.js"></script>
-<script src="/js/jquery.js"></script>
-<script src="/js/swiper-3.4.2.min.js"></script>
-<script src="/js/head.js"></script>
-<script src="/js/app.js"></script>
-<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=dpYUGNcGjk0Kx0p3o8zR7z3QI53HuGEc&s=1"></script>
-<script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="${base}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script src="${base}/static/plugins/ms/1.0.0/ms.util.js"></script>
+<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
 <script>
     var app = new Vue({
         mixins: [mixin],
         data:function(){
             return {
-                hasRoute: true
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                hasRoute: true,
+                lines: []
             }
         },
         created:function() {
         },
         methods: {
+            list: function() {
+                var that = this
+                var page = {pageNo: 1,pageSize: 100}
+                ms.http.post("/cms/expert/list.do", Object.assign({}, {
+                    {ms:channel type='self'}
+                    departmentId:`${field.typeid}`
+                    {/ms:channel}
+                }, page)).then(function(res) {
+                    //that.page.contentCount = res.data.total
+                    that.lines = res.data.rows.map(function(row) {
+                        let name = row.name.split('_');
+                        if(name.length>1){
+                            row.name = name[0];
+                            row.sortIdx = name[1];
+                        }
+                        if (row.portrait) {
+                            var img = JSON.parse(row.portrait)
+                            if (img.length > 0) {
+                                row.portraitUrl = '{ms:global.host/}' + img[0].url
+                            }
+                        }
+                        if(row.briefIntro&&row.briefIntro.length>=109){
+                            row.show = false;
+                        }else {
+                            row.show = true;
+                        }
+                        return row
+                    })
+                    let temp = that.lines.filter(item=>{
+                        return item.jobNumber.indexOf('-') == -1
+                    })
+                    that.lines = temp;
+                    console.log('temp:', temp)
+                    console.log('lines:', that.lines)
+                }).catch(function(err) {
+                    console.error('error:', err)
+                })
+            },
+            handleRoute(item){
+                {ms:channel type='self'}
+                this.goto("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                {/ms:channel}
+            }
         },
+        created: function() {
+            this.list()
+        }
     }).$mount('#app')
-</script>
-<script>
-$('.nav .column').eq(10).addClass('active');
 </script>
 </html>

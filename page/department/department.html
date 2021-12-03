@@ -33,6 +33,9 @@
             margin-right: 10px;
             cursor: pointer;
         }
+        .search_row .left .tag a{
+            color: #fff !important;
+        }
         .search_row .right .label{
             padding-left: 39px;
             line-height: 40px;
@@ -103,24 +106,26 @@
                     <div class="search_row clearfix">
                         <ul class="left clearfix fl">
                             {ms:channel type='son' orderby='sort'}
-                            <li class="tag fl">${field.typetitle}</li>
+                            <li class="tag fl" @click="handleTab(${field.index})">
+                                <a href="#" class="a_${field.index}">${field.typetitle}</a>
+                            </li>
                             {/ms:channel}
                         </ul>
                         <div class="right fl clearfix">
                             <p class="label fl">
                                 出诊信息查询
                             </p>
-                            <input type="text" placeholder="科室名称">
-                            <input type="text" placeholder="医生名称">
-                            <button class="btn">搜索</button>
+                            <input v-model.trim="departName" type="text" placeholder="科室名称">
+                            <input v-model.trim="doctorName" type="text" placeholder="医生名称">
+                            <button class="btn" @click="handleSearch">搜索</button>
                         </div>
                     </div>
                     {ms:channel type='son' orderby='sort'}
-                    <div class="panel">
+                    <div class="panel b_${field.index}">
                         <p class="label">${field.typetitle}</p>
                         <ul class="dept_wrap clearfix">
                             {ms:channel type='son' orderby='sort'}
-                            <li class="item_box fl">${field.typetitle}</li>
+                            <li class="item_box fl" @click="goto('{ms:global.url/}${field.typelink}')">${field.typetitle}</li>
                             {/ms:channel}
                         </ul>
                     </div>
@@ -149,12 +154,23 @@
         mixins: [mixin],
         data:function(){
             return {
-                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>'
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                departName: '',
+                doctorName: ''
             }
         },
         created:function() {
         },
         methods: {
+            handleTab:function(index){
+                $("html, body").scrollTop(0).animate({scrollTop: $(".b_"+index).offset().top - $(".b_"+index).height()});
+            },
+            handleSearch:function(){
+                {ms:channel type='self' typeid='1465582294004097025'}
+                    this.goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>?departName='+this.departName+'&doctorName='+this.doctorName
+                    +"${'#/chuzhendongtai/chuzhenchawen'}")
+                {/ms:channel}
+            }
         },
     }).$mount('#app')
 </script>

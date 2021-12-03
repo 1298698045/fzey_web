@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>就医指南</title>
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/common.css">
+    <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <style>
+        .depart_map .tab_wrap{
+            width: 100%;
+            height: 60px;
+            border-bottom: 2px solid #7f0e12;
+            margin-top: 34px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        .depart_map .tab_wrap .tabs{
+            width: 300px;
+            margin: auto;
+        }
+        .depart_map .tabs .tab{
+            display: inline-block;
+            line-height: 60px;
+            min-width: 100px;
+            height: 60px;
+            background: #cccccc;
+            font-size: 16px;
+            color: #333333;
+            text-align: center;
+            cursor: pointer;
+            float: left;
+            border-right: 1px solid #fff;
+            box-sizing: border-box;
+            padding: 0 20px;
+        }
+        .depart_map .tabs .tab.active{
+            background: #7f0e12;
+            color: #fff;
+        }
+        .depart_map .table_cont{
+            display: none;
+        }
+        .depart_map .table_cont.active{
+            display: block;
+        }
+        .search_row{
+            width: 70%;
+            margin: 34px auto;
+        }
+        .search_row .label{
+            font-size: 18px;
+            color: #333333;
+            margin-right: 30px;
+            line-height: 40px;
+        }
+        .search_row .inp{
+            width: 280px;
+            height: 40px;
+            line-height: 40px;
+            border: 1px solid #ced4da;
+            box-shadow: rgba(206, 212, 218, 1) solid 1px;
+            border-radius: 5px;
+            font-size: 16px;
+            line-height: 1.5;
+            padding-left: 10px;
+            box-sizing: border-box;
+            margin-right: 20px;
+        }
+        .search_row .btn{
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            color: #fff;
+            text-align: center;
+            border-radius: 20px;
+            background: #7f0e12;
+            cursor: pointer;
+        }
+        .visit .title{
+            font-size: 36px;
+            font-weight: bold;
+            color: #333333;
+            text-align: center;
+            border-bottom: 1px solid #c6c6c6;
+            padding: 30px 0;
+        }
+        .visit .tips {
+            color: #999999;
+            font-size: 14px;
+            line-height: 52px;
+            padding: 0 65px;
+            box-sizing: border-box;
+        }
+        .visit .tips .label{
+            color: #7f0e12;
+        }
+        .visit .table{
+            width: 100%;
+            border-collapse: collapse;
+            
+        }
+        .visit .table tr th{
+            min-width: 60px;
+            height: 60px;
+            text-align: center;
+            background: #cfb48b;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 16px;
+        }
+        .visit .table tr th .english{
+            font-size: 14px;
+            font-weight: 500;
+        }
+        .visit .table tr:nth-child(1) th{
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+        }
+        /* .visit .table tr:nth-child(1) th:nth-child(1){
+            min-width: 150px;
+        } */
+        .visit .content .label{
+            background: #f1f1f1;
+            height: 60px;
+            padding: 0 30px;
+            box-sizing: border-box;
+            color: #7f0e12;
+            font-weight: bold;
+            cursor: pointer;
+            border: 1px solid #e9e9e9;
+            box-sizing: border-box;
+        }
+        .visit .content .label .name{
+            line-height: 60px;
+        }
+        .visit .content .label .icon{
+            width: 30px;
+            height: 30px;
+            background: #ffffff;
+            border-radius: 50%;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .visit .content .label .icon .row{
+            display: inline-block;
+            width: 20px;
+            height: 4px;
+            background: #f1f1f1;
+            position: relative;
+        }
+        .visit .content .label .icon .row .column{
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background: #f1f1f1;
+            position: absolute;
+            left: 8px;
+            top: -8px;
+            display: block;
+        }
+        .visit .content .label .icon .row .column.active{
+            display: none;
+        }
+        .visit .content .child_table{
+            display: none;
+        }
+        .visit .content .child_table,.visit .content .child_table table{
+            width: 100% !important;
+        }
+        .visit .content .child_table.active{
+            display: block;
+        }
+        .visit .content .child_table table tr td:nth-child(2){
+            width: 60px !important;
+        }
+        .visit .content .child_table table tr td{
+            min-width: 60px !important;
+            border: 1px solid #e9e9e9;
+            box-sizing: border-box;
+        }
+        .visit .content .child_table table + p{
+            display: none;
+        }
+        .search_bd table{
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .search_bd table tr th{
+            min-width: 60px;
+            height: 60px;
+            text-align: center;
+            background: #cfb48b;
+            border: 1px solid #fff;
+            color: #fff;
+            font-size: 16px;
+        }
+        .search_bd table tr td{
+            min-width: 60px;
+            height: 60px;
+            text-align: center;
+            border: 1px solid #e9e9e9;
+            color: #333;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id='app' v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <div class="banner">
+                <img src="{ms:global.host/}{ms:global.style/}/images/yygk_banner.jpg" alt="">
+            </div>
+            <div class="container">
+                <div class="common_nav">
+                    <ul class="common_tabs fixedWidth">
+                        {ms:channel type='son' orderby='sort'}
+                        <li class="common_tab" :class="{active : $route.path == '${field.typepath}'}"  @click="push('${field.typepath}')">${field.typetitle}</li>
+                        {/ms:channel}
+                    </ul>
+                </div>
+                <div class="fixedWidth">
+                    <!-- <div class="common_content" style="display: block;">
+                    </div>
+                    <div class="common_content">
+                        <div class="richText_wrap">
+                            <div class="title">
+                                福州市第二医院简介
+                            </div>
+                            <div class="rich">
+                                福州市第二医院始建于1866年，是福州市属
+                                医疗机构中历史最为悠久的百年老院，前身为英
+                                国皇家海军、英国领事馆合办的“海港医馆”，1887年易名为
+                                “塔亭医院”，1956年3月定名为“福州市第二医院”，1984年
+                                经福建省人民政府批准，增挂“福建省福州中西医结合医院”，
+                                为全国第一批中西医结合三级甲等医院，2012年4月正式成为厦门大学附属医院。
+                                2016年、2017年连续进入“中国省会市属医院•竞争力
+                                排行榜100强医院”“中国中医医院•竞争力排行榜100强医院”。骨伤科、
+                                康复科、急诊科(含重症医学科)获评“2018中国中医医院.最佳临床型专科”。
+                            </div>
+                            <div class="shareView">
+                                分享到：
+                                <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt="">
+                                <img src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">
+                                <img src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="common_content">
+                        <ul class="column_list">
+                            <li class="column_item">
+                                <a href="#" class="clearfix">
+                                    <p class="name fl">
+                                        关于成立巡察问题“回头看”督导工作领导小组的通知
+                                    </p>
+                                    <p class="time fr">
+                                        2019-06-26
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="column_item">
+                                <a href="#" class="clearfix">
+                                    <p class="name fl">
+                                        关于成立巡察问题“回头看”督导工作领导小组的通知
+                                    </p>
+                                    <p class="time fr">
+                                        2019-06-26
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="column_item">
+                                <a href="#" class="clearfix">
+                                    <p class="name fl">
+                                        关于成立巡察问题“回头看”督导工作领导小组的通知
+                                    </p>
+                                    <p class="time fr">
+                                        2019-06-26
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="pagePC">
+                            <el-pagination
+                                background
+                                @current-change="changePage"
+                                :page-size="page.pageSize"
+                                prev-text="上一页"
+                                next-text="下一页"
+                                :current-page.sync="page.pageNo"
+                                layout="prev, pager, next, jumper"
+                                :total="page.contentCount">
+                            </el-pagination>
+                        </div>
+                    </div>
+                    <div class="common_content">
+                        <div class="richText_wrap">
+                            <div class="title">
+                                福州市第二医院就医流程
+                            </div>
+                            <div class="rich">
+                                福州市第二医院始建于1866年，是福州市属
+                                医疗机构中历史最为悠久的百年老院，前身为英
+                                国皇家海军、英国领事馆合办的“海港医馆”，1887年易名为
+                                “塔亭医院”，1956年3月定名为“福州市第二医院”，1984年
+                                经福建省人民政府批准，增挂“福建省福州中西医结合医院”，
+                                为全国第一批中西医结合三级甲等医院，2012年4月正式成为厦门大学附属医院。
+                                2016年、2017年连续进入“中国省会市属医院•竞争力
+                                排行榜100强医院”“中国中医医院•竞争力排行榜100强医院”。骨伤科、
+                                康复科、急诊科(含重症医学科)获评“2018中国中医医院.最佳临床型专科”。
+                            </div>
+                            <div class="shareView">
+                                分享到：
+                                <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt="">
+                                <img src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">
+                                <img src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="common_content">
+                        <div class="depart_map">
+                            <ul class="tab_wrap">
+                                <div class="tabs clearfix">
+                                    <li class="tab active">1号楼</li>
+                                    <li class="tab">2号楼</li>
+                                    <li class="tab">3号楼</li>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="common_content">
+                        <ul class="column_list">
+                            <li class="column_item">
+                                <a href="#" class="clearfix">
+                                    <p class="name fl">
+                                        医疗机构执业许可证
+                                    </p>
+                                    <p class="time fr">
+                                        2019-06-26
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="column_item">
+                                <a href="#" class="clearfix">
+                                    <p class="name fl">
+                                        医疗机构执业许可证
+                                    </p>
+                                    <p class="time fr">
+                                        2019-06-26
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="column_item">
+                                <a href="#" class="clearfix">
+                                    <p class="name fl">
+                                        医疗机构执业许可证
+                                    </p>
+                                    <p class="time fr">
+                                        2019-06-26
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="pagePC">
+                            <el-pagination
+                                background
+                                @current-change="changePage"
+                                :page-size="page.pageSize"
+                                prev-text="上一页"
+                                next-text="下一页"
+                                :current-page.sync="page.pageNo"
+                                layout="prev, pager, next, jumper"
+                                :total="page.contentCount">
+                            </el-pagination>
+                        </div>
+                    </div> -->
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="${base}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script>
+    var aggregateDept = function(rows) {
+        var lastDept = ''
+        var lastRow = null
+        function aggregate(row) {
+            if (lastDept != row.departmentId) {
+                lastDept = row.departmentId
+                lastRow = row
+                lastRow.rowSpan = 1
+                lastRow.showDept = true
+            } else {
+                row.showDept = false
+                lastRow.rowSpan += 1
+            }
+        }
+        rows.forEach(aggregate)
+    }
+
+    Storage.prototype.setExpire = (key, value, expire) => {
+        let obj = {
+        data: value,
+        time: Date.now(),
+        expire: expire
+        };
+        //localStorage 设置的值不能为对象,转为json字符串
+        localStorage.setItem(key, JSON.stringify(obj));
+    }
+
+    Storage.prototype.getExpire = key => {
+        let val = localStorage.getItem(key);
+        if (!val) {
+            return val;
+        }
+        val = JSON.parse(val);
+        if (Date.now() - val.time > val.expire) {
+            localStorage.removeItem(key);
+            return null;
+        }
+        return val.data;
+    }
+
+    var fetchExpert = function() {
+        var KEY = 'expertList'
+        var list = localStorage.getExpire(KEY)
+        if (list) {
+            return Promise.resolve(list)
+        }
+        return ms.http.post("/cms/expert/list.do", {pageSize:9999}).then(function(res) {
+            localStorage.setExpire(KEY, res.data.rows, 30000)
+            return Promise.resolve(res.data.rows)
+        })
+    }
+    var router = new VueRouter({routes:[
+        {ms:channel type='son'}
+        <#if field.typeid='1460812497194229762' || field.typeid='1460812774580330498'>
+                {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template: '{ms:arclist size=1}'+
+'                        <div class="common_content" style="display: block;">'+
+'                            <div class="richText_wrap">'+
+'                                <div class="title">'+
+'                                    ${field.title}'+
+'                                </div>'+
+'                                <div class="rich">'+
+'                                    ${field.content}'+
+'                                </div>'+
+'                                <div class="shareView">'+
+'                                    分享到：'+
+'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt="">'+
+'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">'+
+'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">'+
+'                                </div>'+
+'                            </div>'+
+'                        </div>'+
+'                        {/ms:arclist}'
+                    }
+                },
+                <#elseif field.typeid='1460812663754235905' ||  field.typeid='1460813005791338498'>
+                {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template: '<div class="common_content">'+
+'                        <ul class="column_list">'+
+'                            <li class="column_item" v-for="item in listData" @click="handleDetail(item)">'+
+'                                <a href="#" class="clearfix">'+
+'                                    <p class="name fl">'+
+'                                        {{item.contentTitle}}'+
+'                                    </p>'+
+'                                    <p class="time fr">'+
+'                                        {{item.contentDatetime}}'+
+'                                    </p>'+
+'                                </a>'+
+'                            </li>'+
+'                        </ul>'+
+'                        <div class="pagePC" v-if="page.contentCount>10">'+
+'                            <el-pagination'+
+'                                background'+
+'                                @current-change="getQueryList"'+
+'                                :page-size="page.pageSize"'+
+'                                prev-text="上一页"'+
+'                                next-text="下一页"'+
+'                                :current-page.sync="page.pageNo"'+
+'                                layout="prev, pager, next, jumper"'+
+'                                :total="page.contentCount">'+
+'                            </el-pagination>'+
+'                        </div>'+
+'                    </div>',
+                        mixins: [mixin],
+                        data:function(){
+                            return {
+                                page:{
+                                    //当前页数
+                                    pageNo: 1,
+                                    //每页文章条数
+                                    pageSize: 10,
+                                    //页数总数
+                                    pageTotal: 0,
+                                    //内容总数
+                                    contentCount: 0
+                                },
+                                listData:[]
+                            }
+                        },
+                        mounted:function() {
+                            this.getQueryList();
+                        },
+                        methods:{
+                            getQueryList: function(pageCur) {
+                                var that = this
+                                that.page.pageNo = pageCur
+                                ms.http.post("/cms/content/list.do", Object.assign({}, {
+                                    categoryId: '${field.typeid}'
+                                }, that.page)).then(function(res) {
+                                    that.page.contentCount = res.data.total
+                                    that.listData = res.data.rows.map(function(row) {
+                                        if (row.contentImg) {
+                                            var img = JSON.parse(row.contentImg)
+                                            if (img.length > 0) {
+                                            row.imageUrl = '{ms:global.host/}' + img[0].path
+                                            }
+                                        }
+                                        if(row.contentDatetime){
+                                            var date = new Date(row.contentDatetime.replace(/-/g,'/'));
+                                            var yy = date.getFullYear();
+                                            var mm = date.getMonth() + 1;
+                                            var day = date.getDate();
+                                            var yymm = yy + '/' + mm
+                                            row.day = day;
+                                            row.yymm = yymm;
+                                        }
+                                        return row
+                                    })
+                                    console.log('listData:', that.listData)
+                                }).catch(function(err) {
+                                    console.error('error:', err)
+                                })
+                            },
+                            handleDetail:function(item){
+                                {ms:channel type='self'}
+                                    this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
+                                {/ms:channel}
+                            }
+                        }
+                    },
+                },
+                <#elseif field.typeid='1460812881845460994'>
+                {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template: ' <div class="common_content">'+
+'                        <div class="depart_map">'+
+'                            <ul class="tab_wrap">'+
+'                                <div class="tabs clearfix">'+
+'                                   {ms:channel type="son" orderby="sort"}'+
+'                                    <li class="tab <#if field.index==1> active</#if>">${field.typetitle}</li>'+
+'                                   {/ms:channel}'+
+'                                </div>'+
+'                            </ul>'+
+'                            {ms:channel type="son" orderby="sort"}'+
+'                            <div class="table_cont <#if field.index==1> active</#if>">'+
+'                            {ms:arclist}'+
+'                               ${field.content}'+
+'                            {/ms:arclist}'+
+'                            </div>'+
+'                            {/ms:channel}'+
+'                        </div>'+
+'                    </div>',
+                        data:function(){
+                            return {
+
+                            }
+                        },
+                        mounted:function() {
+                            $('.depart_map .tabs .tab').click(function(){
+                                $('.depart_map .tabs .tab').removeClass('active');
+                                $('.depart_map .table_cont').hide();
+                                $(this).addClass('active');
+                                let idx = $(this).index();
+                                $('.depart_map .table_cont').eq(idx).show();
+                            })
+                        },
+                        methods:{
+
+                        }
+                    }
+                },
+                <#elseif field.typeid='1465582294004097025'>
+                {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template:  `
+                        <div class="common_content visit" style="display: block;">
+                        <form action="">
+                            <div class="search_row clearfix">
+                                <p class="label fl">出诊信息查询</p>
+                                <input v-model.trim="departName" class="inp fl" type="text" placeholder="科室名称">
+                                <input v-model.trim="doctorName" class="inp fl" type="text" placeholder="医生名称">
+                                <button class="btn fl" @click="handleSearch">搜索</button>
+                            </div>
+                        </form>
+                        <div class="title">
+                            出诊时间表
+                        </div>
+                        <div class="tips">
+                            <span class="label">温馨提示：</span>
+                            这里为您提供的福州市第二医院门诊专家固定出诊安排表，由于门诊专家的其他安排造成的停诊情况，请咨询医院门诊导医台（85860666-2988），以免造成您就诊的不便。
+                        </div>
+                        <div class="bd" v-if="!isSearch">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th rowspan="2">科室</th>
+                                        <th rowspan="2"></th>
+                                        <th colspan="2" rowspan="1">
+                                            周一
+                                            <span class="english">Mon</span>
+                                        </th>
+                                        <th colspan="2" rowspan="1">
+                                            周二
+                                            <span class="english">Tue</span>
+                                        </th>
+                                        <th colspan="2" rowspan="1">
+                                            周三
+                                            <span class="english">Wed</span>
+                                        </th>
+                                        <th colspan="2" rowspan="1">
+                                            周四
+                                            <span class="english">Thur</span>
+                                        </th>
+                                        <th colspan="2" rowspan="1">
+                                            周五
+                                            <span class="english">Fri</span>
+                                        </th>
+                                        <th colspan="1" rowspan="1">
+                                            周六
+                                            <span class="english">Sat</span>
+                                        </th>
+                                        <th colspan="1" rowspan="1">
+                                            周日
+                                            <span class="english">Sun</span>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th>
+                                            上午
+                                            <p class="english">AM</p>
+                                        </th>
+                                        <th>
+                                            下午
+                                            <p class="english">PM</p>
+                                        </th>
+                                        <th>
+                                            上午
+                                            <p class="english">AM</p>
+                                        </th>
+                                        <th>
+                                            下午
+                                            <p class="english">PM</p>
+                                        </th>
+                                        <th>
+                                            上午
+                                            <p class="english">AM</p>
+                                        </th>
+                                        <th>
+                                            下午
+                                            <p class="english">PM</p>
+                                        </th>
+                                        <th>
+                                            上午
+                                            <p class="english">AM</p>
+                                        </th>
+                                        <th>
+                                            下午
+                                            <p class="english">PM</p>
+                                        </th>
+                                        <th>
+                                            上午
+                                            <p class="english">AM</p>
+                                        </th>
+                                        <th>
+                                            下午
+                                            <p class="english">PM</p>
+                                        </th>
+                                        <th>
+                                            上午
+                                            <p class="english">AM</p>
+                                        </th>
+                                        <th>
+                                            下午
+                                            <p class="english">PM</p>
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                            {ms:channel type='son'}
+                            <div class="content">
+                                <div class="label clearfix" colspan="14">
+                                    <p class="name fl">${field.typetitle}</p>
+                                    <p class="icon fr">
+                                        <span class="row">
+                                            <span class="column <#if field.index==1> active</#if>">
+    
+                                            </span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <#assign parentIndex=field.index />
+                                {ms:arclist size=1}
+                                <div class="child_table <#if parentIndex==1> active</#if>">
+                                  ${field.content}  
+                                </div>
+                                {/ms:arclist}
+                            </div>
+                            {/ms:channel}
+                        </div>
+                        <div class="search_bd" v-if="isSearch">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>科室</th>
+                                        <th width="100">姓名</th>
+                                        <th width="200">职称</th>
+                                        <th>主治</th>
+                                        <th>出诊时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for='line in queryList'>
+                                        <td @click="handleDept(line)" v-show="line.showDept" :rowspan="line.rowSpan" class="name departmentId">{{line.departmentName}}</td>
+                                        <td @click="handleRouter(line)">{{line.name}}</td>
+                                        <td>{{line.technicalTitle}}</td>
+                                        <td>{{line.goodAt}}</td>
+                                        <td>{{line.schedule}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                        `,
+                        data:function(){
+                            return {
+                                isSearch: false,
+                                departName: '',
+                                doctorName: '',
+                                localList: [],
+                                queryList: [],
+                                deptList:[]
+                            }
+                        },
+                        mounted:function() {
+                            $('.content .label').click(function(){
+                                $(this).find('.column').toggle();
+                                $(this).next('.child_table').toggle('active');
+                            })
+                        },
+                        created:function() {
+                            let that = this;
+                            that.list().then(function(res){
+                                let data = that.$route.query;
+                                if(data.departName||data.doctorName){
+                                    that.departName = data.departName;
+                                    if(data.doctorName.indexOf('#')!==-1){
+                                        that.doctorName = data.doctorName.split('#')[0]
+                                    }else {
+                                        that.doctorName = data.doctorName;
+                                    }
+                                    this.isSearch = true;
+                                    that.handleSearch();
+                                }else {
+                                    that.isSearch = false;
+                                }
+                            });
+                        },
+                        methods:{
+                            list: function() {
+                                var that = this
+                                
+                                return fetchExpert().then(function(list) {
+                                    that.localList = list;
+                                    aggregateDept(that.localList)
+                                    that.localList.forEach(function(item) {
+                                        let name = item.name.split('_');
+                                        if(name.length>1){
+                                            that.$set(item,'name',name[0])
+                                        }
+                                        if(item.showDept){
+                                            that.deptList.push(item)
+                                        }
+                                    })
+                                    return Promise.resolve(list);
+                                }).catch(function(err) {
+                                    console.error('error:', err)
+                                })
+                            },
+                            handleSearch(){
+                                debugger
+                                if(this.doctorName!=''&&this.departName==''){
+                                    this.queryList = this.localList.filter(item=>{
+                                        if(this.doctorName!=''){
+                                            return RegExp(this.doctorName).test(item.name)
+                                        }
+                                    })
+                                    this.isSearch = true;
+                                }else if(this.departName!=''&&this.doctorName==''){
+                                    this.queryList = this.localList.filter(item=>{
+                                        if(this.departName!=''){
+                                            return RegExp(this.departName).test(item.departmentName)
+                                        }
+                                    })
+                                    this.isSearch = true;
+                                }else if(this.departName!=''&&this.doctorName!=''){
+                                    this.queryList = this.localList.filter(item=>{
+                                        return RegExp(this.departName).test(item.departmentName) && RegExp(this.doctorName).test(item.name);
+                                    })
+                                    this.isSearch = true;
+                                }
+                                else{
+                                    this.isSearch = false;
+                                    setTimeout(function(){
+                                        $('.content .label').click(function(){
+                                            $(this).find('.column').toggle();
+                                            $(this).next('.child_table').toggle('active');
+                                        })
+                                    },200)
+                                }
+                                // if(this.departName!=''||this.doctorName!=''){
+                                //     this.departName = this.departName.replace(/[\s]+/g,'')
+                                //     this.doctorName = this.doctorName.replace(/[\s]+/g,'')
+                                //     this.isSearch = true;
+                                // }else {
+                                //     this.isSearch = false;
+                                // }
+                            },
+                            handleRouter: function(item){
+                                window.open("{ms:global.url/}${'/page/expert/detail.html'}?id="+ item.id )
+                            },
+                            // 跳转部门
+                            handleDept(item){
+                                window.open("{ms:global.url/}"+ item.departmentPath  + '/index.html')
+                            },
+                        }
+                    }
+                },
+            </#if>
+        {/ms:channel}
+    ]})
+    var app = new Vue({
+        router:router,
+        mixins:[mixin],
+        data:function(){
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                hasRoute: true
+            }
+        },
+        created:function(){
+            {ms:channel type='son' size=1}
+            console.log('${field.typepath}')
+            if (this.$route.path == '/') {
+                this.push('${field.typepath}')
+            }
+            {/ms:channel}
+        },
+        methods: {
+        },
+    }).$mount('#app')
+</script>
+</html>

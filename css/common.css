@@ -39,6 +39,7 @@
     position: absolute;
     left: calc(50% - 6px);
     bottom: -8px;
+    background: #fff;
 }
 .wrapper .center .common_content{
     /* display: none; */

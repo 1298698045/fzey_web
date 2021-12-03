@@ -332,7 +332,7 @@
 
             departmentList: function() {
                 var that = this
-                var parentId = '1459054215978233857'
+                var parentId = '1400724656644583425'
                 return ms.http.get('/cms/category/list.do', 
                     {categoryParentIds: parentId, pageSize:99999}).then(function (res) {
                         // console.log(that.getTreeData(res.data.rows),'=====')

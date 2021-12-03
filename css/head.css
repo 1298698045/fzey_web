@@ -174,7 +174,7 @@
 .rightBar{
     width: 90px;
     position: fixed;
-    top: 350px;
+    top: 210px;
     right: 0;
     z-index: 999;
 }
@@ -183,14 +183,12 @@
     height: 85px;
     cursor: pointer;
     text-align: center;
-    padding-top: 15px;
-    box-sizing: border-box;
+    padding-top: 1px;
     margin-bottom: 1px;
     background: rgba(127, 14, 18, .8);
 }
 .rightBar .bar_cont .item:hover{
     background: #fff;
-    box-sizing: border-box;
 }
 .rightBar .bar_cont .item:last-child{
     margin-bottom: 0;
@@ -198,7 +196,7 @@
 .rightBar .bar_cont .item .icon{
     width: 30px;
     height: 30px;
-    margin: 0 auto;
+    margin: 15px auto 0;
 }
 .rightBar .bar_cont .item .icon img{
     width: 100%;

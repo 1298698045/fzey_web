@@ -7,33 +7,41 @@
             </p>
             <p class="text">预约挂号</p>
         </li>
-        <li class="item">
+        {ms:channel type='self' size=1 typeid='1465582294004097025'}
+        <li class="item" @click="goto('{ms:global.host/}/${field.typeurl}')">
             <p class="icon">
                 <img class="default" src="{ms:global.host/}/{ms:global.style/}/images/pic-2-c.png" alt="">
                 <img src="{ms:global.host/}/{ms:global.style/}/images/pic-2-b.png" alt="" class="active">
             </p>
             <p class="text">专家门诊</p>
         </li>
+        {/ms:channel}
+        {ms:channel type='self' size=1 typeid='1460812497194229762'}
         <li class="item">
-            <p class="icon">
+            <p class="icon" @click="goto('{ms:global.host/}/${field.typeurl}')">
                 <img class="default" src="{ms:global.host/}/{ms:global.style/}/images/pic-3-c.png" alt="">
                 <img src="{ms:global.host/}/{ms:global.style/}/images/pic-3-b.png" alt="" class="active">
             </p>
             <p class="text">就医须知</p>
         </li>
-        <li class="item">
+        {/ms:channel}
+        {ms:channel type='self' size=1 typeid='1459088027093250049'}
+        <li class="item" @click="goto('{ms:global.host/}/${field.typeurl}')">
             <p class="icon">
                 <img class="default" src="{ms:global.host/}/{ms:global.style/}/images/pic-4-c.png" alt="">
                 <img src="{ms:global.host/}/{ms:global.style/}/images/pic-4-b.png" alt="" class="active">
             </p>
             <p class="text">交通指南</p>
         </li>
-        <li class="item">
+        {/ms:channel}
+        {ms:channel type='self' size=1 typeid='1459087626331697154'}
+        <li class="item" @click="goto('{ms:global.host/}/${field.typeurl}')">
             <p class="icon">
                 <img class="default" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-c.png" alt="">
                 <img src="{ms:global.host/}/{ms:global.style/}/images/pic-5-b.png" alt="" class="active">
             </p>
             <p class="text">科室分布</p>
         </li>
+        {/ms:channel}
     </ul>
  </div>
