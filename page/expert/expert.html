@@ -163,7 +163,7 @@
                     </div>
                     <div class="right fr">
                         共
-                        <span class="num">30</span>
+                        <span class="num">{{page.contentCount || 0}}</span>
                         个专家
                     </div>
                 </div>
@@ -225,7 +225,8 @@
 <script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
 <!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
-<script src="${base}/static/plugins/ms/1.0.0/ms.util.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/msUtil.js"></script>
+<!-- <script src="${base}/static/plugins/ms/1.0.0/ms.util.js"></script> -->
 <script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
 <script>
     var app = new Vue({
@@ -267,18 +268,18 @@
             changePage:function(e){
 
             },
-            getCheck(item){
+            getCheck:function(item){
                 console.log(item);
                 this.departmentId = item.id;
                 this.departmentName = item.categoryTitle;
                 this.list();
             },
-            handleCancel(){
+            handleCancel:function(){
                 this.departmentId = '';
                 this.departmentName = '';
                 this.list();
             },
-            handleTab(line,index){
+            handleTab:function(line,index){
                 this.idx = index;
                 if(line.contentType!=''){
                     this.departmentId = '';
@@ -325,9 +326,12 @@
                         console.error('error:', err)
                     })
             },
-            unique(arr){
-                const res = new Map();
-                return arr.filter(item=>!res.has(item.jobNumber)&&res.set(item.jobNumber,1));
+            unique:function(arr){
+                var res = new Map();
+                // return arr.filter(item=>!res.has(item.jobNumber)&&res.set(item.jobNumber,1));
+                return arr.filter(function(item){
+                    return !res.has(item.jobNumber)&&res.set(item.jobNumber,1);
+                })
             },
 
             departmentList: function() {
@@ -373,12 +377,24 @@
                         return Promise.reject(err)
                     })
             },
-            getTreeData(arr,id){
-                let parents = arr.filter(item => item.id==id); //取出根节点
-                let childrens = arr.filter(item => item.parentids.indexOf(id)!=-1);//取出子节点
+            getTreeData:function(arr,id){
+                var parents = arr.filter(function(item){
+                    return item.id==id
+                }); //取出根节点
+                var childrens = arr.filter(function(item){ 
+                    return item.parentids.indexOf(id)!=-1
+                }); //取出子节点
                 function translator(parents, childrens) {
-                    parents.forEach(item => {
-                        childrens.forEach(items => {
+                    // parents.forEach(item => {
+                    //     childrens.forEach(items => {
+                    //         if (items.parentids.indexOf(item.id)!=-1) {
+                    //             item.children ? item.children.push(items) : item.children = [items];
+                    //             translator([items], childrens);
+                    //         }
+                    //     })
+                    // })
+                    parents.forEach(function(item){
+                        childrens.forEach(function(items){
                             if (items.parentids.indexOf(item.id)!=-1) {
                                 item.children ? item.children.push(items) : item.children = [items];
                                 translator([items], childrens);
@@ -389,10 +405,10 @@
                 translator(parents,childrens)
                 return parents;
             },
-            handleDept(item){
+            handleDept:function(item){
                 window.open("{ms:global.url/}"+ item.departmentPath +'/index.html');
             },
-            handleDetail(item){
+            handleDetail:function(item){
                 {ms:channel type='self'}
                 this.goto("{ms:global.url/}${'/page/expert/detail.html'}?id="+ item.id )
                 {/ms:channel}

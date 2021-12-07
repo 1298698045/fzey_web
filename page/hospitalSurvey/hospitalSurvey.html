@@ -235,7 +235,7 @@
                     name: '${field.typetitle}',
                     component: {
                         template: '{ms:arclist size=1 artid="1461273063448047618"}'+
-'                        <div class="common_content" style="display: block;">'+
+'                        <div class="common_content" style="display: block;" desc="${field.descrip}" title="${field.title}">'+
 '                            <div class="richText_wrap">'+
 '                                <div class="title">'+
 '                                    ${field.title}'+
@@ -245,13 +245,25 @@
 '                                </div>'+
 '                                <div class="shareView">'+
 '                                    分享到：'+
-'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt="">'+
-'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">'+
-'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">'+
+'                                    <img class="bds_tsina" src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">'+
+'                                    <img class="bds_qzone" src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">'+
 '                                </div>'+
 '                            </div>'+
 '                        </div>'+
-'                        {/ms:arclist}'
+'                        {/ms:arclist}',
+                        mounted:function() {
+                            var share_config = {
+                                'bdText': $('.common_content').attr('title'),
+                                'bdUrl': location.href,
+                                'bdDesc': $('.common_content').attr('desc')
+                            };
+                            $('.bds_tsina').click(function(){
+                                window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + share_config.bdUrl)
+                            })
+                            $('.bds_qzone').click(function(){
+                                window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+share_config.bdUrl+'&title='+share_config.bdText+'&desc='+share_config.bdDesc)
+                            })
+                        },
                     }
                 },
             <#elseif field.typeid='1459087626331697154'>
@@ -260,7 +272,7 @@
                     name: '${field.typetitle}',
                     component: {
                         template: '{ms:arclist size=1 artid="1461300948984590337"}'+
-'                        <div class="common_content" style="display: block;">'+
+'                        <div class="common_content" style="display: block;" desc="${field.descrip}" title="${field.title}">'+
 '                            <div class="richText_wrap">'+
 '                                <div class="title">'+
 '                                    ${field.title}'+
@@ -270,13 +282,25 @@
 '                                </div>'+
 '                                <div class="shareView">'+
 '                                    分享到：'+
-'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt="">'+
-'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">'+
-'                                    <img src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">'+
+'                                    <img class="bds_tsina" src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">'+
+'                                    <img class="bds_qzone" src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">'+
 '                                </div>'+
 '                            </div>'+
 '                        </div>'+
-'                        {/ms:arclist}'
+'                        {/ms:arclist}',
+                        mounted:function() {
+                            var share_config = {
+                                'bdText': $('.common_content').attr('title'),
+                                'bdUrl': location.href,
+                                'bdDesc': $('.common_content').attr('desc')
+                            };
+                            $('.bds_tsina').click(function(){
+                                window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + share_config.bdUrl)
+                            })
+                            $('.bds_qzone').click(function(){
+                                window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+share_config.bdUrl+'&title='+share_config.bdText+'&desc='+share_config.bdDesc)
+                            })
+                        },
                     }
                 },
             <#elseif field.typeid='1459087150320136193' ||  field.typeid='1459087394327965697'>
@@ -374,7 +398,7 @@
                     name: '${field.typetitle}',
                     component: {
                         template: '{ms:arclist size=1 artid="1461545074451714050"}'+
-'                       <div class="common_content">'+
+'                       <div class="common_content" desc="${field.descrip}" title="${field.title}">'+
 '                        <div class="richText_wrap">'+
 '                            <div class="title">'+
 '                                ${field.title}'+
@@ -387,9 +411,8 @@
 '                            </div>'+
 '                            <div class="shareView">'+
 '                                分享到：'+
-'                                <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt="">'+
-'                                <img src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">'+
-'                                <img src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">'+
+'                                <img class="bds_tsina" src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">'+
+'                                <img class="bds_qzone" src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">'+
 '                            </div>'+
 '                        </div>'+
 '                    </div>'+
@@ -398,6 +421,19 @@
                             return {
 
                             }
+                        },
+                        mounted:function() {
+                            var share_config = {
+                                'bdText': $('.common_content').attr('title'),
+                                'bdUrl': location.href,
+                                'bdDesc': $('.common_content').attr('desc')
+                            };
+                            $('.bds_tsina').click(function(){
+                                window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + location.href)
+                            })
+                            $('.bds_qzone').click(function(){
+                                window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+share_config.bdUrl+'&title='+share_config.bdText+'&desc='+share_config.bdDesc)
+                            })
                         },
                         created:function() {
                             this.$nextTick(function(){

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>护理园地</title>
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/common.css">
+    <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <style>
+        .container {
+            padding: 20px 0 100px 0;
+        }
+        .container .box{
+            width: 394px;
+            height: 202px;
+            background: #ffffff;
+            box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #bf9e6c;
+            margin-top: 40px;
+            padding: 20px 30px;
+            box-sizing: border-box;
+            margin-right: 49px;
+            cursor: pointer;
+        }
+        .container .box:nth-child(3n){
+            margin-right: 0;
+        }
+        .container .box .time{
+            font-size: 14px;
+            color: #999999;
+        }
+        .container .box .title{
+            font-size: 22px;
+            font-weight: bold;
+            color: #333333;
+            padding: 5px 0;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+        .container .box .desc{
+            font-size: 14px;
+            color: #666666;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id='app' v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <div class="banner">
+                <img src="{ms:global.host/}{ms:global.style/}/images/yygk_banner.jpg" alt="">
+            </div>
+            <div class="container fixedWidth">
+                <div class="panel clearfix">
+                    <div class="box fl" v-for="item in listData" @click="handleDetail(item)">
+                        <p class="time">
+                            {{item.contentDatetime}}
+                        </p>
+                        <p class="title">
+                            {{item.contentTitle}}
+                        </p>
+                        <p class="desc">
+                            {{item.contentDescription}}
+                        </p>
+                    </div>
+                </div>
+                <div class="pagePC" v-if="page.contentCount>12">
+                    <el-pagination
+                        background
+                        @current-change="getQueryList"
+                        :page-size="page.pageSize"
+                        prev-text="上一页"
+                        next-text="下一页"
+                        :current-page.sync="page.pageNo"
+                        layout="prev, pager, next, jumper"
+                        :total="page.contentCount">
+                    </el-pagination>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="${base}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script>
+    var app = new Vue({
+        mixins:[mixin],
+        data:function(){
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                page:{
+                    //当前页数
+                    pageNo: 1,
+                    //每页文章条数
+                    pageSize: 12,
+                    //页数总数
+                    pageTotal: 0,
+                    //内容总数
+                    contentCount: 1000
+                },
+                listData:[]
+            }
+        },
+        created:function() {
+            this.getQueryList();
+        },
+        methods: {
+            getQueryList: function(pageCur) {
+                var that = this
+                that.page.pageNo = pageCur
+                ms.http.post("/cms/content/list.do", Object.assign({}, {
+                    categoryId: '${field.typeid}'
+                }, that.page)).then(function(res) {
+                    that.page.contentCount = res.data.total
+                    that.listData = res.data.rows.map(function(row) {
+                        if (row.contentImg) {
+                            var img = JSON.parse(row.contentImg)
+                            if (img.length > 0) {
+                            row.imageUrl = '{ms:global.host/}' + img[0].path
+                            }
+                        }
+                        if(row.contentDatetime){
+                            var date = new Date(row.contentDatetime.replace(/-/g,'/'));
+                            var yy = date.getFullYear();
+                            var mm = date.getMonth() + 1;
+                            var day = date.getDate();
+                            var yymm = yy + '/' + mm
+                            row.day = day;
+                            row.yymm = yymm;
+                        }
+                        return row
+                    })
+                    console.log('listData:', that.listData)
+                }).catch(function(err) {
+                    console.error('error:', err)
+                })
+            },
+            handleDetail:function(item){
+                {ms:channel type='self'}
+                    this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
+                {/ms:channel}
+            }
+        },
+    }).$mount('#app')
+</script>
+</html>

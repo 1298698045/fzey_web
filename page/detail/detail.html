@@ -36,7 +36,7 @@
                 <div class="content fixedWidth">
                     <div class="common_content" style="display: block;">
                         <div class="richText_wrap">
-                            <div class="title">
+                            <div class="title" title="${field.title}">
                                 ${field.title}
                                 <div class="row">
                                     来源：${field.source}<span class="time">
@@ -44,14 +44,14 @@
                                     </span>浏览量：${field.hit}
                                 </div>
                             </div>
-                            <div class="rich">
+                            <div class="rich" desc="${field.descrip}">
                                 ${field.content}
                             </div>
                             <div class="shareView">
                                 分享到：
-                                <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt="">
-                                <img src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">
-                                <img src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">
+                                <!-- <img src="{ms:global.host/}{ms:global.style/}/images/share_01.png" alt=""> -->
+                                <img class="bds_tsina" src="{ms:global.host/}{ms:global.style/}/images/share_02.png" alt="">
+                                <img class="bds_qzone" src="{ms:global.host/}{ms:global.style/}/images/share_03.png" alt="">
                             </div>
                         </div>
                     </div>
@@ -128,7 +128,21 @@
             }
         },
         methods: {
+            handleRouteWechat:function(){
+
+            }
         },
     }).$mount('#app')
+    var share_config = {
+        'bdText': $('.title').attr('title'),
+        'bdUrl': location.href,
+        'bdDesc': $('.rich').attr('desc')
+    };
+    $('.bds_tsina').click(function(){
+        window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + share_config.bdUrl)
+    })
+    $('.bds_qzone').click(function(){
+        window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+share_config.bdUrl+'&title='+share_config.bdText+'&desc='+share_config.bdDesc.slice(0,60))
+    })
 </script>
 </html>

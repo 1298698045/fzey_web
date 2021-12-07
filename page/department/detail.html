@@ -195,7 +195,8 @@
 <script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
 <!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
-<script src="${base}/static/plugins/ms/1.0.0/ms.util.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/msUtil.js"></script>
+<!-- <script src="${base}/static/plugins/ms/1.0.0/ms.util.js"></script> -->
 <script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
 <script>
     var app = new Vue({
@@ -215,7 +216,7 @@
                 var page = {pageNo: 1,pageSize: 100}
                 ms.http.post("/cms/expert/list.do", Object.assign({}, {
                     {ms:channel type='self'}
-                    departmentId:`${field.typeid}`
+                    departmentId:'${field.typeid}'
                     {/ms:channel}
                 }, page)).then(function(res) {
                     //that.page.contentCount = res.data.total
@@ -238,7 +239,7 @@
                         }
                         return row
                     })
-                    let temp = that.lines.filter(item=>{
+                    let temp = that.lines.filter(function(item){
                         return item.jobNumber.indexOf('-') == -1
                     })
                     that.lines = temp;
@@ -248,7 +249,7 @@
                     console.error('error:', err)
                 })
             },
-            handleRoute(item){
+            handleRoute:function(item){
                 {ms:channel type='self'}
                 this.goto("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
                 {/ms:channel}

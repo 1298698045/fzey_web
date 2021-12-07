@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1300px"/>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> -->
     <title>{ms:global.name/}</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/index.css">
@@ -548,7 +549,7 @@
                                 typetitle: "${field.typetitle}",
                                 typelink: "{ms:global.url/}${field.typelink}",
                                 {ms:arclist flag='c' size=1}
-                                descrip: `${field.descrip}`,
+                                descrip: "${field.descrip}",
                                 image: "{ms:global.host/}{@ms:file field.litpic/}"
                                 {/ms:arclist}
                             },
@@ -566,7 +567,7 @@
             window.addEventListener('scroll',this.handleSroll)
         },
         methods: {
-            handleMore(){
+            handleMore:function(){
                 switch(this.noticeIdx){
                     case 0:
                         {ms:channel typeid='1460811013253668866' type='self'}
