@@ -104,6 +104,10 @@
     height: 100px;
     background: #fff;
 }
+.footer .footer_center .cen_view .cen_r .box_wrap .box .code_img img{
+    width: 100%;
+    height: 100%;
+}
 .footer .footer_center .cen_view .cen_r .box_wrap .box:last-child{
     margin-right: 0;
 }

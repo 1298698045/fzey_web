@@ -27,24 +27,18 @@
                 </div>
             </div>
             <div class="cen_r fr">
+                {ms:channel typeid='1425296884772192257' type='self'}
                 <ul class="box_wrap">
+                    {ms:arclist orderby='sort'}
                    <li class="box">
-                       <div class="code_img"></div>
-                       <p class="name">官方微博</p>
+                       <div class="code_img">
+                           <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                       </div>
+                       <p class="name">${field.title}</p>
                    </li>
-                   <li class="box">
-                       <div class="code_img"></div>
-                       <p class="name">官方微信订阅号</p>
-                   </li>
-                   <li class="box">
-                       <div class="code_img"></div>
-                       <p class="name">官方微信服务号</p>
-                   </li>
-                   <li class="box">
-                       <div class="code_img"></div>
-                       <p class="name">官方抖音</p>
-                   </li>
+                   {/ms:arclist}
                 </ul>
+                {/ms:channel}
             </div>
         </div>
     </div>
