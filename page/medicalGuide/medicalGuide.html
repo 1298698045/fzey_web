@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/footer.css">
     <link rel="stylesheet" href="{ms:global.host/}{ms:global.style/}/css/common.css">
     <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.ico" type="image/x-icon" />
     <style>
         .depart_map .tab_wrap{
             width: 100%;
@@ -189,6 +190,20 @@
         }
         .visit .content .child_table table + p{
             display: none;
+        }
+        .visit .content .child_table table p span{
+            font-size: 16px !important;
+        }
+        .visit .content .child_table table p a:hover{
+            cursor: pointer;
+            text-decoration: underline;
+            color: #7f0e12 !important;
+        }
+        .visit .content .child_table table p a:hover span{
+            color: #7f0e12 !important;
+        }
+        .visit .content .child_table table p a span{
+            font-size: 16px !important;
         }
         .search_bd table{
             width: 100%;
@@ -455,8 +470,263 @@
         })
     }
     var router = new VueRouter({routes:[
-        {ms:channel type='son'}
-        <#if field.typeid='1460812497194229762' || field.typeid='1460812774580330498'>
+        {ms:channel type='son' orderby='sort'}
+        <#if field.typeid='1465582294004097025'>
+        {
+            path: '${field.typepath}',
+            name: '${field.typetitle}',
+            component: {
+                template:  '<div class="common_content visit" style="display: block;">'+
+'                            <div class="search_row clearfix">'+
+'                                <p class="label fl">出诊信息查询</p>'+
+'                                <input v-model.trim="departName" class="inp fl" type="text" placeholder="科室名称">'+
+'                                <input v-model.trim="doctorName" class="inp fl" type="text" placeholder="医生名称">'+
+'                                <button class="btn fl" @click="handleSearch">搜索</button>'+
+'                            </div>'+
+'                        <div class="title">'+
+'                            出诊时间表'+
+'                        </div>'+
+'                        <div class="tips">'+
+'                            <span class="label">温馨提示：</span>'+
+'                            这里为您提供的福州市第二医院门诊专家固定出诊安排表，由于门诊专家的其他安排造成的停诊情况，请咨询医院门诊导医台（85860666-2988），以免造成您就诊的不便。'+
+'                        </div>'+
+'                        <div class="bd" v-if="!isSearch">'+
+'                            <table class="table">'+
+'                                <thead>'+
+'                                    <tr>'+
+'                                        <th rowspan="2">科室</th>'+
+'                                        <th rowspan="2"></th>'+
+'                                        <th colspan="2" rowspan="1">'+
+'                                            周一'+
+'                                            <span class="english">Mon</span>'+
+'                                        </th>'+
+'                                        <th colspan="2" rowspan="1">'+
+'                                            周二'+
+'                                            <span class="english">Tue</span>'+
+'                                        </th>'+
+'                                        <th colspan="2" rowspan="1">'+
+'                                            周三'+
+'                                            <span class="english">Wed</span>'+
+'                                        </th>'+
+'                                        <th colspan="2" rowspan="1">'+
+'                                            周四'+
+'                                            <span class="english">Thur</span>'+
+'                                        </th>'+
+'                                        <th colspan="2" rowspan="1">'+
+'                                            周五'+
+'                                            <span class="english">Fri</span>'+
+'                                        </th>'+
+'                                        <th colspan="1" rowspan="1">'+
+'                                            周六'+
+'                                            <span class="english">Sat</span>'+
+'                                        </th>'+
+'                                        <th colspan="1" rowspan="1">'+
+'                                            周日'+
+'                                            <span class="english">Sun</span>'+
+'                                        </th>'+
+'                                    </tr>'+
+'                                    <tr>'+
+'                                        <th>'+
+'                                            上午'+
+'                                            <p class="english">AM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            下午'+
+'                                            <p class="english">PM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            上午'+
+'                                            <p class="english">AM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            下午'+
+'                                            <p class="english">PM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            上午'+
+'                                            <p class="english">AM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            下午'+
+'                                            <p class="english">PM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            上午'+
+'                                            <p class="english">AM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            下午'+
+'                                            <p class="english">PM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            上午'+
+'                                            <p class="english">AM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            下午'+
+'                                            <p class="english">PM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            上午'+
+'                                            <p class="english">AM</p>'+
+'                                        </th>'+
+'                                        <th>'+
+'                                            下午'+
+'                                            <p class="english">PM</p>'+
+'                                        </th>'+
+'                                    </tr>'+
+'                                </thead>'+
+'                            </table>'+
+'                            {ms:channel type="son"}'+
+'                            <div class="content">'+
+'                                <div class="label clearfix" colspan="14">'+
+'                                    <p class="name fl">${field.typetitle}</p>'+
+'                                    <p class="icon fr">'+
+'                                        <span class="row">'+
+'                                            <span class="column <#if field.index==1> active</#if>">'+
+'    '+
+'                                            </span>'+
+'                                        </span>'+
+'                                    </p>'+
+'                                </div>'+
+'                                <#assign parentIndex=field.index />'+
+'                                {ms:arclist size=1}'+
+'                                <div class="child_table <#if parentIndex==1> active</#if>">'+
+'                                  ${field.content}  '+
+'                                </div>'+
+'                                {/ms:arclist}'+
+'                            </div>'+
+'                            {/ms:channel}'+
+'                        </div>'+
+'                        <div class="search_bd" v-if="isSearch">'+
+'                            <table>'+
+'                                <thead>'+
+'                                    <tr>'+
+'                                        <th>科室</th>'+
+'                                        <th width="100">姓名</th>'+
+'                                        <th width="200">职称</th>'+
+'                                        <th>主治</th>'+
+'                                        <th>出诊时间</th>'+
+'                                    </tr>'+
+'                                </thead>'+
+'                                <tbody>'+
+'                                    <tr v-for=\'line in queryList\'>'+
+'                                        <td @click="handleDept(line)" v-show="line.showDept" :rowspan="line.rowSpan" class="name departmentId">{{line.departmentName}}</td>'+
+'                                        <td @click="handleRouter(line)">{{line.name}}</td>'+
+'                                        <td>{{line.technicalTitle}}</td>'+
+'                                        <td>{{line.goodAt}}</td>'+
+'                                        <td>{{line.schedule}}</td>'+
+'                                    </tr>'+
+'                                </tbody>'+
+'                            </table>'+
+'                        </div>'+
+'                    </div>',
+                data:function(){
+                    return {
+                        isSearch: false,
+                        departName: '',
+                        doctorName: '',
+                        localList: [],
+                        queryList: [],
+                        deptList:[]
+                    }
+                },
+                mounted:function() {
+                    $('.content .label').click(function(){
+                        $(this).find('.column').toggle();
+                        $(this).next('.child_table').toggle('active');
+                    })
+                },
+                created:function() {
+                    let that = this;
+                    that.list().then(function(res){
+                        let data = that.$route.query;
+                        if(data.departName||data.doctorName){
+                            that.departName = data.departName;
+                            if(data.doctorName.indexOf('#')!==-1){
+                                that.doctorName = data.doctorName.split('#')[0]
+                            }else {
+                                that.doctorName = data.doctorName;
+                            }
+                            this.isSearch = true;
+                            that.handleSearch();
+                        }else {
+                            that.isSearch = false;
+                        }
+                    });
+                },
+                methods:{
+                    list: function() {
+                        var that = this
+                        
+                        return fetchExpert().then(function(list) {
+                            that.localList = list;
+                            aggregateDept(that.localList)
+                            that.localList.forEach(function(item) {
+                                let name = item.name.split('_');
+                                if(name.length>1){
+                                    that.$set(item,'name',name[0])
+                                }
+                                if(item.showDept){
+                                    that.deptList.push(item)
+                                }
+                            })
+                            return Promise.resolve(list);
+                        }).catch(function(err) {
+                            console.error('error:', err)
+                        })
+                    },
+                    handleSearch:function(){
+                        debugger
+                        var that = this;
+                        if(that.doctorName!=''&&that.departName==''){
+                            that.queryList = that.localList.filter(function(item){
+                                if(that.doctorName!=''){
+                                    return RegExp(that.doctorName).test(item.name)
+                                }
+                            })
+                            that.isSearch = true;
+                        }else if(that.departName!=''&&that.doctorName==''){
+                            that.queryList = that.localList.filter(function(item){
+                                if(that.departName!=''){
+                                    return RegExp(that.departName).test(item.departmentName)
+                                }
+                            })
+                            that.isSearch = true;
+                        }else if(that.departName!=''&&that.doctorName!=''){
+                            that.queryList = that.localList.filter(function(item){
+                                return RegExp(that.departName).test(item.departmentName) && RegExp(that.doctorName).test(item.name);
+                            })
+                            that.isSearch = true;
+                        }
+                        else{
+                            that.isSearch = false;
+                            setTimeout(function(){
+                                $('.content .label').click(function(){
+                                    $(this).find('.column').toggle();
+                                    $(this).next('.child_table').toggle('active');
+                                })
+                            },200)
+                        }
+                        // if(this.departName!=''||this.doctorName!=''){
+                        //     this.departName = this.departName.replace(/[\s]+/g,'')
+                        //     this.doctorName = this.doctorName.replace(/[\s]+/g,'')
+                        //     this.isSearch = true;
+                        // }else {
+                        //     this.isSearch = false;
+                        // }
+                    },
+                    handleRouter: function(item){
+                        window.open("{ms:global.url/}${'/page/expert/detail.html'}?id="+ item.id )
+                    },
+                    // 跳转部门
+                    handleDept:function(item){
+                        window.open("{ms:global.url/}"+ item.departmentPath  + '/index.html')
+                    },
+                }
+            }
+        },
+        <#elseif field.typeid='1460812497194229762' || field.typeid='1460812774580330498'>
                 {
                     path: '${field.typepath}',
                     name: '${field.typetitle}',
@@ -612,262 +882,7 @@
                         }
                     }
                 },
-                <#elseif field.typeid='1465582294004097025'>
-                {
-                    path: '${field.typepath}',
-                    name: '${field.typetitle}',
-                    component: {
-                        template:  '<div class="common_content visit" style="display: block;">'+
-'                        <form action="">'+
-'                            <div class="search_row clearfix">'+
-'                                <p class="label fl">出诊信息查询</p>'+
-'                                <input v-model.trim="departName" class="inp fl" type="text" placeholder="科室名称">'+
-'                                <input v-model.trim="doctorName" class="inp fl" type="text" placeholder="医生名称">'+
-'                                <button class="btn fl" @click="handleSearch">搜索</button>'+
-'                            </div>'+
-'                        </form>'+
-'                        <div class="title">'+
-'                            出诊时间表'+
-'                        </div>'+
-'                        <div class="tips">'+
-'                            <span class="label">温馨提示：</span>'+
-'                            这里为您提供的福州市第二医院门诊专家固定出诊安排表，由于门诊专家的其他安排造成的停诊情况，请咨询医院门诊导医台（85860666-2988），以免造成您就诊的不便。'+
-'                        </div>'+
-'                        <div class="bd" v-if="!isSearch">'+
-'                            <table class="table">'+
-'                                <thead>'+
-'                                    <tr>'+
-'                                        <th rowspan="2">科室</th>'+
-'                                        <th rowspan="2"></th>'+
-'                                        <th colspan="2" rowspan="1">'+
-'                                            周一'+
-'                                            <span class="english">Mon</span>'+
-'                                        </th>'+
-'                                        <th colspan="2" rowspan="1">'+
-'                                            周二'+
-'                                            <span class="english">Tue</span>'+
-'                                        </th>'+
-'                                        <th colspan="2" rowspan="1">'+
-'                                            周三'+
-'                                            <span class="english">Wed</span>'+
-'                                        </th>'+
-'                                        <th colspan="2" rowspan="1">'+
-'                                            周四'+
-'                                            <span class="english">Thur</span>'+
-'                                        </th>'+
-'                                        <th colspan="2" rowspan="1">'+
-'                                            周五'+
-'                                            <span class="english">Fri</span>'+
-'                                        </th>'+
-'                                        <th colspan="1" rowspan="1">'+
-'                                            周六'+
-'                                            <span class="english">Sat</span>'+
-'                                        </th>'+
-'                                        <th colspan="1" rowspan="1">'+
-'                                            周日'+
-'                                            <span class="english">Sun</span>'+
-'                                        </th>'+
-'                                    </tr>'+
-'                                    <tr>'+
-'                                        <th>'+
-'                                            上午'+
-'                                            <p class="english">AM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            下午'+
-'                                            <p class="english">PM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            上午'+
-'                                            <p class="english">AM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            下午'+
-'                                            <p class="english">PM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            上午'+
-'                                            <p class="english">AM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            下午'+
-'                                            <p class="english">PM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            上午'+
-'                                            <p class="english">AM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            下午'+
-'                                            <p class="english">PM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            上午'+
-'                                            <p class="english">AM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            下午'+
-'                                            <p class="english">PM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            上午'+
-'                                            <p class="english">AM</p>'+
-'                                        </th>'+
-'                                        <th>'+
-'                                            下午'+
-'                                            <p class="english">PM</p>'+
-'                                        </th>'+
-'                                    </tr>'+
-'                                </thead>'+
-'                            </table>'+
-'                            {ms:channel type="son"}'+
-'                            <div class="content">'+
-'                                <div class="label clearfix" colspan="14">'+
-'                                    <p class="name fl">${field.typetitle}</p>'+
-'                                    <p class="icon fr">'+
-'                                        <span class="row">'+
-'                                            <span class="column <#if field.index==1> active</#if>">'+
-'    '+
-'                                            </span>'+
-'                                        </span>'+
-'                                    </p>'+
-'                                </div>'+
-'                                <#assign parentIndex=field.index />'+
-'                                {ms:arclist size=1}'+
-'                                <div class="child_table <#if parentIndex==1> active</#if>">'+
-'                                  ${field.content}  '+
-'                                </div>'+
-'                                {/ms:arclist}'+
-'                            </div>'+
-'                            {/ms:channel}'+
-'                        </div>'+
-'                        <div class="search_bd" v-if="isSearch">'+
-'                            <table>'+
-'                                <thead>'+
-'                                    <tr>'+
-'                                        <th>科室</th>'+
-'                                        <th width="100">姓名</th>'+
-'                                        <th width="200">职称</th>'+
-'                                        <th>主治</th>'+
-'                                        <th>出诊时间</th>'+
-'                                    </tr>'+
-'                                </thead>'+
-'                                <tbody>'+
-'                                    <tr v-for=\'line in queryList\'>'+
-'                                        <td @click="handleDept(line)" v-show="line.showDept" :rowspan="line.rowSpan" class="name departmentId">{{line.departmentName}}</td>'+
-'                                        <td @click="handleRouter(line)">{{line.name}}</td>'+
-'                                        <td>{{line.technicalTitle}}</td>'+
-'                                        <td>{{line.goodAt}}</td>'+
-'                                        <td>{{line.schedule}}</td>'+
-'                                    </tr>'+
-'                                </tbody>'+
-'                            </table>'+
-'                        </div>'+
-'                    </div>',
-                        data:function(){
-                            return {
-                                isSearch: false,
-                                departName: '',
-                                doctorName: '',
-                                localList: [],
-                                queryList: [],
-                                deptList:[]
-                            }
-                        },
-                        mounted:function() {
-                            $('.content .label').click(function(){
-                                $(this).find('.column').toggle();
-                                $(this).next('.child_table').toggle('active');
-                            })
-                        },
-                        created:function() {
-                            let that = this;
-                            that.list().then(function(res){
-                                let data = that.$route.query;
-                                if(data.departName||data.doctorName){
-                                    that.departName = data.departName;
-                                    if(data.doctorName.indexOf('#')!==-1){
-                                        that.doctorName = data.doctorName.split('#')[0]
-                                    }else {
-                                        that.doctorName = data.doctorName;
-                                    }
-                                    this.isSearch = true;
-                                    that.handleSearch();
-                                }else {
-                                    that.isSearch = false;
-                                }
-                            });
-                        },
-                        methods:{
-                            list: function() {
-                                var that = this
-                                
-                                return fetchExpert().then(function(list) {
-                                    that.localList = list;
-                                    aggregateDept(that.localList)
-                                    that.localList.forEach(function(item) {
-                                        let name = item.name.split('_');
-                                        if(name.length>1){
-                                            that.$set(item,'name',name[0])
-                                        }
-                                        if(item.showDept){
-                                            that.deptList.push(item)
-                                        }
-                                    })
-                                    return Promise.resolve(list);
-                                }).catch(function(err) {
-                                    console.error('error:', err)
-                                })
-                            },
-                            handleSearch:function(){
-                                debugger
-                                if(this.doctorName!=''&&this.departName==''){
-                                    this.queryList = this.localList.filter(function(item){
-                                        if(this.doctorName!=''){
-                                            return RegExp(this.doctorName).test(item.name)
-                                        }
-                                    })
-                                    this.isSearch = true;
-                                }else if(this.departName!=''&&this.doctorName==''){
-                                    this.queryList = this.localList.filter(function(item){
-                                        if(this.departName!=''){
-                                            return RegExp(this.departName).test(item.departmentName)
-                                        }
-                                    })
-                                    this.isSearch = true;
-                                }else if(this.departName!=''&&this.doctorName!=''){
-                                    this.queryList = this.localList.filter(function(item){
-                                        return RegExp(this.departName).test(item.departmentName) && RegExp(this.doctorName).test(item.name);
-                                    })
-                                    this.isSearch = true;
-                                }
-                                else{
-                                    this.isSearch = false;
-                                    setTimeout(function(){
-                                        $('.content .label').click(function(){
-                                            $(this).find('.column').toggle();
-                                            $(this).next('.child_table').toggle('active');
-                                        })
-                                    },200)
-                                }
-                                // if(this.departName!=''||this.doctorName!=''){
-                                //     this.departName = this.departName.replace(/[\s]+/g,'')
-                                //     this.doctorName = this.doctorName.replace(/[\s]+/g,'')
-                                //     this.isSearch = true;
-                                // }else {
-                                //     this.isSearch = false;
-                                // }
-                            },
-                            handleRouter: function(item){
-                                window.open("{ms:global.url/}${'/page/expert/detail.html'}?id="+ item.id )
-                            },
-                            // 跳转部门
-                            handleDept:function(item){
-                                window.open("{ms:global.url/}"+ item.departmentPath  + '/index.html')
-                            },
-                        }
-                    }
-                },
+                
             </#if>
         {/ms:channel}
     ]})
@@ -881,7 +896,7 @@
             }
         },
         created:function(){
-            {ms:channel type='son' size=1}
+            {ms:channel type='son' orderby='sort' size=1}
             console.log('${field.typepath}')
             if (this.$route.path == '/') {
                 this.push('${field.typepath}')

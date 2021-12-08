@@ -133,6 +133,7 @@
     font-weight: bold;
     color: #333333;
     padding: 12px 0;
+    text-align: left;
 }
 .wrapper .center .news_wrap .news .left_box .banner_news .swiper-container_news .swiper-slide .panel_box .news_info .title:hover{
     color: #7f0e12;
@@ -278,6 +279,12 @@
 .wrapper .center .notice_wrap .notice .notice_content .block .box .r_info{
     margin-left: 10px;
     width: 225px;
+}
+.wrapper .center .notice_wrap .notice .notice_content .block .box:hover{
+    cursor: pointer;
+}
+.wrapper .center .notice_wrap .notice .notice_content .block .box:hover .r_info .text{
+    color: #7f0e12;
 }
 .wrapper .center .notice_wrap .notice .notice_content .block .box .r_info .text{
     width: 100%;

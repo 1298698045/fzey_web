@@ -15,6 +15,7 @@
 .wrapper .header .header_bd .logo{
     width: 336px;
     height: 71px;
+    cursor: pointer;
 }
 .wrapper .header .header_bd .logo img{
     width: 100%;

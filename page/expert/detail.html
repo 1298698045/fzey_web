@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/hospitalSurvey.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/common.css">
     <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.ico" type="image/x-icon" />
     <style>
         .content .doctor_panel{
             margin: 40px 0;
@@ -215,7 +216,7 @@
                 })
             },
             
-            getUrlParam(key) {
+            getUrlParam:function(key) {
                 // 获取参数
                 var url = window.location.search;
                 // 正则筛选地址栏
@@ -225,7 +226,7 @@
                 //返回参数值
                 return result ? decodeURIComponent(result[2]) : null;
             },
-            handleMoreDoctor(){
+            handleMoreDoctor:function(){
                 this.goto("{ms:global.url/}"+ this.info.departmentPath + '/index.html')
             }
         },
