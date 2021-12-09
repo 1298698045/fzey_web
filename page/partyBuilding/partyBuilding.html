@@ -170,14 +170,14 @@
                     <div class="panel_box fixedWidth clearfix">
                         {ms:channel type='son'}
                         {ms:arclist}
-                        <div class="row fl">
+                        <div class="row fl" @click="goto('{ms:global.url/}${field.link}')">
                             <span class="time">${field.date?string("yyyy-MM-dd")}</span>
                             <span class="label">${field.descrip}</span>
                         </div>
                         {/ms:arclist}
                         {/ms:channel}
                     </div>
-                    {ms:channel type='self' typeid='1460811717586362369'}
+                    {ms:channel type='self' typeid='1468760796949831682'}
                     <div class="more" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
                         查看全部
                         <i class="iconfont icon-youjiantou"></i>

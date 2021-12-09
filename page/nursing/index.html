@@ -163,7 +163,10 @@
             },
             handleDetail:function(item){
                 {ms:channel type='self'}
-                    this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
+                {ms:arclist size=1}
+                    console.log('${field.link}')
+                    this.goto('{ms:global.url/}${field.link}')
+                {/ms:arclist}
                 {/ms:channel}
             }
         },
