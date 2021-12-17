@@ -24,7 +24,7 @@
                     <div class="swiper-wrapper">
                         {ms:arclist}
                         <div class="swiper-slide">
-                            <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                            <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
                         </div>
                         {/ms:arclist}
                     </div>
@@ -105,10 +105,10 @@
                             <div class="swiper-container_news">
                                 {ms:channel type='self'  typeid='1468759502730223618'}
                                 <div class="swiper-wrapper">
-                                    {ms:arclist size=3 flag='c' orderby='sort'}
+                                    {ms:arclist size=7 flag='c' orderby='sort'}
                                     <div class="swiper-slide" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
                                         <div class="cover_img">
-                                            <img src="{ms:global.host/}{@ms:file field.litpic/}" alt="">
+                                            <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
                                         </div>
                                         <div class="panel_box clearfix">
                                             <div class="timeBox">
@@ -287,7 +287,7 @@
                         <div class="swiper-btn swiper-prev fl"></div>
                         <div class="swiper-container-expert swiper-container-horizontal fl">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide" v-for="item in lines">
+                                <div class="swiper-slide" v-for="item in lines" @click="handleRouter(item)">
                                     <img :src="item.portraitUrl" alt="">
                                     <div class="info_fixed">
                                         <p class="name">{{item.name}}</p>
@@ -326,7 +326,7 @@
                          <div class="dept_bd clearfix" :class="{active: idx==0}" v-for="(depart, idx) in departments">
                              <div class="item" :class="{active: idx2==deptIdx}" @click="goto(dep.typelink)" v-for="(dep, idx2) in depart.children">
                                  <div class="icon">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/neike-1.png" alt="">
+                                    <img :src="dep.path" alt="">
                                  </div>
                                  <p class="name">{{dep.typetitle}}</p>
                              </div>
@@ -559,9 +559,11 @@
                             {
                                 typetitle: "${field.typetitle}",
                                 typelink: "{ms:global.url/}${field.typelink}",
+                                base: "{ms:global.host/}",
+                                typeimg: ${field.typelitpic},
                                 {ms:arclist flag='c' size=1}
                                 descrip: "${field.descrip}",
-                                image: "{ms:global.host/}{@ms:file field.litpic/}"
+                                image: "{ms:global.host/}/{@ms:file field.litpic/}"
                                 {/ms:arclist}
                             },
                             {/ms:channel}
@@ -572,10 +574,19 @@
             }
         },
         created:function() {
+            this.departments.forEach(function(item){
+                if(item.children){
+                    item.children.forEach(function(row){
+                        row.path = row.base + JSON.parse(JSON.stringify(row.typeimg))[0].path.url;
+                        console.log(row.path)
+                    })
+                }
+            })
             this.expertList();
         },
         mounted:function() {
             window.addEventListener('scroll',this.handleSroll)
+            
         },
         methods: {
             handleMore:function(){
@@ -677,6 +688,9 @@
                     var val2 = b[property];
                     return val1 - val2;
                 }
+            },
+            handleRouter:function(item){
+                window.open("{ms:global.url/}${'/page/expert/detail.html'}?id="+ item.id )
             },
         },
     })
