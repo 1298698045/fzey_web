@@ -291,6 +291,11 @@
     font-size: 16px;
     color: #333333;
     text-align: left;
+    height: 45px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 .wrapper .center .notice_wrap .notice .notice_content .block .box .r_info .time{
     font-size: 24px;

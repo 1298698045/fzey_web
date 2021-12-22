@@ -43,7 +43,7 @@
                          <p class="name">预约挂号</p>
                      </li>
                      {ms:channel type='self' size=1 typeid='1468766365345546244'}
-                     <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
+                     <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-2-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-2-b.png" alt="">
@@ -52,7 +52,7 @@
                     </li>
                     {/ms:channel}
                     {ms:channel type='self' size=1 typeid='1468771868154953730'}
-                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
+                    <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-3-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-3-b.png" alt="">
@@ -61,7 +61,7 @@
                     </li>
                     {/ms:channel}
                     {ms:channel type='self' size=1 typeid='1468759275814182916'}
-                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
+                    <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-4-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-4-b.png" alt="">
@@ -70,7 +70,7 @@
                     </li>
                     {/ms:channel}
                     {ms:channel type='self' size=1 typeid='1468772052414922754'}
-                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
+                    <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-b.png" alt="">
@@ -79,7 +79,7 @@
                     </li>
                     {/ms:channel}
                     {ms:channel type='self' size=1 typeid='1468772038850543618'}
-                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
+                    <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-6-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-6-b.png" alt="">
@@ -88,7 +88,7 @@
                     </li>
                     {/ms:channel}
                     {ms:channel type='self' size=1 typeid='1468772003291234306'}
-                    <li class="itemBox" @click="goto('{ms:global.host/}/${field.typeurl}')">
+                    <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-7-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-7-b.png" alt="">
@@ -182,7 +182,7 @@
                                         ${field.title}
                                     </p>
                                     <p class="time">
-                                        ${field.date?string("yyyy/MM")}
+                                        ${field.date?string("MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -199,7 +199,7 @@
                                         ${field.title}
                                     </p>
                                     <p class="time">
-                                        ${field.date?string("yyyy/MM")}
+                                        ${field.date?string("MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -216,7 +216,7 @@
                                         ${field.title}
                                     </p>
                                     <p class="time">
-                                        ${field.date?string("yyyy/MM")}
+                                        ${field.date?string("MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@
                                         ${field.title}
                                     </p>
                                     <p class="time">
-                                        ${field.date?string("yyyy/MM")}
+                                        ${field.date?string("MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -250,7 +250,7 @@
                                         ${field.title}
                                     </p>
                                     <p class="time">
-                                        ${field.date?string("yyyy/MM")}
+                                        ${field.date?string("MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -267,7 +267,7 @@
                                         ${field.title}
                                     </p>
                                     <p class="time">
-                                        ${field.date?string("yyyy/MM")}
+                                        ${field.date?string("MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -593,32 +593,32 @@
                 switch(this.noticeIdx){
                     case 0:
                         {ms:channel typeid='1468759722604027905' type='self'}
-                            this.goto('{ms:global.url/}${field.typeurl}')
+                            this.goto('{ms:global.url/}/${field.typeurl}')
                         {/ms:channel}
                         break;
                     case 1:
                         {ms:channel typeid='1468768992112312322' type='self'}
-                            this.goto('{ms:global.url/}${field.typelink}')
+                            this.goto('{ms:global.url/}/${field.typelink}')
                         {/ms:channel}
                         break;
                     case 2:
                         {ms:channel typeid='1468760796815613954' type='self'}
-                            this.goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')
+                            this.goto('<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>')
                         {/ms:channel}
                         break;
                     case 3:
-                        {ms:channel typeid='1468768639958548481' type='self'}
-                            this.goto('{ms:global.url/}${field.typeurl}')
+                        {ms:channel typeid='1471722018951385089' type='self'}
+                            this.goto('{ms:global.url/}/${field.typeurl}')
                         {/ms:channel}
                         break;
                     case 4:
                         {ms:channel typeid='1468768786826297346' type='self'}
-                        this.goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')
+                        this.goto('<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>')
                         {/ms:channel}
                         break;
                     case 5:
                         {ms:channel typeid='1468759722536919042' type='self'}
-                            this.goto('{ms:global.url/}${field.typeurl}')
+                            this.goto('{ms:global.url/}/${field.typeurl}')
                         {/ms:channel}
                         break;
                 }

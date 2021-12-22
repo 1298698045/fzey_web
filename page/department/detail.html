@@ -151,7 +151,7 @@
                     <div class="dynamic">
                         <p class="title">科室专家</p>
                         <div class="doctor_wrap clearfix">
-                            <div class="doctor_cart fl" v-for="item in lines">
+                            <div class="doctor_cart fl" v-for="item in lines" @click="handleRoute(item)">
                                 <div class="avatar">
                                     <img :src="item.portraitUrl" alt="">
                                     <div class="hover">
@@ -254,7 +254,7 @@
             },
             handleRoute:function(item){
                 {ms:channel type='self'}
-                this.goto("{ms:global.url/}${'/page/department/doctorDetail.html'}?id="+ item.id )
+                this.goto("{ms:global.url/}${'/page/expert/detail.html'}?id="+ item.id )
                 {/ms:channel}
             }
         },

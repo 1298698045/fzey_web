@@ -140,7 +140,7 @@
                             <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
                             <div class="fixed_desc">
                                 <p class="desc">
-                                    ${field.descrip}
+                                    ${field.title}
                                 </p>
                             </div>
                         </div>
@@ -172,13 +172,13 @@
                         {ms:arclist}
                         <div class="row fl" @click="goto('{ms:global.url/}${field.link}')">
                             <span class="time">${field.date?string("yyyy-MM-dd")}</span>
-                            <span class="label">${field.descrip}</span>
+                            <span class="label">${field.title}</span>
                         </div>
                         {/ms:arclist}
                         {/ms:channel}
                     </div>
                     {ms:channel type='self' typeid='1468760796949831682'}
-                    <div class="more" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">
+                    <div class="more" @click="goto('<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>')">
                         查看全部
                         <i class="iconfont icon-youjiantou"></i>
                     </div>
