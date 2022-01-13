@@ -1,3 +1,151 @@
+@media only screen and (max-width: 750px){
+    .fixedWidth{
+        width: 100% !important;
+    }
+    .bulletinBoard_wrap{
+        width: auto !important;
+        word-wrap: break-word;
+        word-break: normal;
+    }
+    .wrapper .header{
+        display: none !important;
+    }
+    .rightBar{
+        display: none;
+    }
+    .header_mobile{
+        height: 67px;
+        display: block !important;
+        position: relative;
+    }
+    .header_mobile .row{
+        padding: 13px;
+        box-sizing: border-box;
+        background-color: rgba(255, 255, 255, 1);
+        box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.2);
+    }
+    .header_mobile .row .logo{
+        width: 187px;
+        height: 40px;
+    }
+    .header_mobile .row .logo img{
+        width: 100%;
+        height: 100%;
+    }
+    .header_mobile .icon{
+        width: 20px;
+        margin-top: 13px;
+        cursor: pointer;
+    }
+    .header_mobile .icon .menu_h::before{
+        content: '';
+        width: 20px;
+        height: 2px;
+        background: #333333;
+        display: block;
+    }
+    .header_mobile .icon .menu_h span{
+        display: block;
+        width: 20px;
+        height: 2px;
+        background: #333333;
+        display: block;
+        margin: 5px 0;
+    }
+    .header_mobile .icon .menu_h::after{
+        content: '';
+        width: 20px;
+        height: 2px;
+        background: #333333;
+        display: block;
+        
+    }
+    .header_mobile .icon .menu_h.active::before{
+        position: absolute;
+        top: 32px;
+        transform: rotate3d(0, 0, 1, 45deg);
+    }
+    .header_mobile .icon .menu_h.active span{
+        display: none;
+    }
+    .header_mobile .icon .menu_h.active::after{
+        position: absolute;
+        top: 32px;
+        transform: rotate3d(0, 0, 1,-45deg);
+    }
+    .header_mobile .header_panel{
+        width: 100%;
+        height: 400px;
+        background: #fff;
+        z-index: 9999;
+        position: absolute;
+        top: 100%;
+        overflow-y: auto;
+    }
+    .header_mobile .header_panel .search_box{
+        padding: 12px 12px 23px 12px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #cdc9c5;
+        font-size: 13px;
+        color: #333333;
+    }
+    .header_mobile .header_panel .search_box .top{
+        padding-bottom: 7px;
+    }
+    .header_mobile .header_panel .search_box .top .label{
+        font-size: 13px;
+        color: #333333;
+    }
+    .header_mobile .header_panel .search_box .top .solid{
+        color: #cccccc;
+        padding: 0 10px;
+    }
+    .header_mobile .header_panel .search_box .search input{
+        width: 310px;
+        height: 35px;
+        line-height: 35px;
+        font-size: 12px;
+        
+        padding-left: 12px;
+        box-sizing: border-box;
+    }
+    .header_mobile .header_panel .search_box .search{
+        width: 352px;
+        position: relative;
+        border: 1px solid #7f0e12;
+    }
+    .header_mobile .header_panel .search_box .search .btn_icon{
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 38px;
+        height: 35px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        background: #7f0e12;
+    }
+    .header_mobile .header_panel .ul_bd .column .name{
+        padding: 12px;
+        color: #333333;
+        font-size: 17px;
+        border-bottom: 1px solid #cdc9c5;
+    }
+    .header_mobile .header_panel .ul_bd .column .name.active{
+        border-bottom: 1px solid transparent;
+    }
+    .header_mobile .header_panel .ul_bd .column .children{
+        padding: 0 12px;
+        box-sizing: border-box;
+        border-bottom: 1px solid #cdc9c5;
+    }
+    .header_mobile .header_panel .ul_bd .column .children .child_name{
+        width: 50%;
+        margin-bottom: 14px;
+    }
+}
+.header_mobile{
+    display: none;
+}
 .fixedWidth{
     width: 1280px;
     margin: 0 auto;
@@ -5,6 +153,7 @@
 .wrapper .header{
     width: 100%;
     background: #fff;
+    display: block;
 }
 .wrapper .header .header_top{
     border-bottom: 1px solid #e2e3e5;
@@ -186,7 +335,7 @@
     text-align: center;
     padding-top: 1px;
     margin-bottom: 1px;
-    background: rgba(127, 14, 18, .8);
+    background: rgba(127, 14, 18, .9);
 }
 .rightBar .bar_cont .item:hover{
     background: #fff;

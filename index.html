@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/> -->
+    <!-- <meta name="viewport" content="width=1300px"/> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <title>{ms:global.name/}</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/index.css">
@@ -22,10 +22,16 @@
                 {ms:channel type='self' typeid='1468769596486352898' }
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                        {ms:arclist}
+                        {ms:arclist orderby='sort'}
+                        <#if field.descrip!=''>
+                        <div class="swiper-slide" @click="goto('${field.descrip}')">
+                            <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
+                        </div>
+                        <#else>
                         <div class="swiper-slide">
                             <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
                         </div>
+                        </#if>
                         {/ms:arclist}
                     </div>
                     <!-- Add Pagination -->
@@ -34,8 +40,8 @@
                 {/ms:channel}
              </div>
              <div class="bulletinBoard">
-                 <ul class="bulletinBoard_wrap fixedWidth">
-                     <li class="itemBox">
+                 <ul class="bulletinBoard_wrap fixedWidth clearfix">
+                     <li class="itemBox fl">
                          <div class="icon">
                              <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-1-a.png" alt="">
                              <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-1-b.png" alt="">
@@ -43,7 +49,7 @@
                          <p class="name">预约挂号</p>
                      </li>
                      {ms:channel type='self' size=1 typeid='1468766365345546244'}
-                     <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
+                     <li class="itemBox fl" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-2-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-2-b.png" alt="">
@@ -174,15 +180,20 @@
                     <div class="notice_content">
                         {ms:channel typeid='1468759722604027905' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==0}">
-                            {ms:arclist size=8 flag='c'}
+                            {ms:arclist size=8 flag='c' orderby='sort'}
                             <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl"></div>
+                                <div class="icon fl">
+                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                </div>
                                 <div class="r_info fl">
                                     <p class="text">
                                         ${field.title}
                                     </p>
-                                    <p class="time">
+                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
                                         ${field.date?string("MM/dd")}
+                                    </p>
+                                    <p class="time" v-else>
+                                        ${field.date?string("yyyy/MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -191,15 +202,20 @@
                         {/ms:channel}
                         {ms:channel typeid='1468768992112312322' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==1}">
-                            {ms:arclist size=8 flag='c'}
+                            {ms:arclist size=8 flag='c' orderby='sort'}
                             <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl"></div>
+                                <div class="icon fl">
+                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_2.png" alt="">
+                                </div>
                                 <div class="r_info fl">
                                     <p class="text">
                                         ${field.title}
                                     </p>
-                                    <p class="time">
+                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
                                         ${field.date?string("MM/dd")}
+                                    </p>
+                                    <p class="time" v-else>
+                                        ${field.date?string("yyyy/MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -208,32 +224,42 @@
                         {/ms:channel}
                         {ms:channel typeid='1468760796815613954' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==2}">
-                            {ms:arclist size=8 flag='c'}
+                            {ms:arclist size=8 flag='c' orderby='sort'}
                             <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl"></div>
+                                <div class="icon fl">
+                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_3.png" alt="">
+                                </div>
                                 <div class="r_info fl">
                                     <p class="text">
                                         ${field.title}
                                     </p>
-                                    <p class="time">
+                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
                                         ${field.date?string("MM/dd")}
+                                    </p>
+                                    <p class="time" v-else>
+                                        ${field.date?string("yyyy/MM/dd")}
                                     </p>
                                 </div>
                             </div>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
-                        {ms:channel typeid='1468768639958548481' type='self'}
+                        {ms:channel typeid='1471722018951385089' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==3}">
-                            {ms:arclist size=8 flag='c'}
+                            {ms:arclist size=8 flag='c' orderby='sort'}
                             <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl"></div>
+                                <div class="icon fl">
+                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_4.png" alt="">
+                                </div>
                                 <div class="r_info fl">
                                     <p class="text">
                                         ${field.title}
                                     </p>
-                                    <p class="time">
+                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
                                         ${field.date?string("MM/dd")}
+                                    </p>
+                                    <p class="time" v-else>
+                                        ${field.date?string("yyyy/MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -242,15 +268,20 @@
                         {/ms:channel}
                         {ms:channel typeid='1468768786826297346' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==4}">
-                            {ms:arclist size=8 flag='c'}
+                            {ms:arclist size=8 flag='c' orderby='sort'}
                             <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl"></div>
+                                <div class="icon fl">
+                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_5.png" alt="">
+                                </div>
                                 <div class="r_info fl">
                                     <p class="text">
                                         ${field.title}
                                     </p>
-                                    <p class="time">
+                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
                                         ${field.date?string("MM/dd")}
+                                    </p>
+                                    <p class="time" v-else>
+                                        ${field.date?string("yyyy/MM/dd")}
                                     </p>
                                 </div>
                             </div>
@@ -259,20 +290,25 @@
                         {/ms:channel}
                         {ms:channel typeid='1468759722536919042' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==5}">
-                            {ms:arclist size=8 flag='c'}
+                            {ms:arclist size=8 flag='c' orderby='sort'}
                             <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl"></div>
+                                <div class="icon fl">
+                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_6.png" alt="">
+                                </div>
                                 <div class="r_info fl">
                                     <p class="text">
                                         ${field.title}
                                     </p>
-                                    <p class="time">
+                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
                                         ${field.date?string("MM/dd")}
+                                    </p>
+                                    <p class="time" v-else>
+                                        ${field.date?string("yyyy/MM/dd")}
                                     </p>
                                 </div>
                             </div>
                             {/ms:arclist}
-                        </div>
+                        </div>  
                         {/ms:channel}
                     </div>
                  </div>
@@ -303,10 +339,12 @@
                         </div>
                         <div class="swiper-btn swiper-next fl"></div>
                      </div>
-                     <div class="expert_more more">
+                     {ms:channel type='self' typeid='1468766839750688769'}
+                     <div class="expert_more more" @click="goto('{ms:global.url/}/${field.typelink}')">
                          查看全部
                          <i class="iconfont icon-youjiantou"></i>
                      </div>
+                     {/ms:channel}
                  </div>
              </div>
              <div class="department_wrap">
@@ -427,6 +465,7 @@
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
 <script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
 <script>
+    const year = new Date().getFullYear()
     var app = new Vue({
         el:'#app',
         mixins: [mixin],
@@ -434,6 +473,7 @@
             return {
                 typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
                 activeTab: 0,
+                currenYear: year,
                 tabs:[
                     {
                         name: '医院概况',
@@ -697,18 +737,39 @@
 </script>
 <script>
     var swiper1 = new Swiper('.swiper-container', {
+        autoplay: 2000,
         pagination: '.swiper-pagination',
         paginationClickable: true
     });
+    swiper1.container[0].onmouseover = function () {
+        swiper1.stopAutoplay();
+    }
+    // 鼠标移出开始自动滚动
+    swiper1.container[0].onmouseout = function () {
+        swiper1.startAutoplay();
+    }
     var swiper2 = new Swiper('.swiper-container_news', {
+        autoplay: 2000,
         pagination: '.swiper-pagination-news',
         paginationClickable: true
     });
+    swiper2.container[0].onmouseover = function () {
+        swiper2.stopAutoplay();
+    }
+    // 鼠标移出开始自动滚动
+    swiper2.container[0].onmouseout = function () {
+        swiper2.startAutoplay();
+    }
+    let documentWidth = document.body.clientWidth || document.documentElement.clientWidth
+    let slidesPerView = 6
+    if(documentWidth<=750){
+        slidesPerView = 1
+    }
     setTimeout(function(){
         var swiper3 = new Swiper('.swiper-container-expert', {
             nextButton: '.swiper-next',
             prevButton: '.swiper-prev',
-            slidesPerView: 6,
+            slidesPerView: slidesPerView,
             paginationClickable: true,
             spaceBetween: 30,
             onSlideChangeEnd:function(swiper){
@@ -723,12 +784,20 @@
             }
         });
     },300)
+    let slideNum = 4
+    let spaceBetween = 15
+    if(width<=750){
+        slideNum = 1
+        spaceBetween = 0
+    }
     var swiperFour = new Swiper('.swiper-container-specail', {
         pagination: '.swiper-pagination-special',
         paginationClickable:true,
-        slidesPerView: 4,
+        slidesPerView: slideNum,
         paginationClickable: true,
-        spaceBetween: 15,
+        spaceBetween: spaceBetween,
+        observer: true,
+        observeParents: true,
         onSlideChangeEnd:function(swiper){
             console.log(swiper)
             if(swiper.isEnd){

@@ -5,13 +5,13 @@
         <a class="black home" href="{ms:global.url/}/index.html" target="_blank">首页</a>
         {ms:channel type="path"}
         <#if curtypeid==field.typeid>
-            <a v-if="hasRoute || isArticle" class="black" target="_blank" href="{ms:global.url/}<#if field.type==3>${field.typeurl}<#else>${field.typelink}</#if>"> &gt; ${field.typetitle}</a>
+            <a v-if="hasRoute || isArticle" class="black" target="_blank" href="{ms:global.url/}/<#if field.type==3>${field.typeurl}<#else>${field.typelink}</#if>"> &gt; ${field.typetitle}</a>
             <a v-else> &gt; ${field.typetitle}</a>
             <span class="default" v-if="isArticle"> &gt; 详情</span>
         <#elseif field.type==3>
-            <a class="black" href="{ms:global.url/}${field.typeurl}"> &gt; ${field.typetitle}</a>
+            <a class="black" href="{ms:global.url/}/${field.typeurl}"> &gt; ${field.typetitle}</a>
         <#else>
-            <a class="black" href="{ms:global.url/}${field.typelink}"> &gt; ${field.typetitle}</a>
+            <a class="black" href="{ms:global.url/}/${field.typelink}"> &gt; ${field.typetitle}</a>
         </#if>
         {/ms:channel}
         <!-- <span v-if="hasRoute"> &gt; {{$route.name}}</span> -->

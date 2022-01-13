@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <!-- <meta name="viewport" content="width=1300px"/> -->
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>医院新闻</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -84,6 +86,47 @@
             font-size: 14px;
             color: #7f0e12;
         }
+        @media only screen and (max-width: 750px){
+            .wrapper .center .banner{
+                height: 100px !important;
+            }
+            .wrapper .center .banner img{
+                object-fit: cover;
+            }
+            .news_content .box{
+                padding: 21px 17px 14px 17px !important;
+            }
+            .news_content .box .l_time{
+                width: 60px !important;
+                height: auto !important;
+            }
+            .news_content .box .r_cont{
+                width: calc(100% - 80px) !important;
+            }
+            .news_content .box .r_cont .title{
+                font-size: 15px !important;
+                line-height: 1.5 !important;
+                white-space: nowrap;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                padding-bottom: 13px;
+            }
+            .news_content .box .r_cont .desc{
+                font-size: 12px !important;
+                line-height: 1.6 !important;
+            }
+            .news_content .box .l_time .num{
+                font-size: 29px !important;
+            }
+            .news_content .box .l_time span{
+                margin-top: 0 !important;
+            }
+            .news_content .box .l_time .time{
+                font-size: 12px !important;
+                margin-top: 0 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -94,12 +137,12 @@
             <div class="banner">
                 <img src="{ms:global.host/}/{ms:global.style/}/images/yygk_banner.jpg" alt="">
             </div>
-            <div class="news_content fixedWidth">
+            <div class="news_content fixedWidth" v-if="listData!=''">
                 <div class="box clearfix" v-for="(item,index) in listData" :key="index"  @click="handleDetail(item)">
                     <div class="l_time fl">
                         <p class="num">{{item.day}}</p>
                         <span></span>
-                        <p class="time">{{item.yymm}}</p>
+                        <p class="time">{{dateFormat(item.yymm)}}</p>
                     </div>
                     <div class="r_cont fr">
                         <h3 class="title">{{item.contentTitle}}</h3>
@@ -111,10 +154,10 @@
                         background
                         @current-change="getQueryList"
                         :page-size="page.pageSize"
-                        prev-text="上一页"
-                        next-text="下一页"
+                        :prev-text="prevText"
+                        :next-text="nextText"
                         :current-page.sync="page.pageNo"
-                        layout="prev, pager, next, jumper"
+                        :layout="layout"
                         :total="page.contentCount">
                     </el-pagination>
                 </div>
@@ -187,6 +230,9 @@
                 }).catch(function(err) {
                     console.error('error:', err)
                 })
+            },
+            dateFormat: function (date, fmt = "YYYY-MM") {
+                return moment(date).format(fmt)
             },
             handleDetail:function(item){
                 {ms:channel type='self'}

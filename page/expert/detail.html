@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>医生详情</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -100,6 +101,59 @@
             height: 110px;
             background: #e5e5e5;
             margin: 28px auto 0;
+        }
+        @media only screen and (max-width:750px) {
+            .doctor_img{
+                left: 30px !important;
+                top: 33px !important;
+                width: 110px !important;
+            }
+            .doctor_clip{
+                width: 195px !important;
+                height: 219px !important;
+            }
+            .right_content{
+                width: auto !important;
+                min-height: auto !important;
+                margin-left: 180px !important;
+                margin-top: 14px !important;
+                padding: 24px 13px !important;
+            }
+            .right_content .row_name{
+                padding-bottom: 21px !important;
+            }
+            .right_content .row_name .name{
+                font-size: 24px !important;
+            }
+            .right_content .row_name .depart{
+                font-size: 15px !important;
+                padding-left: 0 !important;
+            }
+            .right_content .postion{
+                font-size: 10px !important;
+            }
+            .right_content .box .title{
+                font-size: 12px !important;
+                margin: 10px 0 !important;
+            }
+            .right_content .beGoodAt,.right_content .box .desc{
+                font-size: 10px !important;
+            }
+            .wechat{
+                width: 152px !important;
+                height: 167px !important;
+                top: 226px !important;
+                left: 0 !important;
+            }
+            .wechat .box{
+                width: auto !important;
+                height: auto !important;
+            }
+            .wechat .box .code{
+                width: 73px !important;
+                height: 73px !important;
+                margin: 16px auto 0 !important;
+            }
         }
     </style>
 </head>

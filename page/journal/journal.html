@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>在线院刊</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -50,6 +51,30 @@
         }
         .journal_content .box_wrap .box .info:hover{
             color: #7f0e12;
+        }
+        @media only screen and (max-width:750px) {
+            .journal_content{
+                padding: 10px !important;
+                box-sizing: border-box;
+            }
+            .journal_content .box_wrap .box{
+                width: 163px !important;
+                height: auto !important;
+                margin-top: 16px !important;
+                margin-right: 17px !important;
+            }
+            .journal_content .box_wrap .box:nth-child(2n){
+                margin-right: 0 !important;
+            }
+            .journal_content .box_wrap .box .imgs{
+                height: 203px !important;
+            }
+            .journal_content .box_wrap .box .info{
+                height: auto !important;
+                line-height: auto !important;
+                font-size: 15px !important;
+                padding: 11px 0 !important;
+            }
         }
     </style>
 </head>

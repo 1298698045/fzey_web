@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>健康科普</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -15,6 +16,13 @@
     <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
     <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.ico" type="image/x-icon" />
 </head>
+<style>
+    @media only screen and (max-width:750px) {
+        .wrapper .center .common_content{
+            margin-top: 0 !important;
+        }
+    }
+</style>
 <body>
     <div class="wrapper" id='app' v-cloak>
         <#include "head.html" />
@@ -32,7 +40,7 @@
                                     {{item.contentTitle}}
                                 </p>
                                 <p class="time fr">
-                                    {{item.contentDatetime}}
+                                    {{dateFormat(item.yymm)}}
                                 </p>
                             </a>
                         </li>
@@ -42,10 +50,10 @@
                             background
                             @current-change="getQueryList"
                             :page-size="page.pageSize"
-                            prev-text="上一页"
-                            next-text="下一页"
+                            :prev-text="prevText"
+                            :next-text="nextText"
                             :current-page.sync="page.pageNo"
-                            layout="prev, pager, next, jumper"
+                            :layout="layout"
                             :total="page.contentCount">
                         </el-pagination>
                     </div>
@@ -109,7 +117,7 @@
                             var yy = date.getFullYear();
                             var mm = date.getMonth() + 1;
                             var day = date.getDate();
-                            var yymm = yy + '/' + mm
+                            var yymm = yy + '-' + mm + '-' + day
                             row.day = day;
                             row.yymm = yymm;
                         }

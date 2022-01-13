@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>党建之窗</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -71,7 +72,7 @@
         .wrapper .center .content .section .right_cont .panel .time{
             font-size: 14px;
             color: #999999;
-            padding: 7px 0;
+            padding: 9px 0;
         }
         .wrapper .center .content .section .right_cont .panel .article{
             font-size: 14px;
@@ -120,6 +121,57 @@
             color: #7f0e12;
             cursor: pointer;
         }
+        @media only screen and (max-width:750px) {
+            .wrapper .center .content{
+                padding: 40px 0 !important;
+            }
+            .wrapper .center .content .section .left_cont{
+                width: 100% !important;
+                height: 227px !important;
+                float: initial !important;
+            }
+            .wrapper .center .content .section .right_cont{
+                width: 100% !important;
+                float: initial !important;
+            }
+            .wrapper .center .content .more_content .panel_box .row{
+                width: 100% !important;
+                float: initial !important;
+            }
+            .wrapper .center .content .more_content .panel_box .row:nth-child(2n){
+                margin-left: 0 !important;
+            }
+            .wrapper .center .content .more_content .panel_box .row .time{
+                font-size: 11px !important;
+                padding-right: 10px !important;
+            }
+            .wrapper .center .content .more_content .panel_box .row{
+                font-size: 15px !important;
+                height: auto !important;
+                line-height: initial !important;
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            .wrapper .center .content .section .right_cont .panel .title{
+                font-size: 15px !important;
+            }
+            .wrapper .center .content .section .right_cont .panel .time{
+                font-size: 11px !important;
+            }
+            .wrapper .center .content .section .right_cont .panel .article{
+                font-size: 12px !important;
+            }
+            .wrapper .center .content .more_content{
+                margin-top: 0 !important;
+            }
+            .wrapper .center .content .more_content .panel_box .row .label{
+                width: calc(100% - 100px);
+                white-space: nowrap;
+                display: inline-block;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
     </style>
 </head>
 <body>
@@ -135,7 +187,7 @@
                     <div class="left_cont fl">
                         {ms:channel type='son'}
                         <#assign typeurl=field.typeurl />
-                        {ms:arclist size=3 flag='hot'}
+                        {ms:arclist size=3 flag='hot' orderby='sort'}
                         <div class="box" @click="goto('{ms:global.url/}${field.link}')">
                             <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
                             <div class="fixed_desc">
@@ -150,7 +202,7 @@
                     <div class="right_cont fr">
                         {ms:channel type='son'}
                         <#assign typeurl=field.typeurl />
-                        {ms:arclist size=3 flag='hot'}
+                        {ms:arclist size=3 flag='hot' orderby='sort'}
                         <div class="panel" @click="goto('{ms:global.url/}${field.link}')">
                             <p class="title">
                                 ${field.title}
@@ -168,12 +220,19 @@
                 </div>
                 <div class="more_content">
                     <div class="panel_box fixedWidth clearfix">
-                        {ms:channel type='son'}
-                        {ms:arclist}
+                        {ms:channel type='self' typeid='1468760796815613954'}
+                        {ms:arclist orderby='sort' size=12}
+                        <#if field.flag?contains('hot')>
+                        <!-- <div class="row fl" @click="goto('{ms:global.url/}${field.link}')">
+                            <span class="time">${field.date?string("yyyy-MM-dd")}</span>
+                            <span class="label">${field.title}</span>
+                        </div> -->
+                        <#else>
                         <div class="row fl" @click="goto('{ms:global.url/}${field.link}')">
                             <span class="time">${field.date?string("yyyy-MM-dd")}</span>
                             <span class="label">${field.title}</span>
                         </div>
+                        </#if>
                         {/ms:arclist}
                         {/ms:channel}
                     </div>

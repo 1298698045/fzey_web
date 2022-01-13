@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>院务公开</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -25,11 +26,15 @@
             </div>
             <div class="container">
                 <div class="common_nav">
-                    <ul class="common_tabs fixedWidth">
-                        {ms:channel type='son'}
-                        <li class="common_tab" :class="{active : $route.path == '${field.typepath}'}"  @click="push('${field.typepath}')">${field.typetitle}</li>
-                        {/ms:channel}
-                    </ul>
+                    <div class="scroll_wrap">
+                        <ul class="common_tabs fixedWidth">
+                            {ms:channel type='son'}
+                            <li class="common_tab" :class="{active : $route.path == '${field.typepath}'}"
+                                @click="push('${field.typepath}')">${field.typetitle}</li>
+                            {/ms:channel}
+                        </ul>
+                    </div>
+                    <div class="hr"></div>
                 </div>
                 <!-- <div class="common_content fixedWidth" style="display: block;">
                     <ul class="column_list">
@@ -110,7 +115,7 @@
 '                                    {{item.contentTitle}}'+
 '                                </p>'+
 '                                <p class="time fr">'+
-'                                    {{item.contentDatetime}}'+
+'                                    {{dateFormat(item.yymm)}}'+
 '                                </p>'+
 '                            </a>'+
 '                        </li>'+
@@ -119,10 +124,10 @@
 '                            background'+
 '                            @current-change="getQueryList"'+
 '                            :page-size="page.pageSize"'+
-'                            prev-text="上一页"'+
-'                            next-text="下一页"'+
+'                            :prev-text="prevText"'+
+'                            :next-text="nextText"'+
 '                            :current-page.sync="page.pageNo"'+
-'                            layout="prev, pager, next, jumper"'+
+'                            :layout="layout"'+
 '                            :total="page.contentCount">'+
 '                        </el-pagination>'+
 '                    </div>'+
@@ -168,7 +173,7 @@
                                     var yy = date.getFullYear();
                                     var mm = date.getMonth() + 1;
                                     var day = date.getDate();
-                                    var yymm = yy + '/' + mm
+                                    var yymm = yy + '-' + mm + '-' + day
                                     row.day = day;
                                     row.yymm = yymm;
                                 }

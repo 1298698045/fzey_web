@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>科室导航</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -28,10 +29,12 @@
             font-weight: bold;
         }
         .content .briefInfo .left_cover .text{
-            width: 59px;
-            height: 360px;
+            /* width: 59px;
+            height: 360px; */
             margin: 30px auto 0;
             text-align: center;
+            writing-mode: vertical-rl;
+            letter-spacing: 5px;
         }
         .content .briefInfo .right_cont{
             width: calc(100% - 136px);
@@ -103,6 +106,85 @@
             padding-top: 10px;
             color: #999999;
         }
+        @media only screen and (max-width:750px) {
+            .wrapper .center .container .content{
+                padding: 10px;
+                box-sizing: border-box;
+            }
+            .content .briefInfo{
+                margin: auto !important;
+            }
+            .content .briefInfo .left_cover{
+                width: 69px !important;
+                height: 267px !important;
+            }
+            .content .briefInfo .left_cover .text{
+                font-size: 21px !important;
+            }
+            .content .briefInfo .right_cont{
+                width: calc(100% - 69px) !important;
+                height: 267px !important;
+                padding: 17px 16px !important;
+            }
+            .content .briefInfo .right_cont .block .title{
+                font-size: 14px !important;
+                padding-bottom: 13px !important;
+            }
+            .content .briefInfo .right_cont .block .article{
+                font-size: 10px !important;
+            }
+            .content .briefInfo .right_cont .block{
+                height: 230px !important;
+                padding-right: 0 !important;
+            }
+            .dynamic{
+                margin: 24px 0 13px 0 !important;
+            }
+            .dynamic .title{
+                font-size: 14px !important;
+                padding-bottom: 13px !important;
+            }
+            .doctor_cart{
+                width: 163px !important;
+                height: auto !important;
+                margin-right: 29px !important;
+                margin-bottom: 16px !important;
+                margin-top: 0 !important;
+            }
+            .doctor_wrap .doctor_cart:nth-child(2n){
+                margin-right: 0 !important;
+            }
+            .doctor_cart .avatar{
+                height: 203px !important;
+            }
+            .doctor_cart .doctor_info{
+                padding-top: 11px !important;
+            }
+            .doctor_cart .doctor_info .name{
+                font-size: 15px !important;
+            }
+            .doctor_cart .doctor_info .position{
+                font-size: 10px !important;
+            }
+            .dynamic .bd .box{
+                width: 173px !important;
+                height: 67px !important;
+                margin-right: 8px !important;
+                margin-bottom: 8px !important;
+                margin-top: 0px !important;
+                padding: 14px 11px !important;
+            }
+            .container .dynamic .bd .box:nth-child(2n){
+                margin-right: 0 !important;
+            }
+            .dynamic .bd .box .info{
+                font-size: 10px !important;
+                height: auto !important;
+            }
+            .dynamic .bd .box .time{
+                font-size: 10px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -117,7 +199,7 @@
             <div class="container">
                 <div class="content fixedWidth">
                     {ms:channel type='self'}
-                    {ms:arclist size=1}
+                    {ms:arclist size=1 flag='c'}
                     <div class="briefInfo clearfix">
                         <div class="left_cover fl">
                             <p class="text">
@@ -137,15 +219,17 @@
                     {/ms:channel}
                     <div class="dynamic">
                         {ms:channel type='self'}
+                        {ms:channel type='self' size=1}
                         <p class="title">科室动态</p>
                         <div class="bd clearfix">
-                            {ms:arclist size=6 flag='c'}
+                            {ms:arclist size=6}
                             <div class="box fl" @click="goto('{ms:global.url/}${field.link}')">
                                 <p class="info">${field.title}</p>
                                 <p class="time">${field.date?string("yyyy/MM/dd")}</p>
                             </div>
                             {/ms:arclist}
                         </div>
+                        {/ms:channel}
                         {/ms:channel}
                     </div>
                     <div class="dynamic">

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>就医指南</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -245,6 +246,80 @@
         .table_cont table tr:nth-child(2n+1) td{
             background: #f5f5f5;
         }
+        @media only screen and (max-width:750px){
+            .search_row{
+                width: 100% !important;
+                margin: 34px auto !important;
+                padding: 0 13px !important;
+                box-sizing: border-box !important;
+            }
+            .search_row .label{
+                text-align: center;
+                width: 100%;
+                font-size: 15px !important;
+            }
+            .search_row .inp{
+                width: 100% !important;
+                font-size: 14px !important;
+                margin-right: 0 !important;
+                display: block !important;
+                margin-bottom: 6px !important;
+            }
+            .search_row .btn{
+                width: 100% !important;
+                height: 38px !important;
+                line-height: 38px !important;
+                font-size: 15px !important;
+            }
+            .visit .title{
+                font-size: 19px !important;
+                padding: 10px 0 !important;
+            }
+            .visit .tips{
+                font-size: 11px !important;
+                line-height: 1.5 !important;
+                padding: 13px !important;
+            }
+            .container .bd{
+                overflow-x: auto;
+                width: 100% !important;
+            }
+            .wrapper .center .common_content .depart_map{
+                padding: 0 10px !important;
+                box-sizing: border-box !important;
+            }
+            .depart_map .tab_wrap{
+                width: 100% !important;
+                height: auto !important;
+            }
+            .depart_map .tab_wrap .tabs{
+                width: 100% !important;
+                white-space: nowrap;
+                overflow-x: auto;
+            }
+            .depart_map .tabs .tab{
+                height: 40px !important;
+                line-height: 40px !important;
+                font-size: 11px !important;
+                float: initial !important;
+                border-right: none !important;
+                margin-right: -5px !important;
+            }
+            .wrapper .center .common_content .search_bd{
+                width: 100%;
+                overflow-x: auto;
+            }
+            .search_bd table tr th{
+                min-width: 100px !important;
+            }
+            .search_bd table tr th:nth-child(4){
+                min-width: 200px !important;
+            }
+            .wrapper .center .visit{
+                padding:0 10px 30px 10px !important;
+                box-sizing: border-box;
+            }
+        }
     </style>
 </head>
 <body>
@@ -257,11 +332,14 @@
             </div>
             <div class="container">
                 <div class="common_nav">
-                    <ul class="common_tabs fixedWidth">
-                        {ms:channel type='son' orderby='sort'}
-                        <li class="common_tab" :class="{active : $route.path == '${field.typepath}'}"  @click="push('${field.typepath}')">${field.typetitle}</li>
-                        {/ms:channel}
-                    </ul>
+                    <div class="scroll_wrap">
+                        <ul class="common_tabs fixedWidth">
+                            {ms:channel type='son' orderby='sort'}
+                            <li class="common_tab" :class="{active : $route.path == '${field.typepath}'}"  @click="push('${field.typepath}')">${field.typetitle}</li>
+                            {/ms:channel}
+                        </ul>
+                    </div>
+                    <div class="hr"></div>
                 </div>
                 <div class="fixedWidth">
                     <!-- <div class="common_content" style="display: block;">
@@ -655,6 +733,8 @@
                         $(this).find('.column').toggle();
                         $(this).next('.child_table').toggle('active');
                     })
+                    let width = $('.common_content').eq(0).find('.bd table').eq(0).width();
+                    $('.visit .content .label').css('width',width+'px')
                 },
                 created:function() {
                     let that = this;
@@ -783,7 +863,7 @@
 '                                        {{item.contentTitle}}'+
 '                                    </p>'+
 '                                    <p class="time fr">'+
-'                                        {{item.contentDatetime}}'+
+'                                        {{dateFormat(item.yymm)}}'+
 '                                    </p>'+
 '                                </a>'+
 '                            </li>'+
@@ -793,10 +873,10 @@
 '                                background'+
 '                                @current-change="getQueryList"'+
 '                                :page-size="page.pageSize"'+
-'                                prev-text="上一页"'+
-'                                next-text="下一页"'+
+'                                :prev-text="prevText"'+
+'                                :next-text="nextText"'+
 '                                :current-page.sync="page.pageNo"'+
-'                                layout="prev, pager, next, jumper"'+
+'                                :layout="layout"'+
 '                                :total="page.contentCount">'+
 '                            </el-pagination>'+
 '                        </div>'+
@@ -840,7 +920,7 @@
                                             var yy = date.getFullYear();
                                             var mm = date.getMonth() + 1;
                                             var day = date.getDate();
-                                            var yymm = yy + '/' + mm
+                                            var yymm = yy + '-' + mm + '-' + day
                                             row.day = day;
                                             row.yymm = yymm;
                                         }

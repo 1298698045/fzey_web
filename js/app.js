@@ -1,75 +1,91 @@
-var mixin = {
-    data: function(){
-        return {
-            isArticle: false,
-            hasRoute: this.hasOwnProperty('$route'),
-            selectMenu: '',
-            isGotop:false,
-            qrCodeIdx: 0,
-            isTop:true, // 是否在页面顶部
-            isFixed: false
-        }
-    },
-    computed: {
-        activeMenu: function() {
-            return (this.selectMenu || this.typePath)
-        }
-    },
-    mounted:function() {
-        window.addEventListener('scroll',this.handleIsScroll,true)
-        window.addEventListener('scroll',this.handleSroll)
-    },
-    methods: {
-        push: function(path) {
-            router.push({path: path})
-        },
-        gotoHref: function(url) {
-            location.href = url
-        },
-        goto: function(url) {
-            window.open(url)
-        },
-        onMenuMouseOver: function(menu) {
-            this.selectMenu = menu
-        },
-        onMenuMouseLeave: function() {
-            this.selectMenu = ''
-        },
-        handleTabQrCode:function(idx){
-            this.qrCodeIdx = idx;
-        },
-        handleIsScroll:function() {
-            let scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
-            scrolltop > 500 ? (this.isGotop = true) : (this.isGotop = false);
-        },
-        toTop:function() {
-            let top = document.documentElement.scrollTop || document.body.scrollTop;
-            // 实现滚动效果 
-            const timeTop = setInterval(function(){
-                document.body.scrollTop = document.documentElement.scrollTop = top -= 50;
-                if (top <= 0) {
-                    this.isTop = true;
-                    clearInterval(timeTop);
-                }else {
-                    this.isTop = false;
-                }
-            }, 10);
-        },
-        handleSroll:function(e){
-            let top = document.documentElement.scrollTop || document.body.scrollTop;
-            if(top>=140){
-                this.isFixed = true;
-            }else {
-                this.isFixed = false;
-            }
-        },
-        handleOpen:function(){
-            this.$refs.childModal.dialogVisible = true;
-        }
-    }
+var isMobile = false;
+let width = document.body.clientWidth || document.documentElement.clientWidth;
+if (width <= 750) {
+  isMobile = true;
 }
+var mixin = {
+  data: function () {
+    return {
+      isArticle: false,
+      hasRoute: this.hasOwnProperty("$route"),
+      selectMenu: "",
+      isGotop: false,
+      qrCodeIdx: 0,
+      isTop: true, // 是否在页面顶部
+      isFixed: false,
+      isHeader: false,
+      prevText: isMobile ? '' : '上一页',
+      nextText: isMobile ? '' : '下一页',
+      layout: isMobile ? "prev, pager, next" : "prev, pager, next, jumper",
+    };
+  },
+  computed: {
+    activeMenu: function () {
+      return this.selectMenu || this.typePath;
+    },
+  },
+  mounted: function () {
+    window.addEventListener("scroll", this.handleIsScroll, true);
+    window.addEventListener("scroll", this.handleSroll);
+  },
+  methods: {
+    push: function (path) {
+      router.push({ path: path });
+    },
+    gotoHref: function (url) {
+      location.href = url;
+    },
+    goto: function (url) {
+      window.open(url);
+    },
+    onMenuMouseOver: function (menu) {
+      this.selectMenu = menu;
+    },
+    onMenuMouseLeave: function () {
+      this.selectMenu = "";
+    },
+    handleTabQrCode: function (idx) {
+      this.qrCodeIdx = idx;
+    },
+    handleIsScroll: function () {
+      let scrolltop =
+        document.documentElement.scrollTop || document.body.scrollTop;
+      scrolltop > 500 ? (this.isGotop = true) : (this.isGotop = false);
+    },
+    toTop: function () {
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      // 实现滚动效果
+      const timeTop = setInterval(function () {
+        document.body.scrollTop =
+          document.documentElement.scrollTop =
+          top -=
+            50;
+        if (top <= 0) {
+          this.isTop = true;
+          clearInterval(timeTop);
+        } else {
+          this.isTop = false;
+        }
+      }, 10);
+    },
+    handleSroll: function (e) {
+      let top = document.documentElement.scrollTop || document.body.scrollTop;
+      if (top >= 140) {
+        this.isFixed = true;
+      } else {
+        this.isFixed = false;
+      }
+    },
+    handleOpen: function () {
+      this.$refs.childModal.dialogVisible = true;
+    },
+    dateFormat: function (date, fmt = "YYYY-MM-DD") {
+      return moment(date).format(fmt);
+    },
+  },
+};
 
-// const Modal = 
+// const Modal =
 // Vue.extend({
 //     template: `
 //         <el-dialog

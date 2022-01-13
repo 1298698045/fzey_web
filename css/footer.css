@@ -1,3 +1,90 @@
+@media only screen and (max-width: 750px){
+    .footer .footer_top{
+        padding: 10px !important;
+        box-sizing: border-box;
+    }
+    .footer .footer_top .top_l,.footer .footer_top .top_r{
+        float: initial !important;
+    }
+    .footer .footer_top .top_l .info .yb{
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
+    .footer .footer_top .top_l .phone{
+        margin-top: 0 !important;
+    }
+    .footer .footer_top .top_l .info .yb::before{
+        width: 14px;
+        height: 12px;
+        background: url(../images/foot_mail.png) no-repeat;
+        content: '';
+        display: inline-block;
+        margin-right: 13px;
+    }
+    .footer .footer_top .top_l .info .dz::before{
+        margin-right: 18px !important;
+    }
+    .footer{
+        height: auto !important;
+        background: url(../images/foot_bj.jpg) no-repeat !important;
+        background-size: 100% 100% !important;
+    }
+    .footer .footer_center .logo_img{
+        max-width: 200px !important;
+        max-height: 50px !important;
+        margin-left: 40px !important;
+        margin-right: 0!important;
+    }
+    .footer .footer_center .logo_img img{
+        object-fit: contain;
+    }
+    .footer .footer_center .hz_img{
+        max-width: 61px !important;
+        height: 50px !important;
+        margin-left: 39px !important;
+    }
+    .footer .footer_center .cen_view .cen_l{
+        float: initial !important;
+        margin-top: 0 !important;
+    }
+    .footer .footer_center .cen_view .cen_r{
+        float: initial !important;
+    }
+    .footer .footer_center .hz_img img{
+        object-fit: contain;
+    }
+    .footer .footer_center .cen_view .cen_r .box_wrap{
+        text-align: center;
+    }
+    .footer .footer_center .cen_view .cen_r .box_wrap .box{
+        width: 60px !important;
+    }
+    .footer .footer_center .cen_view .cen_r .box_wrap .box .code_img{
+        height: 60px !important;
+    }
+    .footer .footer_center .cen_view .cen_r .box_wrap .box{
+        margin: 10px 10px 10px 0;
+        vertical-align: top;
+    }
+    .footer .footer_foot .foot_l .route li a{
+        font-size: 12px !important;
+    }
+    .footer .footer_foot .foot_l,.footer .footer_foot .foot_r{
+        float: initial !important;
+    }
+    .footer .footer_foot .foot_r ul{
+        text-align: center;
+        font-size: 12px;
+    }
+    .footer .footer_foot .foot_r ul li{
+        display: block !important;
+        width: 100% !important;
+    }
+    .footer .footer_foot .foot_r .text{
+        margin-right: 0 !important;
+        padding: 5px 0 !important;
+    }
+}
 .footer{
     width: 100%;
     height: 350px;

@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>专家推荐</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -102,6 +103,80 @@
             font-size: 16px;
             font-weight: bold;
             color: #7f0e12;
+        }
+        @media only screen and (max-width:750px) {
+            .expert_content .dept_block{
+                margin: 10px !important;
+                padding: 0 !important;
+            }
+            .expert_content .dept_block .label{
+                display: none !important;
+            }
+            .expert_content .dept_block .right_block{
+                width: 100% !important;
+                margin-left: 0 !important;
+            }
+            .expert_content .dept_block .right_block .tabs{
+                overflow-x: auto;
+                width: 100%;
+                white-space: nowrap;
+            }
+            .expert_content .dept_block .right_block .tabs .tab{
+                width: auto !important;
+                min-width: 80px;
+                font-size: 12px !important;
+                float: initial !important;
+                padding-bottom: 8px !important;
+                padding-top: 24px !important;
+                height: auto !important;
+                line-height: normal !important;
+                margin-right: 0 !important;
+            }
+            .expert_content .dept_block .right_block .dept_content .name{
+                font-size: 12px !important;
+                height: 28px !important;
+                line-height: 28px !important;
+                margin-right: 21px !important;
+            }
+            .expert_content .dept_block .right_block .dept_content{
+                margin: 0 !important;
+                padding: 14px 8px;
+                box-sizing: border-box;
+            }
+            .expert_content .select_row{
+                padding: 0 10px !important;
+            }
+            .select_row .left .tag{
+                min-width: 71px !important;
+                height: 23px !important;
+                line-height: 23px !important;
+                font-size: 11px !important;
+            }
+            .expert_content .content{
+                padding: 24px 16px;
+                box-sizing: border-box;
+            }
+            .doctor_cart{
+                width: 163px !important;
+                height: 254px !important;
+                margin-right: 17px !important;
+                margin-top: 16px !important;
+            }
+            .doctor_cart:nth-child(2n){
+                margin-right: 0 !important;
+            }
+            .doctor_cart .avatar{
+                height: 203px !important;
+            }
+            .doctor_cart .doctor_info{
+                padding-top: 11px !important;
+            }
+            .doctor_cart .doctor_info .name{
+                font-size: 15px !important;
+            }
+            .doctor_cart .doctor_info .position{
+                font-size: 10px !important;
+            }
         }
     </style>
 </head>
@@ -207,10 +282,10 @@
                         background
                         @current-change="list"
                         :page-size="page.pageSize"
-                        prev-text="上一页"
-                        next-text="下一页"
+                        :prev-text="prevText"
+                        :next-text="nextText"
                         :current-page.sync="page.pageNo"
-                        layout="prev, pager, next, jumper"
+                        :layout="layout"
                         :total="page.contentCount">
                     </el-pagination>
                 </div>

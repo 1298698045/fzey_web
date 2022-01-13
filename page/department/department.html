@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>科室介绍</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -91,6 +92,66 @@
         }
         .panel .dept_wrap .item_box:nth-child(4n){
             margin-right: 0;
+        }
+        @media only screen and (max-width:750px) {
+            .search_row{
+                margin-top: 0 !important;
+                padding: 13px 10px;
+                box-sizing: border-box;
+            }
+            .search_row .left, .search_row .right{
+                float: initial !important;
+            }
+            .search_row .left{
+                padding-bottom: 13px;
+                overflow-x: auto;
+                white-space: nowrap;
+                float: initial;
+            }
+            .search_row .left .tag{
+                width: auto !important;
+                min-width: 53px !important;
+                height: 27px !important;
+                line-height: 27px !important;
+                font-size: 11px !important;
+                float: initial !important;
+            }
+            .search_row .right .label{
+                padding-left: 0 !important;
+                padding-right: 0 !important;
+                width: 100%;
+                text-align: center;
+                font-size: 15px;
+            }
+            .search_row .right input{
+                width: 100% !important;
+                margin-bottom: 6px !important;
+                font-size: 14px !important;
+                margin-right: 0 !important;
+            }
+            .search_row .right .btn{
+                width: 100% !important;
+                font-size: 15px !important;
+                border-radius: 19px !important;
+            }
+            .panel{
+                padding: 10px !important;
+                box-sizing: border-box;
+            }
+            .panel .label{
+                font-size: 17px !important;
+            }
+            .panel .dept_wrap .item_box{
+                width: 173px !important;
+                height: 33px !important;
+                line-height: 33px !important;
+                margin-right: 8px !important;
+                margin-bottom: 6px !important;
+                font-size: 11px !important;
+            }
+            .panel .dept_wrap .item_box:nth-child(2n){
+                margin-right: 0 !important;
+            }
         }
     </style>
 </head>

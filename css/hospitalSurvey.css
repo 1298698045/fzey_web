@@ -1,7 +1,37 @@
         /* .wrapper .center{
     padding-bottom: 100px;
 } */
-
+@media only screen and (max-width:750px) {
+  .wrapper .center .common_content .richText_wrap .map_view{
+    padding: 0 10px !important;
+  }
+  .wrapper .center .common_content .expert_wrap{
+    padding: 0 16px !important;
+  }
+  .expert_wrap .box{
+    width: 163px !important;
+    height: auto !important;
+    margin-right: 17px !important;
+    margin-top: 16px !important;
+  }
+  .wrapper .center .common_content .expert_wrap .box:nth-child(2n){
+    margin-right: 0 !important;
+  }
+  .expert_wrap .box .imgs{
+    height: 203px !important;
+  }
+  .expert_wrap .box .info{
+    height: auto !important;
+  }
+  .expert_wrap .box .info .name{
+    font-size: 15px !important;
+    margin-top: 11px !important;
+    line-height: initial !important;
+  }
+  .expert_wrap .box .info .post{
+    font-size: 10px !important;
+  }
+}
 /* 地图 */
 .wrapper .center .common_content .richText_wrap .map_view{
   padding: 0 40px;
