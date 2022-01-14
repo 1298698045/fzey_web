@@ -223,10 +223,14 @@
                         <p class="title">科室动态</p>
                         <div class="bd clearfix">
                             {ms:arclist size=6}
+                            <#if field.flag?contains('c')>
+
+                            <#else>
                             <div class="box fl" @click="goto('{ms:global.url/}${field.link}')">
                                 <p class="info">${field.title}</p>
                                 <p class="time">${field.date?string("yyyy/MM/dd")}</p>
                             </div>
+                            </#if>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}

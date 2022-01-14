@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=1300px"/>
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>院领导详情</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
@@ -61,6 +62,37 @@
             margin: 25px 0;
             line-height: 2;
         }
+        @media only screen and (max-width:750px) {
+            .doctor_img{
+                left: 30px !important;
+                top: 33px !important;
+                width: 110px !important;
+            }
+            .doctor_clip{
+                width: 195px !important;
+                height: 219px !important;
+            }
+            .right_content{
+                width: auto !important;
+                min-height: 390px !important;
+                margin-left: 180px !important;
+                margin-top: 14px !important;
+                padding: 24px 13px !important;
+            }
+            .right_content .row_name{
+                padding-bottom: 21px !important;
+            }
+            .right_content .row_name .name{
+                font-size: 24px !important;
+            }
+            .right_content .row_name .depart{
+                font-size: 15px !important;
+                padding-left: 21px !important;
+            }
+            .right_content .box .desc{
+                font-size: 10px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -76,7 +108,7 @@
                 <div class="content fixedWidth">
                     <div class="doctor_panel">
                         <div class="doctor_box">
-                            <img class="doctor_img" src="{ms:global.host/}/{ms:global.style/}/images/doctor.png" alt="">
+                            <img class="doctor_img" src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
                             <img class="doctor_clip" src="{ms:global.host/}/{ms:global.style/}/images/doctor_clip.png" alt="">
                         </div>
                         <div class="right_content">

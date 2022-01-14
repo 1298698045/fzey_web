@@ -57,66 +57,75 @@
            </ul>
        </div>
     </div>
-    <div class="header_mobile">
-        <div class="row clearfix">
-            <p class="logo fl" @click="gotoHref('{ms:global.url/}/index.html')">
-                <img src="{ms:global.host/}/{ms:global.style/}/images/logo.png" alt="">
-            </p>
-            <p class="icon fr">
-                <a href="javascript:;" class="menu_h" :class="{'active':isHeader}" @click="isHeader=!isHeader">
-                    <span></span>
-                </a>
-            </p>
-        </div>
-        <div class="header_panel" v-if="isHeader">
-            <div class="search_box">
-                <div class="top">
-                    {ms:channel typeid="1468769324850642945" type="self"}
-                    <span class="label" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">在线院刊</span>
-                    {/ms:channel}
-                    <span class="solid">|</span>
-                    {ms:channel typeid="1468769388763447297" type="self"}
-                    <span class="label" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">客户服务</span>
-                    {/ms:channel}
-                    <span class="solid">|</span>
-                    <span class="label">医保政策</span>
-                </div>
-                <form id="searchDataForm1" action="{ms:global.host/}/mcms/search.do" method="post"></form>
-                    <div class="search">
-                        <input type="text" name="content_title" id="" placeholder="搜索">
-                        <p class="btn_icon" onclick="document.getElementById('searchDataForm1').submit();"></p>
-                    </div>
-                </form>
+    <div class="mobileHeaderWrap">
+        <div class="header_mobile">
+            <div class="row clearfix">
+                <p class="logo fl" @click="gotoHref('{ms:global.url/}/index.html')">
+                    <img src="{ms:global.host/}/{ms:global.style/}/images/logo.png" alt="">
+                </p>
+                <p class="icon fr">
+                    <a href="javascript:;" class="menu_h" :class="{'active':isHeader}" @click="handleNavOpen">
+                        <span></span>
+                    </a>
+                </p>
             </div>
-            <ul class="ul_bd">
-                <li class="column">
-                    <p class="name" @click="gotoHref('{ms:global.url/}/index.html')">
-                        首页
-                    </p>
-                </li>
-                {ms:channel type='top' flag='nav' orderby='sort'}
-                <#assign parentlink=field.typelink>
-                <#assign parentchannel=field>
-                <li class="column">
-                    <#if (field.childsize>0)>
-                    <p class="name active">
-                        <a href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">${field.typetitle}</a>
-                    </p>
-                    <#else>
-                    <p class="name">
-                        <a href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">${field.typetitle}</a>
-                    </p>
-                    </#if>
-                    <#if (field.childsize>0)>
-                    <div class="children clearfix">
-                        {ms:channel type='son' flag='nav2' orderby='sort'}
-                        <p class="child_name fl"><a href="<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>">${field.typetitle}</a></p>
+            <div class="header_panel" :style="{height:height+'px'}" v-if="isHeader">
+                <div class="search_box">
+                    <div class="top">
+                        {ms:channel typeid="1468769324850642945" type="self"}
+                        <span class="label" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">在线院刊</span>
                         {/ms:channel}
+                        <span class="solid">|</span>
+                        {ms:channel typeid="1468769388763447297" type="self"}
+                        <span class="label" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">客户服务</span>
+                        {/ms:channel}
+                        <span class="solid">|</span>
+                        <span class="label">医保政策</span>
                     </div>
-                    </#if>
-                </li>
-                {/ms:channel}
-            </ul>
+                    <form id="searchDataForm1" action="{ms:global.host/}/mcms/search.do" method="post"></form>
+                        <div class="search">
+                            <input type="text" name="content_title" id="" placeholder="搜索">
+                            <p class="btn_icon" onclick="document.getElementById('searchDataForm1').submit();">
+                                <img src="{ms:global.host/}/{ms:global.style/}/images/search-btn.png" alt="">
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <ul class="ul_bd">
+                    <li class="column">
+                        <p class="name" @click="gotoHref('{ms:global.url/}/index.html')">
+                            首页
+                        </p>
+                    </li>
+                    {ms:channel type='top' flag='nav' orderby='sort'}
+                    <#assign parentlink=field.typelink>
+                    <#assign parentchannel=field>
+                    <li class="column">
+                        <#if (field.childsize>0)>
+                        <p class="name active">
+                            <!-- <a href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">${field.typetitle}</a> -->
+                            <a href="#" @click="gotoHref('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">${field.typetitle}</a>
+                        </p>
+                        <#else>
+                        <!-- <a href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">${field.typetitle}</a> -->
+                        <p class="name">
+                            <a href="#" @click="gotoHref('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">${field.typetitle}</a>
+                        </p>
+                        </#if>
+                        <#if (field.childsize>0)>
+                        <div class="children clearfix">
+                            {ms:channel type='son' flag='nav2' orderby='sort'}
+                            <p class="child_name fl"><a href="#" @click="gotoHref('<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>')">${field.typetitle}</a></p>
+                            {/ms:channel}
+                        </div>
+                        </#if>
+                    </li>
+                    {/ms:channel}
+                </ul>
+            </div>
         </div>
     </div>
+</div>
+<div class="scrollTop" v-if="isTop" @click="toTop">
+    <img src="{ms:global.host/}/{ms:global.style/}/images/arr_up.png" alt="">
 </div>

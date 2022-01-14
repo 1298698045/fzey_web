@@ -11,12 +11,13 @@ var mixin = {
       selectMenu: "",
       isGotop: false,
       qrCodeIdx: 0,
-      isTop: true, // 是否在页面顶部
+      isTop: false, // 是否在页面顶部
       isFixed: false,
       isHeader: false,
-      prevText: isMobile ? '' : '上一页',
-      nextText: isMobile ? '' : '下一页',
+      prevText: isMobile ? "" : "上一页",
+      nextText: isMobile ? "" : "下一页",
       layout: isMobile ? "prev, pager, next" : "prev, pager, next, jumper",
+      height: ''
     };
   },
   computed: {
@@ -34,9 +35,11 @@ var mixin = {
     },
     gotoHref: function (url) {
       location.href = url;
+      this.isHeader = false;
     },
     goto: function (url) {
       window.open(url);
+      this.isHeader = false
     },
     onMenuMouseOver: function (menu) {
       this.selectMenu = menu;
@@ -50,7 +53,7 @@ var mixin = {
     handleIsScroll: function () {
       let scrolltop =
         document.documentElement.scrollTop || document.body.scrollTop;
-      scrolltop > 500 ? (this.isGotop = true) : (this.isGotop = false);
+      scrolltop > 500 ? (this.isTop = true) : (this.isTop = false);
     },
     toTop: function () {
       let top = document.documentElement.scrollTop || document.body.scrollTop;
@@ -82,6 +85,21 @@ var mixin = {
     dateFormat: function (date, fmt = "YYYY-MM-DD") {
       return moment(date).format(fmt);
     },
+    // 导航开关
+    handleNavOpen(){
+      this.isHeader = !this.isHeader;
+      if (this.isHeader) {
+        this.$nextTick(() => {
+          this.height = document.documentElement.clientHeight - 66;
+          document.body.style.overflow = "hidden";
+        });
+      } else {
+        this.$nextTick(() => {
+          this.height = 0;
+          document.body.style.overflow = "auto";
+        });
+      }
+    }
   },
 };
 

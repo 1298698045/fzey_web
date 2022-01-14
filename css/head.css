@@ -13,9 +13,16 @@
     .rightBar{
         display: none;
     }
+    .mobileHeaderWrap{
+        width: 100%;
+        display: block !important;
+        position: fixed;
+        top: 0;
+        z-index: 9999;
+    }
     .header_mobile{
         height: 67px;
-        display: block !important;
+        /* display: block !important; */
         position: relative;
     }
     .header_mobile .row{
@@ -75,12 +82,12 @@
     }
     .header_mobile .header_panel{
         width: 100%;
-        height: 400px;
         background: #fff;
-        z-index: 9999;
         position: absolute;
         top: 100%;
+        z-index: 999999;
         overflow-y: auto;
+        transition: all .5s;
     }
     .header_mobile .header_panel .search_box{
         padding: 12px 12px 23px 12px;
@@ -123,6 +130,12 @@
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
         background: #7f0e12;
+        text-align: center;
+    }
+    .header_mobile .header_panel .search_box .search .btn_icon img{
+        width: 24px;
+        height: 24px;
+        margin-top: 6px;
     }
     .header_mobile .header_panel .ul_bd .column .name{
         padding: 12px;
@@ -142,8 +155,30 @@
         width: 50%;
         margin-bottom: 14px;
     }
+    .wrapper .scrollTop{
+        width: 50px;
+        height: 50px;
+        background: rgba(0,0,0,.6);
+        position: fixed;
+        display: flex!important;
+        justify-content: center;
+        align-items: center;
+        bottom: 20px;
+        right: 10px;
+        border-radius: 15px;
+        z-index: 999;
+        box-shadow: 0 1px 12px 0 rgb(0 0 0 / 20%);
+    }
+    .wrapper .scrollTop img{
+        transform: rotate(180deg);
+        width: 30px;
+        height: 30px;
+    }
 }
-.header_mobile{
+.wrapper .scrollTop{
+    display: none;
+}
+.mobileHeaderWrap{
     display: none;
 }
 .fixedWidth{

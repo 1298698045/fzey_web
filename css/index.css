@@ -1,16 +1,18 @@
 @media only screen and (max-width: 750px){
     .wrapper .center .banner{
         height: 200px !important;
+        margin-top: 67px !important;
     }
     .wrapper .center .banner .swiper-container .swiper-pagination .swiper-pagination-bullet{
         width: 50px !important;
     }
     .wrapper .center .bulletinBoard .bulletinBoard_wrap .itemBox{
-        padding: 0 20px !important;
+        padding: 0 10px !important;
     }
     .wrapper .center .bulletinBoard .bulletinBoard_wrap .itemBox .icon{
-        width: 50px !important;
-        height: 50px !important;
+        width: 40px !important;
+        height: 40px !important;
+        margin: 0 auto;
     }
     .wrapper .center .bulletinBoard .bulletinBoard_wrap .itemBox .name{
         font-size: 16px !important;
@@ -105,13 +107,14 @@
     .wrapper .department_wrap .depart_content .dept_tabs{
         white-space: nowrap;
         width: 100%;
-        overflow-x: auto;
+        overflow-y: auto;
     }
     .wrapper .department_wrap .depart_content .dept_tabs .dept_tab{
         width: 88px !important;
         height: 50px !important;
         line-height: 50px !important;
         padding-top: 0 !important;
+        float: initial !important;
     }
     .wrapper .department_wrap .depart_content .dept_bd .item{
         width: 98px !important;
@@ -126,8 +129,10 @@
         font-size: 14px !important;
     }
     .wrapper .department_wrap .depart_content .dept_bd .item .icon img{
-        width: 50px !important;
-        height: 50px !important;
+        width: 40px !important;
+        height: 40px !important;
+        margin-top: 15px !important;
+        margin-left: 15px !important;
     }
     .wrapper .department_wrap .depart_content .dept_bd{
         padding: 0!important;
@@ -152,6 +157,20 @@
         width: 100px !important;
         height: 30px !important;
     }
+    .wrapper .mobile_more{
+        width: 125px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 16px;
+        color: #7f0e12;
+        background: #fff;
+        margin: 0 auto;
+        display: block !important;
+    }
+}
+.wrapper .mobile_more{
+    display: none;
 }
 .wrapper {
     width: 100%;
@@ -252,7 +271,7 @@
     height: 100%;
     object-fit: cover;
 }
-.wrapper .center .news_wrap .news .left_box .banner_news .swiper-container_news .swiper-pagination-bullet-active{
+.wrapper .center .news_wrap .news .left_box .banner_news .swiper-container_news .swiper-pagination-bullets .swiper-pagination-bullet-active{
     background: #7f0e12 !important;
 }
 .wrapper .center .news_wrap .news .left_box .banner_news .swiper-container_news .swiper-pagination-bullets{
@@ -262,6 +281,10 @@
     z-index: 999;
     padding-right: 20px;
     box-sizing: border-box;
+}
+.wrapper .center .news_wrap .news .left_box .banner_news .swiper-container_news .swiper-pagination-bullets .swiper-pagination-bullet{
+    background: #fff;
+    opacity: .8 !important;
 }
 .wrapper .center .news_wrap .news .left_box .banner_news .swiper-container_news .swiper-slide .panel_box{
     position: relative;
@@ -606,11 +629,11 @@
     transform: rotate(45deg);
 }
 .wrapper .department_wrap .depart_content .dept_bd .item .icon img{
-    width: 80px;
-    height: 80px;
+    width: 52px;
+    height: 52px;
     transform: rotate(-45deg);
-    margin-top: 10px;
-    margin-left: 10px;
+    margin-top: 26px;
+    margin-left: 25px;
 }
 .wrapper .department_wrap .depart_content .dept_bd .item .name{
     font-size: 16px;

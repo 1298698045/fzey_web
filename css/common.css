@@ -1,4 +1,7 @@
 @media only screen and (max-width: 750px){
+    .wrapper .center{
+        margin-top: 67px !important;
+    }
     .pagePC .el-pager .number,.pagePC .el-pager li.more{
         width: 29px !important;
         height: 31px !important;
@@ -55,6 +58,10 @@
         font-size: 14px !important;
         padding: 0 10px;
         box-sizing: border-box;
+    }
+    .wrapper .center .common_content .richText_wrap .rich>img{
+        max-width: 100% !important;
+        height: auto !important;
     }
     /* 列表 */
     .wrapper .center .common_nav{
@@ -114,7 +121,13 @@
     /* 文章 */
     .wrapper .center .common_content .richText_wrap .rich{
         width: 100% !important;
-        overflow-x: auto;
+        /* overflow-x: auto; */
+        overflow: hidden;
+    }
+    .wrapper .center .common_content .richText_wrap .rich img{
+        max-width: 100% !important;
+        width: auto !important;
+        height: auto !important;
     }
 }
 .wrapper .center .banner{

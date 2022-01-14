@@ -312,6 +312,10 @@
                         {/ms:channel}
                     </div>
                  </div>
+                <div class="mobile_more" @click="handleMore">
+                    查看全部
+                    <i class="iconfont icon-youjiantou"></i>
+                </div>
              </div>
              <!--  -->
              <div class="expert_wrap">
@@ -372,7 +376,7 @@
                      </div>
                  </div>
              </div>
-             <div class="specialColumn">
+             <!-- <div class="specialColumn">
                  <div class="special fixedWidth">
                     <div class="swiper-container-specail">
                         <div class="swiper-wrapper">
@@ -409,7 +413,6 @@
                                 <div class="columnName">抗疫专栏 </div>
                             </div>
                         </div>
-                        <!-- Add Pagination -->
                         <div class="swiper-pagination-special"></div>
                     </div>
                     <div class="special_more more">
@@ -417,7 +420,7 @@
                         <i class="iconfont icon-youjiantou"></i>
                     </div>
                  </div>
-             </div>
+             </div> -->
              <div class="hr"></div>
              <div class="home_footer">
                  <div class="box fixedWidth">
@@ -737,7 +740,9 @@
 </script>
 <script>
     var swiper1 = new Swiper('.swiper-container', {
-        autoplay: 2000,
+        loop: true,
+        speed: 1000,
+        autoplay: 3000,
         pagination: '.swiper-pagination',
         paginationClickable: true
     });
@@ -772,6 +777,11 @@
             slidesPerView: slidesPerView,
             paginationClickable: true,
             spaceBetween: 30,
+            // loop: true,
+            speed: 1000,
+            autoplay: 3000,
+            observer:true,
+            observeParents:true,
             onSlideChangeEnd:function(swiper){
                 console.log(swiper)
                 if(swiper.isEnd){
@@ -783,6 +793,13 @@
                 }
             }
         });
+        swiper3.container[0].onmouseover = function () {
+            swiper3.stopAutoplay();
+        }
+        // 鼠标移出开始自动滚动
+        swiper3.container[0].onmouseout = function () {
+            swiper3.startAutoplay();
+        }
     },300)
     let slideNum = 4
     let spaceBetween = 15

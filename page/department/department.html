@@ -75,7 +75,7 @@
             width: 290px;
             height: 49px;
             line-height: 49px;
-            text-align: center;
+            text-align: left;
             margin-right: 37px;
             font-size: 16px;
             border: 1px solid #c6c6c6;
@@ -86,6 +86,14 @@
             box-sizing: border-box;
             cursor: pointer;
             margin-bottom: 28px;
+            padding: 0 10px;
+            box-sizing: border-box;
+        }
+        .panel .dept_wrap .item_box img{
+            width: 24px;
+            height: 24px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/Rarrow.jpg') no-repeat 100% 100%;
+            margin-top: 10px;
         }
         .panel .dept_wrap .item_box:hover{
             border: 1px solid #7f0e12;
@@ -152,6 +160,10 @@
             .panel .dept_wrap .item_box:nth-child(2n){
                 margin-right: 0 !important;
             }
+            .panel .dept_wrap .item_box img{
+                width: 12px !important;
+                height: 12px !important;
+            }
         }
     </style>
 </head>
@@ -187,7 +199,10 @@
                         <p class="label">${field.typetitle}</p>
                         <ul class="dept_wrap clearfix">
                             {ms:channel type='son' orderby='sort'}
-                            <li class="item_box fl" @click="goto('{ms:global.url/}${field.typelink}')">${field.typetitle}</li>
+                            <li class="item_box fl clearfix" @click="goto('{ms:global.url/}${field.typelink}')">
+                                <span class="text fl">${field.typetitle}</span>
+                                <img class="fr" src="{ms:global.host/}/{ms:global.style/}/images/Rarrow.jpg" alt="">
+                            </li>
                             {/ms:channel}
                         </ul>
                     </div>

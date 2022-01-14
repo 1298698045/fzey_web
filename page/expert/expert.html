@@ -272,12 +272,12 @@
                         <div class="doctor_info">
                             <p class="name">{{item.name}}</p>
                             <p class="position">
-                                {{item.techingPost}}
+                                {{item.technicalTitle}}
                             </p>
                         </div>
                     </div>
                 </div>
-                <div class="pagePC">
+                <div class="pagePC" v-if="page.contentCount>10">
                     <el-pagination
                         background
                         @current-change="list"
