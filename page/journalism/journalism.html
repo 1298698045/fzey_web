@@ -42,7 +42,7 @@
         .news_content .box .l_time .num{
             font-size: 48px;
             color: #333333;
-            font-weight: bold;
+            /* font-weight: bold; */
             line-height: 48px;
         }
         .news_content .box .l_time span{
@@ -66,7 +66,8 @@
             font-size: 20px;
             font-weight: bold;
             color: #333333;
-            line-height: 1.5;
+            height: 40px;
+            line-height: 40px;
         }
         .news_content .box .r_cont .desc{
             font-size: 14px;
@@ -224,20 +225,36 @@
                             row.day = day;
                             row.yymm = yymm;
                         }
+                        if (row.contentType.indexOf('tv') != -1) {
+                            row.link = that.getSimpleText(row.contentDetails);
+                            row.link = row.link.replace(/amp;/g, '')
+                        }
                         return row
                     })
+                    if (pageCur) {
+                        $("html, body").scrollTop(0).animate({ scrollTop: $(".news_content").offset().top - 30 });
+                    }
                     console.log('listData:', that.listData)
                 }).catch(function(err) {
                     console.error('error:', err)
                 })
             },
+            getSimpleText(html) {
+                var re1 = new RegExp("<.+?>", "g");//匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
+                var msg = html.replace(re1, '');//执行替换成空字符
+                return msg;
+            },
             dateFormat: function (date, fmt = "YYYY-MM") {
                 return moment(date).format(fmt)
             },
             handleDetail:function(item){
-                {ms:channel type='self'}
-                    this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
-                {/ms:channel}
+                if (item.contentType.indexOf('tv') != -1) {
+                    this.goto(item.link)
+                }else {
+                    {ms:channel type='self'}
+                        this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
+                    {/ms:channel}
+                }
             }
         },
     }).$mount('#app')

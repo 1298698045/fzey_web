@@ -72,7 +72,7 @@
 '                                </p>'+
 '                            </a>'+
 '                        </li>'+
-'                    <div class="pagePC" v-if="listData.length>0&&listData.length>10">'+
+'                    <div class="pagePC" v-if="page.contentCount>20">'+
 '                        <el-pagination'+
 '                            background'+
 '                            @current-change="getQueryList"'+
@@ -94,7 +94,7 @@
                             //当前页数
                             pageNo: 1,
                             //每页文章条数
-                            pageSize: 10,
+                            pageSize: 20,
                             //页数总数
                             pageTotal: 0,
                             //内容总数
@@ -130,17 +130,28 @@
                                     row.day = day;
                                     row.yymm = yymm;
                                 }
+                                if (row.contentType.indexOf('tv') != -1) {
+                                    row.link = that.getSimpleText(row.contentDetails);
+                                    row.link = row.link.replace(/amp;/g, '')
+                                }
                                 return row
                             })
+                            if (pageCur) {
+                                $("html, body").scrollTop(0).animate({ scrollTop: $(".common_nav").offset().top - 30 });
+                            }
                             console.log('listData:', that.listData)
                         }).catch(function(err) {
                             console.error('error:', err)
                         })
                     },
                     handleDetail:function(item){
-                        {ms:channel type='self'}
-                            this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
-                        {/ms:channel}
+                        if (item.contentType.indexOf('tv') != -1) {
+                            this.goto(item.link)
+                        } else {
+                            {ms:channel type='self'}
+                                this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
+                            {/ms:channel}
+                        }
                     }
                 }
             }

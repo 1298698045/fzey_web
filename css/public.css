@@ -43,7 +43,7 @@ body {
 	/* color: #666; 150%基于当前字体尺寸的百分比行间距 */
 	color: #333333;
 	background: #fff;
-	font-family: 微软雅黑;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 .clearfix:before, .clearfix:after {
 	/*清除浮动，最好最标准的写法*/

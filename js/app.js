@@ -17,7 +17,7 @@ var mixin = {
       prevText: isMobile ? "" : "上一页",
       nextText: isMobile ? "" : "下一页",
       layout: isMobile ? "prev, pager, next" : "prev, pager, next, jumper",
-      height: ''
+      height: "",
     };
   },
   computed: {
@@ -39,7 +39,7 @@ var mixin = {
     },
     goto: function (url) {
       window.open(url);
-      this.isHeader = false
+      this.isHeader = false;
     },
     onMenuMouseOver: function (menu) {
       this.selectMenu = menu;
@@ -86,7 +86,7 @@ var mixin = {
       return moment(date).format(fmt);
     },
     // 导航开关
-    handleNavOpen(){
+    handleNavOpen() {
       this.isHeader = !this.isHeader;
       if (this.isHeader) {
         this.$nextTick(() => {
@@ -99,6 +99,11 @@ var mixin = {
           document.body.style.overflow = "auto";
         });
       }
+    },
+    getSimpleText(html) {
+      var re1 = new RegExp("<.+?>", "g"); //匹配html标签的正则表达式，"g"是搜索匹配多个符合的内容
+      var msg = html.replace(re1, ""); //执行替换成空字符
+      return msg;
     }
   },
 };

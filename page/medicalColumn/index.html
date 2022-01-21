@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/common.css">
-    <link rel="stylesheet" href="${base}/static/pl/ugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
     <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.ico" type="image/x-icon" />
     <style>
         .container {
@@ -120,10 +120,10 @@
                         background
                         @current-change="getQueryList"
                         :page-size="page.pageSize"
-                        prev-text="上一页"
-                        next-text="下一页"
+                        :prev-text="prevText"
+                        :next-text="nextText"
                         :current-page.sync="page.pageNo"
-                        layout="prev, pager, next, jumper"
+                        :layout="layout"
                         :total="page.contentCount">
                     </el-pagination>
                 </div>
@@ -192,18 +192,30 @@
                         }
                         return row
                     })
+                     if (pageCur) {
+                        $("html, body").scrollTop(0).animate({ scrollTop: $(".container").offset().top - 30 });
+                    }
                     console.log('listData:', that.listData)
                 }).catch(function(err) {
                     console.error('error:', err)
                 })
             },
             handleDetail:function(item){
-                {ms:channel type='self'}
-                {ms:arclist size=1}
-                    console.log('${field.link}')
-                    this.goto('{ms:global.url/}${field.link}')
-                {/ms:arclist}
-                {/ms:channel}
+                // {ms:channel type='self'}
+                // {ms:arclist size=1}
+                //     console.log('${field.link}')
+                //     this.goto('{ms:global.url/}${field.link}')
+                // {/ms:arclist}
+                // {/ms:channel}
+                if (item.categoryTitle == '医务专栏') {
+                    {ms:channel type='self' }
+                        this.goto('{ms:global.url/}${field.typepath}/' + item.id + '.html')
+                    {/ms:channel}
+                }else {
+                    {ms:channel type='self' }
+                        this.goto('{ms:global.url/}${field.typepath}/yiwubuxinwen/' + item.id + '.html')
+                    {/ms:channel}
+                }
             }
         },
     }).$mount('#app')

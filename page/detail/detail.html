@@ -38,7 +38,7 @@
                 <div class="content fixedWidth">
                     <div class="common_content" style="display: block;">
                         <div class="richText_wrap">
-                            <div class="title" title="${field.title}">
+                            <div class="title">
                                 ${field.title}
                             </div>
                             <div class="row">
@@ -136,7 +136,7 @@
         },
     }).$mount('#app')
     var share_config = {
-        'bdText': $('.title').attr('title'),
+        'bdText': $('.title').html(),
         'bdUrl': location.href,
         'bdDesc': $('.rich').attr('desc')
     };

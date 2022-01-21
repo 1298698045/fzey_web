@@ -90,13 +90,14 @@
             box-sizing: border-box;
         }
         .panel .dept_wrap .item_box img{
-            width: 24px;
-            height: 24px;
+            width: 14px;
+            height: 14px;
             background: url('{ms:global.host/}/{ms:global.style/}/images/Rarrow.jpg') no-repeat 100% 100%;
-            margin-top: 10px;
+            margin-top: 15px;
         }
         .panel .dept_wrap .item_box:hover{
             border: 1px solid #7f0e12;
+            box-shadow:0 0 10px -5px rgb(0 0 0 / 30%)
         }
         .panel .dept_wrap .item_box:nth-child(4n){
             margin-right: 0;
@@ -243,8 +244,8 @@
                 $("html, body").scrollTop(0).animate({scrollTop: $(".b_"+index).offset().top - $(".b_"+index).height()});
             },
             handleSearch:function(){
-                {ms:channel type='self' typeid='1465582294004097025'}
-                    this.goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>?departName='+this.departName+'&doctorName='+this.doctorName
+                {ms:channel type='self' typeid='1468766365345546244'}
+                    this.goto('<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>?departName='+this.departName+'&doctorName='+this.doctorName
                     +"${'#/chuzhendongtai/chuzhenchawen'}")
                 {/ms:channel}
             }

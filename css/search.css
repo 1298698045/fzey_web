@@ -65,7 +65,7 @@
 .news_content .box .l_time .num{
     font-size: 48px;
     color: #333333;
-    font-weight: bold;
+    /* font-weight: bold; */
     line-height: 48px;
 }
 .news_content .box .l_time span{
