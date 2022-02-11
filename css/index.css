@@ -517,8 +517,9 @@
     width: 174px;
     height: 226px;
     /* background: #7f0e12; */
-    margin-right: 30px;
+    /* margin-right: 30px; */
     border: 1px solid #f2f2f2;
+    box-sizing: border-box;
     position: relative;
     cursor: pointer;
 }
@@ -536,12 +537,16 @@
     line-height: 27px;
     margin-top: 14px;
 }
+.wrapper .center .expert_wrap .expert_content .swiper-container-expert .swiper-slide .info_fixed .dept{
+    padding: 0 5px;
+    box-sizing: border-box;
+}
 .wrapper .center .expert_wrap .expert_content .swiper-container-expert .swiper-slide .info_fixed .dept span{
     display: inline-block;
     width: 50%;
     text-align: center;
     line-height: 21px;
-    font-size: 14px;
+    font-size: 12px;
     color: #fff;
     white-space: nowrap;
     overflow: hidden;
@@ -605,16 +610,16 @@
     border-bottom: 3px solid #7f0e12;
 }
 .wrapper .department_wrap .depart_content .dept_bd .item{
-    width: 128px;
+    width: 203px;
     height: 150px;
     /* background: #7f0e12; */
-    margin-top: 22px;
+    /* margin-top: 22px; */
     display: block;
-    margin-right: 40px;
+    margin: 20px 0;
     float: left;
 }
 .wrapper .department_wrap .depart_content .dept_bd{
-    padding: 0 24px;
+    /* padding: 0 24px; */
     display: none;
 }
 .wrapper .department_wrap .depart_content .dept_bd.active{
@@ -642,6 +647,10 @@
     font-size: 16px;
     color: #333333;
     text-align: center;
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .wrapper .center .specialColumn{
     padding: 60px 0;

@@ -316,7 +316,7 @@
 /* 专家名片 */
 .doctor_cart{
     width: 285px;
-    height: 440px;
+    height: 450px;
     background: #f9f9f9;
     margin-top: 48px;
     margin-right: 46px;
@@ -327,7 +327,7 @@
 .doctor_cart .avatar{
     width: 100%;
     height: 356px;
-    background: #7f0e12;
+    background: #f9f9f9;
     position: relative;
     border: 1px solid #f2f2f2;
     box-sizing: border-box;
@@ -349,6 +349,7 @@
 .doctor_cart .doctor_info .position{
     font-size: 14px;
     color: #333;
+    padding-top: 5px;
 }
 .doctor_cart .avatar .hover{
     width: 100%;

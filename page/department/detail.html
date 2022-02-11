@@ -26,15 +26,15 @@
             background-size: 100% 100%;
             color: #ffffff;
             font-size: 40px;
-            font-weight: bold;
+            /* font-weight: bold; */
         }
         .content .briefInfo .left_cover .text{
             /* width: 59px;
             height: 360px; */
-            margin: 30px auto 0;
-            text-align: center;
+            margin: 50px auto 0;
+            /* text-align: center; */
             writing-mode: vertical-rl;
-            letter-spacing: 5px;
+            letter-spacing: 14px;
         }
         .content .briefInfo .right_cont{
             width: calc(100% - 136px);
@@ -203,7 +203,7 @@
                     <div class="briefInfo clearfix">
                         <div class="left_cover fl">
                             <p class="text">
-                                ${field.title}
+                                ${field.typetitle}
                             </p>
                         </div>
                         <div class="right_cont fl">
@@ -220,9 +220,9 @@
                     <div class="dynamic">
                         {ms:channel type='self'}
                         {ms:channel type='self' size=1}
-                        <p class="title">科室动态</p>
+                        <p class="title">科室新闻</p>
                         <div class="bd clearfix">
-                            {ms:arclist size=6}
+                            {ms:arclist orderby='sort'}
                             <#if field.flag?contains('c')>
 
                             <#else>
@@ -237,7 +237,7 @@
                         {/ms:channel}
                     </div>
                     <div class="dynamic">
-                        <p class="title">科室专家</p>
+                        <p class="title">专家团队</p>
                         <div class="doctor_wrap clearfix">
                             <div class="doctor_cart fl" v-for="item in lines" @click="handleRoute(item)">
                                 <div class="avatar">
@@ -263,7 +263,7 @@
                                 <div class="doctor_info">
                                     <p class="name">{{item.name}}</p>
                                     <p class="position">
-                                        {{item.techingPost}}
+                                        {{item.technicalTitle}}
                                     </p>
                                 </div>
                             </div>
@@ -291,11 +291,11 @@
 <script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
 <script>
     var app = new Vue({
+        el: '#app',
         mixins: [mixin],
         data:function(){
             return {
                 typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
-                hasRoute: true,
                 lines: []
             }
         },
@@ -349,6 +349,6 @@
         created: function() {
             this.list()
         }
-    }).$mount('#app')
+    })
 </script>
 </html>

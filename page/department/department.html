@@ -37,6 +37,11 @@
         }
         .search_row .left .tag a{
             color: #fff !important;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            width: 100%;
+            display: block;
         }
         .search_row .right .label{
             padding-left: 39px;
@@ -69,7 +74,7 @@
             font-size: 26px;
             font-weight: bold;
             color: #333333;
-            margin: 56px 0 30px 0;
+            margin: 0 0 30px 0;
         }
         .panel .dept_wrap .item_box{
             width: 290px;
@@ -196,6 +201,7 @@
                         </div>
                     </div>
                     {ms:channel type='son' orderby='sort'}
+                    <div id='${field.pinyin}' style="height: 56px;"></div>
                     <div class="panel b_${field.index}">
                         <p class="label">${field.typetitle}</p>
                         <ul class="dept_wrap clearfix">

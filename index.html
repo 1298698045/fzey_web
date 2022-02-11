@@ -594,7 +594,7 @@
                 deptIdx: 0,
                 lines:[],
                 departments: [
-                    {ms:channel type='son' typeid='1400724656644583425' flag='c'}
+                    {ms:channel type='son' typeid='1400724656644583425' flag='c' orderby='sort'}
                     {
                         typetitle: "${field.typetitle}",
                         children: [
@@ -754,7 +754,9 @@
         swiper1.startAutoplay();
     }
     var swiper2 = new Swiper('.swiper-container_news', {
-        autoplay: 2000,
+        loop: true,
+        speed: 1000,
+        autoplay: 3000,
         pagination: '.swiper-pagination-news',
         paginationClickable: true
     });
@@ -777,7 +779,7 @@
             slidesPerView: slidesPerView,
             paginationClickable: true,
             spaceBetween: 30,
-            // loop: true,
+            loop: true,
             speed: 1000,
             autoplay: 3000,
             observer:true,
