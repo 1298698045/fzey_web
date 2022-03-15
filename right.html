@@ -1,12 +1,12 @@
 <div class="rightBar">
     <ul class="bar_cont">
-        <li class="item">
+        <!-- <li class="item">
             <p class="icon">
                 <img class="default" src="{ms:global.host/}/{ms:global.style/}/images/pic-1-c.png" alt="">
                 <img src="{ms:global.host/}/{ms:global.style/}/images/pic-1-b.png" alt="" class="active">
             </p>
             <p class="text">预约挂号</p>
-        </li>
+        </li> -->
         {ms:channel type='self' size=1 typeid='1468766365345546244'}
         <li class="item" @click="goto('{ms:global.url/}/${field.typeurl}')">
             <p class="icon">
@@ -34,13 +34,13 @@
             <p class="text">交通指南</p>
         </li>
         {/ms:channel}
-        {ms:channel type='self' size=1 typeid='1468772052414922754'}
-        <li class="item" @click="goto('{ms:global.url/}/${field.typeurl}')">
+        {ms:channel type='self' size=1 typeid='1400724656644583425'}
+        <li class="item" @click="goto('{ms:global.url/}/${field.typelink}')">
             <p class="icon">
                 <img class="default" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-c.png" alt="">
                 <img src="{ms:global.host/}/{ms:global.style/}/images/pic-5-b.png" alt="" class="active">
             </p>
-            <p class="text">科室分布</p>
+            <p class="text">重点专科</p>
         </li>
         {/ms:channel}
     </ul>

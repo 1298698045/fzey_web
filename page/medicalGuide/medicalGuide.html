@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>就医指南</title>
+    <title>{ms:global.name/}</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/fontIcon/iconfont.css">
@@ -99,7 +99,7 @@
             color: #999999;
             font-size: 14px;
             line-height: 52px;
-            padding: 0 65px;
+            padding: 0 20px;
             box-sizing: border-box;
         }
         .visit .tips .label{
@@ -223,10 +223,17 @@
         .search_bd table tr td{
             min-width: 60px;
             height: 60px;
-            text-align: center;
+            /* text-align: center; */
             border: 1px solid #e9e9e9;
             color: #333;
             font-size: 16px;
+            padding-left: 10px;
+        }
+        .search_bd .empty{
+            margin: 30px 0;
+            font-size: 28px;
+            text-align: center;
+            color: #999;
         }
         .table_cont table{
             width: 100% !important;
@@ -668,8 +675,8 @@
 '                                            <p class="english">AM</p>'+
 '                                        </th>'+
 '                                        <th>'+
-'                                            下午'+
-'                                            <p class="english">PM</p>'+
+'                                            上午'+
+'                                            <p class="english">AM</p>'+
 '                                        </th>'+
 '                                    </tr>'+
 '                                </thead>'+
@@ -696,7 +703,7 @@
 '                            {/ms:channel}'+
 '                        </div>'+
 '                        <div class="search_bd" v-if="isSearch">'+
-'                            <table>'+
+'                            <table v-if="queryList!=\'\'">'+
 '                                <thead>'+
 '                                    <tr>'+
 '                                        <th>科室</th>'+
@@ -716,6 +723,7 @@
 '                                    </tr>'+
 '                                </tbody>'+
 '                            </table>'+
+'                            <div class="empty" v-if="queryList==\'\'">暂无数据</div>'+
 '                        </div>'+
 '                    </div>',
                 data:function(){
@@ -784,6 +792,7 @@
                                     return RegExp(that.doctorName).test(item.name)
                                 }
                             })
+                            aggregateDept(that.queryList)
                             that.isSearch = true;
                         }else if(that.departName!=''&&that.doctorName==''){
                             that.queryList = that.localList.filter(function(item){
@@ -791,11 +800,13 @@
                                     return RegExp(that.departName).test(item.departmentName)
                                 }
                             })
+                            aggregateDept(that.queryList)
                             that.isSearch = true;
                         }else if(that.departName!=''&&that.doctorName!=''){
                             that.queryList = that.localList.filter(function(item){
                                 return RegExp(that.departName).test(item.departmentName) && RegExp(that.doctorName).test(item.name);
                             })
+                            aggregateDept(that.queryList)
                             that.isSearch = true;
                         }
                         else{

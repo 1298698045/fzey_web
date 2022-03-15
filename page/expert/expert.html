@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>专家推荐</title>
+    <title>{ms:global.name/}</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/fontIcon/iconfont.css">
@@ -39,7 +39,7 @@
         }
         .expert_content .dept_block .right_block .tabs .tab{
             display: inline-block;
-            width: 80px;
+            min-width: 80px;
             height: 50px;
             line-height: 50px;
             margin-right: 40px;
@@ -59,7 +59,7 @@
         }
         .expert_content .dept_block .right_block .dept_content .name{
             display: inline-block;
-            min-width: 90px;
+            /* min-width: 90px; */
             height: 44px;
             line-height: 44px;
             text-align: center;
@@ -68,7 +68,7 @@
             box-sizing: border-box;
         }
         .expert_content .dept_block .right_block .dept_content .name:nth-child(7n){
-            margin-right: 0;
+            /* margin-right: 0; */
         }
         .expert_content .dept_block .right_block .dept_content .name:hover{
             color: #c0a868;
@@ -198,22 +198,22 @@
                             <li class="tab fl" :class="{'active':idx==index}" v-for="(item,index) in tabs" @click="handleTab(item,index)">{{item}}</li>
                         </ul>
                         <ul class="dept_content" v-if="idx==0">
-                            <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in gkks" @click="getCheck(dept)">
-                                {{dept.categoryTitle}}
-                            </li>
-                        </ul>
-                        <ul class="dept_content" v-if="idx==1">
                             <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in nkks" @click="getCheck(dept)">
                                 {{dept.categoryTitle}}
                             </li>
                         </ul>
-                        <ul class="dept_content" v-if="idx==2">
+                        <ul class="dept_content" v-if="idx==1">
                             <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in wkks" @click="getCheck(dept)">
                                 {{dept.categoryTitle}}
                             </li>
                         </ul>
+                        <ul class="dept_content" v-if="idx==2">
+                            <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in gkks" @click="getCheck(dept)">
+                                {{dept.categoryTitle}}
+                            </li>
+                        </ul>
                         <ul class="dept_content" v-if="idx==3">
-                            <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in yjks" @click="getCheck(dept)">
+                            <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in feks" @click="getCheck(dept)">
                                 {{dept.categoryTitle}}
                             </li>
                         </ul>
@@ -223,12 +223,12 @@
                             </li>
                         </ul>
                         <ul class="dept_content" v-if="idx==5">
-                            <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in feks" @click="getCheck(dept)">
+                            <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in qtks" @click="getCheck(dept)">
                                 {{dept.categoryTitle}}
                             </li>
                         </ul>
                         <ul class="dept_content" v-if="idx==6">
-                            <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in qtks" @click="getCheck(dept)">
+                            <li class="name" :class="{'active':dept.id==departmentId}" v-for="dept in yjks" @click="getCheck(dept)">
                                 {{dept.categoryTitle}}
                             </li>
                         </ul>
@@ -325,7 +325,7 @@
                     contentCount: 1000
                 },
                 tabs:[
-                    '骨科','内科','外科','医技科室','五官科','妇儿科','其它'
+                    '内科', '外科','骨科', '妇儿科', '五官科', '中医系统及其它','医技科室'
                 ],
                 idx:0,
                 lines:[],
@@ -445,7 +445,7 @@
                             }else if(dept.categoryTitle == '妇儿科'){
                                 that.feks = dept.children
                                 console.log('that.feks:', that.feks)
-                            }else if(dept.categoryTitle == '其它'){
+                            }else if(dept.categoryTitle == '中医系统及其它'){
                                 that.qtks = dept.children
                                 console.log('that.qtks:', that.qtks)
                             }

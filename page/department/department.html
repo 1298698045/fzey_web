@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>科室介绍</title>
+    <title>{ms:global.name/}</title>
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/fontIcon/iconfont.css">
@@ -205,7 +205,7 @@
                     <div class="panel b_${field.index}">
                         <p class="label">${field.typetitle}</p>
                         <ul class="dept_wrap clearfix">
-                            {ms:channel type='son' orderby='sort'}
+                            {ms:channel type='son'}
                             <li class="item_box fl clearfix" @click="goto('{ms:global.url/}${field.typelink}')">
                                 <span class="text fl">${field.typetitle}</span>
                                 <img class="fr" src="{ms:global.host/}/{ms:global.style/}/images/Rarrow.jpg" alt="">

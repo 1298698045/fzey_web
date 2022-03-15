@@ -41,13 +41,13 @@
              </div>
              <div class="bulletinBoard">
                  <ul class="bulletinBoard_wrap fixedWidth clearfix">
-                     <li class="itemBox fl">
+                     <!-- <li class="itemBox fl">
                          <div class="icon">
                              <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-1-a.png" alt="">
                              <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-1-b.png" alt="">
                          </div>
                          <p class="name">预约挂号</p>
-                     </li>
+                     </li> -->
                      {ms:channel type='self' size=1 typeid='1468766365345546244'}
                      <li class="itemBox fl" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
@@ -78,10 +78,19 @@
                     {ms:channel type='self' size=1 typeid='1468772052414922754'}
                     <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
+                            <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-8-a.png" alt="">
+                            <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-8-b.png" alt="">
+                        </div>
+                        <p class="name">科室分布</p>
+                    </li>
+                    {/ms:channel}
+                    {ms:channel type='self' size=1 typeid='1400724656644583425'}
+                    <li class="itemBox" @click="goto('{ms:global.url/}/${field.typelink}')">
+                        <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-a.png" alt="">
                             <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-b.png" alt="">
                         </div>
-                        <p class="name">科室分布</p>
+                        <p class="name">重点专科</p>
                     </li>
                     {/ms:channel}
                     {ms:channel type='self' size=1 typeid='1468772038850543618'}
@@ -112,7 +121,9 @@
                                 {ms:channel type='self'  typeid='1468759502730223618'}
                                 <div class="swiper-wrapper">
                                     {ms:arclist size=7 flag='c' orderby='sort'}
-                                    <div class="swiper-slide" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                                    <#if field.flag?contains('tv')>
+                                    <div class="swiper-slide" flag="${field.flag}">
+                                        <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
                                         <div class="cover_img">
                                             <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
                                         </div>
@@ -129,6 +140,25 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <#else>
+                                    <div class="swiper-slide" flag="${field.flag}" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                                        <div class="cover_img">
+                                            <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
+                                        </div>
+                                        <div class="panel_box clearfix">
+                                            <div class="timeBox">
+                                                <h1 class="num">${field.date?string("dd")}</h1>
+                                                <p class="text">${field.date?string("yyyy-MM")}</p>
+                                            </div>
+                                            <div class="news_info fr">
+                                                <h3 class="title">${field.title}</h3>
+                                                <div class="news_desc">
+                                                    ${field.descrip}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </#if>
                                     {/ms:arclist}
                                 </div>
                                 {/ms:channel}
@@ -141,7 +171,9 @@
                         {ms:channel type='self'  typeid='1468759502730223618'}
                         <div class="newsList">
                             {ms:arclist size=7 flag='c' orderby='sort'}
-                            <div class="row clearfix" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                            <#if field.flag?contains('tv')>
+                            <div class="row clearfix" flag="${field.flag}">
+                                <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
                                 <div class="timeBox fl">
                                     <p class="num">${field.date?string("dd")}</p>
                                     <p class="time">${field.date?string("yyyy-MM")}</p>
@@ -150,6 +182,17 @@
                                     ${field.title}
                                 </div>
                             </div>
+                            <#else>
+                            <div class="row clearfix" flag="${field.flag}" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                                <div class="timeBox fl">
+                                    <p class="num">${field.date?string("dd")}</p>
+                                    <p class="time">${field.date?string("yyyy-MM")}</p>
+                                </div>
+                                <div class="desc fl">
+                                    ${field.title}
+                                </div>
+                            </div>
+                            </#if>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
@@ -181,7 +224,9 @@
                         {ms:channel typeid='1468759722604027905' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==0}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
-                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
+                            <#if field.flag?contains('tv')>
+                            <div class="box clearfix fl" flag="${field.flag}">
+                                <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
                                 <div class="icon fl">
                                     <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
                                 </div>
@@ -197,118 +242,278 @@
                                     </p>
                                 </div>
                             </div>
+                            <#else>
+                            <div class="box clearfix fl" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                                <div class="icon fl">
+                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                </div>
+                                <div class="r_info fl">
+                                    <p class="text">
+                                        ${field.title}
+                                    </p>
+                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                        ${field.date?string("MM/dd")}
+                                    </p>
+                                    <p class="time" v-else>
+                                        ${field.date?string("yyyy/MM/dd")}
+                                    </p>
+                                </div>
+                            </div>
+                            </#if>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
                         {ms:channel typeid='1468768992112312322' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==1}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
-                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_2.png" alt="">
+                            <#if field.flag?contains('tv')>
+                                <div class="box clearfix fl" flag="${field.flag}">
+                                    <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                    <div class="icon fl">
+                                        <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                    </div>
+                                    <div class="r_info fl">
+                                        <p class="text">
+                                            ${field.title}
+                                        </p>
+                                        <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                            ${field.date?string("MM/dd")}
+                                        </p>
+                                        <p class="time" v-else>
+                                            ${field.date?string("yyyy/MM/dd")}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        ${field.title}
-                                    </p>
-                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
-                                        ${field.date?string("MM/dd")}
-                                    </p>
-                                    <p class="time" v-else>
-                                        ${field.date?string("yyyy/MM/dd")}
-                                    </p>
-                                </div>
-                            </div>
+                                <#else>
+                                    <div class="box clearfix fl" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                                        <div class="icon fl">
+                                            <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                        </div>
+                                        <div class="r_info fl">
+                                            <p class="text">
+                                                ${field.title}
+                                            </p>
+                                            <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                                ${field.date?string("MM/dd")}
+                                            </p>
+                                            <p class="time" v-else>
+                                                ${field.date?string("yyyy/MM/dd")}
+                                            </p>
+                                        </div>
+                                    </div>
+                            </#if>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
                         {ms:channel typeid='1468760796815613954' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==2}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
-                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_3.png" alt="">
+                            <#if field.flag?contains('tv')>
+                                <div class="box clearfix fl" flag="${field.flag}">
+                                    <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                    <div class="icon fl">
+                                        <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                    </div>
+                                    <div class="r_info fl">
+                                        <p class="text">
+                                            ${field.title}
+                                        </p>
+                                        <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                            ${field.date?string("MM/dd")}
+                                        </p>
+                                        <p class="time" v-else>
+                                            ${field.date?string("yyyy/MM/dd")}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        ${field.title}
-                                    </p>
-                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
-                                        ${field.date?string("MM/dd")}
-                                    </p>
-                                    <p class="time" v-else>
-                                        ${field.date?string("yyyy/MM/dd")}
-                                    </p>
-                                </div>
-                            </div>
+                                <#else>
+                                    <div class="box clearfix fl" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                                        <div class="icon fl">
+                                            <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                        </div>
+                                        <div class="r_info fl">
+                                            <p class="text">
+                                                ${field.title}
+                                            </p>
+                                            <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                                ${field.date?string("MM/dd")}
+                                            </p>
+                                            <p class="time" v-else>
+                                                ${field.date?string("yyyy/MM/dd")}
+                                            </p>
+                                        </div>
+                                    </div>
+                            </#if>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
                         {ms:channel typeid='1471722018951385089' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==3}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
-                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_4.png" alt="">
+                            <#if field.flag?contains('tv')>
+                                <div class="box clearfix fl" flag="${field.flag}">
+                                    <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                    <div class="icon fl">
+                                        <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                    </div>
+                                    <div class="r_info fl">
+                                        <p class="text">
+                                            ${field.title}
+                                        </p>
+                                        <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                            ${field.date?string("MM/dd")}
+                                        </p>
+                                        <p class="time" v-else>
+                                            ${field.date?string("yyyy/MM/dd")}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        ${field.title}
-                                    </p>
-                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
-                                        ${field.date?string("MM/dd")}
-                                    </p>
-                                    <p class="time" v-else>
-                                        ${field.date?string("yyyy/MM/dd")}
-                                    </p>
+                                <#else>
+                                <div class="box clearfix fl" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                                    <div class="icon fl">
+                                        <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                    </div>
+                                    <div class="r_info fl">
+                                        <p class="text">
+                                            ${field.title}
+                                        </p>
+                                        <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                            ${field.date?string("MM/dd")}
+                                        </p>
+                                        <p class="time" v-else>
+                                            ${field.date?string("yyyy/MM/dd")}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            </#if>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
                         {ms:channel typeid='1468768786826297346' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==4}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
-                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_5.png" alt="">
+                            <#if field.flag?contains('tv')>
+                                <div class="box clearfix fl" flag="${field.flag}">
+                                    <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                    <div class="icon fl">
+                                        <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                    </div>
+                                    <div class="r_info fl">
+                                        <p class="text">
+                                            ${field.title}
+                                        </p>
+                                        <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                            ${field.date?string("MM/dd")}
+                                        </p>
+                                        <p class="time" v-else>
+                                            ${field.date?string("yyyy/MM/dd")}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        ${field.title}
-                                    </p>
-                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
-                                        ${field.date?string("MM/dd")}
-                                    </p>
-                                    <p class="time" v-else>
-                                        ${field.date?string("yyyy/MM/dd")}
-                                    </p>
-                                </div>
-                            </div>
+                                <#else>
+                                    <div class="box clearfix fl" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                                        <div class="icon fl">
+                                            <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                        </div>
+                                        <div class="r_info fl">
+                                            <p class="text">
+                                                ${field.title}
+                                            </p>
+                                            <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                                ${field.date?string("MM/dd")}
+                                            </p>
+                                            <p class="time" v-else>
+                                                ${field.date?string("yyyy/MM/dd")}
+                                            </p>
+                                        </div>
+                                    </div>
+                            </#if>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
                         {ms:channel typeid='1468759722536919042' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==5}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
-                            <div class="box clearfix fl" @click="goto('{ms:global.url/}${field.link}')">
-                                <div class="icon fl">
-                                    <img src="{ms:global.host/}/{ms:global.style/}/images/item_6.png" alt="">
+                            <#if field.flag?contains('tv')>
+                                <div class="box clearfix fl" flag="${field.flag}">
+                                    <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                    <div class="icon fl">
+                                        <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                    </div>
+                                    <div class="r_info fl">
+                                        <p class="text">
+                                            ${field.title}
+                                        </p>
+                                        <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                            ${field.date?string("MM/dd")}
+                                        </p>
+                                        <p class="time" v-else>
+                                            ${field.date?string("yyyy/MM/dd")}
+                                        </p>
+                                    </div>
                                 </div>
-                                <div class="r_info fl">
-                                    <p class="text">
-                                        ${field.title}
-                                    </p>
-                                    <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
-                                        ${field.date?string("MM/dd")}
-                                    </p>
-                                    <p class="time" v-else>
-                                        ${field.date?string("yyyy/MM/dd")}
-                                    </p>
-                                </div>
-                            </div>
+                                <#else>
+                                    <div class="box clearfix fl" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                                        <div class="icon fl">
+                                            <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                        </div>
+                                        <div class="r_info fl">
+                                            <p class="text">
+                                                ${field.title}
+                                            </p>
+                                            <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                                ${field.date?string("MM/dd")}
+                                            </p>
+                                            <p class="time" v-else>
+                                                ${field.date?string("yyyy/MM/dd")}
+                                            </p>
+                                        </div>
+                                    </div>
+                            </#if>
                             {/ms:arclist}
                         </div>  
+                        {/ms:channel}
+                        {ms:channel typeid='1468759722536919041' type='self'}
+                        <div class="block clearfix" :class="{'active':noticeIdx==6}">
+                            {ms:arclist size=8 flag='c' orderby='sort'}
+                            <#if field.flag?contains('tv')>
+                                <div class="box clearfix fl" flag="${field.flag}">
+                                    <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                    <div class="icon fl">
+                                        <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                    </div>
+                                    <div class="r_info fl">
+                                        <p class="text">
+                                            ${field.title}
+                                        </p>
+                                        <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                            ${field.date?string("MM/dd")}
+                                        </p>
+                                        <p class="time" v-else>
+                                            ${field.date?string("yyyy/MM/dd")}
+                                        </p>
+                                    </div>
+                                </div>
+                                <#else>
+                                    <div class="box clearfix fl" flag="${field.flag}" @click="goto('{ms:global.url/}${field.link}')">
+                                        <div class="icon fl">
+                                            <img src="{ms:global.host/}/{ms:global.style/}/images/item_1.png" alt="">
+                                        </div>
+                                        <div class="r_info fl">
+                                            <p class="text">
+                                                ${field.title}
+                                            </p>
+                                            <p class="time" v-if="currenYear=='${field.date?string('yyyy')}'">
+                                                ${field.date?string("MM/dd")}
+                                            </p>
+                                            <p class="time" v-else>
+                                                ${field.date?string("yyyy/MM/dd")}
+                                            </p>
+                                        </div>
+                                    </div>
+                            </#if>
+                            {/ms:arclist}
+                        </div>
                         {/ms:channel}
                     </div>
                  </div>
@@ -579,7 +784,8 @@
                     '党建之窗',
                     '科教信息',
                     '护理信息',
-                    '人力招聘'
+                    '人力招聘',
+                    '招标公告'
                 ],
                 noticeIdx:0,
                 deptTabs:[
@@ -598,7 +804,7 @@
                     {
                         typetitle: "${field.typetitle}",
                         children: [
-                            {ms:channel size=25  orderby='sort'}
+                            {ms:channel size=25}
                             {
                                 typetitle: "${field.typetitle}",
                                 typelink: "{ms:global.url/}${field.typelink}",
@@ -664,6 +870,11 @@
                             this.goto('{ms:global.url/}/${field.typeurl}')
                         {/ms:channel}
                         break;
+                    case 6:
+                        {ms:channel typeid='1468759722536919041' type='self' }
+                        this.goto('{ms:global.url/}/${field.typeurl}')
+                        {/ms:channel}
+                        break;
                 }
             },
             handleSroll:function(e){
@@ -705,11 +916,15 @@
                     contentType: 'c'
                 }, page)).then(function(res) {
                     //that.page.contentCount = res.data.total
+                    let contSort = []
+                    let temp = []
                     var list = res.data.rows.map(function(row) {
-                        let name = row.name.split('_');
-                        if(name.length>1){
-                            row.name = name[0];
-                            row.sortIdx = name[1];
+                        let jobNumber = row.jobNumber.split('_');
+                        if(jobNumber.length>1){
+                            row.jobNumber = jobNumber[0];
+                            row.sortIdx = jobNumber[1];
+                        }else {
+                            row.sortIdx = '无';
                         }
                         if (row.portrait) {
                             var img = JSON.parse(row.portrait)
@@ -719,7 +934,9 @@
                         }
                         return row
                     })
+                    console.log(list,'list')
                     that.lines = list.sort(that.compare('sortIdx'))
+                    // that.lines = that.bubbleSorting(list);
                     console.log('lines:', that.lines)
                 }).catch(function(err) {
                     console.error('error:', err)
@@ -731,6 +948,18 @@
                     var val2 = b[property];
                     return val1 - val2;
                 }
+            },
+            bubbleSorting(arr){
+                for (let i = 0; i < arr.length - 1; i++) {
+                    for (let j = i; j < arr.length; j++) {
+                        if (arr[i].sortIdx > arr[j].sortIdx) {
+                            let changeData = arr[i]
+                            arr[i] = arr[j]
+                            arr[j] = changeData
+                        }
+                    }
+                }
+                return arr
             },
             handleRouter:function(item){
                 window.open("{ms:global.url/}${'/page/expert/detail.html'}?id="+ item.id )
@@ -780,12 +1009,10 @@
             paginationClickable: true,
             spaceBetween: 30,
             loop: true,
-            speed: 1000,
-            autoplay: 3000,
-            observer:true,
-            observeParents:true,
+            speed: 500,
+            autoplay: 1000,
             onSlideChangeEnd:function(swiper){
-                console.log(swiper)
+                // console.log(swiper)
                 if(swiper.isEnd){
                     $('.wrapper .center .expert_wrap .expert_content .swiper-next').addClass('active');
                     $('.wrapper .center .expert_wrap .expert_content .swiper-prev').addClass('active');
@@ -818,7 +1045,7 @@
         observer: true,
         observeParents: true,
         onSlideChangeEnd:function(swiper){
-            console.log(swiper)
+            // console.log(swiper)
             if(swiper.isEnd){
                 $('.wrapper .center .expert_wrap .expert_content .swiper-next').addClass('active');
                 $('.wrapper .center .expert_wrap .expert_content .swiper-prev').addClass('active');
@@ -835,5 +1062,37 @@
         $(this).addClass('active');
         $('.dept_bd').eq(idx).addClass('active');
     })
+    window.onload = function(){
+        for(var i = 0; i < $('.swiper-container_news .swiper-slide').length; i++){
+            var flag = $('.swiper-container_news .swiper-slide').eq(i).attr('flag') || '';
+            if (flag != "" && flag.indexOf('tv') != -1) {
+                var dom = $('.swiper-container_news .swiper-slide').eq(i).find('.hidden')
+                var link = dom.find('a').html();
+                $('.swiper-container_news .swiper-slide').eq(i).bind('click',{link:link}, clickHandler)
+            }
+        }
+        for (var k = 0; k < $('.news_wrap .right_box .newsList .row').length; k++) {
+            var flag2 = $('.news_wrap .right_box .newsList .row').eq(k).attr('flag') || '';
+            if (flag2 != "" && flag2.indexOf('tv') != -1) {
+                var dom2 = $('.news_wrap .right_box .newsList .row').eq(k).find('.hidden');
+                var link2 = dom2.find('a').html();
+                $('.news_wrap .right_box .newsList .row').eq(k).bind('click',{link:link2}, clickHandler)
+            }
+        }
+        for(var i = 0;i < $('.notice_content .block').length; i++){
+            for(var j = 0; j <  $('.notice_content .block').eq(i).find('.box').length; j++){
+                var flag =  $('.notice_content .block').eq(i).find('.box').eq(j).attr('flag') || '';
+                if (flag != "" && flag.indexOf('tv') != -1) {
+                    var dom = $('.notice_content .block').eq(i).find('.box').eq(j).find('.hidden');
+                    var link = dom.find('a').html();
+                    $('.notice_content .block').eq(i).find('.box').eq(j).bind('click', {link:link}, clickHandler)
+                }
+            }
+        }
+        function clickHandler(event) {
+            var href = event.data.link;
+            window.open(href)
+        }
+    }
 </script>
 </html>
