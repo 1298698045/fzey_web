@@ -84,7 +84,7 @@
                         <p class="name">科室分布</p>
                     </li>
                     {/ms:channel}
-                    {ms:channel type='self' size=1 typeid='1400724656644583425'}
+                    <!-- {ms:channel type='self' size=1 typeid='1400724656644583425'}
                     <li class="itemBox" @click="goto('{ms:global.url/}/${field.typelink}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-5-a.png" alt="">
@@ -92,8 +92,8 @@
                         </div>
                         <p class="name">重点专科</p>
                     </li>
-                    {/ms:channel}
-                    {ms:channel type='self' size=1 typeid='1468772038850543618'}
+                    {/ms:channel} -->
+                    <!-- {ms:channel type='self' size=1 typeid='1468772038850543618'}
                     <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
                             <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-6-a.png" alt="">
@@ -101,14 +101,14 @@
                         </div>
                         <p class="name">就诊流程</p>
                     </li>
-                    {/ms:channel}
+                    {/ms:channel} -->
                     {ms:channel type='self' size=1 typeid='1468772003291234306'}
                     <li class="itemBox" @click="goto('{ms:global.url/}/${field.typeurl}')">
                         <div class="icon">
-                            <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-7-a.png" alt="">
-                            <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-7-b.png" alt="">
+                            <img class="imgs" src="{ms:global.host/}/{ms:global.style/}/images/pic-6-a.png" alt="">
+                            <img class="imgs active" src="{ms:global.host/}/{ms:global.style/}/images/pic-6-b.png" alt="">
                         </div>
-                        <p class="name">办事流程</p>
+                        <p class="name">就诊流程</p>
                     </li>
                     {/ms:channel}
                  </ul>
@@ -347,7 +347,7 @@
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
-                        {ms:channel typeid='1471722018951385089' type='self'}
+                        <!-- {ms:channel typeid='1471722018951385089' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==3}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
                             <#if field.flag?contains('tv')>
@@ -388,8 +388,8 @@
                             </#if>
                             {/ms:arclist}
                         </div>
-                        {/ms:channel}
-                        {ms:channel typeid='1468768786826297346' type='self'}
+                        {/ms:channel} -->
+                        <!-- {ms:channel typeid='1468768786826297346' type='self'}
                         <div class="block clearfix" :class="{'active':noticeIdx==4}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
                             <#if field.flag?contains('tv')>
@@ -430,9 +430,9 @@
                             </#if>
                             {/ms:arclist}
                         </div>
-                        {/ms:channel}
+                        {/ms:channel} -->
                         {ms:channel typeid='1468759722536919042' type='self'}
-                        <div class="block clearfix" :class="{'active':noticeIdx==5}">
+                        <div class="block clearfix" :class="{'active':noticeIdx==3}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
                             <#if field.flag?contains('tv')>
                                 <div class="box clearfix fl" flag="${field.flag}">
@@ -474,7 +474,7 @@
                         </div>  
                         {/ms:channel}
                         {ms:channel typeid='1468759722536919041' type='self'}
-                        <div class="block clearfix" :class="{'active':noticeIdx==6}">
+                        <div class="block clearfix" :class="{'active':noticeIdx==4}">
                             {ms:arclist size=8 flag='c' orderby='sort'}
                             <#if field.flag?contains('tv')>
                                 <div class="box clearfix fl" flag="${field.flag}">
@@ -782,9 +782,9 @@
                     '通知公告',
                     '医务专栏',
                     '党建之窗',
-                    '科教信息',
-                    '护理信息',
-                    '人力招聘',
+                    // '科教信息',
+                    // '护理信息',
+                    '人才招聘',
                     '招标公告'
                 ],
                 noticeIdx:0,
@@ -855,22 +855,22 @@
                             this.goto('<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>')
                         {/ms:channel}
                         break;
+                    // case 3:
+                    //     {ms:channel typeid='1471722018951385089' type='self'}
+                    //         this.goto('{ms:global.url/}/${field.typeurl}')
+                    //     {/ms:channel}
+                    //     break;
+                    // case 4:
+                    //     {ms:channel typeid='1468768786826297346' type='self'}
+                    //     this.goto('<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>')
+                    //     {/ms:channel}
+                    //     break;
                     case 3:
-                        {ms:channel typeid='1471722018951385089' type='self'}
-                            this.goto('{ms:global.url/}/${field.typeurl}')
-                        {/ms:channel}
-                        break;
-                    case 4:
-                        {ms:channel typeid='1468768786826297346' type='self'}
-                        this.goto('<#if field.type==3>{ms:global.url/}/${field.typeurl}<#else>{ms:global.url/}/${field.typelink}</#if>')
-                        {/ms:channel}
-                        break;
-                    case 5:
                         {ms:channel typeid='1468759722536919042' type='self'}
                             this.goto('{ms:global.url/}/${field.typeurl}')
                         {/ms:channel}
                         break;
-                    case 6:
+                    case 4:
                         {ms:channel typeid='1468759722536919041' type='self' }
                         this.goto('{ms:global.url/}/${field.typeurl}')
                         {/ms:channel}
