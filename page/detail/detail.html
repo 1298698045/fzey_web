@@ -38,9 +38,9 @@
                 <div class="content fixedWidth">
                     <div class="common_content" style="display: block;">
                         <div class="richText_wrap">
-                            <div class="title">
-                                ${field.title}
-                            </div>
+                            {ms:arclist artid=field.id}
+                    			<div class="title">${field.title}</div>
+                    		{/ms:arclist}
                             <div class="row">
                                 来源：${field.source}<span class="time">
                                     发布时间：${(field.date?string("yyyy-MM-dd"))!}
@@ -76,20 +76,8 @@
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
 <script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
 <script>
-    var Foo = { template: '<div class="fixedWidth">foo</div>' }
-    var Bar = { template: '<div class="fixedWidth">bar</div>' }
-    var routes = [
-        { path: '/yyjj', component: Foo },
-        { path: '/jgzj', component: Bar }
-    ]
-    var router = new VueRouter({
-        // mode:'history',
-        routes:routes // (缩写) 相当于 routes: routes
-    })
     var app = new Vue({
-        router:router,
         mixins: [mixin],
-        
         data:function(){
             return {
                 typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
@@ -125,14 +113,9 @@
             }
         },
         created:function() {
-            if (this.$route.path == '/') {
-                this.push('/yyjj')
-            }
+            
         },
         methods: {
-            handleRouteWechat:function(){
-
-            }
         },
     }).$mount('#app')
     var share_config = {

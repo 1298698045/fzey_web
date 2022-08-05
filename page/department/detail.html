@@ -96,7 +96,11 @@
         }
         .dynamic .bd .box .info{
             font-size: 18px;
-            height: 54px;
+            /* height: 54px; */
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            overflow: hidden;
         }
         .dynamic .bd .box:hover .info{
             color: #7f0e12;
@@ -248,9 +252,11 @@
                                             <p class="x_r border"></p>
                                             <p class="y_l border"></p>
                                             <p class="y_r border"></p>
-                                            <div class="dept">
+                                            {ms:channel type='self' typeid='1400724656644583425'}
+                                            <div class="dept" @click.stop="handleRouteDepart(item)">
                                                 {{item.departmentName}}
                                             </div>
+                                            {/ms:channel}
                                             <div class="desc">
                                                 {{item.introduce}}
                                             </div>
@@ -302,6 +308,9 @@
         created:function() {
         },
         methods: {
+            handleRouteDepart(item) {
+                window.open("{ms:global.url/}" + item.departmentPath + '/index.html');
+            },
             list: function() {
                 var that = this
                 var page = {pageNo: 1,pageSize: 100}

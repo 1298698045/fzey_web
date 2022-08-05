@@ -121,3 +121,7 @@ s, i, em {
 .cloak{
     display: none;
 }
+
+[v-cloak]{
+    display: none;
+}

@@ -257,9 +257,11 @@
                                     <p class="x_r border"></p>
                                     <p class="y_l border"></p>
                                     <p class="y_r border"></p>
-                                    <div class="dept">
+                                    {ms:channel type='self' typeid='1400724656644583425'}
+                                    <div class="dept" @click.stop="handleRouteDepart(item)">
                                         {{item.departmentName}}
                                     </div>
+                                    {/ms:channel}
                                     <div class="desc">
                                         {{item.goodAt}}
                                     </div>
@@ -345,6 +347,9 @@
             this.list()
         },
         methods: {
+            handleRouteDepart(item) {
+                window.open("{ms:global.url/}" + item.departmentPath + '/index.html');
+            },
             changePage:function(e){
 
             },

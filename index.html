@@ -533,12 +533,33 @@
                         <div class="swiper-container-expert swiper-container-horizontal fl">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide" v-for="item in lines" @click="handleRouter(item)">
-                                    <img :src="item.portraitUrl" alt="">
+                                    <div class="box">
+                                        <img :src="item.portraitUrl" alt="">
+                                        <div class="hover">
+                                            <div class="hover_box">
+                                                <p class="x_l border"></p>
+                                                <p class="x_r border"></p>
+                                                <p class="y_l border"></p>
+                                                <p class="y_r border"></p>
+                                                {ms:channel type='self' typeid='1400724656644583425'}
+                                                <div class="dept" @click.stop="handleRouteDepart(item)">
+                                                    {{item.departmentName}}
+                                                </div>
+                                                {/ms:channel}
+                                                <div class="desc">
+                                                    {{item.goodAt}}
+                                                </div>
+                                                <div class="btn">
+                                                    点击查看出诊排班表
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="info_fixed">
                                         <p class="name">{{item.name}}</p>
                                         <div class="dept clearfix">
-                                            <span class="fl">{{item.departmentName}}</span>
-                                            <span class="fl">{{item.technicalTitle}}</span>
+                                            <span>{{item.departmentName}}</span>
+                                            <span>{{item.technicalTitle}}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -630,7 +651,7 @@
              <div class="home_footer">
                  <div class="box fixedWidth">
                     <ul>
-                        <li>
+                        <!-- <li>
                             <a href="http://www.moh.gov.cn/wsb/index_2013.shtml" target="_blank">
                                 <img src="{ms:global.host/}/{ms:global.style/}/images/link-1.jpg" alt="">
                             </a>
@@ -644,7 +665,7 @@
                             <a href="http://www.fjmia.org/" target="_blank">
                                 <img src="{ms:global.host/}/{ms:global.style/}/images/link-3.jpg" alt="">
                             </a>
-                        </li>
+                        </li> -->
                         <li>
                             <a href="https://www.xmu.edu.cn/" target="_blank">
                                 <img src="{ms:global.host/}/{ms:global.style/}/images/link-5.jpg" alt="">
@@ -838,6 +859,9 @@
             
         },
         methods: {
+            handleRouteDepart(item){
+                window.open("{ms:global.url/}" + item.departmentPath + '/index.html');
+            },
             handleMore:function(){
                 switch(this.noticeIdx){
                     case 0:
@@ -936,8 +960,43 @@
                     })
                     console.log(list,'list')
                     that.lines = list.sort(that.compare('sortIdx'))
+                    
                     // that.lines = that.bubbleSorting(list);
                     console.log('lines:', that.lines)
+                    let documentWidth = document.body.clientWidth || document.documentElement.clientWidth
+                    let slidesPerView = 6
+                    if (documentWidth <= 750) {
+                        slidesPerView = 1
+                    }
+                    setTimeout(function () {
+                        var swiper3 = new Swiper('.swiper-container-expert', {
+                            nextButton: '.swiper-next',
+                            prevButton: '.swiper-prev',
+                            slidesPerView: slidesPerView,
+                            paginationClickable: true,
+                            // spaceBetween: 30,
+                            // loop: true,
+                            // speed: 500,
+                            // autoplay: 1000,
+                            onSlideChangeEnd: function (swiper) {
+                                // console.log(swiper)
+                                if (swiper.isEnd) {
+                                    $('.wrapper .center .expert_wrap .expert_content .swiper-next').addClass('active');
+                                    $('.wrapper .center .expert_wrap .expert_content .swiper-prev').addClass('active');
+                                } else {
+                                    $('.wrapper .center .expert_wrap .expert_content .swiper-next').removeClass('active');
+                                    $('.wrapper .center .expert_wrap .expert_content .swiper-prev').removeClass('active');
+                                }
+                            }
+                        });
+                        swiper3.container[0].onmouseover = function () {
+                            swiper3.stopAutoplay();
+                        }
+                        // 鼠标移出开始自动滚动
+                        swiper3.container[0].onmouseout = function () {
+                            swiper3.startAutoplay();
+                        }
+                    }, 0)
                 }).catch(function(err) {
                     console.error('error:', err)
                 })
@@ -996,40 +1055,7 @@
     swiper2.container[0].onmouseout = function () {
         swiper2.startAutoplay();
     }
-    let documentWidth = document.body.clientWidth || document.documentElement.clientWidth
-    let slidesPerView = 6
-    if(documentWidth<=750){
-        slidesPerView = 1
-    }
-    setTimeout(function(){
-        var swiper3 = new Swiper('.swiper-container-expert', {
-            nextButton: '.swiper-next',
-            prevButton: '.swiper-prev',
-            slidesPerView: slidesPerView,
-            paginationClickable: true,
-            spaceBetween: 30,
-            loop: true,
-            speed: 500,
-            autoplay: 1000,
-            onSlideChangeEnd:function(swiper){
-                // console.log(swiper)
-                if(swiper.isEnd){
-                    $('.wrapper .center .expert_wrap .expert_content .swiper-next').addClass('active');
-                    $('.wrapper .center .expert_wrap .expert_content .swiper-prev').addClass('active');
-                }else{
-                    $('.wrapper .center .expert_wrap .expert_content .swiper-next').removeClass('active');
-                    $('.wrapper .center .expert_wrap .expert_content .swiper-prev').removeClass('active');
-                }
-            }
-        });
-        swiper3.container[0].onmouseover = function () {
-            swiper3.stopAutoplay();
-        }
-        // 鼠标移出开始自动滚动
-        swiper3.container[0].onmouseout = function () {
-            swiper3.startAutoplay();
-        }
-    },300)
+    
     let slideNum = 4
     let spaceBetween = 15
     if(width<=750){

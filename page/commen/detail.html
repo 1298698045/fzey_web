@@ -22,7 +22,9 @@
             <div class="content">
                 <div class="top"></div>
                 <div class="centerWrap">
+                  {ms:arclist artid=field.id}
                     <h1 class="title">${field.title}</h1>
+                  {/ms:arclist}
                     <div class="time_wrap">
                         <p class="time">
                             发布时间：${(field.date?string("yyyy-MM-dd"))!} <span>来源：${field.source}</span>点击数： ${field.hit} 次

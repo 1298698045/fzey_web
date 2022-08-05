@@ -38,7 +38,11 @@ var mixin = {
       this.isHeader = false;
     },
     goto: function (url) {
+      const href = window.location.href;
       window.open(url);
+      setTimeout(()=>{
+        window.location.href = href;
+      },300)
       this.isHeader = false;
     },
     onMenuMouseOver: function (menu) {
