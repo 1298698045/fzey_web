@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/common.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/hospitalSurvey.css">
+    <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="stylesheet" href="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.ico" type="image/x-icon" />
+    <style>
+        .content .briefInfo{
+             margin: 29px 0;
+        }
+        .content .briefInfo .left_cover{
+            width: 136px;
+            height: 520px;
+            background: url('{ms:global.host/}/{ms:global.style/}/images/special.jpg') no-repeat;
+            background-size: 100% 100%;
+            color: #ffffff;
+            font-size: 40px;
+            /* font-weight: bold; */
+        }
+        .content .briefInfo .left_cover .text{
+            /* width: 59px;
+            height: 360px; */
+            margin: 50px auto 0;
+            /* text-align: center; */
+            writing-mode: vertical-rl;
+            letter-spacing: 14px;
+        }
+        .content .briefInfo .right_cont{
+            width: calc(100% - 136px);
+            height: 520px;
+            padding: 50px 60px;
+            box-sizing: border-box;
+            background: #ffffff;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+        }
+        .content .briefInfo .right_cont .block{
+            height: 430px;
+            padding-right: 46px;
+            font-size: 16px;
+            color: #333333;
+            overflow: auto;
+        }
+        .content .briefInfo .right_cont .block::-webkit-scrollbar{
+            width: 2px;
+            background: #e5e5e5;
+        }
+        .content .briefInfo .right_cont .block::-webkit-scrollbar-thumb{
+            width: 30px !important;
+            background: #7f0e12;
+        }
+        .content .briefInfo .right_cont .block .title{
+            font-size: 26px;
+            font-weight: bold;
+            color: #333333;
+            padding-bottom: 27px;
+        }
+        .content .briefInfo .right_cont .block  .article{
+            line-height: 2;
+        }
+        .doctor_wrap{
+            margin-top: 30px;
+        }
+        .doctor_wrap .doctor_cart{
+            margin-bottom: 46px;
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper" id="app" v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <div class="banner">
+                <img src="{ms:global.host/}/{ms:global.style/}/images/yygk_banner.jpg" alt="">
+            </div>
+            <div class="container">
+                <div class="common_nav">
+                    <div class="scroll_wrap">
+                        <ul class="common_tabs fixedWidth">
+                            {ms:channel type='son'}
+                            <li class="common_tab" :class="{active : $route.path == '${field.typepath}'}" @click="push('${field.typepath}')">${field.typetitle}</li>
+                            {/ms:channel}
+                        </ul>
+                    </div>
+                    <div class="hr"></div>
+                </div>
+                <div class="content fixedWidth">
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="${base}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script type="text/javascript" src ="{ms:global.host/}/{ms:global.style/}/js/polyfill.min.js"></script>
+<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
+<script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
+<script>
+    var router = new VueRouter({
+        routes:[
+            {ms:channel type='son' flag='nav2' orderby='sort'}
+            <#if field.typeid='1923276323857858561'>
+                {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template: '{ms:arclist size=1}'+
+'                        <div class="common_content" style="display: block;" desc="${field.descrip}" title="${field.title}">'+
+'                            <div class="richText_wrap">'+
+'                                <div class="title">'+
+'                                    ${field.title}'+
+'                                </div>'+
+'                                <div class="rich">'+
+'                                    ${field.content}'+
+'                                </div>'+
+'                                <div class="shareView">'+
+'                                    分享到：'+
+'                                    <img class="bds_tsina" src="{ms:global.host/}/{ms:global.style/}/images/share_02.png" alt="">'+
+'                                    <img class="bds_qzone" src="{ms:global.host/}/{ms:global.style/}/images/share_03.png" alt="">'+
+'                                </div>'+
+'                            </div>'+
+'                        </div>'+
+'                        {/ms:arclist}',
+                        mounted:function() {
+                            var share_config = {
+                                'bdText': $('.common_content').attr('title'),
+                                'bdUrl': location.href,
+                                'bdDesc': $('.common_content').attr('desc')
+                            };
+                            $('.bds_tsina').click(function(){
+                                window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + share_config.bdUrl)
+                            })
+                            $('.bds_qzone').click(function(){
+                                window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+share_config.bdUrl+'&title='+share_config.bdText+'&desc='+share_config.bdDesc)
+                            })
+                        },
+                    }
+                },
+            <#elseif field.typeid='1923277141386428417'>
+            {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template: '{ms:arclist size=1}'+
+'                        <div><div class="briefInfo clearfix">'+
+'                            <div class="left_cover fl">'+
+'                                <p class="text">'+
+'                                    ${field.typetitle}'+
+'                                </p>'+
+    '                        </div>' +
+'                            <div class="right_cont fl">'+
+'                                <div class="block">'+
+'                                     <div class="title">${field.title}</div>'+
+'                                       <div class="article">' +
+'                                           ${field.content}' +
+'                                     </div>' +
+'                                 </div>' +
+'                             </div>' +
+'                        </div>'+
+'                        {/ms:arclist}'+
+                        '<div style="font-weight:bold;font-size:26px;color: #333333;">成员简介</div>'+
+                        '<div class="doctor_wrap clearfix">' +
+                        '    <div class="doctor_cart fl" v-for="item in lines" @click="handleRoute(item)">' +
+                        '        <div class="avatar">' +
+                        '            <img :src="item.portraitUrl" alt="">' +
+                        '            <div class="hover">' +
+                        '                <div class="hover_box">' +
+                        '                    <p class="x_l border"></p>' +
+                        '                    <p class="x_r border"></p>' +
+                        '                    <p class="y_l border"></p>' +
+                        '                    <p class="y_r border"></p>' +
+                        '                    <div class="dept" @click.stop="handleRouteDepart(item)"> ' +
+                        '                       {{item.departmentName}}' +
+                        '                   </div> ' +
+                        '                    <div class="desc"> ' +
+                        '                        {{item.introduce}} ' +
+                        '                    </div> ' +
+                        '                    <div class="btn"> ' +
+                        '                        点击查看出诊排班表 ' +
+                        '                     </div> ' +
+                        '                </div> ' +
+                        '            </div> ' +
+                        '        </div> ' +
+                        '        <div class="doctor_info"> ' +
+                        '            <p class="name">{{item.name}}</p> ' +
+                        '            <p class="position"> ' +
+                        '                {{item.technicalTitle}}' +
+                        '            </p>' +
+                        '        </div> ' +
+                        '    </div> ' +
+                        '</div> </div>',
+                        mounted:function() {
+                            var share_config = {
+                                'bdText': $('.common_content').attr('title'),
+                                'bdUrl': location.href,
+                                'bdDesc': $('.common_content').attr('desc')
+                            };
+                            $('.bds_tsina').click(function(){
+                                window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + share_config.bdUrl)
+                            })
+                            $('.bds_qzone').click(function(){
+                                window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url='+share_config.bdUrl+'&title='+share_config.bdText+'&desc='+share_config.bdDesc)
+                            })
+                        },
+                        data:function(){
+                            return {
+                                lines: []
+                            }
+                        },
+                        created:function (){
+                            this.list();
+                        },
+                        methods: {
+                            list: function () {
+                                var that = this
+                                var page = { pageNo: 1, pageSize: 100 }
+                                ms.http.post("/cms/expert/list.do", Object.assign({}, {
+                                    contentType: "gzscy"
+                                }, page)).then(function (res) {
+                                    //that.page.contentCount = res.data.total
+                                    that.lines = res.data.rows.map(function (row) {
+                                        let name = row.name.split('_');
+                                        if (name.length > 1) {
+                                            row.name = name[0];
+                                            row.sortIdx = name[1];
+                                        }
+                                        if (row.portrait) {
+                                            var img = JSON.parse(row.portrait)
+                                            if (img.length > 0) {
+                                                row.portraitUrl = '{ms:global.host/}' + img[0].url
+                                            }
+                                        }
+                                        if (row.briefIntro && row.briefIntro.length >= 109) {
+                                            row.show = false;
+                                        } else {
+                                            row.show = true;
+                                        }
+                                        return row
+                                    })
+                                    let temp = that.lines.filter(function (item) {
+                                        return item.jobNumber.indexOf('-') == -1
+                                    })
+                                    that.lines = temp;
+                                    console.log('temp:', temp)
+                                    console.log('lines:', that.lines)
+                                }).catch(function (err) {
+                                    console.error('error:', err)
+                                })
+                            },
+                        }
+                    }
+                },
+                <#elseif field.typeid='1923277125146083329'>
+                {
+                path: '${field.typepath}',
+                name: '${field.typetitle}',
+                component: {
+                    template:
+                        '<div class="doctor_wrap clearfix">' +
+                        '    <div class="doctor_cart fl" v-for="item in lines" @click="handleRoute(item)">' +
+                        '        <div class="avatar">' +
+                        '            <img :src="item.portraitUrl" alt="">' +
+                        '            <div class="hover">' +
+                        '                <div class="hover_box">' +
+                        '                    <p class="x_l border"></p>' +
+                        '                    <p class="x_r border"></p>' +
+                        '                    <p class="y_l border"></p>' +
+                        '                    <p class="y_r border"></p>' +
+                        '                    <div class="dept" @click.stop="handleRouteDepart(item)"> ' +
+                        '                       {{item.departmentName}}' +
+                        '                   </div> ' +
+                        '                    <div class="desc"> ' +
+                        '                        {{item.introduce}} ' +
+                        '                    </div> ' +
+                        '                    <div class="btn"> ' +
+                        '                        点击查看出诊排班表 ' +
+                        '                     </div> ' +
+                        '                </div> ' +
+                        '            </div> ' +
+                        '        </div> ' +
+                        '        <div class="doctor_info"> ' +
+                        '            <p class="name">{{item.name}}</p> ' +
+                        '            <p class="position"> ' +
+                        '                {{item.technicalTitle}}' +
+                        '            </p>' +
+                        '        </div> ' +
+                        '    </div> ' +
+                        '</div> ',
+                    data: function () {
+                        return {
+                            lines: []
+                        }
+                    },
+                    mounted: function () {
+                        var share_config = {
+                            'bdText': $('.common_content').attr('title'),
+                            'bdUrl': location.href,
+                            'bdDesc': $('.common_content').attr('desc')
+                        };
+                        $('.bds_tsina').click(function () {
+                            window.open('http://service.weibo.com/share/share.php?title=' + share_config.bdText + '&url=' + location.href)
+                        })
+                        $('.bds_qzone').click(function () {
+                            window.open('https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' + share_config.bdUrl + '&title=' + share_config.bdText + '&desc=' + share_config.bdDesc)
+                        })
+                    },
+                    created: function () {
+                        this.list();
+                        this.$nextTick(function () {
+                            var pointer = new BMap.Point(119.326629, 26.052131);
+                            var hospitalName = "福州市第二医院";
+                            var hospitalAddr = "福州市仓山区上藤路47号";
+                            var map = new BMap.Map("localcontainer");
+                            var hosName = ['福州市第二医院'], i = 0;
+                            var options = {
+                                title: hosName[i], //标题
+                                width: 300, //宽度
+                                height: 24, //高度
+                                panel: "panel", //检索结果面板
+                                enableAutoPan: true, //自动平移
+                                searchTypes: [
+                                    BMAPLIB_TAB_TO_HERE, //到这里去
+                                    BMAPLIB_TAB_FROM_HERE, //从这里出发
+                                    BMAPLIB_TAB_SEARCH // 周边检索
+                                ]
+                            };
+                            var searchInfoWindow = new BMapLib.SearchInfoWindow(map, hospitalAddr, options);
+                            var marker = new BMap.Marker(pointer);
+                            // marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 动画--弹跳
+                            map.enableScrollWheelZoom();
+                            map.addControl(new BMap.NavigationControl());
+                            map.addControl(new BMap.MapTypeControl({
+                                mapTypes: [BMAP_NORMAL_MAP, BMAP_HYBRID_MAP]
+                            }));
+                            init(pointer);
+                            marker.addEventListener('click', function () {
+                                searchInfoWindow.open(marker);
+                            });
+
+                            resetMap.prototype = new BMap.Control();
+                            resetMap.prototype.initialize = function (map) {
+                                var div = document.createElement("div");
+                                div.appendChild(document.createTextNode("返回"));
+                                div.style = "box-shadow:rgba(0, 0, 0, 0.34902) 2px 2px 3px;border:1px solid #008059;background:#009d6d;padding: 2px 6px;font-size: 12px;line-height:1.3em; border-radius:3px;color:#fff;cursor:pointer";
+                                div.onclick = function (e) {
+                                    map.clearOverlays();
+                                    init(pointer);
+                                }
+                                map.getContainer().appendChild(div);
+                                return div;
+                            }
+                            map.addControl(new resetMap());
+
+                            function resetMap() {
+                                this.defaultAnchor = BMAP_ANCHOR_TOP_RIGHT;
+                                this.defaultOffset = new BMap.Size(90, 10);
+                            }
+
+                            function init(pointer) {
+                                map.centerAndZoom(pointer, 16);
+                                map.addOverlay(marker);
+                                map.panBy(100, 150); //中心点偏移多少像素（width,height）为div 宽高的一半;
+                                setTimeout(function () {
+                                    searchInfoWindow.open(marker);
+                                }, 300)
+                            }
+                            // 搜索周边
+                            var LocalSearch = new BMap.LocalSearch(map, {
+                                renderOptions: {
+                                    map: map,
+                                    panel: "resultList"
+                                }
+                            });
+                        })
+                    },
+                    methods: {
+                        list: function () {
+                            var that = this
+                            var page = { pageNo: 1, pageSize: 100 }
+                            ms.http.post("/cms/expert/list.do", Object.assign({}, {
+                                contentType: "gzscy"
+                            }, page)).then(function (res) {
+                                //that.page.contentCount = res.data.total
+                                that.lines = res.data.rows.map(function (row) {
+                                    let name = row.name.split('_');
+                                    if (name.length > 1) {
+                                        row.name = name[0];
+                                        row.sortIdx = name[1];
+                                    }
+                                    if (row.portrait) {
+                                        var img = JSON.parse(row.portrait)
+                                        if (img.length > 0) {
+                                            row.portraitUrl = '{ms:global.host/}' + img[0].url
+                                        }
+                                    }
+                                    if (row.briefIntro && row.briefIntro.length >= 109) {
+                                        row.show = false;
+                                    } else {
+                                        row.show = true;
+                                    }
+                                    return row
+                                })
+                                let temp = that.lines.filter(function (item) {
+                                    return item.jobNumber.indexOf('-') == -1
+                                })
+                                that.lines = temp;
+                                console.log('temp:', temp)
+                                console.log('lines:', that.lines)
+                            }).catch(function (err) {
+                                console.error('error:', err)
+                            })
+                        },
+                    }
+                }
+            },
+            <#elseif field.typeid='1923277156481728514' ||  field.typeid='1924278079442055169' || field.typeid='1924277873954713602'>
+                {
+                    path: '${field.typepath}',
+                    name: '${field.typetitle}',
+                    component: {
+                        template: '<div class="common_content">'+
+'                        <ul class="column_list">'+
+'                            <li class="column_item" v-for="item in listData" @click="handleDetail(item)">'+
+'                                <a href="#" class="clearfix">'+
+'                                    <p class="name fl">'+
+'                                        {{item.contentTitle}}'+
+'                                    </p>'+
+'                                    <p class="time fr">'+
+'                                        {{dateFormat(item.yymm)}}'+
+'                                    </p>'+
+'                                </a>'+
+'                            </li>'+
+'                        </ul>'+
+'                        <div class="pagePC" v-if="page.contentCount>20">'+
+'                            <el-pagination'+
+'                                background'+
+'                                @current-change="getQueryList"'+
+'                                :page-size="page.pageSize"'+
+'                                :prev-text="prevText"'+
+'                                :next-text="nextText"'+
+'                                :current-page.sync="page.pageNo"'+
+'                                :layout="layout"'+
+'                                :total="page.contentCount">'+
+'                            </el-pagination>'+
+'                        </div>'+
+'                    </div>',
+                        mixins: [mixin],
+                        data:function(){
+                            return {
+                                page:{
+                                    //当前页数
+                                    pageNo: 1,
+                                    //每页文章条数
+                                    pageSize: 20,
+                                    //页数总数
+                                    pageTotal: 0,
+                                    //内容总数
+                                    contentCount: 0
+                                },
+                                listData:[]
+                            }
+                        },
+                        mounted:function() {
+                            this.getQueryList();
+                        },
+                        methods:{
+                            getQueryList: function(pageCur) {
+                                var that = this
+                                that.page.pageNo = pageCur
+                                ms.http.post("/cms/content/list.do", Object.assign({}, {
+                                    categoryId: '${field.typeid}'
+                                }, that.page)).then(function(res) {
+                                    that.page.contentCount = res.data.total
+                                    that.listData = res.data.rows.map(function(row) {
+                                        if (row.contentImg) {
+                                            var img = JSON.parse(row.contentImg)
+                                            if (img.length > 0) {
+                                            row.imageUrl = '{ms:global.host/}' + img[0].path
+                                            }
+                                        }
+                                        if(row.contentDatetime){
+                                            var date = new Date(row.contentDatetime.replace(/-/g,'/'));
+                                            var yy = date.getFullYear();
+                                            var mm = date.getMonth() + 1;
+                                            var day = date.getDate();
+                                            var yymm = yy + '/' + mm + '/' + day
+                                            row.day = day;
+                                            row.yymm = yymm;
+                                        }
+                                        if (row.contentType.indexOf('tv') != -1) {
+                                            row.link = that.getSimpleText(row.contentDetails);
+                                            row.link = row.link.replace(/amp;/g, '')
+                                        }
+                                        return row
+                                    })
+                                    console.log('listData:', that.listData)
+                                    if (pageCur) {
+                                        $("html, body").scrollTop(0).animate({ scrollTop: $(".common_nav").offset().top - 30 });
+                                    }
+                                }).catch(function(err) {
+                                    console.error('error:', err)
+                                })
+                            },
+                            handleDetail:function(item){
+                                if (item.contentType.indexOf('tv') != -1) {
+                                    this.goto(item.link)
+                                } else {
+                                    {ms:channel type='self'}
+                                        this.goto("{ms:global.url/}${field.typepath}/"+ item.id + ".html")
+                                    {/ms:channel}
+                                }
+                            }
+                        }
+                    },
+                },
+            </#if>
+            {/ms:channel}
+        ]
+    })
+    var app = new Vue({
+        router:router,
+        mixins: [mixin],
+        data:function(){
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+                hasRoute: true
+            }
+        },
+        created:function(){
+            {ms:channel type='son' size=1}
+            if (this.$route.path == '/') {
+                this.push('${field.typepath}')
+            }
+            {/ms:channel}
+        },
+        methods: {
+
+        },
+    }).$mount('#app')
+</script>
+</html>

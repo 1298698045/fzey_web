@@ -99,7 +99,7 @@
 <script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
 <!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
-<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" src ="{ms:global.host/}/{ms:global.style/}/js/polyfill.min.js"></script>
 <script>
     var router = new VueRouter({routes:[
         {ms:channel type='son'}
@@ -183,12 +183,19 @@
                                 }
                                 return row
                             })
+                            
+                            that.listData = that.sortFn(that.listData);
                             if (pageCur) {
                                 $("html, body").scrollTop(0).animate({ scrollTop: $(".common_nav").offset().top - 30 });
                             }
                             console.log('listData:', that.listData)
                         }).catch(function(err) {
                             console.error('error:', err)
+                        })
+                    },
+                    sortFn:function(list){
+                        return list.sort((a,b)=>{
+                            return a.contentSort - b.contentSort;
                         })
                     },
                     handleDetail:function(item){

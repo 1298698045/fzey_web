@@ -206,7 +206,7 @@
                         {/ms:channel}
                     </div>
                     <div class="right_cont fr">
-                        {ms:channel type='son'}
+                        {ms:channel typeid='1468760796815613954' type='self' orderby='sort'}
                         <#assign typeurl=field.typeurl />
                         {ms:arclist size=3 flag='hot' orderby='sort'}
                         <div class="panel" @click="goto('{ms:global.url/}${field.link}')">
@@ -265,7 +265,7 @@
 <script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
 <!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
-<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" src ="{ms:global.host/}/{ms:global.style/}/js/polyfill.min.js"></script>
 <script>
     var app = new Vue({
         mixins:[mixin],

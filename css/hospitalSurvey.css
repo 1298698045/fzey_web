@@ -73,10 +73,13 @@
   background-position: 0px -265px!important;
 }
 
-
+.expert_wrap{
+  display: flex;
+  justify-content: center;
+}
 .expert_wrap .box{
   width: 285px;
-  height: 445px;
+  /* height: 445px; */
   background: #f2f2f2;
   margin-right: 46px;
   margin-top: 40px;
@@ -96,7 +99,7 @@
 }
 .expert_wrap .box .info{
   width: 100%;
-  height: 89px;
+  height: 150px;
   text-align: center;
 }
 .expert_wrap .box .info .name{
@@ -109,5 +112,9 @@
   font-size: 14px;
   color: #333333;
   line-height: 25px;
+  padding: 4px;
+  box-sizing: border-box;
+  text-align: justify;
+  text-align-last: center;
   /* margin-top: 10px; */
 }

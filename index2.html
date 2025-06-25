@@ -13,46 +13,11 @@
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
     <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
     <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.ico" type="image/x-icon" />
-    <style>
-        .header-banner{
-            width: 100%;
-            height: 100px;
-            background: #a9271b;
-            cursor: pointer;
-        }
-        .header-banner img{
-            width: 100%;
-            height: 100px;
-            object-fit: contain;
-        }
-        .banner-flex{
-            width: 100%;
-            /* height: 104px; */
-            padding: 20px 0;
-            background: #7f0e12;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 20px;
-        }
-        .banner-flex .flexImgBox{
-            width: 630px;
-            height: 104px;
-            cursor: pointer;
-        }
-        .banner-flex .flexImgBox img{
-            width: 100%;
-            height: 100%;
-        }
-    </style>
 </head>
 <body>
      <div class="wrapper" id="app" v-cloak>
         <#include "head.html" />
-        <div class="center" :class="{'active':isFixed}">
-             <div class="header-banner" @click="goto('/html/web/dangjianzhichuang/dangdeershidajingshen/index.html#/dangjianzhichuang/dangdeershidajingshen')">
-                 <img src="{ms:global.host/}/{ms:global.style/}/images/AD_1.jpg" alt="">
-             </div>
+         <div class="center" :class="{'active':isFixed}">
              <div class="banner">
                 {ms:channel type='self' typeid='1468769596486352898' }
                 <div class="swiper-container">
@@ -73,14 +38,6 @@
                     <div class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets"><span class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span><span class="swiper-pagination-bullet"></span></div>
                 </div>
                 {/ms:channel}
-             </div>
-             <div class="banner-flex">
-                <div class="flexImgBox" @click="goto('/html/web/dangjianzhichuang/zhutijiaoyu/index.html#/dangjianzhichuang/zhutijiaoyu')">
-                    <img src="{ms:global.host/}/{ms:global.style/}/images/AD_2.jpg" alt="">
-                </div>
-                <div class="flexImgBox" @click="goto('/html/web/dangjianzhichuang/fazhijianshe1/index.html#/dangjianzhichuang/fazhijianshe1')">
-                    <img src="{ms:global.host/}/{ms:global.style/}/images/AD_3.jpg" alt="">
-                </div>
              </div>
              <div class="bulletinBoard">
                  <ul class="bulletinBoard_wrap fixedWidth clearfix">
@@ -710,16 +667,6 @@
                             </a>
                         </li> -->
                         <li>
-                            <a href="http://www.fzsdsyy.com/index.html" target="_blank">
-                                <img src="{ms:global.host/}/{ms:global.style/}/images/link-7.jpg" alt="">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="http://www.fzfybj.com" target="_blank">
-                                <img src="{ms:global.host/}/{ms:global.style/}/images/link-8.jpg" alt="">
-                            </a>
-                        </li>
-                        <li>
                             <a href="https://www.xmu.edu.cn/" target="_blank">
                                 <img src="{ms:global.host/}/{ms:global.style/}/images/link-5.jpg" alt="">
                             </a>
@@ -1096,7 +1043,7 @@
     }
     var swiper2 = new Swiper('.swiper-container_news', {
         loop: true,
-        // speed: 1000,
+        speed: 1000,
         autoplay: 3000,
         pagination: '.swiper-pagination-news',
         paginationClickable: true

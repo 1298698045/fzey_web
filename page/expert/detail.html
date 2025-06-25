@@ -159,6 +159,10 @@
                 margin: 16px auto 0 !important;
             }
         }
+        .indent{
+            text-indent: 2em;
+            line-height: 2;
+        }
     </style>
 </head>
 <body>
@@ -194,7 +198,7 @@
                                     {{info.position}}
                                 </span>
                             </div>
-                            <div class="postion">职务：{{info.technicalTitle}}</div>
+                            <div class="postion">职称：{{info.technicalTitle}}</div>
                             <div class="beGoodAt">
                                 主要研究方向：
                                 <br />
@@ -203,7 +207,8 @@
                             <div class="box">
                                 <p class="title">专家简介</p>
                                 <p class="desc">
-                                    {{info.introduce}}
+                                    <!-- {{info.introduce}} -->
+                                    <p class="indent" v-for="item in info.infoArr">{{item}}</p>
                                 </p>
                             </div>
                             <div class="box">
@@ -239,7 +244,7 @@
 <script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
 <!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
-<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" src ="{ms:global.host/}/{ms:global.style/}/js/polyfill.min.js"></script>
 <script>
     var app = new Vue({
         el: '#app',

@@ -221,7 +221,7 @@
 <script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
 <!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
 <script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
-<script type="text/javascript" src ="https://cdn.polyfill.io/v2/polyfill.min.js?features=es6"></script>
+<script type="text/javascript" src ="{ms:global.host/}/{ms:global.style/}/js/polyfill.min.js"></script>
 <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=PlhFWpA02aoURjAOpnWcRGqw7AI8EEyO"></script>
 <script type="text/javascript" src="//api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.js"></script>
 <script>
@@ -529,6 +529,7 @@
                         template: '<div class="common_content">'+
 '                        <div class="expert_wrap clearfix">'+
 '                          {ms:arclist orderby="sort"} '+
+'                           <#if (field.index==1||field.index==2)> '+
 '                            <div class="box fl" @click="goto(\'{ms:global.url/}/${field.link}\')">'+
 '                                <div class="imgs">'+
 '                                    <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">'+
@@ -538,6 +539,52 @@
 '                                    <p class="post">${field.keyword}</p>'+
 '                                </div>'+
 '                            </div>'+
+'                           </#if> '+
+'                          {/ms:arclist} '+
+'                        </div>'+
+'                        <div class="expert_wrap clearfix">'+
+'                          {ms:arclist orderby="sort"} '+
+'                           <#if (field.index==3||field.index==4||field.index==5||field.index==6)> '+
+'                            <div class="box fl" @click="goto(\'{ms:global.url/}/${field.link}\')">'+
+'                                <div class="imgs">'+
+'                                    <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">'+
+'                                </div>'+
+'                                <div class="info">'+
+'                                    <p class="name">${field.title}</p>'+
+'                                    <p class="post">${field.keyword}</p>'+
+'                                </div>'+
+'                            </div>'+
+'                           </#if> '+
+'                          {/ms:arclist} '+
+'                        </div>'+
+'                        <div class="expert_wrap clearfix">'+
+'                          {ms:arclist orderby="sort"} '+
+'                           <#if (field.index==7||field.index==8||field.index==9)> '+
+'                            <div class="box fl" @click="goto(\'{ms:global.url/}/${field.link}\')">'+
+'                                <div class="imgs">'+
+'                                    <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">'+
+'                                </div>'+
+'                                <div class="info">'+
+'                                    <p class="name">${field.title}</p>'+
+'                                    <p class="post">${field.keyword}</p>'+
+'                                </div>'+
+'                            </div>'+
+'                           </#if> '+
+'                          {/ms:arclist} '+
+'                        </div>'+
+'                        <div class="expert_wrap clearfix">'+
+'                          {ms:arclist orderby="sort"} '+
+'                           <#if (field.index==10||field.index==11||field.index==12||field.index==13)> '+
+'                            <div class="box fl" @click="goto(\'{ms:global.url/}/${field.link}\')">'+
+'                                <div class="imgs">'+
+'                                    <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">'+
+'                                </div>'+
+'                                <div class="info">'+
+'                                    <p class="name">${field.title}</p>'+
+'                                    <p class="post">${field.keyword}</p>'+
+'                                </div>'+
+'                            </div>'+
+'                           </#if> '+
 '                          {/ms:arclist} '+
 '                        </div>'+
 '                    </div>',

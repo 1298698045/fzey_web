@@ -28,8 +28,69 @@ var mixin = {
   mounted: function () {
     window.addEventListener("scroll", this.handleIsScroll, true);
     window.addEventListener("scroll", this.handleSroll);
+    var that = this;
+    // window.addEventListener("input",function(event){
+    //   var newval = event.target.value;
+    //   newval = that.validateInput(newval);
+    //   event.target.value = newval;
+    // })
+    var dom = document.querySelector(".search_icon");
+    dom.addEventListener("click", function(event){
+      var inputField = document.getElementById('fullText'); 
+      if (!that.validateInput(inputField.value)) {  
+          alert('输入包含禁止的SQL关键字或符号！');  
+          event.preventDefault(); // 阻止表单提交  
+      } else {
+        document.getElementById('searchDataForm1').submit();
+      }
+    })
+    document.getElementById("searchDataForm1").addEventListener("submit", function(event){
+      var inputField = document.getElementById('fullText'); 
+      if (!that.validateInput(inputField.value)) {  
+          alert('输入包含禁止的SQL关键字或符号！');  
+          event.preventDefault(); // 阻止表单提交  
+      }
+    })
   },
   methods: {
+    // functionAntiSqlValid: function(){
+    //  var re = /select|update|delete|exec|count|'|"|=|;|>|<|%/i; 
+    //  if( re.test(oField.value) ) {
+    //   oField.value ="http://blog.soso.com/qz.q/";
+    //   oField.className="errInfo"; 
+    //   oField.focus(); 
+    //   return false;
+    //  }
+    // },
+    // validateInput: function(event){
+    //   var inputValue = event;
+    //   const regex = /^[\u4e00-\u9fa5a-zA-Z0-9\s,.!?]*$/; // 允许中文、英文、数字和常用符号
+    //   if (!regex.test(event)) {
+    //     inputValue = event.replace(/[^\u4e00-\u9fa5a-zA-Z0-9\s,.!?]/g, '');
+    //   }
+    //   return inputValue;
+    // },
+      validateInput:function (inputValue) {  
+        // 定义禁止的SQL关键字和符号  
+        const forbiddenWords = ['SELECT', 'UPDATE', 'DELETE', 'INSERT', 'DROP'];  
+        const forbiddenSymbols = [';', '--', '/*', '*/', '=', '>', '<', "'", '"', '`', '\\', '(', ')', '|', '&', '$', '#', '@', '%', '^', '*', '+', ',', '-', '_', '~', '[', ']', '{', '}', '.', '!', '?', '/', '\\\\'];  
+      
+        // 将输入转换为大写以进行不区分大小写的比较  
+        const upperInput = inputValue.toUpperCase();  
+      
+        // 检查是否包含任何禁止的SQL关键字  
+        if (forbiddenWords.some(word => upperInput.includes(word))) {  
+            return false;  
+        }  
+      
+        // 检查是否包含任何禁止的符号  
+        if (forbiddenSymbols.some(symbol => upperInput.includes(symbol))) {  
+            return false;  
+        }  
+      
+        // 如果没有发现任何问题，则返回true  
+        return true;  
+    },
     push: function (path) {
       router.push({ path: path });
     },
@@ -111,7 +172,16 @@ var mixin = {
     }
   },
 };
-
+window.onload = function(){
+  var meta = document.createElement('meta');
+  meta.setAttribute('http-equiv', 'Content-Security-Policy');
+  meta.setAttribute('content', "form-action 'self';");
+  document.head.appendChild(meta);
+  // var script = document.createElement('script');
+  // script.innerHTML = 'document.cookie = "app_shell_visited=1;path=/;max-age=5";location.replace(location.href.split("#")[0]);'
+  // script.setAttribute("nonce","SG0bV9rOanQfzG0ccU8WQw==");
+  // document.body.appendChild(script);
+}
 // const Modal =
 // Vue.extend({
 //     template: `

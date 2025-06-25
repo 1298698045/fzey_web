@@ -5,13 +5,23 @@
                 <div class="logo fl" @click="gotoHref('{ms:global.url/}/index.html')">
                     <img src="{ms:global.host/}/{ms:global.style/}/images/logo.png" alt="">
                 </div>
+                <div class="headImg fl">
+                    <div class="imgCol" @click="goto('http://www.fzsdsyy.com/')">
+                        <a href="http://www.fzsdsyy.com/" target="_blank" class="">福州市第二总医院神经精神病防治院</a>
+                        <!-- <img src="{ms:global.host/}/{ms:global.style/}/images/fzsdsyy.png" alt=""> -->
+                    </div>
+                    <div class="imgCol" @click="goto('https://www.fzfybj.com/')">
+                        <a href="https://www.fzfybj.com/" target="_blank" class="">福州市第二总医院妇幼保健院</a>
+                    </div>
+                </div>
                 <div class="search fl">
                     <form id="searchDataForm1" action="{ms:global.host/}/mcms/search.do" method="post"> 
                         <div class="search_box clearfix">
                             <div class="l_inp fl">
-                                <input type="text" class="inp" name="content_title" placeholder="请您输入关键词">
+                                <input type="text" id="fullText" class="inp" name="content_title" placeholder="请您输入关键词">
                             </div>
-                            <div class="r_btn fr search_icon" onclick="document.getElementById('searchDataForm1').submit();">
+                            <!--  onclick="document.getElementById('searchDataForm1').submit();" -->
+                            <div class="r_btn fr search_icon">
                                 查询
                             </div>
                         </div>
@@ -31,6 +41,16 @@
                     <p class="btn">
                         <a class="" href="http://ybj.fujian.gov.cn/" target="_blank">医保政策</a>
                     </p>
+                    {ms:channel typeid="1730494815634968578" type="self"}
+                    <p class="btn" :class="{active: activeMenu.indexOf('1730494815634968578')!=-1}">
+                        <a class="" href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">书记信箱</a>
+                    </p>
+                    {/ms:channel}
+                    {ms:channel typeid="1732705651589894146" type="self"}
+                    <p class="btn" :class="{active: activeMenu.indexOf('1732705651589894146')!=-1}">
+                        <a class="" href="<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>">院长信箱</a>
+                    </p>
+                    {/ms:channel}
                 </div>
             </div>
         </div>
@@ -85,7 +105,8 @@
                     <form id="searchDataForm1" action="{ms:global.host/}/mcms/search.do" method="post"></form>
                         <div class="search">
                             <input type="text" name="content_title" id="" placeholder="搜索">
-                            <p class="btn_icon" onclick="document.getElementById('searchDataForm1').submit();">
+                            <!--  onclick="document.getElementById('searchDataForm1').submit();" -->
+                            <p class="btn_icon">
                                 <img src="{ms:global.host/}/{ms:global.style/}/images/search-btn.png" alt="">
                             </p>
                         </div>
