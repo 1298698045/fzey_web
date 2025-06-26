@@ -100,7 +100,12 @@
                         <span class="label" @click="goto('<#if field.type==3>{ms:global.url/}${field.typeurl}<#else>{ms:global.url/}${field.typelink}</#if>')">客户服务</span>
                         {/ms:channel}
                         <span class="solid">|</span>
-                        <span class="label">医保政策</span>
+                        <span class="label" @click="goto('http://ybj.fujian.gov.cn/')">医保政策</span>
+                        <span class="solid">|</span>
+                        {ms:channel typeid="1923276321244807169" type="self"}
+                        <span class="label"
+                            @click="goto('{ms:global.url/}${field.typelink}')">名医工作室</span>
+                        {/ms:channel}
                     </div>
                     <form id="searchDataForm1" action="{ms:global.host/}/mcms/search.do" method="post"></form>
                         <div class="search">

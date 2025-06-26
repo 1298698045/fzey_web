@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>{ms:global.name/}</title>
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/public.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/index.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/swiper-3.4.2.min.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/fontIcon/iconfont.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/head.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/footer.css">
+    <link rel="stylesheet" href="{ms:global.host/}/{ms:global.style/}/css/common.css">
+    <link rel="stylesheet" href="${base}/static/plugins/element-ui/2.15.1/theme-chalk/index.min.css">
+    <link rel="shortcut icon" href="{ms:global.host/}/{ms:global.style/}/images/favicon.ico" type="image/x-icon" />
+    <style>
+        .container {
+            padding: 20px 0 100px 0;
+        }
+
+        .container .box {
+            width: 394px;
+            height: 202px;
+            background: #ffffff;
+            box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+            border-bottom: 3px solid #bf9e6c;
+            margin-top: 40px;
+            padding: 20px 30px;
+            box-sizing: border-box;
+            margin-right: 49px;
+            cursor: pointer;
+        }
+
+        .container .box:nth-child(3n) {
+            margin-right: 0;
+        }
+
+        .container .box .time {
+            font-size: 14px;
+            color: #999999;
+        }
+
+        .container .box .title {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333333;
+            padding: 5px 0 20px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .container .box .desc {
+            font-size: 14px;
+            color: #666666;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            line-height: 1.8;
+        }
+        .doctorIntroduce{
+            margin-bottom: 20px;
+        }
+        .doctorIntroduce .doctorIntroduceItem{
+            width: calc(33% - 15px);
+            height: 380px;
+            background: url("{ms:global.host/}/{ms:global.style/}/images/bg5.jpg");
+            padding: 36px;
+            float: left;
+            box-sizing: border-box;
+            margin-bottom: 30px;
+        }
+        .doctorIntroduce .doctorIntroduceItem+.doctorIntroduceItem{
+            margin-left: 15px;
+        }
+        .doctorIntroduce .doctorIntroduceItem:nth-child(4n){
+            margin-left: 0;
+        }
+        .doctorIntroduce .doctorIntroduceItem:hover{
+            cursor: pointer;
+            background: url("{ms:global.host/}/{ms:global.style/}/images/bg6.jpg");
+        }
+
+        .doctorIntroduce .doctorIntroduceItem .doctorIntroduceItem-header .name{
+            font-size: 28px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .doctorIntroduce .doctorIntroduceItem .doctorIntroduceItem-header .more-img{
+            position: relative;
+            width: 75px;
+            vertical-align: middle;
+            height: 40px;
+            line-height: 40px;
+            font-size: 18px;
+            color: #fff;
+        }
+        .doctorIntroduce .doctorIntroduceItem .doctorIntroduceItem-header .more-img::after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 36px;
+            height: 15px;
+            background: url("{ms:global.host/}/{ms:global.style/}/images/more2.png");
+            background-size: contain;
+            transform: translateY(-50%);
+        }
+
+        .doctorIntroduce .doctorIntroduceItem .doctorIntroduceItem-body .descWrap .descImg{
+            height: 150px;
+            background: #f3f3f3;
+            margin: 20px 0;
+        }
+        .doctorIntroduce .doctorIntroduceItem .doctorIntroduceItem-body .descWrap .descImg img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .doctorIntroduce .doctorIntroduceItem .doctorIntroduceItem-body .descWrap .desc{
+            font-size: 14px;
+            color: #fff;
+            line-height: 1.5;
+            width: 100%;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 4;
+            overflow: hidden;
+        }
+
+        .doctorIntroduce .doctorIntroduceItem .doctorIntroduceItem-body .doctorIntroduceItemList .liItem{
+            font-size: 18px;
+            color: #fff;
+            position: relative;
+            padding-left: 30px;
+            margin-top: 18px;
+        }
+        .doctorIntroduce .doctorIntroduceItem .doctorIntroduceItem-body .doctorIntroduceItemList .liItem::after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 15px;
+            height: 15px;
+            background: url("{ms:global.host/}/{ms:global.style/}/images/arr2.png");
+            background-size: contain;
+            transform: translateY(-50%);
+        }
+
+        .doctorIntroduce .doctorIntroduceItem:hover .doctorIntroduceItem-body .doctorIntroduceItemList .liItem::after{
+            background: url("{ms:global.host/}/{ms:global.style/}/images/arr3.png");
+            background-size: 100%;
+        }
+
+        @media only screen and (max-width: 750px) {
+            .wrapper .center .banner {
+                height: 100px !important;
+            }
+
+            .wrapper .center .banner img {
+                object-fit: cover;
+            }
+
+            .wrapper .center .container {
+                padding: 10px 0 35px 0 !important;
+                min-height: auto !important;
+            }
+
+            .wrapper .center .container .panel {
+                padding: 0 10px;
+                box-sizing: border-box;
+            }
+
+            .container .box {
+                width: 100% !important;
+                height: 147px !important;
+                padding: 15px 22px !important;
+                margin-right: 0 !important;
+                margin-bottom: 10px;
+                margin-top: 0 !important;
+            }
+
+            .container .box .time {
+                font-size: 12px !important;
+            }
+
+            .container .box .title {
+                font-size: 16px !important;
+            }
+
+            .container .box .desc {
+                font-size: 12px !important;
+                line-height: 1.5;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+            }
+            .doctorIntroduceWrap{
+                padding: 0 10px;
+            }
+            .doctorIntroduce .doctorIntroduceItem{
+                width: 100%;
+                float: initial !important;
+                margin-left: 0 !important;
+            }
+        }
+        .news_more{
+            position: relative;
+        }
+        .moreBox{
+            position: relative;
+        }
+        .more-icon{
+            display: inline-block;
+            position: relative;
+            width: 90px;
+            vertical-align: middle;
+            height: 40px;
+            line-height: 40px;
+            font-size: 18px;
+            color: #7f0e12;
+            left: 50%;
+            padding-left: 10px;
+        }
+        .more-icon:hover{
+            color: #fff;
+            background: #7f0e12;
+        }
+        .more-icon::after{
+            content: "";
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 36px;
+            height: 15px;
+            background: url("{ms:global.host/}/{ms:global.style/}/images/more.png");
+            background-size: contain;
+            transform: translateY(-50%);
+        }
+        .more-icon:hover::after{
+            background: url("{ms:global.host/}/{ms:global.style/}/images/more2.png");
+            background-size: contain;
+            background-color: #7f0e12;
+        }
+        .news_more-btn::after{
+            content: '';
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            width: 36px;
+            height: 15px;
+            background: url("{ms:global.host/}/{ms:global.style/}/images/more.png");
+            background-size: contain;
+            transform: translateY(-50%);
+            visibility: visible;
+        }
+        .news_more:hover:after{
+            background: url("{ms:global.host/}/{ms:global.style/}/images/more2.png");
+            background-size: contain;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper" id='app' v-cloak>
+        <#include "head.html" />
+        <#include "right.html" />
+        <div class="center">
+            <div class="banner">
+                <img src="{ms:global.host/}/{ms:global.style/}/images/banner_mygzs.jpg" alt="">
+            </div>
+            <div class="news_wrap">
+                <div class="news fixedWidth clearfix">
+                    <div class="left_box fl">
+                        <div class="banner_news">
+                            <div class="swiper-container_news">
+                                {ms:channel type='self' typeid='1937721102570000385'}
+                                <div class="swiper-wrapper">
+                                    {ms:arclist size=7 orderby='sort'}
+                                        <div class="swiper-slide" flag="${field.flag}"
+                                            @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                                            <div class="cover_img">
+                                                <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
+                                            </div>
+                                            <div class="panel_box clearfix">
+                                                <div class="timeBox">
+                                                    <h1 class="num">${field.date?string("dd")}</h1>
+                                                    <p class="text">${field.date?string("yyyy-MM")}</p>
+                                                </div>
+                                                <div class="news_info fr">
+                                                    <h3 class="title">${field.title}</h3>
+                                                    <div class="news_desc">
+                                                        ${field.descrip}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {/ms:arclist}
+                                </div>
+                                {/ms:channel}
+                                <!-- Add Pagination -->
+                                <div class="swiper-pagination-news"><span
+                                        class="swiper-pagination-bullet swiper-pagination-bullet-active"></span><span
+                                        class="swiper-pagination-bullet"></span><span
+                                        class="swiper-pagination-bullet"></span><span
+                                        class="swiper-pagination-bullet"></span><span
+                                        class="swiper-pagination-bullet"></span><span
+                                        class="swiper-pagination-bullet"></span><span
+                                        class="swiper-pagination-bullet"></span><span
+                                        class="swiper-pagination-bullet"></span><span
+                                        class="swiper-pagination-bullet"></span><span
+                                        class="swiper-pagination-bullet"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right_box fl">
+                        {ms:channel type='self' typeid='1937721102570000385'}
+                        <div class="newsList">
+                            {ms:arclist size=7 orderby='sort'}
+                                <div class="row clearfix" flag="${field.flag}"
+                                    @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                                    <div class="timeBox fl">
+                                        <p class="num">${field.date?string("dd")}</p>
+                                        <p class="time">${field.date?string("yyyy-MM")}</p>
+                                    </div>
+                                    <div class="desc fl">
+                                        ${field.title}
+                                    </div>
+                                </div>
+                            {/ms:arclist}
+                        </div>
+                        {/ms:channel}
+                    </div>
+                </div>
+                {ms:channel type='self' typeid='1937721102570000385'}
+                <div class="moreBox clearfix">
+                    <a href="{ms:global.url/}/${field.typeurl}" target="_blank" class="more-icon">更多</a>
+                </div>
+                {/ms:channel}
+            </div>
+            <div class="doctorIntroduceWrap">
+                <div class="doctorIntroduce fixedWidth clearfix">
+                    {ms:channel type='son'}
+                    <#if field.typeid='1924346623091249153' || field.typeid='1924347571394023426' || field.typeid='1924348918705131522'>
+                    <div class="doctorIntroduceItem">
+                        <div class="doctorIntroduceItem-header clearfix">
+                            <p class="name fl">${field.typetitle}</p>
+                            <a href="{ms:global.url/}/${field.typeurl}" target="_blank" class="more-img fr">更多</a>
+                        </div>
+                        <div class="doctorIntroduceItem-body">
+                            {ms:arclist size=1}
+                            <div class="descWrap">
+                                <div class="descImg">
+                                    <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
+                                </div>
+                                <div class="desc">
+                                    ${field.descrip}
+                                </div>
+                            </div>
+                            {/ms:arclist}
+                        </div>
+                    </div>
+                    <#elseif field.typeid='1924349311761747969' || field.typeid='1924349684329189378' || field.typeid='1924350114627031042'>
+                    <div class="doctorIntroduceItem">
+                        <div class="doctorIntroduceItem-header clearfix">
+                            <p class="name fl">${field.typetitle}</p>
+                            <a href="{ms:global.url/}/${field.typeurl}" target="_blank" class="more-img fr">更多</a>
+                        </div>
+                        <div class="doctorIntroduceItem-body">
+                            <ul class="doctorIntroduceItemList">
+                                {ms:arclist size=6 orderby='sort'}
+                                <li class="liItem" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                                    ${field.title}
+                                </li>
+                                {/ms:arclist}
+                            </ul>
+                        </div>
+                    </div>
+                    </#if>
+                    {/ms:channel}
+                </div>
+            </div>
+        </div>
+        <#include "foot.html" />
+    </div>
+</body>
+<script type="text/javascript" src="${base}/static/plugins/vue/2.6.9/vue.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/app.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/vue-router/3.5.1/vue-router.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/jquery.js"></script>
+<script src="{ms:global.host/}/{ms:global.style/}/js/swiper-3.4.2.min.js"></script>
+<script src="${base}/static/plugins/element-ui/2.15.1/index.min.js"></script>
+<script src="${base}/static/plugins/axios/0.18.0/axios.min.js"></script>
+<script src="${base}/static/plugins/qs/6.6.0/qs.min.js"></script>
+<script type="text/javascript" src="${base}/static/plugins/moment/2.29.1/moment.js"></script>
+<!-- <script type="text/javascript" src="${base}/static/plugins/ms/1.0.0/ms.http.js"></script> -->
+<script src="{ms:global.host/}/{ms:global.style/}/js/msHttps.js"></script>
+<script type="text/javascript" src="{ms:global.host/}/{ms:global.style/}/js/polyfill.min.js"></script>
+<script>
+    var app = new Vue({
+        mixins: [mixin],
+        data: function () {
+            return {
+                typePath: '<#if field.typeid?has_content>${field.typeid}<#if field.parentids?has_content>,${field.parentids}</#if><#else>0</#if>',
+            }
+        },
+        created: function () {
+
+        },
+        methods: {
+
+        },
+    }).$mount('#app');
+    var swiper2 = new Swiper('.swiper-container_news', {
+        loop: true,
+        // speed: 1000,
+        autoplay: 3000,
+        pagination: '.swiper-pagination-news',
+        paginationClickable: true
+    });
+    swiper2.container[0].onmouseover = function () {
+        swiper2.stopAutoplay();
+    }
+    window.onload = function () {
+        for (var k = 0; k < $('.news_wrap .right_box .newsList .row').length; k++) {
+            var flag2 = $('.news_wrap .right_box .newsList .row').eq(k).attr('flag') || '';
+            if (flag2 != "" && flag2.indexOf('tv') != -1) {
+                var dom2 = $('.news_wrap .right_box .newsList .row').eq(k).find('.hidden');
+                var link2 = dom2.find('a').html();
+                $('.news_wrap .right_box .newsList .row').eq(k).bind('click', { link: link2 }, clickHandler)
+            }
+        }
+    }
+</script>
+
+</html>

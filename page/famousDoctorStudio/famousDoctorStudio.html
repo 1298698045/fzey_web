@@ -122,8 +122,8 @@
 <script>
     var router = new VueRouter({
         routes:[
-            {ms:channel type='son' flag='nav2' orderby='sort'}
-            <#if field.typeid='1923276323857858561'>
+            {ms:channel type='son' flag='nav2' orderby='sort' type='son' typeid='1468768786826297346' }
+            <#if field.typeid='1923276323857858561' || field.typeid='1923277141386428417' || field.typeid='1924348918705131522' || field='1924349311761747969' || field='1923277125146083329' || field.typeid='1923277156481728514'>
                 {
                     path: '${field.typepath}',
                     name: '${field.typetitle}',
@@ -160,7 +160,7 @@
                         },
                     }
                 },
-            <#elseif field.typeid='1923277141386428417'>
+            <#elseif field.typeid='1923277141386428417000'>
             {
                     path: '${field.typepath}',
                     name: '${field.typetitle}',
@@ -274,7 +274,7 @@
                         }
                     }
                 },
-                <#elseif field.typeid='1923277125146083329'>
+                <#elseif field.typeid='1923277125146083329000'>
                 {
                 path: '${field.typepath}',
                 name: '${field.typetitle}',
@@ -437,7 +437,7 @@
                     }
                 }
             },
-            <#elseif field.typeid='1923277156481728514' ||  field.typeid='1924278079442055169' || field.typeid='1924277873954713602'>
+            <#elseif field.typeid='1924278079442055169' || field.typeid='1924277873954713602' || field.typeid='1937459286998487041'>
                 {
                     path: '${field.typepath}',
                     name: '${field.typetitle}',
