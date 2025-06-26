@@ -281,24 +281,44 @@
                                 {ms:channel type='self' typeid='1937721102570000385'}
                                 <div class="swiper-wrapper">
                                     {ms:arclist size=7 orderby='sort'}
-                                        <div class="swiper-slide" flag="${field.flag}"
-                                            @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
-                                            <div class="cover_img">
-                                                <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
+                                    <#if field.flag?contains('tv')>
+                                    <div class="swiper-slide" flag="${field.flag}">
+                                        <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                        <div class="cover_img">
+                                            <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
+                                        </div>
+                                        <div class="panel_box clearfix">
+                                            <div class="timeBox">
+                                                <h1 class="num">${field.date?string("dd")}</h1>
+                                                <p class="text">${field.date?string("yyyy-MM")}</p>
                                             </div>
-                                            <div class="panel_box clearfix">
-                                                <div class="timeBox">
-                                                    <h1 class="num">${field.date?string("dd")}</h1>
-                                                    <p class="text">${field.date?string("yyyy-MM")}</p>
-                                                </div>
-                                                <div class="news_info fr">
-                                                    <h3 class="title">${field.title}</h3>
-                                                    <div class="news_desc">
-                                                        ${field.descrip}
-                                                    </div>
+                                            <div class="news_info fr">
+                                                <h3 class="title">${field.title}</h3>
+                                                <div class="news_desc">
+                                                    ${field.descrip}
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <#else>
+                                    <div class="swiper-slide" flag="${field.flag}" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                                        <div class="cover_img">
+                                            <img src="{ms:global.host/}/{@ms:file field.litpic/}" alt="">
+                                        </div>
+                                        <div class="panel_box clearfix">
+                                            <div class="timeBox">
+                                                <h1 class="num">${field.date?string("dd")}</h1>
+                                                <p class="text">${field.date?string("yyyy-MM")}</p>
+                                            </div>
+                                            <div class="news_info fr">
+                                                <h3 class="title">${field.title}</h3>
+                                                <div class="news_desc">
+                                                    ${field.descrip}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </#if>
                                     {/ms:arclist}
                                 </div>
                                 {/ms:channel}
@@ -322,16 +342,28 @@
                         {ms:channel type='self' typeid='1937721102570000385'}
                         <div class="newsList">
                             {ms:arclist size=7 orderby='sort'}
-                                <div class="row clearfix" flag="${field.flag}"
-                                    @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
-                                    <div class="timeBox fl">
-                                        <p class="num">${field.date?string("dd")}</p>
-                                        <p class="time">${field.date?string("yyyy-MM")}</p>
-                                    </div>
-                                    <div class="desc fl">
-                                        ${field.title}
-                                    </div>
+                            <#if field.flag?contains('tv')>
+                            <div class="row clearfix" flag="${field.flag}">
+                                <div class="hidden" style="display:none;visibility: hidden;">${field.content}</div>
+                                <div class="timeBox fl">
+                                    <p class="num">${field.date?string("dd")}</p>
+                                    <p class="time">${field.date?string("yyyy-MM")}</p>
                                 </div>
+                                <div class="desc fl">
+                                    ${field.title}
+                                </div>
+                            </div>
+                            <#else>
+                            <div class="row clearfix" flag="${field.flag}" @click="goto('{ms:global.url/}${field.typepath}/${field.id}.html')">
+                                <div class="timeBox fl">
+                                    <p class="num">${field.date?string("dd")}</p>
+                                    <p class="time">${field.date?string("yyyy-MM")}</p>
+                                </div>
+                                <div class="desc fl">
+                                    ${field.title}
+                                </div>
+                            </div>
+                            </#if>
                             {/ms:arclist}
                         </div>
                         {/ms:channel}
@@ -427,6 +459,14 @@
         swiper2.stopAutoplay();
     }
     window.onload = function () {
+        for (var i = 0; i < $('.swiper-container_news .swiper-slide').length; i++) {
+            var flag = $('.swiper-container_news .swiper-slide').eq(i).attr('flag') || '';
+            if (flag != "" && flag.indexOf('tv') != -1) {
+                var dom = $('.swiper-container_news .swiper-slide').eq(i).find('.hidden')
+                var link = dom.find('a').html();
+                $('.swiper-container_news .swiper-slide').eq(i).bind('click', { link: link }, clickHandler)
+            }
+        }
         for (var k = 0; k < $('.news_wrap .right_box .newsList .row').length; k++) {
             var flag2 = $('.news_wrap .right_box .newsList .row').eq(k).attr('flag') || '';
             if (flag2 != "" && flag2.indexOf('tv') != -1) {
@@ -434,6 +474,20 @@
                 var link2 = dom2.find('a').html();
                 $('.news_wrap .right_box .newsList .row').eq(k).bind('click', { link: link2 }, clickHandler)
             }
+        }
+        for (var i = 0; i < $('.notice_content .block').length; i++) {
+            for (var j = 0; j < $('.notice_content .block').eq(i).find('.box').length; j++) {
+                var flag = $('.notice_content .block').eq(i).find('.box').eq(j).attr('flag') || '';
+                if (flag != "" && flag.indexOf('tv') != -1) {
+                    var dom = $('.notice_content .block').eq(i).find('.box').eq(j).find('.hidden');
+                    var link = dom.find('a').html();
+                    $('.notice_content .block').eq(i).find('.box').eq(j).bind('click', { link: link }, clickHandler)
+                }
+            }
+        }
+        function clickHandler(event) {
+            var href = event.data.link;
+            window.open(href)
         }
     }
 </script>
